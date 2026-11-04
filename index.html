@@ -95,7 +95,7 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-hellblau) 25%, transparent)
 
   <section>
     <h2 id="tiles-titel">Bildung auf einen Blick</h2>
-    <p class="note">Kennzahlen zum oben gewählten Thema, Werte der neuesten Ausgabe. Rang 1 = höchster Wert unter den 26 Landkreisen und kreisfreien Städten.</p>
+    <p class="note">Kennzahlen zum oben gewählten Thema, Werte der neuesten Ausgabe. Rang 1 = höchster Wert unter den Landkreisen und kreisfreien Städten.</p>
     <div class="tiles" id="tiles"></div>
   </section>
 
@@ -110,7 +110,8 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-hellblau) 25%, transparent)
     <div class="grid">
       <div class="card">
         <h3 id="merkmal-titel">—</h3>
-        <p class="note">26 Landkreise und kreisfreie Städte, absteigend sortiert. Gestrichelt: Land Hessen und eine Vergleichsregion, die kein Kreis ist, sofern ihr Wert in den Maßstab der Kreise passt.</p>
+        <p class="note" id="einheit" hidden></p>
+        <p class="note">Landkreise und kreisfreien Städte, absteigend sortiert. Gestrichelt: Land Hessen und eine Vergleichsregion, die kein Kreis ist, sofern ihr Wert in den Maßstab der Kreise passt.</p>
         <p class="note">Berichtszeitraum: <span id="bezug-aktuell">—</span></p>
         <div class="pct" id="pct">
           <label>Prozent bezogen auf<select id="sel-basis" aria-label="Bezugsgröße für Prozentwerte"></select></label>
@@ -125,13 +126,14 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-hellblau) 25%, transparent)
         <p class="note">Gewähltes Merkmal für Fokus- und Vergleichsregion je Berichtszeitraum (<span id="verlauf-art">—</span>). Steht ein Zeitraum in mehreren Ausgaben, gilt die neueste. Halbjahres- und Jahreswerte werden nicht gemischt.</p>
         <p class="legend"><span><i class="sw sw-f"></i>Fokus-Region</span><span><i class="sw sw-v"></i>Vergleichsregion</span></p>
         <div class="chart" id="verlauf"></div>
+        <p class="hint" id="verlauf-hinweis" hidden></p>
       </div>
     </div>
   </section>
 
   <section>
     <h2>Tabelle im Detail</h2>
-    <p class="note">Alle Merkmale der gewählten Tabelle für Fokus- und Vergleichsregion, neueste Ausgabe. Index: Wert der Fokus-Region im Verhältnis zum Land Hessen (= 100). Klick auf eine Zeile zeigt das Merkmal oben im Kreisvergleich.</p>
+    <p class="note">Alle Merkmale der gewählten Tabelle für Fokus- und Vergleichsregion, neueste Ausgabe. Hessen-Vergleich: bei Anteilen, Quoten und Durchschnitten der Index (Hessen = 100), bei Anzahlen und Summen der Anteil am Landeswert; bei Veränderungsraten, Salden und Anteilen am Land kein Vergleich (—). Klick auf eine Zeile zeigt das Merkmal oben im Kreisvergleich.</p>
     <div class="card" style="margin-top: 12px">
       <h3 id="tabelle-titel">—</h3>
       <input class="search" id="suche" type="search" placeholder="Merkmal suchen …" aria-label="Merkmal suchen" style="margin: 8px 0">
@@ -148,14 +150,970 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-hellblau) 25%, transparent)
 <script>
 (() => {
 'use strict';
-const TILESETS = [["Baugewerbe und Bautätigkeit", [["fertigWhg", "Fertiggestellte Wohnungen", "Je 10.000 Einwohner/-innen im letzten Jahr (Tab. 4)", {"num": ["4_12"], "d": 1}], ["genehmWhg", "Genehmigte Wohnungen", "Je 10.000 Einwohner/-innen im letzten Jahr (Tab. 5)", {"num": ["5_14"], "d": 1}], ["whgBestand", "Wohnungsbestand", "Wohnungen je 1.000 Einwohner/-innen (Tab. 3)", {"num": ["3_12"], "d": 1}], ["bauland", "Kaufwert Bauland", "Durchschnittlicher Kaufwert in Euro je m² (Tab. 6)", {"num": ["6_6"], "d": 0, "u": "€"}], ["bauPers", "Tätige im Bauhauptgewerbe", "Tätige Personen (Tab. 1)", {"num": ["1_4"], "d": 0}]]], ["Bevölkerung", [["bev", "Einwohnerinnen und Einwohner", "Bevölkerung insgesamt (Tab. 7)", {"num": ["7_3"], "d": 0}], ["bevVer", "Veränderung zum Vorjahr", "Zu- bzw. Abnahme der Bevölkerung in % (Tab. 7)", {"num": ["7_7"], "d": 1, "u": "%"}], ["u18", "Anteil unter 18-Jährige", "An der Bevölkerung insgesamt (Tab. 11)", {"num": ["11_4", "11_6"], "den": ["11_3"], "f": 100, "d": 1, "u": "%"}], ["ue65", "Anteil 65 Jahre und älter", "An der Bevölkerung insgesamt (Tab. 11)", {"num": ["11_10"], "den": ["11_3"], "f": 100, "d": 1, "u": "%"}], ["nichtdt", "Anteil Nichtdeutsche", "An der Bevölkerung insgesamt (Tab. 7)", {"num": ["7_12"], "den": ["7_3"], "f": 100, "d": 1, "u": "%"}], ["geb", "Lebendgeborene", "Je 1.000 Einwohner/-innen im letzten Jahr (Tab. 9)", {"num": ["9_4"], "d": 1}], ["wand", "Wanderungssaldo", "Zu- minus Fortzüge je 1.000 Einwohner/-innen (Tab. 9)", {"num": ["9_14"], "d": 1}], ["jugendq", "Jugendquotient", "Unter 20-Jährige je 100 Personen von 20 bis unter 65 (Tab. 13)", {"num": ["13_3"], "d": 1}]]], ["Bildung", [["abi", "Allgemeine Hochschulreife", "Anteil an allen Schulentlassenen des letzten Schuljahres (Tab. 17)", {"num": ["17_15"], "den": ["17_3"], "f": 100, "d": 1, "u": "%"}], ["ohneHSA", "Ohne Hauptschulabschluss", "Anteil an allen Schulentlassenen des letzten Schuljahres (Tab. 17)", {"num": ["17_6"], "den": ["17_3"], "f": 100, "d": 1, "u": "%"}], ["schueler", "Schüler/-innen allgemeinbildend", "An allgemeinbildenden Schulen, ohne Schulen für Erwachsene (Tab. 15)", {"num": ["15_21"], "d": 0}], ["beruf", "Schüler/-innen an beruflichen Schulen", "Alle beruflichen Schulformen (Tab. 18)", {"num": ["18_4"], "d": 0}], ["ausl", "Ausländische Schüler/-innen", "Anteil an allen Schüler/-innen allgemeinbildender Schulen (Tab. 15, 16)", {"num": ["16_19"], "den": ["15_21"], "f": 100, "d": 1, "u": "%"}], ["kita", "Kita-Plätze je 100 Kinder unter 6", "Genehmigte Plätze in Kitas (inkl. Plätze für Schulkinder) je 100 Kinder unter 6 Jahren (Tab. 53, 11)", {"num": ["53_8"], "den": ["11_4"], "f": 100, "d": 1}], ["u18b", "Anteil unter 18-Jährige", "An der Bevölkerung insgesamt (Tab. 11)", {"num": ["11_4", "11_6"], "den": ["11_3"], "f": 100, "d": 1, "u": "%"}], ["bevb", "Einwohnerinnen und Einwohner", "Bevölkerung insgesamt (Tab. 7)", {"num": ["7_3"], "d": 0}]]], ["Bruttoinlandsprodukt/Bruttowertschöpfung", [["bipEw", "BIP je Einwohner/-in", "Bruttoinlandsprodukt in jeweiligen Preisen, Euro (Tab. 19)", {"num": ["19_9"], "d": 0, "u": "€"}], ["bipVer", "BIP-Veränderung", "Zu- bzw. Abnahme des BIP zum Vorjahr in % (Tab. 19)", {"num": ["19_5"], "d": 1, "u": "%"}], ["bipAnt", "Anteil am BIP Hessens", "In % (Tab. 19)", {"num": ["19_7"], "d": 1, "u": "%"}], ["bwsVG", "Anteil Verarbeitendes Gewerbe", "An der Bruttowertschöpfung insgesamt (Tab. 20, 21)", {"num": ["21_7"], "den": ["20_4"], "f": 100, "d": 1, "u": "%"}], ["bwsDL", "Anteil öffentliche und sonstige Dienstleistungen", "Inkl. Erziehung und Gesundheit, an der Bruttowertschöpfung insgesamt (Tab. 20, 21)", {"num": ["21_15"], "den": ["20_4"], "f": 100, "d": 1, "u": "%"}]]], ["Einkommen", [["verfEink", "Verfügbares Einkommen", "Der privaten Haushalte je Einwohner/-in, Euro (Tab. 26)", {"num": ["26_5"], "d": 0, "u": "€"}], ["verfIdx", "Verfügbares Einkommen, Index", "Je Einwohner/-in, Landeswert = 100 (Tab. 26)", {"num": ["26_6"], "d": 1}], ["aeAN", "Arbeitnehmerentgelt", "Je Arbeitnehmer/-in, Euro (Tab. 23)", {"num": ["23_3"], "d": 0, "u": "€"}], ["lohnAN", "Bruttolöhne und -gehälter", "Je Arbeitnehmer/-in, Euro (Tab. 25)", {"num": ["25_3"], "d": 0, "u": "€"}]]], ["Erwerbstätigkeit", [["etw", "Erwerbstätige am Arbeitsort", "Jahresdurchschnitt, in 1.000 (Tab. 27)", {"num": ["27_3"], "d": 1}], ["etwDL", "Anteil Dienstleistungsbereiche", "An allen Erwerbstätigen am Arbeitsort (Tab. 27)", {"num": ["27_9"], "den": ["27_3"], "f": 100, "d": 1, "u": "%"}], ["etwPG", "Anteil Produzierendes Gewerbe", "An allen Erwerbstätigen am Arbeitsort (Tab. 27)", {"num": ["27_5"], "den": ["27_3"], "f": 100, "d": 1, "u": "%"}], ["anVZ", "Arbeitnehmer/-innen in Vollzeit­äquivalenten", "Anteil an allen Arbeitnehmer/-innen (Tab. 29, 30)", {"num": ["30_3"], "den": ["29_3"], "f": 100, "d": 1, "u": "%"}], ["stdEtw", "Arbeitsstunden je Erwerbstätigen", "Geleistete Stunden im Jahr (Tab. 33)", {"num": ["33_3"], "d": 0}]]], ["Landwirtschaft", [["lwBetr", "Landwirtschaftliche Betriebe", "Insgesamt (Tab. 35)", {"num": ["35_3"], "d": 0}], ["oeko", "Anteil Ökolandbau", "Ökologisch bewirtschaftete an der landwirtschaftlich genutzten Fläche (Tab. 35)", {"num": ["35_7"], "den": ["35_5"], "f": 100, "d": 1, "u": "%"}], ["wald", "Anteil Wald", "An der Bodenfläche (Tab. 38)", {"num": ["38_8"], "den": ["38_3"], "f": 100, "d": 1, "u": "%"}], ["siedl", "Anteil Siedlung und Verkehr", "An der Bodenfläche (Tab. 38)", {"num": ["38_4", "38_5"], "den": ["38_3"], "f": 100, "d": 1, "u": "%"}], ["lfPreis", "Kaufwert landwirtschaftlicher Fläche", "Euro je Hektar veräußerter LF (Tab. 40)", {"num": ["40_8"], "d": 0, "u": "€"}]]], ["Öffentlicher Dienst", [["oeD", "Personal der öffentlichen Verwaltung", "Bund, Land und Kommunen je 10.000 Einwohner/-innen (Tab. 41)", {"num": ["41_10"], "d": 1}], ["oeLand", "Personal des Landes", "Vollzeitäquivalente je 10.000 Einwohner/-innen (Tab. 42)", {"num": ["42_4"], "d": 1}], ["oeKom", "Personal der Kommunen", "Vollzeitäquivalente je 10.000 Einwohner/-innen (Tab. 43)", {"num": ["43_4"], "d": 1}], ["oeKomW", "Frauenanteil Kommunen", "An den Vollzeitäquivalenten der Kommunen in % (Tab. 43)", {"num": ["43_6"], "d": 1, "u": "%"}]]], ["Sozialleistungen", [["kitaS", "Kita-Plätze je 100 Kinder unter 6", "Genehmigte Plätze je 100 Kinder unter 6 Jahren (Tab. 53, 11)", {"num": ["53_8"], "den": ["11_4"], "f": 100, "d": 1}], ["kitaFach", "Fachkräfte in Kitas", "Anteil tätiger Personen mit fachpädagogischem Abschluss (Tab. 53)", {"num": ["53_10"], "den": ["53_9"], "f": 100, "d": 1, "u": "%"}], ["wohngeld", "Wohngeld", "Empfänger/-innen in Empfängerhaushalten je 1.000 Einwohner/-innen (Tab. 46)", {"num": ["46_7"], "d": 1}], ["grusi", "Grundsicherung im Alter und bei Erwerbsminderung", "Empfänger/-innen je 1.000 Einwohner/-innen (Tab. 47, 7)", {"num": ["47_3"], "den": ["7_3"], "f": 1000, "d": 1}], ["sozhEw", "Sozialhilfe", "Nettoausgaben je Einwohner/-in, Euro (Tab. 50)", {"num": ["50_6"], "d": 0, "u": "€"}], ["schwb", "Schwerbehinderte Menschen", "Anteil an der Bevölkerung (Tab. 52, 7)", {"num": ["52_5"], "den": ["7_3"], "f": 100, "d": 1, "u": "%"}]]], ["Steuern", [["ekStpfl", "Einkünfte je Steuerpflichtigen", "Gesamtbetrag der Einkünfte je Lohn- und Einkommensteuerpflichtigen, Euro (Tab. 55)", {"num": ["55_4"], "den": ["55_3"], "f": 1000000, "d": 0, "u": "€"}], ["ustEw", "Steuerbarer Umsatz je Einwohner/-in", "Lieferungen und Leistungen, Euro (Tab. 57)", {"num": ["57_5"], "d": 0, "u": "€"}], ["ustPfl", "Umsatzsteuerpflichtige", "Alle Wirtschaftsbereiche (Tab. 57)", {"num": ["57_3"], "d": 0}]]], ["Öffentliche Finanzen", [["stEw", "Steuereinnahmen je Einwohner/-in", "Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände, Euro (Tab. 58)", {"num": ["58_4"], "d": 0, "u": "€"}], ["stKraft", "Steuereinnahmekraft", "Gemeindliche Steuereinnahmekraft je Einwohner/-in, Euro (Tab. 58)", {"num": ["58_20"], "d": 0, "u": "€"}], ["bauInv", "Bauinvestitionen", "Der Gemeinden und Gemeindeverbände je Einwohner/-in, Euro (Tab. 58)", {"num": ["58_28"], "d": 0, "u": "€"}], ["schuld", "Schulden", "Investitionskredite und Wertpapierschulden der Gemeinden und Gemeindeverbände je Einwohner/-in, Euro (Tab. 59)", {"num": ["59_12"], "d": 0, "u": "€"}]]], ["Umwelt", [["abfall", "Haushaltsabfälle", "Kilogramm je Einwohner/-in (Tab. 60)", {"num": ["60_4"], "d": 0}], ["getrennt", "Getrennt erfasste Bio- und Wertstoffe", "Anteil an allen Haushaltsabfällen (Tab. 60)", {"num": ["60_7", "60_8"], "den": ["60_3"], "f": 100, "d": 1, "u": "%"}], ["wasser", "Wasserverbrauch der Haushalte", "Liter je Einwohner/-in und Tag (Tab. 61)", {"num": ["61_10"], "d": 0}]]], ["Unternehmen, Arbeitsstätten und Insolvenzen", [["nl", "Niederlassungen", "Mit abhängig Beschäftigten oder Umsätzen (Tab. 62)", {"num": ["62_3"], "d": 0}], ["nlGross", "Beschäftigte in großen Niederlassungen", "Anteil in Niederlassungen mit 250 oder mehr Beschäftigten (Tab. 62)", {"num": ["62_12"], "den": ["62_4"], "f": 100, "d": 1, "u": "%"}], ["gewSaldo", "Saldo Gewerbean- und -abmeldungen", "Anmeldungen minus Abmeldungen (Tab. 63)", {"num": ["63_3"], "minus": ["63_7"], "d": 0}], ["insU", "Unternehmensinsolvenzen", "Beantragte Verfahren (Tab. 65)", {"num": ["65_3"], "d": 0}]]], ["Verarbeitendes Gewerbe einschl. Bergbau sowie Gewinnung von Steinen und Erden", [["vgBetr", "Betriebe", "Im Verarbeitenden Gewerbe (Tab. 66)", {"num": ["66_3"], "d": 0}], ["vgBesch", "Beschäftigte je 1.000 Einwohner/-innen", "Im Verarbeitenden Gewerbe (Tab. 66)", {"num": ["66_5"], "d": 1}], ["vgUms", "Umsatz", "Millionen Euro (Tab. 66)", {"num": ["66_8"], "d": 0}], ["vgExp", "Exportquote", "Anteil des Auslandsumsatzes in % (Tab. 66)", {"num": ["66_11"], "d": 1, "u": "%"}]]]];
+const TILESETS = [
+ [
+  "Baugewerbe und Bautätigkeit",
+  [
+   [
+    "fertigWhg",
+    "Fertiggestellte Wohnungen",
+    "Je 10.000 Einwohner/-innen im letzten Jahr (Tab. 4)",
+    {
+     "num": [
+      "4_12"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "genehmWhg",
+    "Genehmigte Wohnungen",
+    "Je 10.000 Einwohner/-innen im letzten Jahr (Tab. 5)",
+    {
+     "num": [
+      "5_14"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "whgBestand",
+    "Wohnungsbestand",
+    "Wohnungen je 1.000 Einwohner/-innen (Tab. 3)",
+    {
+     "num": [
+      "3_12"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "bauland",
+    "Kaufwert Bauland",
+    "Durchschnittlicher Kaufwert in Euro je m² (Tab. 6)",
+    {
+     "num": [
+      "6_6"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "bauPers",
+    "Tätige im Bauhauptgewerbe",
+    "Tätige Personen (Tab. 1)",
+    {
+     "num": [
+      "1_4"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Bevölkerung",
+  [
+   [
+    "bev",
+    "Einwohnerinnen und Einwohner",
+    "Bevölkerung insgesamt (Tab. 7)",
+    {
+     "num": [
+      "7_3"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "bevVer",
+    "Veränderung zum Vorjahr",
+    "Zu- bzw. Abnahme der Bevölkerung in % (Tab. 7)",
+    {
+     "num": [
+      "7_7"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "u18",
+    "Anteil unter 18-Jährige",
+    "An der Bevölkerung insgesamt (Tab. 11)",
+    {
+     "num": [
+      "11_4",
+      "11_6"
+     ],
+     "den": [
+      "11_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "ue65",
+    "Anteil 65 Jahre und älter",
+    "An der Bevölkerung insgesamt (Tab. 11)",
+    {
+     "num": [
+      "11_10"
+     ],
+     "den": [
+      "11_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "nichtdt",
+    "Anteil Nichtdeutsche",
+    "An der Bevölkerung insgesamt (Tab. 7)",
+    {
+     "num": [
+      "7_12"
+     ],
+     "den": [
+      "7_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "geb",
+    "Lebendgeborene",
+    "Je 1.000 Einwohner/-innen im letzten Jahr (Tab. 9)",
+    {
+     "num": [
+      "9_4"
+     ],
+     "d": 1
+    }
+   ],
+   [
+    "wand",
+    "Wanderungssaldo",
+    "Zu- minus Fortzüge je 1.000 Einwohner/-innen (Tab. 9)",
+    {
+     "num": [
+      "9_14"
+     ],
+     "d": 1
+    }
+   ],
+   [
+    "jugendq",
+    "Jugendquotient",
+    "Unter 20-Jährige je 100 Personen von 20 bis unter 65 (Tab. 13)",
+    {
+     "num": [
+      "13_3"
+     ],
+     "d": 1
+    }
+   ]
+  ]
+ ],
+ [
+  "Bildung",
+  [
+   [
+    "abi",
+    "Allgemeine Hochschulreife",
+    "Anteil an allen Schulentlassenen des letzten Schuljahres (Tab. 17)",
+    {
+     "num": [
+      "17_15"
+     ],
+     "den": [
+      "17_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "ohneHSA",
+    "Ohne Hauptschulabschluss",
+    "Anteil an allen Schulentlassenen des letzten Schuljahres (Tab. 17)",
+    {
+     "num": [
+      "17_6"
+     ],
+     "den": [
+      "17_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "schueler",
+    "Schüler/-innen allgemeinbildend",
+    "An allgemeinbildenden Schulen, ohne Schulen für Erwachsene (Tab. 15)",
+    {
+     "num": [
+      "15_21"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "beruf",
+    "Schüler/-innen an beruflichen Schulen",
+    "Alle beruflichen Schulformen (Tab. 18)",
+    {
+     "num": [
+      "18_4"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "ausl",
+    "Ausländische Schüler/-innen",
+    "Anteil an allen Schüler/-innen allgemeinbildender Schulen (Tab. 15, 16)",
+    {
+     "num": [
+      "16_19"
+     ],
+     "den": [
+      "15_21"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "kita",
+    "Kita-Plätze je 100 Kinder unter 6",
+    "Genehmigte Plätze in Kitas (inkl. Plätze für Schulkinder) je 100 Kinder unter 6 Jahren (Tab. 53, 11)",
+    {
+     "num": [
+      "53_8"
+     ],
+     "den": [
+      "11_4"
+     ],
+     "f": 100,
+     "d": 1
+    }
+   ],
+   [
+    "u18b",
+    "Anteil unter 18-Jährige",
+    "An der Bevölkerung insgesamt (Tab. 11)",
+    {
+     "num": [
+      "11_4",
+      "11_6"
+     ],
+     "den": [
+      "11_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "bevb",
+    "Einwohnerinnen und Einwohner",
+    "Bevölkerung insgesamt (Tab. 7)",
+    {
+     "num": [
+      "7_3"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Bruttoinlandsprodukt/Bruttowertschöpfung",
+  [
+   [
+    "bipEw",
+    "BIP je Einwohner/-in",
+    "Bruttoinlandsprodukt in jeweiligen Preisen, Euro (Tab. 19)",
+    {
+     "num": [
+      "19_9"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "bipVer",
+    "BIP-Veränderung",
+    "Zu- bzw. Abnahme des BIP zum Vorjahr in % (Tab. 19)",
+    {
+     "num": [
+      "19_5"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "bipAnt",
+    "Anteil am BIP Hessens",
+    "In % (Tab. 19)",
+    {
+     "num": [
+      "19_7"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "bwsVG",
+    "Anteil Verarbeitendes Gewerbe",
+    "An der Bruttowertschöpfung insgesamt (Tab. 20, 21)",
+    {
+     "num": [
+      "21_7"
+     ],
+     "den": [
+      "20_4"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "bwsDL",
+    "Anteil öffentliche und sonstige Dienstleistungen",
+    "Inkl. Erziehung und Gesundheit, an der Bruttowertschöpfung insgesamt (Tab. 20, 21)",
+    {
+     "num": [
+      "21_15"
+     ],
+     "den": [
+      "20_4"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ]
+  ]
+ ],
+ [
+  "Einkommen",
+  [
+   [
+    "verfEink",
+    "Verfügbares Einkommen",
+    "Der privaten Haushalte je Einwohner/-in, Euro (Tab. 26)",
+    {
+     "num": [
+      "26_5"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "verfIdx",
+    "Verfügbares Einkommen, Index",
+    "Je Einwohner/-in, Landeswert = 100 (Tab. 26)",
+    {
+     "num": [
+      "26_6"
+     ],
+     "d": 1
+    }
+   ],
+   [
+    "aeAN",
+    "Arbeitnehmerentgelt",
+    "Je Arbeitnehmer/-in, Euro (Tab. 23)",
+    {
+     "num": [
+      "23_3"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "lohnAN",
+    "Bruttolöhne und -gehälter",
+    "Je Arbeitnehmer/-in, Euro (Tab. 25)",
+    {
+     "num": [
+      "25_3"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ]
+  ]
+ ],
+ [
+  "Erwerbstätigkeit",
+  [
+   [
+    "etw",
+    "Erwerbstätige am Arbeitsort",
+    "Jahresdurchschnitt, in 1.000 (Tab. 27)",
+    {
+     "num": [
+      "27_3"
+     ],
+     "d": 1
+    }
+   ],
+   [
+    "etwDL",
+    "Anteil Dienstleistungsbereiche",
+    "An allen Erwerbstätigen am Arbeitsort (Tab. 27)",
+    {
+     "num": [
+      "27_9"
+     ],
+     "den": [
+      "27_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "etwPG",
+    "Anteil Produzierendes Gewerbe",
+    "An allen Erwerbstätigen am Arbeitsort (Tab. 27)",
+    {
+     "num": [
+      "27_5"
+     ],
+     "den": [
+      "27_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "anVZ",
+    "Arbeitnehmer/-innen in Vollzeit­äquivalenten",
+    "Anteil an allen Arbeitnehmer/-innen (Tab. 29, 30)",
+    {
+     "num": [
+      "30_3"
+     ],
+     "den": [
+      "29_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "stdEtw",
+    "Arbeitsstunden je Erwerbstätigen",
+    "Geleistete Stunden im Jahr (Tab. 33)",
+    {
+     "num": [
+      "33_3"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Landwirtschaft",
+  [
+   [
+    "lwBetr",
+    "Landwirtschaftliche Betriebe",
+    "Insgesamt (Tab. 35)",
+    {
+     "num": [
+      "35_3"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "oeko",
+    "Anteil Ökolandbau",
+    "Ökologisch bewirtschaftete an der landwirtschaftlich genutzten Fläche (Tab. 35)",
+    {
+     "num": [
+      "35_7"
+     ],
+     "den": [
+      "35_5"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "wald",
+    "Anteil Wald",
+    "An der Bodenfläche (Tab. 38)",
+    {
+     "num": [
+      "38_8"
+     ],
+     "den": [
+      "38_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "siedl",
+    "Anteil Siedlung und Verkehr",
+    "An der Bodenfläche (Tab. 38)",
+    {
+     "num": [
+      "38_4",
+      "38_5"
+     ],
+     "den": [
+      "38_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "lfPreis",
+    "Kaufwert landwirtschaftlicher Fläche",
+    "Euro je Hektar veräußerter LF (Tab. 40)",
+    {
+     "num": [
+      "40_8"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ]
+  ]
+ ],
+ [
+  "Öffentlicher Dienst",
+  [
+   [
+    "oeD",
+    "Personal der öffentlichen Verwaltung",
+    "Bund, Land und Kommunen je 10.000 Einwohner/-innen (Tab. 41)",
+    {
+     "num": [
+      "41_10"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "oeLand",
+    "Personal des Landes",
+    "Vollzeitäquivalente je 10.000 Einwohner/-innen (Tab. 42)",
+    {
+     "num": [
+      "42_4"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "oeKom",
+    "Personal der Kommunen",
+    "Vollzeitäquivalente je 10.000 Einwohner/-innen (Tab. 43)",
+    {
+     "num": [
+      "43_4"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "oeKomW",
+    "Frauenanteil Kommunen",
+    "An den Vollzeitäquivalenten der Kommunen in % (Tab. 43)",
+    {
+     "num": [
+      "43_6"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ]
+  ]
+ ],
+ [
+  "Sozialleistungen",
+  [
+   [
+    "kitaS",
+    "Kita-Plätze je 100 Kinder unter 6",
+    "Genehmigte Plätze je 100 Kinder unter 6 Jahren (Tab. 53, 11)",
+    {
+     "num": [
+      "53_8"
+     ],
+     "den": [
+      "11_4"
+     ],
+     "f": 100,
+     "d": 1
+    }
+   ],
+   [
+    "kitaFach",
+    "Fachkräfte in Kitas",
+    "Anteil tätiger Personen mit fachpädagogischem Abschluss (Tab. 53)",
+    {
+     "num": [
+      "53_10"
+     ],
+     "den": [
+      "53_9"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "wohngeld",
+    "Wohngeld",
+    "Empfänger/-innen in Empfängerhaushalten je 1.000 Einwohner/-innen (Tab. 46)",
+    {
+     "num": [
+      "46_7"
+     ],
+     "d": 1
+    }
+   ],
+   [
+    "grusi",
+    "Grundsicherung im Alter und bei Erwerbsminderung",
+    "Empfänger/-innen je 1.000 Einwohner/-innen (Tab. 47, 7)",
+    {
+     "num": [
+      "47_3"
+     ],
+     "den": [
+      "7_3"
+     ],
+     "f": 1000,
+     "d": 1
+    }
+   ],
+   [
+    "sozhEw",
+    "Sozialhilfe",
+    "Nettoausgaben je Einwohner/-in, Euro (Tab. 50)",
+    {
+     "num": [
+      "50_6"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "schwb",
+    "Schwerbehinderte Menschen",
+    "Anteil an der Bevölkerung (Tab. 52, 7)",
+    {
+     "num": [
+      "52_5"
+     ],
+     "den": [
+      "7_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ]
+  ]
+ ],
+ [
+  "Steuern",
+  [
+   [
+    "ekStpfl",
+    "Einkünfte je Steuerpflichtigen",
+    "Gesamtbetrag der Einkünfte je Lohn- und Einkommensteuerpflichtigen, Euro (Tab. 55)",
+    {
+     "num": [
+      "55_4"
+     ],
+     "den": [
+      "55_3"
+     ],
+     "f": 1000000,
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "ustEw",
+    "Steuerbarer Umsatz je Einwohner/-in",
+    "Lieferungen und Leistungen, Euro (Tab. 57)",
+    {
+     "num": [
+      "57_5"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "ustPfl",
+    "Umsatzsteuerpflichtige",
+    "Alle Wirtschaftsbereiche (Tab. 57)",
+    {
+     "num": [
+      "57_3"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Öffentliche Finanzen",
+  [
+   [
+    "stEw",
+    "Steuereinnahmen je Einwohner/-in",
+    "Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände, Euro (Tab. 58)",
+    {
+     "num": [
+      "58_4"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "stKraft",
+    "Steuereinnahmekraft",
+    "Gemeindliche Steuereinnahmekraft je Einwohner/-in, Euro (Tab. 58)",
+    {
+     "num": [
+      "58_20"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "bauInv",
+    "Bauinvestitionen",
+    "Der Gemeinden und Gemeindeverbände je Einwohner/-in, Euro (Tab. 58)",
+    {
+     "num": [
+      "58_28"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "schuld",
+    "Schulden",
+    "Investitionskredite und Wertpapierschulden der Gemeinden und Gemeindeverbände je Einwohner/-in, Euro (Tab. 59)",
+    {
+     "num": [
+      "59_12"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ]
+  ]
+ ],
+ [
+  "Umwelt",
+  [
+   [
+    "abfall",
+    "Haushaltsabfälle",
+    "Kilogramm je Einwohner/-in (Tab. 60)",
+    {
+     "num": [
+      "60_4"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "getrennt",
+    "Getrennt erfasste Bio- und Wertstoffe",
+    "Anteil an allen Haushaltsabfällen (Tab. 60)",
+    {
+     "num": [
+      "60_7",
+      "60_8"
+     ],
+     "den": [
+      "60_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "wasser",
+    "Wasserverbrauch der Haushalte",
+    "Liter je Einwohner/-in und Tag (Tab. 61)",
+    {
+     "num": [
+      "61_10"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Unternehmen, Arbeitsstätten und Insolvenzen",
+  [
+   [
+    "nl",
+    "Niederlassungen",
+    "Mit abhängig Beschäftigten oder Umsätzen (Tab. 62)",
+    {
+     "num": [
+      "62_3"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "nlGross",
+    "Beschäftigte in großen Niederlassungen",
+    "Anteil in Niederlassungen mit 250 oder mehr Beschäftigten (Tab. 62)",
+    {
+     "num": [
+      "62_12"
+     ],
+     "den": [
+      "62_4"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "gewSaldo",
+    "Saldo Gewerbean- und -abmeldungen",
+    "Anmeldungen minus Abmeldungen (Tab. 63)",
+    {
+     "num": [
+      "63_3"
+     ],
+     "minus": [
+      "63_7"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "insU",
+    "Unternehmensinsolvenzen",
+    "Beantragte Verfahren (Tab. 65)",
+    {
+     "num": [
+      "65_3"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Verarbeitendes Gewerbe einschl. Bergbau sowie Gewinnung von Steinen und Erden",
+  [
+   [
+    "vgBetr",
+    "Betriebe",
+    "Im Verarbeitenden Gewerbe (Tab. 66)",
+    {
+     "num": [
+      "66_3"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "vgBesch",
+    "Beschäftigte je 1.000 Einwohner/-innen",
+    "Im Verarbeitenden Gewerbe (Tab. 66)",
+    {
+     "num": [
+      "66_5"
+     ],
+     "d": 1
+    }
+   ],
+   [
+    "vgUms",
+    "Umsatz",
+    "Millionen Euro (Tab. 66)",
+    {
+     "num": [
+      "66_8"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "vgExp",
+    "Exportquote",
+    "Anteil des Auslandsumsatzes in % (Tab. 66)",
+    {
+     "num": [
+      "66_11"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ]
+  ]
+ ]
+];
 const SPEC = new Map(TILESETS.flatMap(([, ts]) => ts.map(([k, , , f]) => [k, f])));
 const DEF = { fokus: '532000', vergleich: '000000', mid: '17_15', basis: '', skala: 'abs' };
 const nfc = {};
 const num = (v, d) => (nfc[d] ||= new Intl.NumberFormat('de-DE', { maximumFractionDigits: d })).format(v);
 const ok = (v) => v != null && Number.isFinite(v);
 const fmt = (v) => { if (!ok(v)) return '—'; const a = Math.abs(v); return num(v, a >= 1000 ? 0 : a >= 10 ? 1 : 2); };
-const fmtK = (k, v) => { if (!ok(v)) return '—'; const f = SPEC.get(k) || {}; const t = num(v, f.d ?? 1); return f.u === '%' ? t + ' %' : f.u === '€' ? t + ' €' : t; };
+const fmtN = (v, d) => { let r = Math.round(v * 10 ** d) / 10 ** d; if (r === 0) r = 0; return r.toLocaleString('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d }); };
+const fmtK = (k, v) => { if (!ok(v)) return '—'; const f = SPEC.get(k) || {}; const t = fmtN(v, f.d ?? 1); return f.u === '%' ? t + ' %' : f.u === '€' ? t + ' €' : t; };
 const fmtP = (v) => ok(v) ? (Math.abs(v) < 1 && v !== 0 ? v.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : v.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })) + ' %' : '—';
 const shortName = (n) => String(n).replace(/^Landkreis /, 'LK ').replace(/,.*$/, '');
 const isKreis = (e) => e === 'Landkreis' || e === 'Kreisfreie Stadt';
@@ -182,19 +1140,34 @@ function set(patch) {
 const val = (ai, mid, ags) => { const a = D.werte[ai][mid]; const v = a ? a[RI.get(ags)] : null; return v == null ? null : v; };
 const bez = (ai, mid) => { const b = D.bezug[ai][mid]; return b ? { bezug: b[0], jahr: b[1], art: b[2] } : null; };
 
+// Hanau ist seit 1.1.2026 kreisfrei; manche Tabellen der neuesten Ausgabe weisen Hanau getrennt aus, andere noch im Main-Kinzig-Kreis.
+const HANAU = '415000', MKK = '435000';
+const hanauSep = (mid, ai = LATEST) => val(ai, mid, HANAU) != null;
 function computeKpi() {
-  const g = (mid, ags) => { const v = val(LATEST, mid, ags); return v == null ? NaN : v; };
-  const sum = (ms, a) => (ms || []).reduce((t, m) => t + g(m, a), 0);
   const out = {};
   for (const [k, f] of SPEC) {
+    const mids = [...(f.num || []), ...(f.minus || []), ...(f.den || [])];
+    const sep = mids.map((m) => hanauSep(m));
+    const mixed = sep.some(Boolean) && !sep.every(Boolean);
+    // gemischte Formeln: Main-Kinzig-Kreis einschließlich Hanau rechnen, Hanau selbst ohne Wert
+    const g = (mid, ags) => {
+      let v = val(LATEST, mid, ags);
+      if (mixed && ags === HANAU) return NaN;
+      if (mixed && ags === MKK && hanauSep(mid)) { const h = val(LATEST, mid, HANAU); v = v == null || h == null ? null : v + h; }
+      return v == null ? NaN : v;
+    };
+    const sum = (ms, a) => (ms || []).reduce((t, m) => t + g(m, a), 0);
     const m = new Map();
     for (const r of REG) {
       let w = sum(f.num, r.ags) - sum(f.minus, r.ags);
       if (f.den) w = w / sum(f.den, r.ags) * (f.f || 1);
-      if (Number.isFinite(w)) m.set(r.ags, { wert: Math.round(w * 10 ** f.d) / 10 ** f.d });
+      if (Number.isFinite(w)) m.set(r.ags, { roh: w, wert: Math.round(w * 10 ** f.d) / 10 ** f.d, inklHanau: mixed && r.ags === MKK });
     }
-    const sorted = REG.filter((r) => isKreis(r.ebene) && m.has(r.ags)).sort((a, b) => m.get(b.ags).wert - m.get(a.ags).wert);
-    sorted.forEach((r, i) => { const o = m.get(r.ags); o.rang = i + 1; o.n = sorted.length; });
+    const sorted = REG.filter((r) => isKreis(r.ebene) && m.has(r.ags)).sort((a, b) => m.get(b.ags).roh - m.get(a.ags).roh);
+    sorted.forEach((r, i) => {
+      const o = m.get(r.ags), prev = i ? m.get(sorted[i - 1].ags) : null;
+      o.rang = prev && prev.roh === o.roh ? prev.rang : i + 1; o.n = sorted.length;
+    });
     out[k] = m;
   }
   return out;
@@ -250,6 +1223,7 @@ function renderHead() {
     e.replaceChildren();
     if (!o || o.rang == null) { e.textContent = 'Kein Rang (Region ist kein Kreis)'; return; }
     e.append('Rang ', el('b', null, String(o.rang)), ' von ' + o.n + ' Kreisen');
+    if (o.inklHanau) e.append(' · einschließlich Hanau');
   });
 }
 
@@ -264,6 +1238,7 @@ function renderSelectors() {
   tm.replaceChildren(...MM.filter((m) => m.tab === cur.tab).map((m) => new Option(m.merkmal, m.mid)));
   tm.value = P.mid;
   $('#merkmal-titel').textContent = cur.merkmal;
+  $('#einheit').hidden = !cur.einheit; $('#einheit').textContent = cur.einheit ? 'Einheit: ' + cur.einheit : '';
   $('#tabelle-titel').textContent = D.tabellen[cur.tab][1];
   const b = bez(LATEST, P.mid);
   $('#bezug-aktuell').textContent = b ? b.bezug : '—';
@@ -274,34 +1249,177 @@ function tipFor(host) { let t = host.querySelector(':scope > .tip'); if (!t) { t
 function place(host, t, x, y) { const w = t.offsetWidth, W = host.clientWidth; t.style.left = Math.max(0, Math.min(W - w, x + 12)) + 'px'; t.style.top = Math.max(0, y - t.offsetHeight - 8) + 'px'; }
 
 // Prozentwerte: Anteil eines Merkmals an einer Bezugsgröße derselben Tabelle oder am Landeswert
-const RATE_RE = /%|Prozent|\bje\b|Anteil|Abnahme|auf 1[0 .]*00\b|auf 100\b|Durchschnitt|quotient|Quote|Messzahl|Landeswert|Bundeswert|in Jahren|Heiratsalter|Kaufwert|Abhängigkeitsrate|Herkunftsgebiet|mehr bzw\. weniger|Wanderungsgewinn|negativ/i;
-const UNIT_RE = /Millionen Euro|1 000 Euro|1 000 m[23]|1 000 m2|1 000|Euro|Hektar|Tonnen|Kilogramm|Liter|m[23]\b/;
-const unitOf = (t) => (String(t).match(UNIT_RE) || [''])[0];
+const RATE_RE = /%|Prozent|\bje\b|(?:^|[\s›(])Anteil|Abnahme|auf 1[0 .]*00\b|auf 100\b|Durchschnitt|quotient|Quote|Messzahl|Maßzahl|Landeswert|Bundeswert|in Jahren|Heiratsalter|Kaufwert|Abhängigkeitsrate|Herkunftsgebiet|mehr bzw\. weniger|Wanderungsgewinn|negativ/i;
+const UNIT_RE = /Millionen Euro|1 000 Euro|1 000 m[23]|1 000|Euro|Hektar|Tonnen|Kilogramm|Liter|m[23]\b/;
+const MONEY_RE = /Umsatz|Einkünfte|Einkommen|Entgelt|Löhne|Gehälter|Ausgaben|Einnahmen|Kaufsumme|Baukosten|Schulden|Steuer(?!pflichtig)|BIP|BWS|Wertschöpfung|Forderungen|Kredit|Zuweisung|Investition|Einzahlung|Realsteuer/i;
+const RATE_TABS = [13, 23, 25, 33]; // Tabellen, die als Ganzes Pro-Kopf-Werte oder Maßzahlen enthalten
+const BASIS_DEF = {
+"17_4": "17_3",
+"17_5": "17_3",
+"17_6": "17_3",
+"17_9": "17_3",
+"17_12": "17_3",
+"17_15": "17_3",
+"17_18": "17_3",
+"18_7": "18_4",
+"18_12": "18_4",
+"18_15": "18_4",
+"18_18": "18_4",
+"18_21": "18_4",
+"18_24": "18_4",
+"41_3": "41_9",
+"41_4": "41_9",
+"41_5": "41_9",
+"41_6": "41_9",
+"41_7": "41_9",
+"41_8": "41_9",
+"41_11": "41_9",
+"41_12": "41_9",
+"42_5": "42_3",
+"42_7": "42_3",
+"42_8": "42_3",
+"42_9": "42_3",
+"42_10": "42_3",
+"43_5": "43_3",
+"43_7": "43_3",
+"43_8": "43_3",
+"43_9": "43_3",
+"43_10": "43_3",
+"44_4": "44_3",
+"44_5": "44_3",
+"44_6": "44_3",
+"44_7": "44_3",
+"44_8": "44_3",
+"44_9": "44_3",
+"44_10": "44_3",
+"45_4": "45_3",
+"45_5": "45_3",
+"45_6": "45_3",
+"45_7": "45_3",
+"45_8": "45_3",
+"49_12": "49_3",
+"49_13": "49_3",
+"49_14": "49_3",
+"49_16": "49_3",
+"49_17": "49_3",
+"49_18": "49_3",
+"50_9": "50_5",
+"50_10": "50_5",
+"50_11": "50_5",
+"52_3": "52_5",
+"52_4": "52_5",
+"52_6": "52_5",
+"52_7": "52_5",
+"52_8": "52_5",
+"52_9": "52_5",
+"52_10": "52_5",
+"52_11": "52_5",
+"52_12": "52_5",
+"55_5": "55_3",
+"55_8": "55_3",
+"55_11": "55_3",
+"55_14": "55_3",
+"55_17": "55_3",
+"55_20": "55_3",
+"55_23": "55_3",
+"55_26": "55_3",
+"55_6": "55_4",
+"55_9": "55_4",
+"55_12": "55_4",
+"55_15": "55_4",
+"55_18": "55_4",
+"55_21": "55_4",
+"55_24": "55_4",
+"55_27": "55_4",
+"35_4": "35_3",
+"35_6": "35_3",
+"35_7": "35_5",
+"35_8": "35_5",
+"35_9": "35_5",
+"35_10": "35_5",
+"35_11": "35_5",
+"35_12": "35_5",
+"36_5": "36_3",
+"36_6": "36_4",
+"36_9": "36_7",
+"36_10": "36_8",
+"40_5": "40_4",
+"6_7": "6_3",
+"6_8": "6_4",
+"6_9": "6_5",
+"58_5": "58_3",
+"58_6": "58_3",
+"58_7": "58_3",
+"58_8": "58_3",
+"58_9": "58_3",
+"58_10": "58_3",
+"58_13": "58_11",
+"58_15": "58_11",
+"58_17": "58_11",
+"59_5": "59_3",
+"59_6": "59_3",
+"59_7": "59_3",
+"59_8": "59_3",
+"59_9": "59_3",
+"59_10": "59_3",
+"60_5": "60_3",
+"60_6": "60_3",
+"60_7": "60_3",
+"60_8": "60_3",
+"60_9": "60_3",
+"60_10": "60_3",
+"61_5": "61_4",
+"61_6": "61_4",
+"61_7": "61_4",
+"61_9": "61_8",
+"64_3": "64_6",
+"64_4": "64_6",
+"64_5": "64_6",
+"62_5": "62_3",
+"62_7": "62_3",
+"62_9": "62_3",
+"62_11": "62_3",
+"62_6": "62_4",
+"62_8": "62_4",
+"62_10": "62_4",
+"62_12": "62_4",
+"66_9": "66_8",
+"66_10": "66_8",
+"48_5": "48_4",
+"48_6": "48_4",
+"51_16": "51_15",
+"51_17": "51_15",
+"7_9": "7_3",
+"7_12": "7_3"
+};
+const isRateM = (m) => RATE_RE.test(m.merkmal) || RATE_TABS.includes(m.tab);
+const unitOf = (m) => m.einheit || (m.merkmal.match(UNIT_RE) || [''])[0] || (MONEY_RE.test(m.merkmal) ? 'Geld' : '');
 const segs = (t) => String(t).split(' › ');
+const TOTAL_RE = /insgesamt|zusammen/i;
 function basisInfo(mid) {
   const cur = MI.get(mid);
-  if (RATE_RE.test(cur.merkmal)) return null;
-  const u = unitOf(cur.merkmal), kreise = REG.filter((r) => isKreis(r.ebene));
+  if (isRateM(cur)) return null;
+  const u = unitOf(cur), kreise = REG.filter((r) => isKreis(r.ebene));
   const fits = (b) => {
     let any = false;
     for (const r of kreise) {
       const v = val(LATEST, mid, r.ags), w = val(LATEST, b, r.ags);
-      if (v == null || w == null) continue;
-      if (!(w > 0) || v < 0 || v / w > 1.005) return false;
+      if (v == null || w == null || v < 0 || (v === 0 && w === 0)) continue;
+      if (!(w > 0) || v / w > 1.005) return false;
       any = true;
     }
     return any;
   };
-  const cands = MM.filter((m) => cur.tab !== 10 && m.tab === cur.tab && m.mid !== mid && !RATE_RE.test(m.merkmal) && unitOf(m.merkmal) === u && fits(m.mid));
+  const cands = MM.filter((m) => cur.tab !== 10 && m.tab === cur.tab && m.mid !== mid && !isRateM(m) && unitOf(m) === u && fits(m.mid));
+  // 1. geprüfte Zuordnung (werkzeuge/bezugsgroessen.json), 2. nächsthöhere Summe derselben Gliederung,
+  // 3. Spalte "Insgesamt" bzw. "Alle Wirtschaftsbereiche" mit gleicher letzter Kopfzeile; sonst Landeswert
   const cs = segs(cur.merkmal);
-  const pre = (m) => { const ms = segs(m.merkmal); let i = 0; while (i < ms.length - 1 && i < cs.length - 1 && ms[i] === cs[i]) i++; return i; };
-  const idx = MM.indexOf(cur);
-  let best = null, bestScore = -1;
-  for (const m of cands) {
-    if (MM.indexOf(m) > idx) continue;
-    const sc = pre(m) * 10 + (/insgesamt|zusammen/i.test(segs(m.merkmal).at(-1)) ? 1 : 0);
-    if (sc > bestScore) { best = m; bestScore = sc; }
-  }
+  const defB = BASIS_DEF[mid] && MI.get(BASIS_DEF[mid]);
+  if (defB && !cands.includes(defB) && fits(defB.mid)) cands.unshift(defB); // geprüfte Bezugsgröße auch bei abweichender Einheitsangabe im Text
+  let best = cands.find((m) => m.mid === BASIS_DEF[mid]);
+  if (!best) best = cands.filter((m) => { const ms = segs(m.merkmal), head = ms.slice(0, -1); return TOTAL_RE.test(ms.at(-1)) && head.length > 0 && head.length < cs.length && (ms.length < cs.length || !TOTAL_RE.test(cs.at(-1))) && head.every((x, i) => x === cs[i]); })
+    .sort((a, b) => segs(b.merkmal).length - segs(a.merkmal).length)[0];
+  if (!best) best = cands.find((m) => /^Insgesamt$/i.test(m.merkmal) || (/^(Insgesamt|Alle Wirtschaftsbereiche) › /i.test(m.merkmal) && segs(m.merkmal).at(-1) === cs.at(-1)));
   const landOk = val(LATEST, mid, '000000') > 0;
   const opts = (landOk ? [['land', 'Landeswert Hessen (Anteil des Kreises)']] : []).concat(cands.map((m) => [m.mid, m.merkmal]));
   if (!opts.length) return null;
@@ -312,7 +1430,7 @@ function basisInfo(mid) {
 const share = (bi, mid, ags) => {
   if (!bi) return null;
   const v = val(LATEST, mid, ags), w = bi.chosen === 'land' ? val(LATEST, mid, '000000') : val(LATEST, bi.chosen, ags);
-  return v == null || !(w > 0) ? null : v / w * 100;
+  return v == null || w == null ? null : v === 0 && w === 0 ? 0 : !(w > 0) ? null : v / w * 100;
 };
 
 function renderBasis(bi) {
@@ -376,7 +1494,21 @@ function renderBars() {
     .on('click', (ev, d) => set({ fokus: d.ags }));
 }
 
+const HINWEISE = {
+  zensus: 'Bevölkerungszahlen bis zum Stand Ende 2023 beruhen auf dem Zensus 2011, ab Stand 2024 auf dem Zensus 2022. Werte davor und danach sind nicht direkt vergleichbar.',
+  52: 'Laut Statistischem Landesamt sind die Ergebnisse ab 2025 nicht mit den Vorjahren vergleichbar (bereinigter Abgleich mit den Melderegistern).',
+  hanau: 'Hanau ist seit 1. Januar 2026 kreisfrei. In dieser Tabelle wird Hanau ab der Ausgabe Herbst 2026 getrennt ausgewiesen; der Main-Kinzig-Kreis ist ab dann ohne Hanau.',
+};
+function renderHinweis() {
+  const tab = MI.get(P.mid).tab, out = [];
+  if ([7, 11, 12, 13].includes(tab)) out.push(HINWEISE.zensus);
+  if (tab === 52) out.push(HINWEISE[52]);
+  if ([P.fokus, P.vergleich].some((a) => a === HANAU || a === MKK) && hanauSep(P.mid)) out.push(HINWEISE.hanau);
+  const e = $('#verlauf-hinweis'); e.hidden = !out.length; e.textContent = out.join(' ');
+}
+
 function renderVerlauf() {
+  renderHinweis();
   const host = $('#verlauf');
   host.querySelectorAll('svg, .empty').forEach((n) => n.remove());
   const tip = tipFor(host); tip.hidden = true;
@@ -434,7 +1566,7 @@ function renderDetail() {
   const name = (a) => shortName(REG[RI.get(a)].region);
   const cols = ['Merkmal', name(P.fokus)];
   if (P.vergleich !== P.fokus) cols.push(name(P.vergleich));
-  cols.push('Index ' + name(P.fokus) + ' (Hessen = 100)');
+  cols.push('Hessen-Vergleich ' + name(P.fokus));
   const hr = table.createTHead().insertRow();
   for (const c of cols) hr.append(el('th', null, c));
   const tb = table.createTBody();
@@ -445,10 +1577,14 @@ function renderDetail() {
     tr.insertCell().textContent = fmt(f);
     if (P.vergleich !== P.fokus) tr.insertCell().textContent = fmt(val(LATEST, m.mid, P.vergleich));
     const ic = tr.insertCell();
+    const rate = isRateM(m);
+    const noIdx = /Abnahme|Veränderung|Anteil a[nm] (?:der |dem )?(?:BIP|BWS|Hessen)|Anteil an Hessen|Wanderungsgewinn|mehr bzw\. weniger/.test(m.merkmal) || (m.tab === 21 && / › %$/.test(m.merkmal));
     const iv = ok(f) && land > 0 ? Math.round(f / land * 1000) / 10 : null;
-    if (ok(iv)) {
+    if (noIdx) { ic.textContent = '—'; }
+    else if (ok(iv) && !rate) { ic.textContent = fmtP(f / land * 100) + ' von Hessen'; }
+    else if (ok(iv)) {
       const box = el('span', 'idx'); const bar = el('i', iv > 100 ? 'hi' : null); bar.style.width = Math.min(60, Math.max(1, iv * 0.3)) + 'px';
-      box.append(bar, fmt(iv)); ic.append(box);
+      box.append(bar, 'Index ' + fmt(iv)); ic.append(box);
     } else ic.textContent = '—';
     tr.addEventListener('click', () => set({ mid: m.mid, basis: '' }));
   }
@@ -476,7 +1612,7 @@ async function init() {
   }
   REG = D.regionen.map(([ags, region, ebene]) => ({ ags, region, ebene }));
   RI = new Map(REG.map((r, i) => [r.ags, i]));
-  MM = D.merkmale.map(([mid, merkmal]) => { const tab = Number(mid.split('_')[0]); return { mid, merkmal, tab, thema: D.tabellen[tab][0] }; });
+  MM = D.merkmale.map(([mid, merkmal, einheit]) => { const tab = Number(mid.split('_')[0]); return { mid, merkmal, einheit: einheit || '', tab, thema: D.tabellen[tab][0], tabelle: D.tabellen[tab][1] }; });
   MI = new Map(MM.map((m) => [m.mid, m]));
   LATEST = D.ausgaben.length - 1;
   KPI = computeKpi();

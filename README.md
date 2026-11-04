@@ -1,9 +1,13 @@
 # Kreiszahlen Lahn-Dill-Kreis
 
-Dashboard zu den Hessischen Kreiszahlen (Hessisches Statistisches Landesamt), Ausgaben Frühjahr 2023 bis Herbst 2026.
-Bildungs- und Strukturdaten des Lahn-Dill-Kreises im Vergleich der hessischen Kreise.
+Dashboard zu den Hessischen Kreiszahlen des Hessischen Statistischen Landesamts (Excel-Ausgaben ab Frühjahr 2023):
+Bildungs- und Strukturdaten des Lahn-Dill-Kreises im Vergleich der hessischen Landkreise und kreisfreien Städte.
 
-- `index.html` – die Seite (eigenständig, keine externen Abhängigkeiten)
+Seite: https://bildungsbuero-ldk.github.io/kreiszahlen-ldk/
+
+- `index.html` – die Seite (eigenständig, lädt nichts von fremden Servern)
 - `daten.json` – alle Werte, Regionen, Merkmale und Berichtszeiträume
+- `quellen/` – die unveränderten Excel-Dateien des Statistischen Landesamts
+- `werkzeuge/` – Aufbereitung und Seitenbau; Anleitung für neue Ausgaben in `werkzeuge/ANLEITUNG.md`
 
-Quelle: Hessisches Statistisches Landesamt, Hessische Kreiszahlen. Kennzahlen und Darstellung: eigene Berechnungen.
+Quelle: Hessisches Statistisches Landesamt, Hessische Kreiszahlen (https://www.statistischebibliothek.de/mir/receive/HESerie_mods_00000870). Kennzahlen und Darstellung: eigene Berechnungen.

@@ -1,0 +1,956 @@
+[
+ [
+  "Baugewerbe und Bautätigkeit",
+  [
+   [
+    "fertigWhg",
+    "Fertiggestellte Wohnungen",
+    "Je 10.000 Einwohner/-innen im letzten Jahr (Tab. 4)",
+    {
+     "num": [
+      "4_12"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "genehmWhg",
+    "Genehmigte Wohnungen",
+    "Je 10.000 Einwohner/-innen im letzten Jahr (Tab. 5)",
+    {
+     "num": [
+      "5_14"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "whgBestand",
+    "Wohnungsbestand",
+    "Wohnungen je 1.000 Einwohner/-innen (Tab. 3)",
+    {
+     "num": [
+      "3_12"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "bauland",
+    "Kaufwert Bauland",
+    "Durchschnittlicher Kaufwert in Euro je m² (Tab. 6)",
+    {
+     "num": [
+      "6_6"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "bauPers",
+    "Tätige im Bauhauptgewerbe",
+    "Tätige Personen (Tab. 1)",
+    {
+     "num": [
+      "1_4"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Bevölkerung",
+  [
+   [
+    "bev",
+    "Einwohnerinnen und Einwohner",
+    "Bevölkerung insgesamt (Tab. 7)",
+    {
+     "num": [
+      "7_3"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "bevVer",
+    "Veränderung zum Vorjahr",
+    "Zu- bzw. Abnahme der Bevölkerung in % (Tab. 7)",
+    {
+     "num": [
+      "7_7"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "u18",
+    "Anteil unter 18-Jährige",
+    "An der Bevölkerung insgesamt (Tab. 11)",
+    {
+     "num": [
+      "11_4",
+      "11_6"
+     ],
+     "den": [
+      "11_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "ue65",
+    "Anteil 65 Jahre und älter",
+    "An der Bevölkerung insgesamt (Tab. 11)",
+    {
+     "num": [
+      "11_10"
+     ],
+     "den": [
+      "11_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "nichtdt",
+    "Anteil Nichtdeutsche",
+    "An der Bevölkerung insgesamt (Tab. 7)",
+    {
+     "num": [
+      "7_12"
+     ],
+     "den": [
+      "7_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "geb",
+    "Lebendgeborene",
+    "Je 1.000 Einwohner/-innen im letzten Jahr (Tab. 9)",
+    {
+     "num": [
+      "9_4"
+     ],
+     "d": 1
+    }
+   ],
+   [
+    "wand",
+    "Wanderungssaldo",
+    "Zu- minus Fortzüge je 1.000 Einwohner/-innen (Tab. 9)",
+    {
+     "num": [
+      "9_14"
+     ],
+     "d": 1
+    }
+   ],
+   [
+    "jugendq",
+    "Jugendquotient",
+    "Unter 20-Jährige je 100 Personen von 20 bis unter 65 (Tab. 13)",
+    {
+     "num": [
+      "13_3"
+     ],
+     "d": 1
+    }
+   ]
+  ]
+ ],
+ [
+  "Bildung",
+  [
+   [
+    "abi",
+    "Allgemeine Hochschulreife",
+    "Anteil an allen Schulentlassenen des letzten Schuljahres (Tab. 17)",
+    {
+     "num": [
+      "17_15"
+     ],
+     "den": [
+      "17_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "ohneHSA",
+    "Ohne Hauptschulabschluss",
+    "Anteil an allen Schulentlassenen des letzten Schuljahres (Tab. 17)",
+    {
+     "num": [
+      "17_6"
+     ],
+     "den": [
+      "17_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "schueler",
+    "Schüler/-innen allgemeinbildend",
+    "An allgemeinbildenden Schulen, ohne Schulen für Erwachsene (Tab. 15)",
+    {
+     "num": [
+      "15_21"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "beruf",
+    "Schüler/-innen an beruflichen Schulen",
+    "Alle beruflichen Schulformen (Tab. 18)",
+    {
+     "num": [
+      "18_4"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "ausl",
+    "Ausländische Schüler/-innen",
+    "Anteil an allen Schüler/-innen allgemeinbildender Schulen (Tab. 15, 16)",
+    {
+     "num": [
+      "16_19"
+     ],
+     "den": [
+      "15_21"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "kita",
+    "Kita-Plätze je 100 Kinder unter 6",
+    "Genehmigte Plätze in Kitas (inkl. Plätze für Schulkinder) je 100 Kinder unter 6 Jahren (Tab. 53, 11)",
+    {
+     "num": [
+      "53_8"
+     ],
+     "den": [
+      "11_4"
+     ],
+     "f": 100,
+     "d": 1
+    }
+   ],
+   [
+    "u18b",
+    "Anteil unter 18-Jährige",
+    "An der Bevölkerung insgesamt (Tab. 11)",
+    {
+     "num": [
+      "11_4",
+      "11_6"
+     ],
+     "den": [
+      "11_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "bevb",
+    "Einwohnerinnen und Einwohner",
+    "Bevölkerung insgesamt (Tab. 7)",
+    {
+     "num": [
+      "7_3"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Bruttoinlandsprodukt/Bruttowertschöpfung",
+  [
+   [
+    "bipEw",
+    "BIP je Einwohner/-in",
+    "Bruttoinlandsprodukt in jeweiligen Preisen, Euro (Tab. 19)",
+    {
+     "num": [
+      "19_9"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "bipVer",
+    "BIP-Veränderung",
+    "Zu- bzw. Abnahme des BIP zum Vorjahr in % (Tab. 19)",
+    {
+     "num": [
+      "19_5"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "bipAnt",
+    "Anteil am BIP Hessens",
+    "In % (Tab. 19)",
+    {
+     "num": [
+      "19_7"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "bwsVG",
+    "Anteil Verarbeitendes Gewerbe",
+    "An der Bruttowertschöpfung insgesamt (Tab. 20, 21)",
+    {
+     "num": [
+      "21_7"
+     ],
+     "den": [
+      "20_4"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "bwsDL",
+    "Anteil öffentliche und sonstige Dienstleistungen",
+    "Inkl. Erziehung und Gesundheit, an der Bruttowertschöpfung insgesamt (Tab. 20, 21)",
+    {
+     "num": [
+      "21_15"
+     ],
+     "den": [
+      "20_4"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ]
+  ]
+ ],
+ [
+  "Einkommen",
+  [
+   [
+    "verfEink",
+    "Verfügbares Einkommen",
+    "Der privaten Haushalte je Einwohner/-in, Euro (Tab. 26)",
+    {
+     "num": [
+      "26_5"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "verfIdx",
+    "Verfügbares Einkommen, Index",
+    "Je Einwohner/-in, Landeswert = 100 (Tab. 26)",
+    {
+     "num": [
+      "26_6"
+     ],
+     "d": 1
+    }
+   ],
+   [
+    "aeAN",
+    "Arbeitnehmerentgelt",
+    "Je Arbeitnehmer/-in, Euro (Tab. 23)",
+    {
+     "num": [
+      "23_3"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "lohnAN",
+    "Bruttolöhne und -gehälter",
+    "Je Arbeitnehmer/-in, Euro (Tab. 25)",
+    {
+     "num": [
+      "25_3"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ]
+  ]
+ ],
+ [
+  "Erwerbstätigkeit",
+  [
+   [
+    "etw",
+    "Erwerbstätige am Arbeitsort",
+    "Jahresdurchschnitt, in 1.000 (Tab. 27)",
+    {
+     "num": [
+      "27_3"
+     ],
+     "d": 1
+    }
+   ],
+   [
+    "etwDL",
+    "Anteil Dienstleistungsbereiche",
+    "An allen Erwerbstätigen am Arbeitsort (Tab. 27)",
+    {
+     "num": [
+      "27_9"
+     ],
+     "den": [
+      "27_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "etwPG",
+    "Anteil Produzierendes Gewerbe",
+    "An allen Erwerbstätigen am Arbeitsort (Tab. 27)",
+    {
+     "num": [
+      "27_5"
+     ],
+     "den": [
+      "27_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "anVZ",
+    "Arbeitnehmer/-innen in Vollzeit­äquivalenten",
+    "Anteil an allen Arbeitnehmer/-innen (Tab. 29, 30)",
+    {
+     "num": [
+      "30_3"
+     ],
+     "den": [
+      "29_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "stdEtw",
+    "Arbeitsstunden je Erwerbstätigen",
+    "Geleistete Stunden im Jahr (Tab. 33)",
+    {
+     "num": [
+      "33_3"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Landwirtschaft",
+  [
+   [
+    "lwBetr",
+    "Landwirtschaftliche Betriebe",
+    "Insgesamt (Tab. 35)",
+    {
+     "num": [
+      "35_3"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "oeko",
+    "Anteil Ökolandbau",
+    "Ökologisch bewirtschaftete an der landwirtschaftlich genutzten Fläche (Tab. 35)",
+    {
+     "num": [
+      "35_7"
+     ],
+     "den": [
+      "35_5"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "wald",
+    "Anteil Wald",
+    "An der Bodenfläche (Tab. 38)",
+    {
+     "num": [
+      "38_8"
+     ],
+     "den": [
+      "38_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "siedl",
+    "Anteil Siedlung und Verkehr",
+    "An der Bodenfläche (Tab. 38)",
+    {
+     "num": [
+      "38_4",
+      "38_5"
+     ],
+     "den": [
+      "38_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "lfPreis",
+    "Kaufwert landwirtschaftlicher Fläche",
+    "Euro je Hektar veräußerter LF (Tab. 40)",
+    {
+     "num": [
+      "40_8"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ]
+  ]
+ ],
+ [
+  "Öffentlicher Dienst",
+  [
+   [
+    "oeD",
+    "Personal der öffentlichen Verwaltung",
+    "Bund, Land und Kommunen je 10.000 Einwohner/-innen (Tab. 41)",
+    {
+     "num": [
+      "41_10"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "oeLand",
+    "Personal des Landes",
+    "Vollzeitäquivalente je 10.000 Einwohner/-innen (Tab. 42)",
+    {
+     "num": [
+      "42_4"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "oeKom",
+    "Personal der Kommunen",
+    "Vollzeitäquivalente je 10.000 Einwohner/-innen (Tab. 43)",
+    {
+     "num": [
+      "43_4"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "oeKomW",
+    "Frauenanteil Kommunen",
+    "An den Vollzeitäquivalenten der Kommunen in % (Tab. 43)",
+    {
+     "num": [
+      "43_6"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ]
+  ]
+ ],
+ [
+  "Sozialleistungen",
+  [
+   [
+    "kitaS",
+    "Kita-Plätze je 100 Kinder unter 6",
+    "Genehmigte Plätze je 100 Kinder unter 6 Jahren (Tab. 53, 11)",
+    {
+     "num": [
+      "53_8"
+     ],
+     "den": [
+      "11_4"
+     ],
+     "f": 100,
+     "d": 1
+    }
+   ],
+   [
+    "kitaFach",
+    "Fachkräfte in Kitas",
+    "Anteil tätiger Personen mit fachpädagogischem Abschluss (Tab. 53)",
+    {
+     "num": [
+      "53_10"
+     ],
+     "den": [
+      "53_9"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "wohngeld",
+    "Wohngeld",
+    "Empfänger/-innen in Empfängerhaushalten je 1.000 Einwohner/-innen (Tab. 46)",
+    {
+     "num": [
+      "46_7"
+     ],
+     "d": 1
+    }
+   ],
+   [
+    "grusi",
+    "Grundsicherung im Alter und bei Erwerbsminderung",
+    "Empfänger/-innen je 1.000 Einwohner/-innen (Tab. 47, 7)",
+    {
+     "num": [
+      "47_3"
+     ],
+     "den": [
+      "7_3"
+     ],
+     "f": 1000,
+     "d": 1
+    }
+   ],
+   [
+    "sozhEw",
+    "Sozialhilfe",
+    "Nettoausgaben je Einwohner/-in, Euro (Tab. 50)",
+    {
+     "num": [
+      "50_6"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "schwb",
+    "Schwerbehinderte Menschen",
+    "Anteil an der Bevölkerung (Tab. 52, 7)",
+    {
+     "num": [
+      "52_5"
+     ],
+     "den": [
+      "7_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ]
+  ]
+ ],
+ [
+  "Steuern",
+  [
+   [
+    "ekStpfl",
+    "Einkünfte je Steuerpflichtigen",
+    "Gesamtbetrag der Einkünfte je Lohn- und Einkommensteuerpflichtigen, Euro (Tab. 55)",
+    {
+     "num": [
+      "55_4"
+     ],
+     "den": [
+      "55_3"
+     ],
+     "f": 1000000,
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "ustEw",
+    "Steuerbarer Umsatz je Einwohner/-in",
+    "Lieferungen und Leistungen, Euro (Tab. 57)",
+    {
+     "num": [
+      "57_5"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "ustPfl",
+    "Umsatzsteuerpflichtige",
+    "Alle Wirtschaftsbereiche (Tab. 57)",
+    {
+     "num": [
+      "57_3"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Öffentliche Finanzen",
+  [
+   [
+    "stEw",
+    "Steuereinnahmen je Einwohner/-in",
+    "Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände, Euro (Tab. 58)",
+    {
+     "num": [
+      "58_4"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "stKraft",
+    "Steuereinnahmekraft",
+    "Gemeindliche Steuereinnahmekraft je Einwohner/-in, Euro (Tab. 58)",
+    {
+     "num": [
+      "58_20"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "bauInv",
+    "Bauinvestitionen",
+    "Der Gemeinden und Gemeindeverbände je Einwohner/-in, Euro (Tab. 58)",
+    {
+     "num": [
+      "58_28"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "schuld",
+    "Schulden",
+    "Investitionskredite und Wertpapierschulden der Gemeinden und Gemeindeverbände je Einwohner/-in, Euro (Tab. 59)",
+    {
+     "num": [
+      "59_12"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ]
+  ]
+ ],
+ [
+  "Umwelt",
+  [
+   [
+    "abfall",
+    "Haushaltsabfälle",
+    "Kilogramm je Einwohner/-in (Tab. 60)",
+    {
+     "num": [
+      "60_4"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "getrennt",
+    "Getrennt erfasste Bio- und Wertstoffe",
+    "Anteil an allen Haushaltsabfällen (Tab. 60)",
+    {
+     "num": [
+      "60_7",
+      "60_8"
+     ],
+     "den": [
+      "60_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "wasser",
+    "Wasserverbrauch der Haushalte",
+    "Liter je Einwohner/-in und Tag (Tab. 61)",
+    {
+     "num": [
+      "61_10"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Unternehmen, Arbeitsstätten und Insolvenzen",
+  [
+   [
+    "nl",
+    "Niederlassungen",
+    "Mit abhängig Beschäftigten oder Umsätzen (Tab. 62)",
+    {
+     "num": [
+      "62_3"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "nlGross",
+    "Beschäftigte in großen Niederlassungen",
+    "Anteil in Niederlassungen mit 250 oder mehr Beschäftigten (Tab. 62)",
+    {
+     "num": [
+      "62_12"
+     ],
+     "den": [
+      "62_4"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "gewSaldo",
+    "Saldo Gewerbean- und -abmeldungen",
+    "Anmeldungen minus Abmeldungen (Tab. 63)",
+    {
+     "num": [
+      "63_3"
+     ],
+     "minus": [
+      "63_7"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "insU",
+    "Unternehmensinsolvenzen",
+    "Beantragte Verfahren (Tab. 65)",
+    {
+     "num": [
+      "65_3"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Verarbeitendes Gewerbe einschl. Bergbau sowie Gewinnung von Steinen und Erden",
+  [
+   [
+    "vgBetr",
+    "Betriebe",
+    "Im Verarbeitenden Gewerbe (Tab. 66)",
+    {
+     "num": [
+      "66_3"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "vgBesch",
+    "Beschäftigte je 1.000 Einwohner/-innen",
+    "Im Verarbeitenden Gewerbe (Tab. 66)",
+    {
+     "num": [
+      "66_5"
+     ],
+     "d": 1
+    }
+   ],
+   [
+    "vgUms",
+    "Umsatz",
+    "Millionen Euro (Tab. 66)",
+    {
+     "num": [
+      "66_8"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "vgExp",
+    "Exportquote",
+    "Anteil des Auslandsumsatzes in % (Tab. 66)",
+    {
+     "num": [
+      "66_11"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ]
+  ]
+ ]
+]

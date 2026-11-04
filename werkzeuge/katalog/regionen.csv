@@ -1,0 +1,36 @@
+ags,region,ebene,reihenfolge
+411000,"Darmstadt, Wissenschaftsstadt",Kreisfreie Stadt,0
+412000,"Frankfurt am Main, Stadt",Kreisfreie Stadt,1
+413000,"Offenbach am Main, Stadt",Kreisfreie Stadt,2
+414000,"Wiesbaden, Landeshauptstadt",Kreisfreie Stadt,3
+431000,Landkreis Bergstraße,Landkreis,4
+432000,Landkreis Darmstadt-Dieburg,Landkreis,5
+433000,Landkreis Groß-Gerau,Landkreis,6
+434000,Hochtaunuskreis,Landkreis,7
+435000,Main-Kinzig-Kreis,Landkreis,8
+436000,Main-Taunus-Kreis,Landkreis,9
+437000,Odenwaldkreis,Landkreis,10
+438000,Landkreis Offenbach,Landkreis,11
+439000,Rheingau-Taunus-Kreis,Landkreis,12
+440000,Wetteraukreis,Landkreis,13
+400000,Regierungsbezirk Darmstadt,Regierungsbezirk,14
+531000,Landkreis Gießen,Landkreis,15
+532000,Lahn-Dill-Kreis,Landkreis,16
+533000,Landkreis Limburg-Weilburg,Landkreis,17
+534000,Landkreis Marburg-Biedenkopf,Landkreis,18
+535000,Vogelsbergkreis,Landkreis,19
+500000,Regierungsbezirk Gießen,Regierungsbezirk,20
+611000,"Kassel, documenta-Stadt",Kreisfreie Stadt,21
+631000,Landkreis Fulda,Landkreis,22
+632000,Landkreis Hersfeld-Rotenburg,Landkreis,23
+633000,Landkreis Kassel,Landkreis,24
+634000,Schwalm-Eder-Kreis,Landkreis,25
+635000,Landkreis Waldeck-Frankenberg,Landkreis,26
+636000,Werra-Meißner-Kreis,Landkreis,27
+600000,Regierungsbezirk Kassel,Regierungsbezirk,28
+000000,Land Hessen,Land,29
+100000,kreisfreie Städte,Summe,30
+200000,Landkreise,Summe,31
+900000,Regionalverband FrankfurtRheinMain,Verband,32
+415000,"Hanau, Brüder-Grimm-Stadt",Kreisfreie Stadt,33
+920000,Zweckverband Raum Kassel,Verband,34

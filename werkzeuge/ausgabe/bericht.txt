@@ -1,0 +1,208 @@
+== Frühjahr 2023 (HKr_23_1.xlsx)
+   T7→T7: Spalten ohne Gegenstück: ['Bevölkerung am 30.06.2022 › Zu- bzw. Abnahme (–) 30.06.2022 gegenüber › 09.05.2011 › %']
+   T7→T7: Merkmale ohne Wert in dieser Ausgabe: ['7_8']
+   T10→T10: Spalten ohne Gegenstück: ['Herkunftsgebiet']
+   T12→T12: unsichere Zuordnung ('davon waren … Jahre alt › unter 6 › %', 'Nichtdeutsche Bevölkerung › davon waren … Jahre alt › unter 6 › %', 0.79)
+   T12→T12: unsichere Zuordnung ('davon waren … Jahre alt › unter 6 › Anzahl', 'Nichtdeutsche Bevölkerung › davon waren … Jahre alt › unter 6 › Anzahl', 0.78)
+   T15→T15: Spalten ohne Gegenstück: ['Schüler/-innen an allgemeinbildenden Schulen (ohne Schulen für Erwachsene) › männlich']
+   Tabelle 27 ohne Gegenstück in der Referenz, entfällt: Arbeitslose in Hessen im Jahresdurchschnitt 2022
+   Tabelle 29 ohne Gegenstück in der Referenz, entfällt: Sozialversicherungspflichtig Beschäftigte (am Arbeitsort) in Hessen am 30. Juni 2022 nach Wirtschaft
+   T33→T34: unsichere Zuordnung ('Gerste', 'Getreide › Gerste', 0.76)
+   T33→T34: unsichere Zuordnung ('Roggen', 'Getreide › Roggen', 0.76)
+   T36→T37: unsichere Zuordnung ('darunter › Gemeiner Karpfen › Kilogramm', 'Menge des erzeugten Speisefisches › darunter › Gemeiner Karpfen › Kilogramm', 0.78)
+   T37→T38: unsichere Zuordnung ('davon › darunter › Wald', 'Bodenfläche › davon › Vegetation › darunter › Wald', 0.68)
+   T39→T40: unsichere Zuordnung ('darunter veräußerte LF › Hektar', 'darunter veräußerte Landwirtschaftlich genutzte Fläche (LF) › Hektar', 0.74)
+   T44→T45: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T45→T46: unsichere Zuordnung ('davon › wohngeldrechtliche Teilhaushalte › Mietzuschuss und Lastenzuschuss', 'Haushalte am 31.12. 2025 › davon › wohngeldberechtigte Teilhaushalte mit Miet- und Lastenzuschuss', 0.66)
+   T47→T48: Spalten ohne Gegenstück: ['Empfänger/-innen nach Sitz des Trägers insgesamt › je 10 000 Einwohner/-innen', 'Empfänger/-innen nach Sitz des Trägers insgesamt › je 10 000 Einwohner/-innen']
+   T47→T48: unsichere Zuordnung ('davon › noch: außerhalb von Einrichtungen › und zwar › weiblich', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › und zwar › weiblich', 0.72)
+   T47→T48: unsichere Zuordnung ('davon › noch: außerhalb von Einrichtungen › und zwar › männlich', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › und zwar › männlich', 0.72)
+   T47→T48: unsichere Zuordnung ('davon › noch: außerhalb von Einrichtungen › und zwar › Nichtdeutsche', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › und zwar › Nichtdeutsche', 0.73)
+   T47→T48: unsichere Zuordnung ('davon › noch: außerhalb von Einrichtungen › und zwar › Deutsche', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › und zwar › Deutsche', 0.72)
+   T47→T48: unsichere Zuordnung ('davon › noch: außerhalb von Einrichtungen › und zwar › im Alter von … Jahren › unter 7', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › und zwar › im Alter von … Jahren › unter 7', 0.79)
+   T48→T49: unsichere Zuordnung ('und zwar › Nichtdeutsche › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Nichtdeutsche › %', 0.76)
+   T48→T49: unsichere Zuordnung ('und zwar › Nichtdeutsche › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Nichtdeutsche › Anzahl', 0.76)
+   T48→T49: unsichere Zuordnung ('und zwar › Deutsche › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Deutsche › %', 0.73)
+   T48→T49: unsichere Zuordnung ('und zwar › Deutsche › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Deutsche › Anzahl', 0.72)
+   T48→T49: unsichere Zuordnung ('und zwar › weiblich › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › weiblich › %', 0.73)
+   T48→T49: unsichere Zuordnung ('und zwar › weiblich › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › weiblich › Anzahl', 0.72)
+   T48→T49: unsichere Zuordnung ('und zwar › männlich › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › männlich › %', 0.73)
+   T48→T49: unsichere Zuordnung ('und zwar › männlich › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › männlich › Anzahl', 0.72)
+   T49→T50: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T52→T53: unsichere Zuordnung ('davon mit Kindern im Alter von … bis unter ... Jahren › 0 – 3', 'Einrichtungen › davon mit Kindern im Alter von … Jahren › 0 bis unter 3', 0.63)
+   T57→T58: Spalten ohne Gegenstück: ['Finanzzuweisungen vom Land › Gemeinden und Gemeindeverbände › 1 000 Euro', 'Bauinvestitionen › der Gemeinden und Gemeindeverbände › 1 000 Euro']
+   T57→T58: unsichere Zuordnung ('darunter › Gemeindeanteil an der Umsatzsteuer › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gemeindeanteil an der Umsatzsteuer › 1 000 Euro', 0.79)
+   T57→T58: unsichere Zuordnung ('darunter › Gemeindeanteil an der Einkommensteuer › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gemeindeanteil an der Einkommensteuer › 1 000 Euro', 0.8)
+   T57→T58: unsichere Zuordnung ('darunter › Gewerbesteuer › netto › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gewerbesteuer › netto › 1 000 Euro', 0.74)
+   T57→T58: unsichere Zuordnung ('darunter › Gewerbesteuer › brutto › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gewerbesteuer › brutto › 1 000 Euro', 0.75)
+   T57→T58: unsichere Zuordnung ('darunter › Grundsteuer B › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Grundsteuer B › 1 000 Euro', 0.71)
+   T57→T58: unsichere Zuordnung ('darunter › Grundsteuer A › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Grundsteuer A › 1 000 Euro', 0.71)
+   T58→T59: Spalten ohne Gegenstück: ['Finanzen der Gemeinden und Gemeindeverbände 2021 › Schulden der Gemeinden und Gemeindeverbände › Investitionskredite und Wertpapierschulden am 31.12.2021 insgesamt › der Gemeinden und Gemeindeverbände › 1 000 Euro', 'Finanzen der Gemeinden und Gemeindeverbände 2021 › Schulden der Gemeinden und Gemeindeverbände › Aufnahmen › der Gemeinden und Gemeindeverbände › 1 000 Euro', 'Finanzen der Gemeinden und Gemeindeverbände 2021 › Schulden der Gemeinden und Gemeindeverbände › Tilgungen › der Gemeinden und Gemeindeverbände › 1 000 Euro']
+   T62→T63: Spalten ohne Gegenstück: ['Gewerbeanmeldungen › davon › Übernahme', 'Gewerbeabmeldungen › davon › Übergabe']
+   T62→T63: Merkmale ohne Wert in dieser Ausgabe: ['63_6', '63_10']
+   Tabelle 66 ohne Gegenstück in der Referenz, entfällt: Zusammensetzung des Regionalverbands FrankfurtRheinMain und des Zweckverbands Raum Kassel
+== Herbst 2023 (HKr_23-2hj_2kA.xlsx)
+   T7→T7: Spalten ohne Gegenstück: ['Bevölkerung am 31.12.2022 › Zu- bzw. Abnahme (–) 31.12.2022 gegenüber › 09.05.2011 › %']
+   T7→T7: Merkmale ohne Wert in dieser Ausgabe: ['7_8']
+   T10→T10: Spalten ohne Gegenstück: ['Herkunftsgebiet']
+   T12→T12: unsichere Zuordnung ('davon waren … Jahre alt › unter 6 › %', 'Nichtdeutsche Bevölkerung › davon waren … Jahre alt › unter 6 › %', 0.79)
+   T12→T12: unsichere Zuordnung ('davon waren … Jahre alt › unter 6 › Anzahl', 'Nichtdeutsche Bevölkerung › davon waren … Jahre alt › unter 6 › Anzahl', 0.78)
+   T15→T15: Spalten ohne Gegenstück: ['Schüler/-innen an allgemeinbildenden Schulen (ohne Schulen für Erwachsene) › männlich']
+   Tabelle 27 ohne Gegenstück in der Referenz, entfällt: Arbeitslose in Hessen im Jahresdurchschnitt 2022
+   Tabelle 29 ohne Gegenstück in der Referenz, entfällt: Sozialversicherungspflichtig Beschäftigte (am Arbeitsort) in Hessen am 30. Juni 2022 nach Wirtschaft
+   T33→T34: unsichere Zuordnung ('Gerste', 'Getreide › Gerste', 0.76)
+   T33→T34: unsichere Zuordnung ('Roggen', 'Getreide › Roggen', 0.76)
+   T36→T37: unsichere Zuordnung ('darunter › Gemeiner Karpfen › Kilogramm', 'Menge des erzeugten Speisefisches › darunter › Gemeiner Karpfen › Kilogramm', 0.78)
+   T37→T38: unsichere Zuordnung ('davon › darunter › Wald', 'Bodenfläche › davon › Vegetation › darunter › Wald', 0.68)
+   T39→T40: unsichere Zuordnung ('darunter veräußerte LF › Hektar', 'darunter veräußerte Landwirtschaftlich genutzte Fläche (LF) › Hektar', 0.74)
+   T44→T45: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T45→T46: unsichere Zuordnung ('davon › wohngeldrechtliche Teilhaushalte › Mietzuschuss und Lastenzuschuss', 'Haushalte am 31.12. 2025 › davon › wohngeldberechtigte Teilhaushalte mit Miet- und Lastenzuschuss', 0.66)
+   T47→T48: Spalten ohne Gegenstück: ['Empfänger/-innen nach Sitz des Trägers insgesamt › je 10 000 Einwohner/-innen', 'Empfänger/-innen nach Sitz des Trägers insgesamt › je 10 000 Einwohner/-innen']
+   T48→T49: unsichere Zuordnung ('und zwar › Nichtdeutsche › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Nichtdeutsche › %', 0.76)
+   T48→T49: unsichere Zuordnung ('und zwar › Nichtdeutsche › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Nichtdeutsche › Anzahl', 0.76)
+   T48→T49: unsichere Zuordnung ('und zwar › Deutsche › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Deutsche › %', 0.73)
+   T48→T49: unsichere Zuordnung ('und zwar › Deutsche › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Deutsche › Anzahl', 0.72)
+   T48→T49: unsichere Zuordnung ('und zwar › weiblich › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › weiblich › %', 0.73)
+   T48→T49: unsichere Zuordnung ('und zwar › weiblich › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › weiblich › Anzahl', 0.72)
+   T48→T49: unsichere Zuordnung ('und zwar › männlich › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › männlich › %', 0.73)
+   T48→T49: unsichere Zuordnung ('und zwar › männlich › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › männlich › Anzahl', 0.72)
+   T49→T50: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T52→T53: unsichere Zuordnung ('davon mit Kindern im Alter von … bis unter ... Jahren › 0 – 3', 'Einrichtungen › davon mit Kindern im Alter von … Jahren › 0 bis unter 3', 0.63)
+   T57→T58: Spalten ohne Gegenstück: ['Finanzzuweisungen vom Land › Gemeinden und Gemeindeverbände › 1 000 Euro', 'Bauinvestitionen › der Gemeinden und Gemeindeverbände › 1 000 Euro']
+   T57→T58: unsichere Zuordnung ('darunter › Gemeindeanteil an der Umsatzsteuer › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gemeindeanteil an der Umsatzsteuer › 1 000 Euro', 0.79)
+   T57→T58: unsichere Zuordnung ('darunter › Gemeindeanteil an der Einkommensteuer › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gemeindeanteil an der Einkommensteuer › 1 000 Euro', 0.8)
+   T57→T58: unsichere Zuordnung ('darunter › Gewerbesteuer › netto › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gewerbesteuer › netto › 1 000 Euro', 0.74)
+   T57→T58: unsichere Zuordnung ('darunter › Gewerbesteuer › brutto › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gewerbesteuer › brutto › 1 000 Euro', 0.75)
+   T57→T58: unsichere Zuordnung ('darunter › Grundsteuer B › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Grundsteuer B › 1 000 Euro', 0.71)
+   T57→T58: unsichere Zuordnung ('darunter › Grundsteuer A › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Grundsteuer A › 1 000 Euro', 0.71)
+   T58→T59: Spalten ohne Gegenstück: ['Finanzen der Gemeinden und Gemeindeverbände 2022 › Schulden der Gemeinden und Gemeindeverbände › Investitionskredite und Wertpapierschulden am 31.12.2022 insgesamt › der Gemeinden und Gemeindeverbände › 1 000 Euro', 'Finanzen der Gemeinden und Gemeindeverbände 2022 › Schulden der Gemeinden und Gemeindeverbände › Aufnahmen › der Gemeinden und Gemeindeverbände › 1 000 Euro', 'Finanzen der Gemeinden und Gemeindeverbände 2022 › Schulden der Gemeinden und Gemeindeverbände › Tilgungen › der Gemeinden und Gemeindeverbände › 1 000 Euro']
+   Tabelle 66 ohne Gegenstück in der Referenz, entfällt: Zusammensetzung des Regionalverbands FrankfurtRheinMain und des Zweckverbands Raum Kassel
+== Frühjahr 2024 (HKr_24-1hj_2kA.xlsx)
+   T7→T7: Spalten ohne Gegenstück: ['Bevölkerung am 30.06.2023 › Zu- bzw. Abnahme (–) 30.06.2023 gegenüber › 09.05.2011 › %']
+   T7→T7: Merkmale ohne Wert in dieser Ausgabe: ['7_8']
+   T10→T10: Spalten ohne Gegenstück: ['Herkunftsgebiet']
+   T12→T12: unsichere Zuordnung ('davon waren … Jahre alt › unter 6 › %', 'Nichtdeutsche Bevölkerung › davon waren … Jahre alt › unter 6 › %', 0.79)
+   T12→T12: unsichere Zuordnung ('davon waren … Jahre alt › unter 6 › Anzahl', 'Nichtdeutsche Bevölkerung › davon waren … Jahre alt › unter 6 › Anzahl', 0.78)
+   T15→T15: Spalten ohne Gegenstück: ['Schüler/-innen an allgemeinbildenden Schulen (ohne Schulen für Erwachsene) › männlich']
+   Tabelle 27 ohne Gegenstück in der Referenz, entfällt: Arbeitslose in Hessen im Jahresdurchschnitt 2023
+   Tabelle 28 ohne Gegenstück in der Referenz, entfällt: Sozialversicherungspflichtig Beschäftigte (am Arbeitsort) in Hessen am 30. Juni 2023 nach Wirtschaft
+   T36→T34: unsichere Zuordnung ('Gerste', 'Getreide › Gerste', 0.76)
+   T36→T34: unsichere Zuordnung ('Roggen', 'Getreide › Roggen', 0.76)
+   T39→T37: unsichere Zuordnung ('darunter › Gemeiner Karpfen › Kilogramm', 'Menge des erzeugten Speisefisches › darunter › Gemeiner Karpfen › Kilogramm', 0.78)
+   T40→T38: unsichere Zuordnung ('davon › darunter › Wald', 'Bodenfläche › davon › Vegetation › darunter › Wald', 0.68)
+   T42→T40: unsichere Zuordnung ('darunter veräußerte LF › Hektar', 'darunter veräußerte Landwirtschaftlich genutzte Fläche (LF) › Hektar', 0.74)
+   T47→T45: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T48→T46: unsichere Zuordnung ('davon › wohngeldrechtliche Teilhaushalte › Mietzuschuss und Lastenzuschuss', 'Haushalte am 31.12. 2025 › davon › wohngeldberechtigte Teilhaushalte mit Miet- und Lastenzuschuss', 0.66)
+   T50→T48: Spalten ohne Gegenstück: ['Empfänger/-innen nach Sitz des Trägers insgesamt › je 10 000 Einwohner/-innen', 'Empfänger/-innen nach Sitz des Trägers insgesamt › je 10 000 Einwohner/-innen']
+   T51→T49: unsichere Zuordnung ('und zwar › Nichtdeutsche › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Nichtdeutsche › %', 0.76)
+   T51→T49: unsichere Zuordnung ('und zwar › Nichtdeutsche › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Nichtdeutsche › Anzahl', 0.76)
+   T51→T49: unsichere Zuordnung ('und zwar › Deutsche › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Deutsche › %', 0.73)
+   T51→T49: unsichere Zuordnung ('und zwar › Deutsche › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Deutsche › Anzahl', 0.72)
+   T51→T49: unsichere Zuordnung ('und zwar › weiblich › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › weiblich › %', 0.73)
+   T51→T49: unsichere Zuordnung ('und zwar › weiblich › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › weiblich › Anzahl', 0.72)
+   T51→T49: unsichere Zuordnung ('und zwar › männlich › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › männlich › %', 0.73)
+   T51→T49: unsichere Zuordnung ('und zwar › männlich › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › männlich › Anzahl', 0.72)
+   T52→T50: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T55→T53: unsichere Zuordnung ('davon mit Kindern im Alter von … bis unter ... Jahren › 0 – 3', 'Einrichtungen › davon mit Kindern im Alter von … Jahren › 0 bis unter 3', 0.63)
+   T60→T58: Spalten ohne Gegenstück: ['Finanzzuweisungen vom Land › Gemeinden und Gemeindeverbände › 1 000 Euro', 'Bauinvestitionen › der Gemeinden und Gemeindeverbände › 1 000 Euro']
+   T60→T58: unsichere Zuordnung ('darunter › Gemeindeanteil an der Umsatzsteuer › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gemeindeanteil an der Umsatzsteuer › 1 000 Euro', 0.79)
+   T60→T58: unsichere Zuordnung ('darunter › Gemeindeanteil an der Einkommensteuer › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gemeindeanteil an der Einkommensteuer › 1 000 Euro', 0.8)
+   T60→T58: unsichere Zuordnung ('darunter › Gewerbesteuer › netto › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gewerbesteuer › netto › 1 000 Euro', 0.74)
+   T60→T58: unsichere Zuordnung ('darunter › Gewerbesteuer › brutto › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gewerbesteuer › brutto › 1 000 Euro', 0.75)
+   T60→T58: unsichere Zuordnung ('darunter › Grundsteuer B › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Grundsteuer B › 1 000 Euro', 0.71)
+   T60→T58: unsichere Zuordnung ('darunter › Grundsteuer A › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Grundsteuer A › 1 000 Euro', 0.71)
+   T61→T59: Spalten ohne Gegenstück: ['Finanzen der Gemeinden und Gemeindeverbände 2022 › Schulden der Gemeinden und Gemeindeverbände › Investitionskredite und Wertpapierschulden am 31.12.2022 insgesamt › der Gemeinden und Gemeindeverbände › 1 000 Euro', 'Finanzen der Gemeinden und Gemeindeverbände 2022 › Schulden der Gemeinden und Gemeindeverbände › Aufnahmen › der Gemeinden und Gemeindeverbände › 1 000 Euro', 'Finanzen der Gemeinden und Gemeindeverbände 2022 › Schulden der Gemeinden und Gemeindeverbände › Tilgungen › der Gemeinden und Gemeindeverbände › 1 000 Euro']
+   Tabelle 69 ohne Gegenstück in der Referenz, entfällt: Zusammensetzung des Regionalverbands FrankfurtRheinMain und des Zweckverbands Raum Kassel
+   Tabelle 70 ohne Gegenstück in der Referenz, entfällt: Verwaltungseinheiten in Hessen (Stand: Dezember
+== Herbst 2024 (HKr_24-2hj_2kA.xlsx)
+   T7→T7: Spalten ohne Gegenstück: ['Bevölkerung am 31.12.2023 › Zu- bzw. Abnahme (–) 31.12.2023 gegenüber › 09.05.2011 › %']
+   T7→T7: Merkmale ohne Wert in dieser Ausgabe: ['7_8']
+   T10→T10: Spalten ohne Gegenstück: ['Herkunftsgebiet']
+   T12→T12: unsichere Zuordnung ('davon waren … Jahre alt › unter 6 › %', 'Nichtdeutsche Bevölkerung › davon waren … Jahre alt › unter 6 › %', 0.79)
+   T12→T12: unsichere Zuordnung ('davon waren … Jahre alt › unter 6 › Anzahl', 'Nichtdeutsche Bevölkerung › davon waren … Jahre alt › unter 6 › Anzahl', 0.78)
+   T15→T15: Spalten ohne Gegenstück: ['Schüler/-innen an allgemeinbildenden Schulen (ohne Schulen für Erwachsene) › männlich']
+   T34→T34: unsichere Zuordnung ('Gerste', 'Getreide › Gerste', 0.76)
+   T34→T34: unsichere Zuordnung ('Roggen', 'Getreide › Roggen', 0.76)
+   T37→T37: unsichere Zuordnung ('darunter › Gemeiner Karpfen › Kilogramm', 'Menge des erzeugten Speisefisches › darunter › Gemeiner Karpfen › Kilogramm', 0.78)
+   T38→T38: unsichere Zuordnung ('davon › darunter › Wald', 'Bodenfläche › davon › Vegetation › darunter › Wald', 0.68)
+   T40→T40: unsichere Zuordnung ('darunter veräußerte LF › Hektar', 'darunter veräußerte Landwirtschaftlich genutzte Fläche (LF) › Hektar', 0.74)
+   T45→T45: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T48→T48: Spalten ohne Gegenstück: ['Empfänger/-innen nach Sitz des Trägers insgesamt › je 10 000 Einwohner/ -innen', 'Empfänger/-innen nach Sitz des Trägers insgesamt › je 10 000 Einwohner/ -innen']
+   T49→T49: unsichere Zuordnung ('und zwar › Nichtdeutsche › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Nichtdeutsche › %', 0.76)
+   T49→T49: unsichere Zuordnung ('und zwar › Nichtdeutsche › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Nichtdeutsche › Anzahl', 0.76)
+   T49→T49: unsichere Zuordnung ('und zwar › Deutsche › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Deutsche › %', 0.73)
+   T49→T49: unsichere Zuordnung ('und zwar › Deutsche › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › Deutsche › Anzahl', 0.72)
+   T49→T49: unsichere Zuordnung ('und zwar › weiblich › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › weiblich › %', 0.73)
+   T49→T49: unsichere Zuordnung ('und zwar › weiblich › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › weiblich › Anzahl', 0.72)
+   T49→T49: unsichere Zuordnung ('und zwar › männlich › %', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › männlich › %', 0.73)
+   T49→T49: unsichere Zuordnung ('und zwar › männlich › Anzahl', 'Empfängerinnen und Empfänger nach Sitz des Trägers › davon › männlich › Anzahl', 0.72)
+   T50→T50: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T58→T58: Spalten ohne Gegenstück: ['Finanzzuweisungen vom Land › an Gemeinden und Gemeindeverbände › 1 000 Euro', 'Bauinvestitionen › der Gemeinden und Gemeindeverbände › 1 000 Euro']
+   T58→T58: unsichere Zuordnung ('darunter › Gemeindeanteil an der Umsatzsteuer › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gemeindeanteil an der Umsatzsteuer › 1 000 Euro', 0.79)
+   T58→T58: unsichere Zuordnung ('darunter › Gemeindeanteil an der Einkommensteuer › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gemeindeanteil an der Einkommensteuer › 1 000 Euro', 0.8)
+   T58→T58: unsichere Zuordnung ('darunter › Gewerbesteuer › netto › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gewerbesteuer › netto › 1 000 Euro', 0.74)
+   T58→T58: unsichere Zuordnung ('darunter › Gewerbesteuer › brutto › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Gewerbesteuer › brutto › 1 000 Euro', 0.75)
+   T58→T58: unsichere Zuordnung ('darunter › Grundsteuer B › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Grundsteuer B › 1 000 Euro', 0.71)
+   T58→T58: unsichere Zuordnung ('darunter › Grundsteuer A › 1 000 Euro', 'Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände › darunter › Grundsteuer A › 1 000 Euro', 0.71)
+   Tabelle 67 ohne Gegenstück in der Referenz, entfällt: Zusammensetzung des Regionalverbands FrankfurtRheinMain und des Zweckverbands Raum Kassel
+   Tabelle 68 ohne Gegenstück in der Referenz, entfällt: Verwaltungseinheiten in Hessen (Stand: Dezember
+== Frühjahr 2025 (HKr_25-1hj.xlsx)
+   T10→T10: Spalten ohne Gegenstück: ['Herkunftsgebiet']
+   T15→T15: Spalten ohne Gegenstück: ['Schüler/-innen an allgemeinbildenden Schulen (ohne Schulen für Erwachsene) › männlich']
+   T40→T40: unsichere Zuordnung ('darunter veräußerte LF › Hektar', 'darunter veräußerte Landwirtschaftlich genutzte Fläche (LF) › Hektar', 0.74)
+   T45→T45: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T48→T48: Spalten ohne Gegenstück: ['Empfängerinnen und Empfänger nach Sitz des Trägers › insgesamt › je 10 000 Einwohner/ -innen', 'Empfängerinnen und Empfänger nach Sitz des Trägers › insgesamt › je 10 000 Einwohner/ -innen']
+   T50→T50: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T58→T58: Spalten ohne Gegenstück: ['Finanzzuweisungen vom Land › an Gemeinden und Gemeindeverbände › 1 000 Euro', 'Bauinvestitionen › der Gemeinden und Gemeindeverbände › 1 000 Euro']
+   Tabelle 67 ohne Gegenstück in der Referenz, entfällt: Zusammensetzung des Regionalverbands FrankfurtRheinMain und des Zweckverbands Raum Kassel
+   Tabelle 68 ohne Gegenstück in der Referenz, entfällt: Verwaltungseinheiten in Hessen (Stand: Januar
+== Herbst 2025 (HKr_25-2hj.xlsx)
+   T10→T10: Spalten ohne Gegenstück: ['Herkunftsgebiet']
+   T15→T15: Spalten ohne Gegenstück: ['Schüler/-innen an allgemeinbildenden Schulen (ohne Schulen für Erwachsene) › männlich']
+   T40→T40: unsichere Zuordnung ('darunter veräußerte LF › Hektar', 'darunter veräußerte Landwirtschaftlich genutzte Fläche (LF) › Hektar', 0.74)
+   T45→T45: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T48→T48: Spalten ohne Gegenstück: ['Empfängerinnen und Empfänger nach Sitz des Trägers › insgesamt › je 10 000 Einwohner/ -innen', 'Empfängerinnen und Empfänger nach Sitz des Trägers › insgesamt › je 10 000 Einwohner/ -innen']
+   T50→T50: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T58→T58: Spalten ohne Gegenstück: ['Finanzzuweisungen vom Land › an Gemeinden und Gemeindeverbände › 1 000 Euro', 'Bauinvestitionen › der Gemeinden und Gemeindeverbände › 1 000 Euro']
+   Tabelle 67 ohne Gegenstück in der Referenz, entfällt: Zusammensetzung des Regionalverbands FrankfurtRheinMain und des Zweckverbands Raum Kassel
+   Tabelle 68 ohne Gegenstück in der Referenz, entfällt: Verwaltungseinheiten in Hessen (Stand: Januar
+== Frühjahr 2026 (HKr_26-1hj.xlsx)
+   T10→T10: Spalten ohne Gegenstück: ['Herkunftsgebiet']
+   T15→T15: Spalten ohne Gegenstück: ['Schüler/-innen an allgemeinbildenden Schulen (ohne Schulen für Erwachsene) › männlich']
+   T45→T45: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T48→T48: Spalten ohne Gegenstück: ['Empfängerinnen und Empfänger nach Sitz des Trägers › insgesamt › je 10 000 Einwohner/ -innen', 'Empfängerinnen und Empfänger nach Sitz des Trägers › insgesamt › je 10 000 Einwohner/ -innen']
+   T50→T50: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T58→T58: Spalten ohne Gegenstück: ['Finanzzuweisungen vom Land › an Gemeinden und Gemeindeverbände › 1 000 Euro', 'Bauinvestitionen › der Gemeinden und Gemeindeverbände › 1 000 Euro']
+   Tabelle 67 ohne Gegenstück in der Referenz, entfällt: Zusammensetzung des Regionalverbands FrankfurtRheinMain und des Zweckverbands Raum Kassel
+   Tabelle 68 ohne Gegenstück in der Referenz, entfällt: Verwaltungseinheiten in Hessen (Stand: Dezember
+== Herbst 2026 (HKr_26-2hj.xlsx)
+   T10→T10: Spalten ohne Gegenstück: ['Herkunftsgebiet']
+   T45→T45: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T50→T50: Spalten ohne Gegenstück: ['Nettoausgaben › je Einwohner/-in › Euro']
+   T58→T58: Spalten ohne Gegenstück: ['Finanzzuweisungen vom Land › an Gemeinden und Gemeindeverbände › 1 000 Euro', 'Bauinvestitionen › der Gemeinden und Gemeindeverbände › 1 000 Euro']
+== Auffällige Sprünge des Landeswerts (Faktor > 2,5 zur gleichen Ausgabe des Vorjahres)
+   5_13 Frühjahr 2023: 1.7 → Frühjahr 2024: -9.6  (Wohnungen insgesamt › Zu- bzw. Abnahme (–) gegenüber 2024 › %)
+   5_13 Frühjahr 2024: -9.6 → Frühjahr 2025: -24.2  (Wohnungen insgesamt › Zu- bzw. Abnahme (–) gegenüber 2024 › %)
+   5_13 Herbst 2023: -9.6 → Herbst 2024: -24.2  (Wohnungen insgesamt › Zu- bzw. Abnahme (–) gegenüber 2024 › %)
+   5_13 Herbst 2025: -27.5 → Herbst 2026: 21.8  (Wohnungen insgesamt › Zu- bzw. Abnahme (–) gegenüber 2024 › %)
+   7_6 Frühjahr 2023: 76323 → Frühjahr 2024: 11436  (Bevölkerung am 31.12.2025 › Zu- bzw. Abnahme (–) 31.12.2025 gegenüber )
+   7_6 Frühjahr 2025: 8506 → Frühjahr 2026: -3314  (Bevölkerung am 31.12.2025 › Zu- bzw. Abnahme (–) 31.12.2025 gegenüber )
+   7_6 Herbst 2023: 96343 → Herbst 2024: 29369  (Bevölkerung am 31.12.2025 › Zu- bzw. Abnahme (–) 31.12.2025 gegenüber )
+   7_6 Herbst 2025: 13247 → Herbst 2026: -2199  (Bevölkerung am 31.12.2025 › Zu- bzw. Abnahme (–) 31.12.2025 gegenüber )
+   9_13 Frühjahr 2023: 84260 → Frühjahr 2024: 21545  (Wanderungsgewinn bzw. -verlust (–) an Personen › insgesamt)
+   9_14 Frühjahr 2023: 13.3 → Frühjahr 2024: 3.4  (Wanderungsgewinn bzw. -verlust (–) an Personen › auf 1 000 Einwohner/ )
+   19_5 Frühjahr 2023: -3.4 → Frühjahr 2024: 5.3  (BIP insgesamt › Millionen Euro › Zu- bzw. Abnahme (–) in Prozent)
+   19_10 Frühjahr 2023: -3.6 → Frühjahr 2024: 5.2  (BIP je Einwohner/-in › Euro › Zu- bzw. Abnahme (–) in Prozent)
+   45_5 Frühjahr 2023: 148035 → Frühjahr 2024: 387586  (Bruttoausgaben › davon für › Grundleistungen › 1 000 Euro)
+   45_8 Frühjahr 2023: 2892.48 → Frühjahr 2024: 7706.1  (Bruttoausgaben › davon für › sonstige Leistungen › 1 000 Euro)
+   56_4 Frühjahr 2025: 2.43059e+07 → Frühjahr 2026: 5.89353e+06  (Gesamtbetrag der Einkünfte › insgesamt › 1 000 Euro)
+   56_4 Herbst 2024: 2.43059e+07 → Herbst 2025: 5.89353e+06  (Gesamtbetrag der Einkünfte › insgesamt › 1 000 Euro)
+   56_4 Herbst 2025: 5.89353e+06 → Herbst 2026: 2.47576e+07  (Gesamtbetrag der Einkünfte › insgesamt › 1 000 Euro)
+   56_5 Frühjahr 2025: 234025 → Frühjahr 2026: 54903.8  (Gesamtbetrag der Einkünfte › je steuerpflichtige Person › Euro)
+   56_5 Herbst 2024: 234025 → Herbst 2025: 54903.8  (Gesamtbetrag der Einkünfte › je steuerpflichtige Person › Euro)
+   56_5 Herbst 2025: 54903.8 → Herbst 2026: 220278  (Gesamtbetrag der Einkünfte › je steuerpflichtige Person › Euro)
+   56_7 Frühjahr 2025: -6.95825e+06 → Frühjahr 2026: -2.28725e+07  (Zu versteuerndes Einkommen › negativ › 1 000 Euro)
+   56_7 Herbst 2024: -6.95825e+06 → Herbst 2025: -2.28725e+07  (Zu versteuerndes Einkommen › negativ › 1 000 Euro)
+   56_8 Frühjahr 2023: 7.39635e+07 → Frühjahr 2024: 4.24067e+06  (Festgesetzte Körperschaftsteuer › 1 000 Euro)
+   57_30 Frühjahr 2023: 22130 → Frühjahr 2024: 270617  (Erbringung von Finanz- und Versicherungs-dienstleistungen › Steuerbare)
+   64_9 Herbst 2024: 1.4376e+06 → Herbst 2025: 3.60588e+06  (Insolvenzverfahren › voraussichtliche Forderungen (1 000 Euro))
