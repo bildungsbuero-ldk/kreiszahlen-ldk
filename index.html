@@ -68,6 +68,14 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-gelb) 20%, transparent); fo
 .idx { display: inline-flex; align-items: center; gap: 4px; justify-content: flex-end; }
 .idx i { display: inline-block; height: 8px; border-radius: 2px; background: var(--muted-bar); }
 .idx i.hi { background: var(--ldk-blau-chart); }
+.pct { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: flex-end; margin: 4px 0 2px; }
+.pct label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--fg-muted); flex: 1 1 14rem; min-width: 0; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+.pct select { font-size: 13px; padding: 4px 8px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; flex: none; }
+.seg button { font: inherit; font-size: 13px; padding: 5px 12px; border: 0; background: var(--panel); color: var(--fg); cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--ldk-blau); color: #fff; }
+.seg button:focus-visible { outline: 2px solid var(--ldk-gelb); outline-offset: -2px; }
 .quelle { font-size: 12px; color: var(--fg-muted); margin: 0; padding-top: 10px; border-top: 1px solid var(--line); }
 .loading { padding: 40px 16px; text-align: center; color: var(--fg-muted); }
 </style>
@@ -86,8 +94,8 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-gelb) 20%, transparent); fo
   </header>
 
   <section>
-    <h2>Bildung auf einen Blick</h2>
-    <p class="note">Werte der neuesten Ausgabe. Rang 1 = höchster Wert unter den 26 Landkreisen und kreisfreien Städten.</p>
+    <h2 id="tiles-titel">Bildung auf einen Blick</h2>
+    <p class="note">Kennzahlen zum oben gewählten Thema, Werte der neuesten Ausgabe. Rang 1 = höchster Wert unter den 26 Landkreisen und kreisfreien Städten.</p>
     <div class="tiles" id="tiles"></div>
   </section>
 
@@ -104,6 +112,11 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-gelb) 20%, transparent); fo
         <h3 id="merkmal-titel">—</h3>
         <p class="note">26 Landkreise und kreisfreie Städte, absteigend sortiert. Gestrichelt: Land Hessen und eine Vergleichsregion, die kein Kreis ist.</p>
         <p class="note">Berichtszeitraum: <span id="bezug-aktuell">—</span></p>
+        <div class="pct" id="pct">
+          <label>Prozent bezogen auf<select id="sel-basis" aria-label="Bezugsgröße für Prozentwerte"></select></label>
+          <div class="seg" role="group" aria-label="Balken zeigen"><button type="button" data-skala="abs">Anzahl</button><button type="button" data-skala="pct">Prozent</button></div>
+        </div>
+        <p class="note" id="pct-none" hidden>Dieses Merkmal ist bereits ein Anteil, eine Quote oder ein Durchschnitt; Prozentwerte werden dafür nicht berechnet.</p>
         <p class="legend"><span><i class="sw sw-f"></i>Fokus-Region</span><span><i class="sw sw-v"></i>Vergleichsregion</span></p>
         <div class="chart" id="bars"></div>
       </div>
@@ -135,23 +148,15 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-gelb) 20%, transparent); fo
 <script>
 (() => {
 'use strict';
-const TILES = [
-  ['abi', 'Allgemeine Hochschulreife', 'Anteil an allen Schulentlassenen des letzten Schuljahres (Tab. 17)'],
-  ['ohneHSA', 'Ohne Hauptschulabschluss', 'Anteil an allen Schulentlassenen des letzten Schuljahres (Tab. 17)'],
-  ['schueler', 'Schüler/-innen allgemeinbildend', 'An allgemeinbildenden Schulen, ohne Schulen für Erwachsene (Tab. 15)'],
-  ['beruf', 'Schüler/-innen an beruflichen Schulen', 'Alle beruflichen Schulformen (Tab. 18)'],
-  ['ausl', 'Ausländische Schüler/-innen', 'Anteil an allen Schüler/-innen allgemeinbildender Schulen (Tab. 15, 16)'],
-  ['kita', 'Kita-Plätze je 100 Kinder unter 6', 'Genehmigte Plätze in Kitas (inkl. Plätze für Schulkinder) je 100 Kinder unter 6 Jahren (Tab. 53, 11)'],
-  ['u18', 'Anteil unter 18-Jährige', 'An der Bevölkerung insgesamt (Tab. 11)'],
-  ['bev', 'Einwohnerinnen und Einwohner', 'Bevölkerung insgesamt (Tab. 7)'],
-];
-const SHARE = { abi: 1, ohneHSA: 1, ausl: 1, u18: 1 };
-const DEF = { fokus: '532000', vergleich: '000000', mid: '17_15' };
+const TILESETS = [["Baugewerbe und Bautätigkeit", [["fertigWhg", "Fertiggestellte Wohnungen", "Je 10.000 Einwohner/-innen im letzten Jahr (Tab. 4)", {"num": ["4_12"], "d": 1}], ["genehmWhg", "Genehmigte Wohnungen", "Je 10.000 Einwohner/-innen im letzten Jahr (Tab. 5)", {"num": ["5_14"], "d": 1}], ["whgBestand", "Wohnungsbestand", "Wohnungen je 1.000 Einwohner/-innen (Tab. 3)", {"num": ["3_12"], "d": 1}], ["bauland", "Kaufwert Bauland", "Durchschnittlicher Kaufwert in Euro je m² (Tab. 6)", {"num": ["6_6"], "d": 0, "u": "€"}], ["bauPers", "Tätige im Bauhauptgewerbe", "Tätige Personen (Tab. 1)", {"num": ["1_4"], "d": 0}]]], ["Bevölkerung", [["bev", "Einwohnerinnen und Einwohner", "Bevölkerung insgesamt (Tab. 7)", {"num": ["7_3"], "d": 0}], ["bevVer", "Veränderung zum Vorjahr", "Zu- bzw. Abnahme der Bevölkerung in % (Tab. 7)", {"num": ["7_7"], "d": 1, "u": "%"}], ["u18", "Anteil unter 18-Jährige", "An der Bevölkerung insgesamt (Tab. 11)", {"num": ["11_4", "11_6"], "den": ["11_3"], "f": 100, "d": 1, "u": "%"}], ["ue65", "Anteil 65 Jahre und älter", "An der Bevölkerung insgesamt (Tab. 11)", {"num": ["11_10"], "den": ["11_3"], "f": 100, "d": 1, "u": "%"}], ["nichtdt", "Anteil Nichtdeutsche", "An der Bevölkerung insgesamt (Tab. 7)", {"num": ["7_12"], "den": ["7_3"], "f": 100, "d": 1, "u": "%"}], ["geb", "Lebendgeborene", "Je 1.000 Einwohner/-innen im letzten Jahr (Tab. 9)", {"num": ["9_4"], "d": 1}], ["wand", "Wanderungssaldo", "Zu- minus Fortzüge je 1.000 Einwohner/-innen (Tab. 9)", {"num": ["9_14"], "d": 1}], ["jugendq", "Jugendquotient", "Unter 20-Jährige je 100 Personen von 20 bis unter 65 (Tab. 13)", {"num": ["13_3"], "d": 1}]]], ["Bildung", [["abi", "Allgemeine Hochschulreife", "Anteil an allen Schulentlassenen des letzten Schuljahres (Tab. 17)", {"num": ["17_15"], "den": ["17_3"], "f": 100, "d": 1, "u": "%"}], ["ohneHSA", "Ohne Hauptschulabschluss", "Anteil an allen Schulentlassenen des letzten Schuljahres (Tab. 17)", {"num": ["17_6"], "den": ["17_3"], "f": 100, "d": 1, "u": "%"}], ["schueler", "Schüler/-innen allgemeinbildend", "An allgemeinbildenden Schulen, ohne Schulen für Erwachsene (Tab. 15)", {"num": ["15_21"], "d": 0}], ["beruf", "Schüler/-innen an beruflichen Schulen", "Alle beruflichen Schulformen (Tab. 18)", {"num": ["18_4"], "d": 0}], ["ausl", "Ausländische Schüler/-innen", "Anteil an allen Schüler/-innen allgemeinbildender Schulen (Tab. 15, 16)", {"num": ["16_19"], "den": ["15_21"], "f": 100, "d": 1, "u": "%"}], ["kita", "Kita-Plätze je 100 Kinder unter 6", "Genehmigte Plätze in Kitas (inkl. Plätze für Schulkinder) je 100 Kinder unter 6 Jahren (Tab. 53, 11)", {"num": ["53_8"], "den": ["11_4"], "f": 100, "d": 1}], ["u18b", "Anteil unter 18-Jährige", "An der Bevölkerung insgesamt (Tab. 11)", {"num": ["11_4", "11_6"], "den": ["11_3"], "f": 100, "d": 1, "u": "%"}], ["bevb", "Einwohnerinnen und Einwohner", "Bevölkerung insgesamt (Tab. 7)", {"num": ["7_3"], "d": 0}]]], ["Bruttoinlandsprodukt/Bruttowertschöpfung", [["bipEw", "BIP je Einwohner/-in", "Bruttoinlandsprodukt in jeweiligen Preisen, Euro (Tab. 19)", {"num": ["19_9"], "d": 0, "u": "€"}], ["bipVer", "BIP-Veränderung", "Zu- bzw. Abnahme des BIP zum Vorjahr in % (Tab. 19)", {"num": ["19_5"], "d": 1, "u": "%"}], ["bipAnt", "Anteil am BIP Hessens", "In % (Tab. 19)", {"num": ["19_7"], "d": 1, "u": "%"}], ["bwsVG", "Anteil Verarbeitendes Gewerbe", "An der Bruttowertschöpfung insgesamt (Tab. 20, 21)", {"num": ["21_7"], "den": ["20_4"], "f": 100, "d": 1, "u": "%"}], ["bwsDL", "Anteil öffentliche und sonstige Dienstleistungen", "Inkl. Erziehung und Gesundheit, an der Bruttowertschöpfung insgesamt (Tab. 20, 21)", {"num": ["21_15"], "den": ["20_4"], "f": 100, "d": 1, "u": "%"}]]], ["Einkommen", [["verfEink", "Verfügbares Einkommen", "Der privaten Haushalte je Einwohner/-in, Euro (Tab. 26)", {"num": ["26_5"], "d": 0, "u": "€"}], ["verfIdx", "Verfügbares Einkommen, Index", "Je Einwohner/-in, Landeswert = 100 (Tab. 26)", {"num": ["26_6"], "d": 1}], ["aeAN", "Arbeitnehmerentgelt", "Je Arbeitnehmer/-in, Euro (Tab. 23)", {"num": ["23_3"], "d": 0, "u": "€"}], ["lohnAN", "Bruttolöhne und -gehälter", "Je Arbeitnehmer/-in, Euro (Tab. 25)", {"num": ["25_3"], "d": 0, "u": "€"}]]], ["Erwerbstätigkeit", [["etw", "Erwerbstätige am Arbeitsort", "Jahresdurchschnitt, in 1.000 (Tab. 27)", {"num": ["27_3"], "d": 1}], ["etwDL", "Anteil Dienstleistungsbereiche", "An allen Erwerbstätigen am Arbeitsort (Tab. 27)", {"num": ["27_9"], "den": ["27_3"], "f": 100, "d": 1, "u": "%"}], ["etwPG", "Anteil Produzierendes Gewerbe", "An allen Erwerbstätigen am Arbeitsort (Tab. 27)", {"num": ["27_5"], "den": ["27_3"], "f": 100, "d": 1, "u": "%"}], ["anVZ", "Arbeitnehmer/-innen in Vollzeit­äquivalenten", "Anteil an allen Arbeitnehmer/-innen (Tab. 29, 30)", {"num": ["30_3"], "den": ["29_3"], "f": 100, "d": 1, "u": "%"}], ["stdEtw", "Arbeitsstunden je Erwerbstätigen", "Geleistete Stunden im Jahr (Tab. 33)", {"num": ["33_3"], "d": 0}]]], ["Landwirtschaft", [["lwBetr", "Landwirtschaftliche Betriebe", "Insgesamt (Tab. 35)", {"num": ["35_3"], "d": 0}], ["oeko", "Anteil Ökolandbau", "Ökologisch bewirtschaftete an der landwirtschaftlich genutzten Fläche (Tab. 35)", {"num": ["35_7"], "den": ["35_5"], "f": 100, "d": 1, "u": "%"}], ["wald", "Anteil Wald", "An der Bodenfläche (Tab. 38)", {"num": ["38_8"], "den": ["38_3"], "f": 100, "d": 1, "u": "%"}], ["siedl", "Anteil Siedlung und Verkehr", "An der Bodenfläche (Tab. 38)", {"num": ["38_4", "38_5"], "den": ["38_3"], "f": 100, "d": 1, "u": "%"}], ["lfPreis", "Kaufwert landwirtschaftlicher Fläche", "Euro je Hektar veräußerter LF (Tab. 40)", {"num": ["40_8"], "d": 0, "u": "€"}]]], ["Öffentlicher Dienst", [["oeD", "Personal der öffentlichen Verwaltung", "Bund, Land und Kommunen je 10.000 Einwohner/-innen (Tab. 41)", {"num": ["41_10"], "d": 1}], ["oeLand", "Personal des Landes", "Vollzeitäquivalente je 10.000 Einwohner/-innen (Tab. 42)", {"num": ["42_4"], "d": 1}], ["oeKom", "Personal der Kommunen", "Vollzeitäquivalente je 10.000 Einwohner/-innen (Tab. 43)", {"num": ["43_4"], "d": 1}], ["oeKomW", "Frauenanteil Kommunen", "An den Vollzeitäquivalenten der Kommunen in % (Tab. 43)", {"num": ["43_6"], "d": 1, "u": "%"}]]], ["Sozialleistungen", [["kitaS", "Kita-Plätze je 100 Kinder unter 6", "Genehmigte Plätze je 100 Kinder unter 6 Jahren (Tab. 53, 11)", {"num": ["53_8"], "den": ["11_4"], "f": 100, "d": 1}], ["kitaFach", "Fachkräfte in Kitas", "Anteil tätiger Personen mit fachpädagogischem Abschluss (Tab. 53)", {"num": ["53_10"], "den": ["53_9"], "f": 100, "d": 1, "u": "%"}], ["wohngeld", "Wohngeld", "Empfänger/-innen in Empfängerhaushalten je 1.000 Einwohner/-innen (Tab. 46)", {"num": ["46_7"], "d": 1}], ["grusi", "Grundsicherung im Alter und bei Erwerbsminderung", "Empfänger/-innen je 1.000 Einwohner/-innen (Tab. 47, 7)", {"num": ["47_3"], "den": ["7_3"], "f": 1000, "d": 1}], ["sozhEw", "Sozialhilfe", "Nettoausgaben je Einwohner/-in, Euro (Tab. 50)", {"num": ["50_6"], "d": 0, "u": "€"}], ["schwb", "Schwerbehinderte Menschen", "Anteil an der Bevölkerung (Tab. 52, 7)", {"num": ["52_5"], "den": ["7_3"], "f": 100, "d": 1, "u": "%"}]]], ["Steuern", [["ekStpfl", "Einkünfte je Steuerpflichtigen", "Gesamtbetrag der Einkünfte je Lohn- und Einkommensteuerpflichtigen, Euro (Tab. 55)", {"num": ["55_4"], "den": ["55_3"], "f": 1000000, "d": 0, "u": "€"}], ["ustEw", "Steuerbarer Umsatz je Einwohner/-in", "Lieferungen und Leistungen, Euro (Tab. 57)", {"num": ["57_5"], "d": 0, "u": "€"}], ["ustPfl", "Umsatzsteuerpflichtige", "Alle Wirtschaftsbereiche (Tab. 57)", {"num": ["57_3"], "d": 0}]]], ["Öffentliche Finanzen", [["stEw", "Steuereinnahmen je Einwohner/-in", "Einzahlungen aus Steuern der Gemeinden und Gemeindeverbände, Euro (Tab. 58)", {"num": ["58_4"], "d": 0, "u": "€"}], ["stKraft", "Steuereinnahmekraft", "Gemeindliche Steuereinnahmekraft je Einwohner/-in, Euro (Tab. 58)", {"num": ["58_20"], "d": 0, "u": "€"}], ["bauInv", "Bauinvestitionen", "Der Gemeinden und Gemeindeverbände je Einwohner/-in, Euro (Tab. 58)", {"num": ["58_28"], "d": 0, "u": "€"}], ["schuld", "Schulden", "Investitionskredite und Wertpapierschulden der Gemeinden und Gemeindeverbände je Einwohner/-in, Euro (Tab. 59)", {"num": ["59_12"], "d": 0, "u": "€"}]]], ["Umwelt", [["abfall", "Haushaltsabfälle", "Kilogramm je Einwohner/-in (Tab. 60)", {"num": ["60_4"], "d": 0}], ["getrennt", "Getrennt erfasste Bio- und Wertstoffe", "Anteil an allen Haushaltsabfällen (Tab. 60)", {"num": ["60_7", "60_8"], "den": ["60_3"], "f": 100, "d": 1, "u": "%"}], ["wasser", "Wasserverbrauch der Haushalte", "Liter je Einwohner/-in und Tag (Tab. 61)", {"num": ["61_10"], "d": 0}]]], ["Unternehmen, Arbeitsstätten und Insolvenzen", [["nl", "Niederlassungen", "Mit abhängig Beschäftigten oder Umsätzen (Tab. 62)", {"num": ["62_3"], "d": 0}], ["nlGross", "Beschäftigte in großen Niederlassungen", "Anteil in Niederlassungen mit 250 oder mehr Beschäftigten (Tab. 62)", {"num": ["62_12"], "den": ["62_4"], "f": 100, "d": 1, "u": "%"}], ["gewSaldo", "Saldo Gewerbean- und -abmeldungen", "Anmeldungen minus Abmeldungen (Tab. 63)", {"num": ["63_3"], "minus": ["63_7"], "d": 0}], ["insU", "Unternehmensinsolvenzen", "Beantragte Verfahren (Tab. 65)", {"num": ["65_3"], "d": 0}]]], ["Verarbeitendes Gewerbe einschl. Bergbau sowie Gewinnung von Steinen und Erden", [["vgBetr", "Betriebe", "Im Verarbeitenden Gewerbe (Tab. 66)", {"num": ["66_3"], "d": 0}], ["vgBesch", "Beschäftigte je 1.000 Einwohner/-innen", "Im Verarbeitenden Gewerbe (Tab. 66)", {"num": ["66_5"], "d": 1}], ["vgUms", "Umsatz", "Millionen Euro (Tab. 66)", {"num": ["66_8"], "d": 0}], ["vgExp", "Exportquote", "Anteil des Auslandsumsatzes in % (Tab. 66)", {"num": ["66_11"], "d": 1, "u": "%"}]]]];
+const SPEC = new Map(TILESETS.flatMap(([, ts]) => ts.map(([k, , , f]) => [k, f])));
+const DEF = { fokus: '532000', vergleich: '000000', mid: '17_15', basis: '', skala: 'abs' };
 const nfc = {};
 const num = (v, d) => (nfc[d] ||= new Intl.NumberFormat('de-DE', { maximumFractionDigits: d })).format(v);
 const ok = (v) => v != null && Number.isFinite(v);
 const fmt = (v) => { if (!ok(v)) return '—'; const a = Math.abs(v); return num(v, a >= 1000 ? 0 : a >= 10 ? 1 : 2); };
-const fmtK = (k, v) => !ok(v) ? '—' : SHARE[k] ? num(v, 1) + ' %' : k === 'kita' ? num(v, 1) : num(v, 0);
+const fmtK = (k, v) => { if (!ok(v)) return '—'; const f = SPEC.get(k) || {}; const t = num(v, f.d ?? 1); return f.u === '%' ? t + ' %' : f.u === '€' ? t + ' €' : t; };
+const fmtP = (v) => ok(v) ? (Math.abs(v) < 1 && v !== 0 ? v.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : v.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })) + ' %' : '—';
 const shortName = (n) => String(n).replace(/^Landkreis /, 'LK ').replace(/,.*$/, '');
 const isKreis = (e) => e === 'Landkreis' || e === 'Kreisfreie Stadt';
 const $ = (s) => document.querySelector(s);
@@ -161,7 +166,7 @@ let D, REG, RI, MM, MI, LATEST, P = { ...DEF }, KPI;
 
 function readHash() {
   const q = new URLSearchParams(location.hash.slice(1));
-  P = { fokus: q.get('fokus') || DEF.fokus, vergleich: q.get('vergleich') || DEF.vergleich, mid: q.get('mid') || DEF.mid };
+  P = { fokus: q.get('fokus') || DEF.fokus, vergleich: q.get('vergleich') || DEF.vergleich, mid: q.get('mid') || DEF.mid, basis: q.get('basis') || '', skala: q.get('skala') === 'pct' ? 'pct' : 'abs' };
   if (!RI.has(P.fokus)) P.fokus = DEF.fokus;
   if (!RI.has(P.vergleich)) P.vergleich = DEF.vergleich;
   if (!MI.has(P.mid)) P.mid = DEF.mid;
@@ -179,21 +184,15 @@ const bez = (ai, mid) => { const b = D.bezug[ai][mid]; return b ? { bezug: b[0],
 
 function computeKpi() {
   const g = (mid, ags) => { const v = val(LATEST, mid, ags); return v == null ? NaN : v; };
-  const r1 = (x) => Math.round(x * 10) / 10;
-  const def = {
-    bev: (a) => g('7_3', a),
-    u18: (a) => r1((g('11_4', a) + g('11_6', a)) / g('11_3', a) * 100),
-    schueler: (a) => g('15_21', a),
-    ausl: (a) => r1(g('16_19', a) / g('15_21', a) * 100),
-    ohneHSA: (a) => r1(g('17_6', a) / g('17_3', a) * 100),
-    abi: (a) => r1(g('17_15', a) / g('17_3', a) * 100),
-    kita: (a) => r1(g('53_8', a) / g('11_4', a) * 100),
-    beruf: (a) => g('18_4', a),
-  };
+  const sum = (ms, a) => (ms || []).reduce((t, m) => t + g(m, a), 0);
   const out = {};
-  for (const [k, f] of Object.entries(def)) {
+  for (const [k, f] of SPEC) {
     const m = new Map();
-    for (const r of REG) { const w = f(r.ags); if (Number.isFinite(w)) m.set(r.ags, { wert: w }); }
+    for (const r of REG) {
+      let w = sum(f.num, r.ags) - sum(f.minus, r.ags);
+      if (f.den) w = w / sum(f.den, r.ags) * (f.f || 1);
+      if (Number.isFinite(w)) m.set(r.ags, { wert: Math.round(w * 10 ** f.d) / 10 ** f.d });
+    }
     const sorted = REG.filter((r) => isKreis(r.ebene) && m.has(r.ags)).sort((a, b) => m.get(b.ags).wert - m.get(a.ags).wert);
     sorted.forEach((r, i) => { const o = m.get(r.ags); o.rang = i + 1; o.n = sorted.length; });
     out[k] = m;
@@ -216,8 +215,14 @@ function fillRegionSelect(sel, key) {
   sel.addEventListener('change', () => set({ [key]: sel.value }));
 }
 
+let tilesTheme = null;
 function buildTiles() {
-  $('#tiles').replaceChildren(...TILES.map(([k, title, def]) => {
+  const thema = D.themen[MI.get(P.mid).thema];
+  if (thema === tilesTheme) return;
+  tilesTheme = thema;
+  const set_ = TILESETS.find(([t]) => t === thema);
+  $('#tiles-titel').textContent = thema + ' auf einen Blick';
+  $('#tiles').replaceChildren(...(set_ ? set_[1] : []).map(([k, title, def]) => {
     const a = el('article', 'tile');
     a.append(el('h3', null, title), el('p', 'def', def));
     const big = el('div', 'big kv', '—'); big.dataset.k = k; big.dataset.slot = 'fokus';
@@ -231,6 +236,7 @@ function buildTiles() {
 }
 
 function renderHead() {
+  buildTiles();
   $('#ausgabe').textContent = D.ausgaben[LATEST];
   $('#sel-fokus').value = P.fokus; $('#sel-vergleich').value = P.vergleich;
   const reg = (a) => REG[RI.get(a)];
@@ -267,17 +273,72 @@ function renderSelectors() {
 function tipFor(host) { let t = host.querySelector(':scope > .tip'); if (!t) { t = el('div', 'tip'); t.hidden = true; host.append(t); } return t; }
 function place(host, t, x, y) { const w = t.offsetWidth, W = host.clientWidth; t.style.left = Math.max(0, Math.min(W - w, x + 12)) + 'px'; t.style.top = Math.max(0, y - t.offsetHeight - 8) + 'px'; }
 
+// Prozentwerte: Anteil eines Merkmals an einer Bezugsgröße derselben Tabelle oder am Landeswert
+const RATE_RE = /%|Prozent|\bje\b|Anteil|Abnahme|auf 1[0 .]*00\b|auf 100\b|Durchschnitt|quotient|Quote|Messzahl|Landeswert|Bundeswert|in Jahren|Heiratsalter|Kaufwert|Abhängigkeitsrate|Herkunftsgebiet|mehr bzw\. weniger|Wanderungsgewinn|negativ/i;
+const UNIT_RE = /Millionen Euro|1 000 Euro|1 000 m[23]|1 000 m2|1 000|Euro|Hektar|Tonnen|Kilogramm|Liter|m[23]\b/;
+const unitOf = (t) => (String(t).match(UNIT_RE) || [''])[0];
+const segs = (t) => String(t).split(' › ');
+function basisInfo(mid) {
+  const cur = MI.get(mid);
+  if (RATE_RE.test(cur.merkmal)) return null;
+  const u = unitOf(cur.merkmal), kreise = REG.filter((r) => isKreis(r.ebene));
+  const fits = (b) => {
+    let any = false;
+    for (const r of kreise) {
+      const v = val(LATEST, mid, r.ags), w = val(LATEST, b, r.ags);
+      if (v == null || w == null) continue;
+      if (!(w > 0) || v < 0 || v / w > 1.005) return false;
+      any = true;
+    }
+    return any;
+  };
+  const cands = MM.filter((m) => cur.tab !== 10 && m.tab === cur.tab && m.mid !== mid && !RATE_RE.test(m.merkmal) && unitOf(m.merkmal) === u && fits(m.mid));
+  const cs = segs(cur.merkmal);
+  const pre = (m) => { const ms = segs(m.merkmal); let i = 0; while (i < ms.length - 1 && i < cs.length - 1 && ms[i] === cs[i]) i++; return i; };
+  const idx = MM.indexOf(cur);
+  let best = null, bestScore = -1;
+  for (const m of cands) {
+    if (MM.indexOf(m) > idx) continue;
+    const sc = pre(m) * 10 + (/insgesamt|zusammen/i.test(segs(m.merkmal).at(-1)) ? 1 : 0);
+    if (sc > bestScore) { best = m; bestScore = sc; }
+  }
+  const landOk = val(LATEST, mid, '000000') > 0;
+  const opts = (landOk ? [['land', 'Landeswert Hessen (Anteil des Kreises)']] : []).concat(cands.map((m) => [m.mid, m.merkmal]));
+  if (!opts.length) return null;
+  const def = best ? best.mid : opts[0][0];
+  const chosen = opts.some(([id]) => id === P.basis) ? P.basis : def;
+  return { opts, chosen, label: (opts.find(([id]) => id === chosen) || [, ''])[1] };
+}
+const share = (bi, mid, ags) => {
+  if (!bi) return null;
+  const v = val(LATEST, mid, ags), w = bi.chosen === 'land' ? val(LATEST, mid, '000000') : val(LATEST, bi.chosen, ags);
+  return v == null || !(w > 0) ? null : v / w * 100;
+};
+
+function renderBasis(bi) {
+  const sel = $('#sel-basis');
+  $('#pct').hidden = !bi; $('#pct-none').hidden = !!bi;
+  if (!bi) { sel.replaceChildren(); return; }
+  sel.replaceChildren(...bi.opts.map(([id, l]) => new Option(l, id)));
+  sel.value = bi.chosen;
+  document.querySelectorAll('.seg button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.skala === P.skala)));
+}
+
 function renderBars() {
   const host = $('#bars');
   host.querySelectorAll('svg, .empty').forEach((n) => n.remove());
   const tip = tipFor(host); tip.hidden = true;
-  const v = (ags) => val(LATEST, P.mid, ags);
-  const data = REG.filter((r) => isKreis(r.ebene)).map((r) => ({ ags: r.ags, name: shortName(r.region), full: r.region, v: v(r.ags) }))
+  const bi = basisInfo(P.mid); renderBasis(bi);
+  const pct = !!bi && P.skala === 'pct';
+  const raw = (ags) => val(LATEST, P.mid, ags);
+  const v = (ags) => pct ? share(bi, P.mid, ags) : raw(ags);
+  const lab = (ags) => { const a = fmt(raw(ags)), p = bi ? fmtP(share(bi, P.mid, ags)) : null; return p == null ? a : pct ? p + ' · ' + a : a + ' · ' + p; };
+  const data = REG.filter((r) => isKreis(r.ebene)).map((r) => ({ ags: r.ags, name: shortName(r.region), full: r.region, v: v(r.ags), lab: lab(r.ags) }))
     .filter((d) => d.v != null).sort((a, b) => b.v - a.v);
   if (!data.length) { host.prepend(el('p', 'empty', 'Für dieses Merkmal liegen keine Werte auf Kreisebene vor.')); return; }
   data.forEach((d, i) => { d.rang = i + 1; });
   const refs = [];
-  const land = v('000000'); if (land != null) refs.push({ name: 'Hessen', v: land });
+  const land = v('000000'); if (land != null && !(pct && bi.chosen === 'land')) refs.push({ name: 'Hessen', v: land });
   const vr = REG[RI.get(P.vergleich)];
   if (vr && !isKreis(vr.ebene) && vr.ags !== '000000' && v(vr.ags) != null) refs.push({ name: shortName(vr.region), v: v(vr.ags) });
   const W = Math.max(280, host.clientWidth || 600), bh = 22, top = 14 + refs.length * 14, bottom = 22;
@@ -286,7 +347,7 @@ function renderBars() {
   const meas = svg.append('text').attr('class', 'name');
   let lw = 0; for (const d of data) { meas.text(d.name); lw = Math.max(lw, meas.node().getComputedTextLength()); }
   meas.attr('class', 'val');
-  let vw = 0; for (const d of data) { meas.text(fmt(d.v)); vw = Math.max(vw, meas.node().getComputedTextLength()); }
+  let vw = 0; for (const d of data) { meas.text(d.lab); vw = Math.max(vw, meas.node().getComputedTextLength()); }
   meas.remove();
   const lo = Math.min(0, d3.min(data, (d) => d.v), ...refs.map((r) => r.v));
   const hi = Math.max(0, d3.max(data, (d) => d.v), ...refs.map((r) => r.v));
@@ -295,21 +356,21 @@ function renderBars() {
   const y = d3.scaleBand(data.map((d) => d.ags), [top, H - bottom]).padding(0.25);
   const col = (d) => d.ags === P.fokus ? 'var(--ldk-blau-chart)' : d.ags === P.vergleich ? 'var(--ldk-gelb)' : 'var(--muted-bar)';
   const nt = Math.max(2, Math.floor((W - left - right) / 90));
-  const ax = svg.append('g').attr('transform', `translate(0,${H - bottom + 4})`).call(d3.axisBottom(x).ticks(nt).tickFormat((t) => fmt(t)).tickSize(0)).attr('font-size', null).attr('font-family', null);
+  const ax = svg.append('g').attr('transform', `translate(0,${H - bottom + 4})`).call(d3.axisBottom(x).ticks(nt).tickFormat((t) => pct ? num(t, 1) + ' %' : fmt(t)).tickSize(0)).attr('font-size', null).attr('font-family', null);
   ax.select('.domain').remove(); ax.selectAll('text').attr('class', 'tick').attr('dy', '0.9em');
   svg.append('g').selectAll('line').data(x.ticks(nt)).join('line').attr('x1', (t) => x(t)).attr('x2', (t) => x(t)).attr('y1', top).attr('y2', H - bottom).style('stroke', 'var(--grid)');
   const row = svg.append('g').selectAll('g').data(data).join('g');
   row.append('rect').attr('x', (d) => x(Math.min(0, d.v))).attr('y', (d) => y(d.ags)).attr('width', (d) => Math.max(1, Math.abs(x(d.v) - x(0)))).attr('height', y.bandwidth()).attr('rx', 2).style('fill', col);
   row.append('text').attr('class', (d) => 'name' + (d.ags === P.fokus || d.ags === P.vergleich ? ' on' : '')).attr('x', Math.ceil(lw) + 4).attr('y', (d) => y(d.ags) + y.bandwidth() / 2).attr('dy', '0.35em').attr('text-anchor', 'end').text((d) => d.name);
-  row.append('text').attr('class', 'val').attr('x', (d) => d.v < 0 ? x(d.v) - 4 : x(d.v) + 4).attr('text-anchor', (d) => d.v < 0 ? 'end' : 'start').attr('y', (d) => y(d.ags) + y.bandwidth() / 2).attr('dy', '0.35em').text((d) => fmt(d.v));
+  row.append('text').attr('class', 'val').attr('x', (d) => d.v < 0 ? x(d.v) - 4 : x(d.v) + 4).attr('text-anchor', (d) => d.v < 0 ? 'end' : 'start').attr('y', (d) => y(d.ags) + y.bandwidth() / 2).attr('dy', '0.35em').text((d) => d.lab);
   svg.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', top).attr('y2', H - bottom).style('stroke', 'var(--axis)');
   refs.forEach((r, i) => {
     svg.append('line').attr('x1', x(r.v)).attr('x2', x(r.v)).attr('y1', 12 + i * 14).attr('y2', H - bottom).style('stroke', 'var(--ref)').attr('stroke-dasharray', '4 3');
-    const t = svg.append('text').attr('class', 'tick').attr('y', 8 + i * 14).text(r.name + ' ' + fmt(r.v));
+    const t = svg.append('text').attr('class', 'tick').attr('y', 8 + i * 14).text(r.name + ' ' + (pct ? fmtP(r.v) : fmt(r.v)));
     const tw = t.node().getComputedTextLength(); t.attr('x', Math.max(0, Math.min(W - tw, x(r.v) - tw / 2)));
   });
   row.append('rect').attr('class', 'hit').attr('x', 0).attr('width', W).attr('y', (d) => y(d.ags) - (y.step() - y.bandwidth()) / 2).attr('height', y.step())
-    .on('mousemove', (ev, d) => { tip.replaceChildren(el('div', 'h', d.full), el('div', null, fmt(d.v) + ' · Rang ' + d.rang + ' von ' + data.length)); tip.hidden = false; const [mx, my] = d3.pointer(ev, host); place(host, tip, mx, my); })
+    .on('mousemove', (ev, d) => { tip.replaceChildren(el('div', 'h', d.full), el('div', null, d.lab + ' · Rang ' + d.rang + ' von ' + data.length), ...(bi ? [el('div', 'h', 'Prozent bezogen auf: ' + bi.label)] : [])); tip.hidden = false; const [mx, my] = d3.pointer(ev, host); place(host, tip, mx, my); })
     .on('mouseleave', () => { tip.hidden = true; })
     .on('click', (ev, d) => set({ fokus: d.ags }));
 }
@@ -388,7 +449,7 @@ function renderDetail() {
       const box = el('span', 'idx'); const bar = el('i', iv > 100 ? 'hi' : null); bar.style.width = Math.min(60, Math.max(1, iv * 0.3)) + 'px';
       box.append(bar, fmt(iv)); ic.append(box);
     } else ic.textContent = '—';
-    tr.addEventListener('click', () => set({ mid: m.mid }));
+    tr.addEventListener('click', () => set({ mid: m.mid, basis: '' }));
   }
 }
 
@@ -418,12 +479,13 @@ async function init() {
   MI = new Map(MM.map((m) => [m.mid, m]));
   LATEST = D.ausgaben.length - 1;
   KPI = computeKpi();
-  buildTiles();
   fillRegionSelect($('#sel-fokus'), 'fokus');
   fillRegionSelect($('#sel-vergleich'), 'vergleich');
-  $('#sel-thema').addEventListener('change', (e) => { const f = MM.find((m) => m.thema === Number(e.target.value)); if (f) set({ mid: f.mid }); });
-  $('#sel-tabelle').addEventListener('change', (e) => { const f = MM.find((m) => m.tab === Number(e.target.value)); if (f) set({ mid: f.mid }); });
-  $('#sel-merkmal').addEventListener('change', (e) => set({ mid: e.target.value }));
+  $('#sel-thema').addEventListener('change', (e) => { const f = MM.find((m) => m.thema === Number(e.target.value)); if (f) set({ mid: f.mid, basis: '' }); });
+  $('#sel-tabelle').addEventListener('change', (e) => { const f = MM.find((m) => m.tab === Number(e.target.value)); if (f) set({ mid: f.mid, basis: '' }); });
+  $('#sel-merkmal').addEventListener('change', (e) => set({ mid: e.target.value, basis: '' }));
+  $('#sel-basis').addEventListener('change', (e) => set({ basis: e.target.value }));
+  document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => set({ skala: b.dataset.skala })));
   $('#suche').addEventListener('input', renderDetail);
   readHash();
   $('#loading').remove();
