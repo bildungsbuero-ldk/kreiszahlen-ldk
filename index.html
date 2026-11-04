@@ -8,8 +8,8 @@
 <style>
 :root {
   --fg: #1a1a1a; --fg-muted: #5c5f66; --bg: #f4f6f9; --panel: #ffffff; --line: #dde2ea;
-  --grid: #e6e9ef; --axis: #9aa1ad; --muted-bar: #c5ccd8; --ref: #6b7280;
-  --ldk-blau: #004b8d; --ldk-blau-dunkel: #00305a; --ldk-blau-chart: #1f66b3; --ldk-gelb: #f5b800; --ldk-gelb-text: #8a6400;
+  --grid: #e6e9ef; --axis: #9aa1ad; --muted-bar: #d9d7d7; --ref: #575656;
+  --ldk-blau: #4f81a5; --ldk-blau-dunkel: #36607f; --ldk-hellblau: #8cbce0; --ldk-hellblau-text: #3d79a6; --ldk-orange: #ee5d05; --ldk-gruen: #a2c617; --ldk-grau: #575656;
   --radius: 8px; --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color-scheme: light;
 }
@@ -20,24 +20,24 @@ body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--fo
 h1, h2, h3 { margin: 0; }
 h1 { font-size: clamp(1.5rem, 3.5vw, 2.1rem); font-weight: 700; color: #fff; letter-spacing: .01em; }
 h2 { font-size: 1.05rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
-h2::after { content: ''; display: block; width: 3rem; height: 4px; background: var(--ldk-gelb); margin-top: 6px; border-radius: 2px; }
+h2::after { content: ''; display: block; width: 3rem; height: 4px; background: var(--ldk-hellblau); margin-top: 6px; border-radius: 2px; }
 h3 { font-size: 15px; font-weight: 600; }
 .note, .def { color: var(--fg-muted); margin: 0; font-size: 13px; }
-.head { background: linear-gradient(135deg, var(--ldk-blau) 0%, var(--ldk-blau-dunkel) 100%); color: #fff; padding: 24px 20px; border-radius: var(--radius); border-bottom: 6px solid var(--ldk-gelb); display: flex; flex-direction: column; gap: 10px; }
-.kicker { margin: 0; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--ldk-gelb); }
+.head { background: linear-gradient(135deg, var(--ldk-blau) 0%, var(--ldk-blau-dunkel) 100%); color: #fff; padding: 24px 20px; border-radius: var(--radius); border-bottom: 6px solid var(--ldk-hellblau); display: flex; flex-direction: column; gap: 10px; }
+.kicker { margin: 0; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.85); }
 .lede { margin: 0; color: rgba(255,255,255,.85); }
 .take { margin: 0; }
-.take b { color: var(--ldk-gelb); }
+.take b { color: #fff; }
 .controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
 .controls label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--fg-muted); flex: 1 1 14rem; min-width: 0; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 .head .controls label { color: rgba(255,255,255,.88); }
 select, .search { font: inherit; font-size: 15px; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 6px 10px; width: 100%; min-width: 0; text-overflow: ellipsis; text-transform: none; letter-spacing: 0; font-weight: 400; }
 .head select { border-color: transparent; }
-select:focus-visible, .search:focus-visible { outline: 2px solid var(--ldk-gelb); outline-offset: 1px; }
+select:focus-visible, .search:focus-visible { outline: 2px solid var(--ldk-orange); outline-offset: 1px; }
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: 12px; margin-top: 12px; }
 .tile, .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .tile { border-top: 4px solid var(--ldk-blau); }
-.big { font-size: 1.9rem; font-weight: 700; color: var(--ldk-blau-chart); font-variant-numeric: tabular-nums; margin-top: 4px; line-height: 1.15; }
+.big { font-size: 1.9rem; font-weight: 700; color: var(--ldk-blau); font-variant-numeric: tabular-nums; margin-top: 4px; line-height: 1.15; }
 .sub { font-size: 13px; color: var(--fg-muted); margin: 0; font-variant-numeric: tabular-nums; }
 .sub b { font-weight: 600; color: var(--fg); }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: 12px; align-items: start; }
@@ -51,11 +51,11 @@ select:focus-visible, .search:focus-visible { outline: 2px solid var(--ldk-gelb)
 .tip { position: absolute; pointer-events: none; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 4px 14px rgba(0,0,0,.12); padding: 4px 8px; font-size: 12px; white-space: nowrap; z-index: 2; }
 .tip .h { color: var(--fg-muted); }
 .empty { color: var(--fg-muted); font-size: 13px; margin: 12px 0; }
-.hint { font-size: 13px; color: var(--fg-muted); margin: 0; padding: 4px 10px; border-left: 3px solid var(--ldk-gelb); }
+.hint { font-size: 13px; color: var(--fg-muted); margin: 0; padding: 4px 10px; border-left: 3px solid var(--ldk-orange); }
 .legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--fg-muted); margin: 0; }
 .legend span { display: inline-flex; align-items: center; gap: 4px; }
 .sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
-.sw-f { background: var(--ldk-blau-chart); } .sw-v { background: var(--ldk-gelb); }
+.sw-f { background: var(--ldk-blau); } .sw-v { background: var(--ldk-hellblau); }
 .tablewrap { max-height: 32rem; overflow: auto; border: 1px solid var(--line); border-radius: var(--radius); }
 table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
 th { position: sticky; top: 0; background: var(--panel); text-align: right; font-weight: 600; padding: 4px 10px; border-bottom: 1px solid var(--line); vertical-align: bottom; text-transform: uppercase; letter-spacing: .04em; font-size: 12px; }
@@ -64,10 +64,10 @@ td { padding: 4px 10px; border-bottom: 1px solid var(--line); text-align: right;
 td:first-child { white-space: normal; min-width: 14rem; }
 tbody tr { cursor: pointer; }
 tbody tr:hover { background: var(--bg); }
-tr.sel td { background: color-mix(in srgb, var(--ldk-gelb) 20%, transparent); font-weight: 600; }
+tr.sel td { background: color-mix(in srgb, var(--ldk-hellblau) 25%, transparent); font-weight: 600; }
 .idx { display: inline-flex; align-items: center; gap: 4px; justify-content: flex-end; }
 .idx i { display: inline-block; height: 8px; border-radius: 2px; background: var(--muted-bar); }
-.idx i.hi { background: var(--ldk-blau-chart); }
+.idx i.hi { background: var(--ldk-gruen); }
 .pct { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: flex-end; margin: 4px 0 2px; }
 .pct label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--fg-muted); flex: 1 1 14rem; min-width: 0; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 .pct select { font-size: 13px; padding: 4px 8px; }
@@ -75,7 +75,7 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-gelb) 20%, transparent); fo
 .seg button { font: inherit; font-size: 13px; padding: 5px 12px; border: 0; background: var(--panel); color: var(--fg); cursor: pointer; }
 .seg button + button { border-left: 1px solid var(--line); }
 .seg button[aria-pressed="true"] { background: var(--ldk-blau); color: #fff; }
-.seg button:focus-visible { outline: 2px solid var(--ldk-gelb); outline-offset: -2px; }
+.seg button:focus-visible { outline: 2px solid var(--ldk-orange); outline-offset: -2px; }
 .quelle { font-size: 12px; color: var(--fg-muted); margin: 0; padding-top: 10px; border-top: 1px solid var(--line); }
 .loading { padding: 40px 16px; text-align: center; color: var(--fg-muted); }
 </style>
@@ -110,7 +110,7 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-gelb) 20%, transparent); fo
     <div class="grid">
       <div class="card">
         <h3 id="merkmal-titel">—</h3>
-        <p class="note">26 Landkreise und kreisfreie Städte, absteigend sortiert. Gestrichelt: Land Hessen und eine Vergleichsregion, die kein Kreis ist.</p>
+        <p class="note">26 Landkreise und kreisfreie Städte, absteigend sortiert. Gestrichelt: Land Hessen und eine Vergleichsregion, die kein Kreis ist, sofern ihr Wert in den Maßstab der Kreise passt.</p>
         <p class="note">Berichtszeitraum: <span id="bezug-aktuell">—</span></p>
         <div class="pct" id="pct">
           <label>Prozent bezogen auf<select id="sel-basis" aria-label="Bezugsgröße für Prozentwerte"></select></label>
@@ -338,9 +338,10 @@ function renderBars() {
   if (!data.length) { host.prepend(el('p', 'empty', 'Für dieses Merkmal liegen keine Werte auf Kreisebene vor.')); return; }
   data.forEach((d, i) => { d.rang = i + 1; });
   const refs = [];
-  const land = v('000000'); if (land != null && !(pct && bi.chosen === 'land')) refs.push({ name: 'Hessen', v: land });
+  const kmax = d3.max(data, (d) => Math.abs(d.v));
+  const land = v('000000'); if (land != null && !(pct && bi.chosen === 'land') && Math.abs(land) <= kmax * 1.5) refs.push({ name: 'Hessen', v: land });
   const vr = REG[RI.get(P.vergleich)];
-  if (vr && !isKreis(vr.ebene) && vr.ags !== '000000' && v(vr.ags) != null) refs.push({ name: shortName(vr.region), v: v(vr.ags) });
+  if (vr && !isKreis(vr.ebene) && vr.ags !== '000000' && v(vr.ags) != null) if (Math.abs(v(vr.ags)) <= kmax * 1.5) refs.push({ name: shortName(vr.region), v: v(vr.ags) });
   const W = Math.max(280, host.clientWidth || 600), bh = 22, top = 14 + refs.length * 14, bottom = 22;
   const H = top + data.length * bh + bottom;
   const svg = d3.select(host).insert('svg', ':first-child').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Balkendiagramm: ' + MI.get(P.mid).merkmal);
@@ -354,7 +355,7 @@ function renderBars() {
   const left = Math.ceil(lw) + 10 + (lo < 0 ? vw + 6 : 0), right = vw + 8;
   const x = d3.scaleLinear([lo, hi || 1], [left, W - right]).nice();
   const y = d3.scaleBand(data.map((d) => d.ags), [top, H - bottom]).padding(0.25);
-  const col = (d) => d.ags === P.fokus ? 'var(--ldk-blau-chart)' : d.ags === P.vergleich ? 'var(--ldk-gelb)' : 'var(--muted-bar)';
+  const col = (d) => d.ags === P.fokus ? 'var(--ldk-blau)' : d.ags === P.vergleich ? 'var(--ldk-hellblau)' : 'var(--muted-bar)';
   const nt = Math.max(2, Math.floor((W - left - right) / 90));
   const ax = svg.append('g').attr('transform', `translate(0,${H - bottom + 4})`).call(d3.axisBottom(x).ticks(nt).tickFormat((t) => pct ? num(t, 1) + ' %' : fmt(t)).tickSize(0)).attr('font-size', null).attr('font-family', null);
   ax.select('.domain').remove(); ax.selectAll('text').attr('class', 'tick').attr('dy', '0.9em');
@@ -387,7 +388,7 @@ function renderVerlauf() {
       const z = bez(ai, P.mid); if (!z || z.art !== head.art) return;
       const v = val(ai, P.mid, a); if (v != null) by.set(z.jahr, { j: z.jahr, bezug: z.bezug, au, v });
     });
-    return { name: shortName(REG[RI.get(a)].region), color: i === 0 ? 'var(--ldk-blau-chart)' : 'var(--ldk-gelb)', text: i === 0 ? 'var(--ldk-blau-chart)' : 'var(--ldk-gelb-text)',
+    return { name: shortName(REG[RI.get(a)].region), color: i === 0 ? 'var(--ldk-blau)' : 'var(--ldk-hellblau)', text: i === 0 ? 'var(--ldk-blau-dunkel)' : 'var(--ldk-hellblau-text)',
       pts: [...by.values()].sort((p, q) => (p.j < q.j ? -1 : p.j > q.j ? 1 : 0)) };
   }).filter((s) => s.pts.length);
   if (!series.length) { host.prepend(el('p', 'empty', 'Für diese Regionen liegt zu diesem Merkmal kein Wert vor.')); return; }
