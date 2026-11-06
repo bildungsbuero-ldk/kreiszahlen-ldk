@@ -1,0 +1,116 @@
+{
+  "stand": "06.11.2026",
+  "quellen": {
+    "hsl_gemeinde": {
+      "titel": "Hessische Gemeindestatistik 2025",
+      "herausgeber": "Hessisches Statistisches Landesamt (HSL)",
+      "stand": "Bevölkerung 31.12.2024, Einkünfte 2021, Wohnungen 31.12.2024",
+      "url": "https://www.statistischebibliothek.de/mir/servlets/MCRFileNodeServlet/HEHeft_derivate_00015438/HGSt_j2025.xlsx",
+      "lizenz": "Vervielfältigung und Verbreitung mit Quellenangabe gestattet",
+      "datei": "quellen/sozialraum/HGSt_j2025.xlsx",
+      "hinweis": "Amtliche Bevölkerungsfortschreibung auf Basis des Zensus 2022. Anteile hier aus den Tabellenwerten berechnet."
+    },
+    "wegweiser": {
+      "titel": "Wegweiser Kommune",
+      "herausgeber": "Bertelsmann Stiftung (Daten der Statistischen Ämter, der Bundesagentur für Arbeit und von ZEFIR)",
+      "stand": "2023 (Aktualisierung 2025)",
+      "url": "https://www.wegweiser-kommune.de/open-data",
+      "lizenz": "CC0 1.0",
+      "datei": "sozialraum/daten/wegweiser_kommune_2023.csv",
+      "hinweis": "Der Wegweiser umfasst Kommunen ab etwa 5.000 Einwohnern nach seiner eigenen Bevölkerungsbasis. Für Bischoffen und Siegbach weist er keine Werte aus. Abgerufen über die Export-Schnittstelle des Wegweisers am 06.11.2026."
+    },
+    "hsl_kv8": {
+      "titel": "Statistischer Bericht K V 8: Erzieherische Hilfe 2023, Tabelle 10",
+      "herausgeber": "Hessisches Statistisches Landesamt (HSL)",
+      "stand": "31.12.2023",
+      "url": "https://www.statistischebibliothek.de/mir/servlets/MCRFileNodeServlet/HEHeft_derivate_00015163/KV8_j23.pdf",
+      "lizenz": "Vervielfältigung und Verbreitung mit Quellenangabe gestattet",
+      "datei": "quellen/sozialraum/KV8_j23.pdf",
+      "hinweis": "Neuere Ausgaben (2024, 2025) enthalten nur Landeswerte. Werte nach Jugendamt, nicht nach Kommune."
+    },
+    "kv_hessen": {
+      "titel": "Fokus Gesundheit (Bedarfsplanung)",
+      "herausgeber": "Kassenärztliche Vereinigung Hessen",
+      "stand": "Hausärzte 14.10.2026, Fachärzte 13.10.2026, Kinder- und Jugendpsychiater 11.09.2026",
+      "url": "https://www.kvhessen.de/fokus-gesundheit/",
+      "lizenz": "öffentlich zugängliche Kartendaten",
+      "datei": "sozialraum/daten/versorgungsgrade_kv.csv",
+      "hinweis": "Abgefragt aus den öffentlichen Kartendiensten (ArcGIS) der KV-Seite."
+    },
+    "sanego": {
+      "titel": "Arztverzeichnis sanego.de",
+      "herausgeber": "sanego (privates Online-Verzeichnis)",
+      "stand": "abgerufen am 06.11.2026, ohne Datenstand",
+      "url": "https://www.sanego.de/Arzt/Hessen/",
+      "lizenz": "eigene Auszählung",
+      "datei": "sozialraum/daten/aerzte_kommune.csv",
+      "hinweis": "Nicht von der KV geprüft. Summen je Mittelbereich liegen nah an den KV-Zahlen (Haiger/Dillenburg 30 zu 28, Herborn 27 zu 31, Wetzlar 105 zu 119)."
+    },
+    "schulen": {
+      "titel": "Schulstandorte und Ganztag",
+      "herausgeber": "Lahn-Dill-Kreis (Ganztagsliste 08/2024), Hessisches Kultusministerium (Ganztagsverzeichnis 2026/27), Stadt Wetzlar (Schulübersicht 02/2026), HSL (Verzeichnis beruflicher Schulen 2019)",
+      "stand": "08/2024 bis 02/2026",
+      "url": "https://www.lahn-dill-kreis.de/wp-content/uploads/2025/03/Zustaendigkeiten-Aufteilung-Schulen-Ganztag-und-Betreuung.pdf",
+      "lizenz": "eigene Zusammenstellung, Quelle je Schule in der Datei",
+      "datei": "sozialraum/daten/schulen_liste.csv",
+      "hinweis": "Außenstellen in anderen Kommunen zählen dort als eigener Standort. Schülerzahlen fehlen."
+    },
+    "angebote": {
+      "titel": "Anlaufstellen und soziale Angebote",
+      "herausgeber": "eigene Zusammenstellung aus Kreis-, Träger- und Vitos-Webseiten, Kreistagsvorlagen und der Landesförderliste Familienzentren",
+      "stand": "Recherche 06.11.2026",
+      "url": "https://jugendfoerderung.lahn-dill-kreis.de/index.php/netzwerk/begegnungs-und-familienzentren/",
+      "lizenz": "eigene Zusammenstellung, Link je Angebot in der Datei",
+      "datei": "sozialraum/daten/angebote_liste.csv",
+      "hinweis": "Nicht vollständig. Ergänzungen bitte über „Daten einreichen“."
+    }
+  },
+  "kennzahlen": {
+    "bedarfsindex": {"label": "Bedarfsindex", "einheit": "z-Wert", "jahr": "2021–2024", "quelle": ["wegweiser", "hsl_gemeinde"], "definition": "Mittelwert aus sechs standardisierten Kennzahlen: Kinderarmut, SGB-II-Quote, Arbeitslose an den Beschäftigten, Kita-Kinder mit Migrationshintergrund, nichtdeutsche Kinder unter 15 Jahren und Einkünfte je Steuerpflichtigem (mit umgekehrtem Vorzeichen). 0 entspricht dem Durchschnitt der Kommunen, +1 einer Standardabweichung darüber.", "hinweis": "Alle sechs Kennzahlen zählen gleich. Kommunen mit weniger als vier Werten bekommen keinen Rang. Der Index vergleicht Kommunen untereinander; er sagt nichts über Teilräume einer Kommune."},
+    "sgb2": {"label": "SGB-II-Quote", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Leistungsberechtigte nach dem SGB II (Bürgergeld) an der Bevölkerung bis zur Regelaltersgrenze, Dezember 2023."},
+    "kinderarmut": {"label": "Kinderarmut", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Anteil der unter 15-Jährigen, die in Bedarfsgemeinschaften nach dem SGB II leben."},
+    "jugendarmut": {"label": "Jugendarmut", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Anteil der 15- bis 17-Jährigen, die in Bedarfsgemeinschaften nach dem SGB II leben."},
+    "altersarmut": {"label": "Altersarmut", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Empfänger:innen von Grundsicherung im Alter an den Personen ab 65 Jahren."},
+    "alo_svb": {"label": "Arbeitslose an den Beschäftigten", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Arbeitslose je 100 sozialversicherungspflichtig Beschäftigte am Wohnort."},
+    "alo_svb_u25": {"label": "Arbeitslose unter 25 an den Beschäftigten unter 25", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Arbeitslose unter 25 Jahren je 100 sozialversicherungspflichtig Beschäftigte unter 25 Jahren."},
+    "kita_mh": {"label": "Kita-Kinder mit Migrationshintergrund", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Anteil der Kinder in Kindertageseinrichtungen mit mindestens einem Elternteil ausländischer Herkunft (Kinder- und Jugendhilfestatistik).", "hinweis": "Bester verfügbarer Näherungswert für Migrationshintergrund auf Gemeindeebene. Gezählt am Standort der Kita."},
+    "kita3_mh": {"label": "3-Jährige in Kitas mit Migrationshintergrund", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Wie oben, nur für dreijährige Kinder."},
+    "sgb2_ausl": {"label": "SGB-II-Quote Ausländer:innen", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "SGB-II-Leistungsberechtigte ohne deutsche Staatsangehörigkeit an der ausländischen Bevölkerung bis zur Regelaltersgrenze."},
+    "efh_anteil": {"label": "Wohnungen in Ein- und Zweifamilienhäusern", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Anteil der Wohnungen in Gebäuden mit einer oder zwei Wohnungen."},
+    "nichtdt": {"label": "Nichtdeutsche Bevölkerung", "einheit": "%", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Einwohner:innen ohne deutsche Staatsangehörigkeit an allen Einwohner:innen, 31.12.2024.", "hinweis": "Der Wegweiser Kommune weist auf älterer Bevölkerungsbasis etwas höhere Anteile aus."},
+    "kinder_u15_nichtdt": {"label": "Nichtdeutsche Kinder unter 15", "einheit": "%", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Nichtdeutsche Kinder unter 15 Jahren an allen Kindern unter 15 Jahren, 31.12.2024."},
+    "einkuenfte_je_stpfl": {"label": "Einkünfte je Steuerpflichtigem", "einheit": "€", "jahr": "2021", "quelle": ["hsl_gemeinde"], "definition": "Gesamtbetrag der Einkünfte je Steuerpflichtigem laut Lohn- und Einkommensteuerstatistik 2021."},
+    "ab65": {"label": "Anteil 65 Jahre und älter", "einheit": "%", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Einwohner:innen ab 65 Jahren an allen Einwohner:innen."},
+    "u6": {"label": "Anteil unter 6 Jahren", "einheit": "%", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Kinder unter 6 Jahren an allen Einwohner:innen."},
+    "geburten_je1000": {"label": "Geburten je 1.000 Einwohner", "einheit": "", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Lebendgeborene 2024 je 1.000 Einwohner:innen am 31.12.2024."},
+    "wanderungssaldo_je1000": {"label": "Wanderungssaldo je 1.000 Einwohner", "einheit": "", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Zuzüge minus Fortzüge über die Gemeindegrenze 2024 je 1.000 Einwohner:innen."},
+    "veraend_vj": {"label": "Bevölkerungsveränderung zum Vorjahr", "einheit": "%", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Veränderung der Einwohnerzahl vom 31.12.2023 zum 31.12.2024."},
+    "whg_klein": {"label": "Wohnungen mit 1–2 Räumen", "einheit": "%", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Wohnungen mit einem oder zwei Räumen (einschließlich Küche) an allen Wohnungen in Wohn- und Nichtwohngebäuden."},
+    "hze_je1000": {"label": "Hilfen zur Erziehung je 1.000 Einwohner", "einheit": "", "jahr": "2023", "quelle": ["hsl_kv8"], "definition": "Laufende Hilfen am 31.12.2023 (Erziehungshilfen nach §§ 27–35 SGB VIII, Eingliederungshilfe nach § 35a, Hilfen für junge Volljährige nach § 41, einschließlich Erziehungsberatung, ohne familienorientierte Hilfen) je 1.000 Einwohner:innen.", "hinweis": "Nur nach Jugendamt: Kreisjugendamt (22 Kommunen) und Jugendamt der Stadt Wetzlar. Einwohner zum 31.12.2023 aus der Gemeindestatistik zurückgerechnet."},
+    "hze_transfer": {"label": "Anteil der Hilfen mit Transferleistungen", "einheit": "%", "jahr": "2023", "quelle": ["hsl_kv8"], "definition": "Anteil der laufenden Hilfen, bei denen die Familie ganz oder teilweise von SGB II, SGB XII, Grundsicherung oder Kinderzuschlag lebt.", "hinweis": "Bei Erziehungsberatungen (§ 28) ist diese Angabe freiwillig; der Anteil ist daher eher zu niedrig."},
+    "schulen": {"label": "Schulstandorte", "einheit": "Anzahl", "jahr": "2024–2026", "quelle": ["schulen"], "definition": "Allgemeinbildende und berufliche Schulen mit Standort in der Kommune, Außenstellen eingeschlossen."},
+    "ganztag": {"label": "Schulen mit Ganztag oder Pakt", "einheit": "Anzahl", "jahr": "2024–2026", "quelle": ["schulen"], "definition": "Schulen im Pakt für den Ganztag oder mit Ganztagsprofil 1 bis 3. Reine Betreuungsangebote zählen nicht.", "hinweis": "Bei 9 Schulen ist das Profil unbekannt."},
+    "kita_u3": {"label": "Kita-Betreuungsquote unter 3", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Kinder unter 3 Jahren in Kindertageseinrichtungen je 100 Kinder dieses Alters (ohne Tagespflege).", "hinweis": "Gezählt am Standort der Kita. Werte über 100 % bedeuten Kinder aus Nachbarorten."},
+    "kita_3_5": {"label": "Kita-Betreuungsquote 3 bis 5", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Kinder von 3 bis unter 6 Jahren in Kindertageseinrichtungen je 100 Kinder dieses Alters.", "hinweis": "Gezählt am Standort der Kita. Werte über 100 % bedeuten Kinder aus Nachbarorten."},
+    "hausaerzte": {"label": "Hausärzt:innen", "einheit": "Anzahl", "jahr": "2026", "quelle": ["sanego"], "definition": "Einträge in der Kategorie Hausarzt im Online-Verzeichnis sanego.de je Ort.", "hinweis": "Nicht amtlich. Hausärztlich tätige Internist:innen fehlen möglicherweise teilweise."},
+    "hausarzt_vg": {"label": "Hausarzt-Versorgungsgrad", "einheit": "%", "jahr": "2026", "quelle": ["kv_hessen"], "definition": "Versorgungsgrad der Bedarfsplanung im Mittelbereich, zu dem die Kommune gehört (Haiger/Dillenburg, Herborn oder Wetzlar). 100 % entspricht dem Soll; ab 110 % ist der Bereich für neue Zulassungen gesperrt."},
+    "versorgungsgrad": {"label": "Versorgungsgrad der Bedarfsplanung", "einheit": "%", "jahr": "2026", "quelle": ["kv_hessen"], "definition": "Verhältnis der tatsächlich zugelassenen Ärzt:innen bzw. Psychotherapeut:innen zur Soll-Zahl laut Bedarfsplanungs-Richtlinie. Hausärzte werden je Mittelbereich geplant, Kinderärzte, Nervenärzte und Psychotherapeuten je Kreis, Kinder- und Jugendpsychiater je Raumordnungsregion (Mittelhessen).", "hinweis": "Ein Versorgungsgrad über 100 % sagt nichts über Wartezeiten oder die Erreichbarkeit innerhalb des Kreises."},
+    "familienzentren": {"label": "Familienzentren", "einheit": "Anzahl", "jahr": "2026", "quelle": ["angebote"], "definition": "Begegnungs- und Familienzentren mit Standort in der Kommune. Gemeinsame Zentren mehrerer Kommunen zählen in jeder beteiligten Kommune."},
+    "schulsozialarbeit": {"label": "Schulsozialarbeit", "einheit": "Anzahl", "jahr": "2027", "quelle": ["angebote"], "definition": "Schulen mit sozialraumorientierter Sozialarbeit des Kreises laut Förderanträgen 2027.", "hinweis": "15 der 19 Schulen erfasst, die der Kreis nennt. Schulsozialarbeit, die das Jugendamt der Stadt Wetzlar selbst anbietet oder fördert, fehlt."},
+    "jugend": {"label": "Jugendzentren und Jugendpflege", "einheit": "Anzahl", "jahr": "2026", "quelle": ["angebote"], "definition": "Offene Kinder- und Jugendarbeit: Jugendzentren, Jugendtreffs und kommunale Jugendpflege."},
+    "vorort_je10k": {"label": "Angebote vor Ort je 10.000 Einwohner", "einheit": "", "jahr": "2026", "quelle": ["angebote", "hsl_gemeinde"], "definition": "Familienzentren, Schulsozialarbeit, Jugendzentren/Jugendpflege und Quartiersarbeit in der Kommune je 10.000 Einwohner:innen. Kreisweite Fachdienste (auch die Kreisjugendpflege) zählen nicht mit, weil sie am Sitz eingetragen sind, aber für mehrere Kommunen arbeiten."},
+    "fachdienste": {"label": "Fachdienste mit Sitz in der Kommune", "einheit": "Anzahl", "jahr": "2026", "quelle": ["angebote"], "definition": "Beratungsstellen und Dienste (Erziehungsberatung, Sozialpsychiatrie, Sucht, Gewaltschutz, Selbsthilfe, Frühe Hilfen, Migration, Existenzsicherung, Psychiatrie) mit Sitz in der Kommune. Meist für den ganzen Kreis oder eine Region zuständig."},
+    "psychiatrie": {"label": "Psychiatrie und Sozialpsychiatrie", "einheit": "Anzahl", "jahr": "2026", "quelle": ["angebote"], "definition": "Kliniken, Tageskliniken, Institutsambulanzen und sozialpsychiatrische Angebote mit Sitz in der Kommune."}
+  },
+  "luecken": [
+    ["Alleinerziehende", "Auf Gemeindeebene nur im Zensus 2022 bzw. beim Kommunalen Jobcenter Lahn-Dill."],
+    ["Gesundheit von Kindern", "Gesundheitsdaten liegen öffentlich nur auf Kreisebene vor. Für Kommunen eignen sich die Schuleingangsuntersuchungen des Gesundheitsamts (Sprache, Motorik, Übergewicht, Impfstatus)."],
+    ["Hilfen zur Erziehung nach Kommune", "Nur nach Jugendamt veröffentlicht. Werte nach Kommune hat die Jugendhilfeplanung des Kreises."],
+    ["Psychotherapie nach Kommune", "Öffentlich nur der Versorgungsgrad für den Kreis. Zahlen je Kommune sind nicht verfügbar."],
+    ["Kita-Plätze", "Die Zahl der Einrichtungen ist nur für 8 Kommunen veröffentlicht; Plätze je Kommune gar nicht."],
+    ["Vereine", "Nur kreisweit: 435 Sportvereine (Landessportbund 2023)."],
+    ["Bischoffen und Siegbach", "Keine Sozialdaten im Wegweiser Kommune (kleinste Kommunen des Kreises); SGB-II-Daten hat das Kommunale Jobcenter Lahn-Dill."],
+    ["Krisendienst und Fachberatung sexualisierte Gewalt", "Im Kreis kein regionaler Krisendienst und keine eigene Fachberatungsstelle gefunden. Schulpsychologie sitzt im Staatlichen Schulamt Weilburg."],
+    ["Teilräume", "Alle Werte gelten für die ganze Kommune. Unterschiede zwischen Stadtteilen sind nicht sichtbar."]
+  ]
+}
