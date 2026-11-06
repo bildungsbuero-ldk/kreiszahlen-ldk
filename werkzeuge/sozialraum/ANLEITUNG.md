@@ -6,8 +6,7 @@ Seite: https://bildungsbuero-ldk.github.io/kreiszahlen-ldk/sozialraum/
 - `sozialraum/index.html` – die Seite (gebaut, nicht von Hand bearbeiten)
 - `sozialraum/daten/` – alle Daten als CSV (UTF-8, Komma, Dezimalpunkt). Diese Dateien sind die Grundlage der Seite.
   `kennzahlen_kommunen.csv` wird vom Werkzeug erzeugt.
-- `sozialraum/vorlagen/` – Vorlagen für Einreichungen
-- `sozialraum/einreichungen/` – freigegebene Einreichungen im Original
+- `sozialraum/einreichungen/` – freigegebene Zusendungen im Original
 - `quellen/sozialraum/` – Originaldateien amtlicher Quellen (Gemeindestatistik, Statistischer Bericht K V 8)
 - `werkzeuge/sozialraum.py` – Prüfen, Berechnen, Seitenbau
 - `werkzeuge/sozialraum/methodik.json` – Definitionen, Quellen und Lücken. Daraus entstehen die Info-Popups und die Seite „Methodik und Quellen“.
@@ -23,13 +22,14 @@ Das Werkzeug prüft Spalten, Kommunennamen, Zahlenbereiche, Kategorien und doppe
 nichts. Bericht: `werkzeuge/ausgabe/sozialraum_bericht.txt` (mit Rangfolge des Bedarfsindex). Danach Seite lokal öffnen
 (`python3 -m http.server` im Hauptordner, dann `/sozialraum/`) und alle vier Reiter ansehen.
 
-## Eingereichte Daten verarbeiten
-Einreichungen kommen über das GitHub-Formular „Daten für die Sozialraum-Übersicht einreichen“ (Label `datenlieferung`).
+## Zugeschickte Daten verarbeiten
+Ergänzungen schicken Nutzer:innen formlos an das Bildungsbüro (E-Mail, Excel, Liste). Das Bildungsbüro leitet sie zur
+Einarbeitung weiter.
 
 1. **Sichten**: Was wird geliefert, für welche Kommunen, Quelle, Stand, Veröffentlichung erlaubt? Personenbezogene
    Daten oder Werte unter 3 Fällen nicht übernehmen; im Zweifel nachfragen.
 2. **Rücksprache**: Vorschlag für die Einarbeitung (welche Datei, welche Spalte, neue Kennzahl ja/nein, Änderung am
-   Bedarfsindex ja/nein) im Formular-Thread notieren und vom Bildungsbüro freigeben lassen. Ohne Freigabe nichts einarbeiten.
+   Bedarfsindex ja/nein) dem Bildungsbüro vorlegen und freigeben lassen. Ohne Freigabe nichts einarbeiten.
 3. **Einarbeiten** auf einem eigenen Branch:
    - Original nach `sozialraum/einreichungen/JJJJ-MM-TT_kurzbeschreibung.<endung>` legen.
    - Angebote: Zeile(n) in `angebote_liste.csv`; erlaubte Kategorien und `reichweite` stehen in `werkzeuge/sozialraum.py`.
@@ -40,8 +40,8 @@ Einreichungen kommen über das GitHub-Formular „Daten für die Sozialraum-Übe
      in der Methodik anpassen.
    - `stand` in `methodik.json` aktualisieren.
 4. **Bauen und prüfen** (siehe oben), Stichproben gegen die Einreichung vergleichen.
-5. **Pull Request** mit Verweis auf das Formular („Schließt #…“). Nach dem Zusammenführen veröffentlicht GitHub Pages
-   die Seite automatisch. Formular mit kurzer Rückmeldung schließen.
+5. **Pull Request** mit kurzer Beschreibung der Zusendung (ohne Namen oder Kontaktdaten). Nach dem Zusammenführen
+   veröffentlicht GitHub Pages die Seite automatisch.
 
 ## Regelmäßige Aktualisierung
 - **Gemeindestatistik** (jährlich, Herbst): neue `HGSt_j<JJJJ>.xlsx` aus der Statistischen Bibliothek

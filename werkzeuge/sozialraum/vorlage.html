@@ -110,7 +110,7 @@ td.na { color: var(--fg-muted); }
       <button type="button" role="tab" id="tab-bedarfe" data-tab="bedarfe" aria-controls="bedarfe" aria-selected="true">Bedarfe</button>
       <button type="button" role="tab" id="tab-angebote" data-tab="angebote" aria-controls="angebote" aria-selected="false">Angebote</button>
       <button type="button" role="tab" id="tab-methodik" data-tab="methodik" aria-controls="methodik" aria-selected="false">Methodik und Quellen</button>
-      <button type="button" role="tab" id="tab-daten" data-tab="daten" aria-controls="daten" aria-selected="false">Daten und Mitmachen</button>
+      <button type="button" role="tab" id="tab-daten" data-tab="daten" aria-controls="daten" aria-selected="false">Daten und Ergänzungen</button>
     </nav>
   </header>
 
@@ -164,7 +164,7 @@ td.na { color: var(--fg-muted); }
 
   <!-- ============ ANGEBOTE ============ -->
   <main class="page" id="angebote" role="tabpanel" aria-labelledby="tab-angebote" hidden>
-    <p class="hint">Bestehende Angebote und Infrastruktur, Schwerpunkt psychische Gesundheit. Aus öffentlichen Quellen zusammengetragen und nicht vollständig. Ergänzungen bitte über „Daten und Mitmachen“.</p>
+    <p class="hint">Bestehende Angebote und Infrastruktur, Schwerpunkt psychische Gesundheit. Aus öffentlichen Quellen zusammengetragen und nicht vollständig. Ergänzungen bitte an das Bildungsbüro (siehe „Daten und Ergänzungen“).</p>
     <section>
       <h2>Angebote im Kreis</h2>
       <div class="tiles">
@@ -245,23 +245,17 @@ td.na { color: var(--fg-muted); }
     </section>
   </main>
 
-  <!-- ============ DATEN UND MITMACHEN ============ -->
+  <!-- ============ DATEN UND ERGÄNZUNGEN ============ -->
   <main class="page" id="daten" role="tabpanel" aria-labelledby="tab-daten" hidden>
     <section class="doc">
       <h3 id="d-download">Daten herunterladen</h3>
       <p>Alle Daten liegen als CSV-Dateien (UTF-8, Komma als Trennzeichen, Punkt als Dezimalzeichen) im Ordner <code>sozialraum/daten/</code> des GitHub-Repositorys. Die Originaldateien der amtlichen Quellen liegen unter <code>quellen/sozialraum/</code>.</p>
       <ul id="liste-downloads"></ul>
 
-      <h3 id="d-mitmachen">Daten einreichen</h3>
-      <p>Sie kennen ein Angebot, das fehlt, haben aktuellere Zahlen oder Daten für einzelne Kommunen (z. B. aus der Jugendhilfeplanung, dem Gesundheitsamt oder einer Kommune)? Reichen Sie sie ein. Jede Einreichung wird vom Bildungsbüro geprüft, bevor sie in die Übersicht übernommen wird.</p>
-      <ol class="steps">
-        <li><b>Vorlage wählen</b>: für Angebote <a href="vorlagen/angebote_vorlage.csv">angebote_vorlage.csv</a>, für Kennzahlen je Kommune <a href="vorlagen/kennzahl_vorlage.csv">kennzahl_vorlage.csv</a>. Eigene Tabellen (Excel, CSV) gehen auch, wenn Quelle und Stand dabeistehen.</li>
-        <li><b>Einreichen</b> über das Formular auf GitHub (kostenloses Konto nötig). Datei anhängen, Quelle und Stand angeben. Formular und Anhänge sind öffentlich sichtbar; eine Ansprechperson nur nennen, wenn sie damit einverstanden ist.</li>
-        <li><b>Prüfung</b>: Das Bildungsbüro prüft Herkunft, Datenschutz und Plausibilität und meldet sich bei Rückfragen im Formular.</li>
-        <li><b>Übernahme</b>: Nach Freigabe werden die Daten eingearbeitet, das Werkzeug prüft sie automatisch, und die Seite wird neu gebaut. Die Änderung ist im Repository nachvollziehbar.</li>
-      </ol>
-      <p><a class="btn" href="https://github.com/bildungsbuero-ldk/kreiszahlen-ldk/issues/new?template=datenlieferung.yml" target="_blank" rel="noopener">Daten einreichen</a></p>
-      <p class="note">Bitte nur Daten einreichen, die veröffentlicht werden dürfen, und keine personenbezogenen Daten (keine Namen von Klient:innen, keine Einzelfälle, keine Werte unter 3 Fällen). Ist die Freigabe noch unklar, bitte vorher das <a href="https://bildungslandschaft.schulen-ldk.de/bildungsbuero/" target="_blank" rel="noopener">Bildungsbüro</a> ansprechen statt das Formular zu nutzen.</p>
+      <h3 id="d-mitmachen">Ergänzungen und Korrekturen</h3>
+      <p>Sie kennen ein Angebot, das fehlt, haben aktuellere Zahlen oder Daten für einzelne Kommunen (z. B. aus der Jugendhilfeplanung, dem Gesundheitsamt oder einer Kommune)? Schicken Sie sie einfach an das <a href="https://bildungslandschaft.schulen-ldk.de/bildungsbuero/" target="_blank" rel="noopener">Bildungsbüro des Lahn-Dill-Kreises</a>, in welcher Form auch immer: E-Mail, Excel-Tabelle oder Liste. Bitte Quelle und Stand dazuschreiben.</p>
+      <p>Das Bildungsbüro prüft jede Zusendung und übernimmt sie nach Freigabe in die Übersicht.</p>
+      <p class="note">Bitte nur Daten schicken, die veröffentlicht werden dürfen, und keine personenbezogenen Daten (keine Namen von Klient:innen, keine Einzelfälle, keine Werte unter 3 Fällen).</p>
 
       <h3 id="d-technik">Technik</h3>
       <p>Die Seite ist eine einzelne HTML-Datei ohne Verbindung zu fremden Servern. Sie wird mit <code>python3 werkzeuge/sozialraum.py seite</code> aus den CSV-Dateien, dem Methodik-Katalog <code>werkzeuge/sozialraum/methodik.json</code> und der Vorlage gebaut. Das Werkzeug prüft vorher jede Datei (Spalten, Kommunennamen, Zahlenbereiche, Kategorien) und baut die Seite nur ohne Fehler. Anleitung: <code>werkzeuge/sozialraum/ANLEITUNG.md</code>.</p>
