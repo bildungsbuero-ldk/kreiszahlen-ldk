@@ -47,3 +47,6 @@ python3 werkzeuge/kreiszahlen.py seite
 - `werkzeuge/kacheln.json` – Kennzahlen der Themen-Kacheln (Formeln über Merkmals-IDs).
 - `werkzeuge/bezugsgroessen.json` – geprüfte Bezugsgrößen für den Prozent-Modus (Merkmal → Summe).
 - `werkzeuge/vorlage.html`, `werkzeuge/d3.min.js` – Vorlage der Seite und Diagrammbibliothek (d3 v7.9.0, ISC-Lizenz).
+
+## Sozialraum-Übersicht
+Eigene Anleitung: `werkzeuge/sozialraum/ANLEITUNG.md`. Der Link von der Kreiszahlen-Seite steht in `werkzeuge/vorlage.html` (Kopfzeile).

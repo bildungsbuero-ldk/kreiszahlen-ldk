@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sozialräume Lahn-Dill-Kreis: Bedarfe und Angebote</title>
+<meta name="description" content="Sozial- und Infrastrukturdaten der 23 Städte und Gemeinden im Lahn-Dill-Kreis als Grundlage für Sozialraumkonferenzen: Bedarfsindex, Angebote, Methodik und Quellen.">
+<style>
+:root {
+  --fg: #1a1a1a; --fg-muted: #5c5f66; --bg: #f4f6f9; --panel: #ffffff; --line: #dde2ea;
+  --grid: #e6e9ef; --axis: #9aa1ad; --muted-bar: #cfd3da; --ref: #575656;
+  --ldk-blau: #4f81a5; --ldk-blau-dunkel: #36607f; --ldk-hellblau: #8cbce0; --ldk-orange: #ee5d05; --ldk-gruen: #a2c617;
+  --radius: 8px; --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 16px; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 15px; line-height: 1.45; }
+a { color: var(--ldk-blau-dunkel); }
+.kz { max-width: 1200px; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; gap: 24px; }
+h1, h2, h3 { margin: 0; }
+h1 { font-size: clamp(1.4rem, 3.3vw, 2rem); font-weight: 700; color: #fff; letter-spacing: .01em; }
+h2 { font-size: 1.05rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
+h2::after { content: ''; display: block; width: 3rem; height: 4px; background: var(--ldk-hellblau); margin-top: 6px; border-radius: 2px; }
+h3 { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+.note { color: var(--fg-muted); margin: 0; font-size: 13px; }
+.head { background: linear-gradient(135deg, var(--ldk-blau) 0%, var(--ldk-blau-dunkel) 100%); color: #fff; padding: 22px 20px 18px; border-radius: var(--radius); border-bottom: 6px solid var(--ldk-hellblau); display: flex; flex-direction: column; gap: 10px; }
+.head a { color: #fff; }
+.kicker { margin: 0; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.85); }
+.lede { margin: 0; color: rgba(255,255,255,.88); }
+.take { margin: 0; }
+.take b { color: #fff; }
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.tabs button { font: inherit; font-size: 14px; padding: 6px 14px; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; background: transparent; color: #fff; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: #fff; color: var(--ldk-blau-dunkel); font-weight: 600; border-color: #fff; }
+.tabs button:focus-visible { outline: 2px solid var(--ldk-orange); outline-offset: 2px; }
+.page { display: flex; flex-direction: column; gap: 24px; }
+.page[hidden] { display: none; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: 12px; }
+.tile, .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.tile { border-top: 4px solid var(--ldk-blau); }
+.tile .lab { font-size: 13px; color: var(--fg-muted); margin: 0; display: flex; align-items: flex-start; gap: 6px; justify-content: space-between; }
+.big { font-size: 1.9rem; font-weight: 700; color: var(--ldk-blau); font-variant-numeric: tabular-nums; margin-top: auto; line-height: 1.15; }
+.sub { font-size: 13px; color: var(--fg-muted); margin: 0; font-variant-numeric: tabular-nums; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); gap: 12px; align-items: start; }
+.chart { position: relative; min-height: 120px; }
+.chart svg { display: block; overflow: visible; }
+.tick { font-size: 12px; fill: var(--fg-muted); font-family: var(--font); }
+.name { font-size: 12px; fill: var(--fg); font-family: var(--font); }
+.val { font-size: 11px; fill: var(--fg-muted); font-variant-numeric: tabular-nums; font-family: var(--font); paint-order: stroke; stroke: #fff; stroke-width: 3px; stroke-linejoin: round; }
+.halo { paint-order: stroke; stroke: #fff; stroke-width: 3px; stroke-linejoin: round; }
+.axt { font-size: 11px; fill: var(--fg-muted); font-family: var(--font); }
+.tip { position: absolute; pointer-events: none; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 4px 14px rgba(0,0,0,.12); padding: 4px 8px; font-size: 12px; white-space: nowrap; z-index: 3; }
+.tip .h { color: var(--fg-muted); }
+.ctrl { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: flex-end; }
+.ctrl label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--fg-muted); flex: 1 1 14rem; min-width: 0; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+select, .search { font: inherit; font-size: 14px; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 6px 10px; width: 100%; min-width: 0; text-transform: none; letter-spacing: 0; font-weight: 400; }
+select:focus-visible, .search:focus-visible { outline: 2px solid var(--ldk-orange); outline-offset: 1px; }
+.tablewrap { max-height: 34rem; overflow: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+th { position: sticky; top: 0; background: var(--panel); text-align: right; font-weight: 600; padding: 0; border-bottom: 1px solid var(--line); vertical-align: bottom; font-size: 12px; z-index: 1; }
+th .thw { display: flex; align-items: flex-end; justify-content: flex-end; gap: 2px; padding: 4px 6px 4px 10px; }
+th:first-child .thw { justify-content: flex-start; }
+th button.sort { font: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: inherit; color: var(--fg); font-weight: 600; }
+th[aria-sort="descending"] button.sort::after { content: " ↓"; }
+th[aria-sort="ascending"] button.sort::after { content: " ↑"; }
+th:first-child, td:first-child { text-align: left; }
+td { padding: 4px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+td.na { color: var(--fg-muted); }
+.list td { white-space: normal; text-align: left; vertical-align: top; }
+.list th { text-align: left; }
+.list th .thw { justify-content: flex-start; }
+.info { flex: none; width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--ldk-blau); background: #fff; color: var(--ldk-blau); font: 700 11px/16px Georgia, serif; font-style: italic; cursor: pointer; padding: 0; text-align: center; }
+.info:hover, .info[aria-expanded="true"] { background: var(--ldk-blau); color: #fff; }
+.info:focus-visible { outline: 2px solid var(--ldk-orange); outline-offset: 1px; }
+.pop { position: absolute; z-index: 10; max-width: min(26rem, calc(100vw - 24px)); background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--ldk-blau); border-radius: var(--radius); box-shadow: 0 8px 24px rgba(0,0,0,.18); padding: 12px 14px; font-size: 13px; }
+.pop h4 { margin: 0 0 6px; font-size: 14px; }
+.pop p { margin: 0 0 6px; }
+.pop .m { color: var(--fg-muted); }
+.pop .x { position: absolute; top: 6px; right: 8px; border: 0; background: none; font-size: 18px; cursor: pointer; color: var(--fg-muted); }
+.hint { font-size: 13px; color: var(--fg-muted); margin: 0; padding: 4px 10px; border-left: 3px solid var(--ldk-orange); }
+.legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--fg-muted); margin: 0; }
+.legend span { display: inline-flex; align-items: center; gap: 4px; }
+.sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.doc { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+.doc h3 { margin: 18px 0 6px; font-size: 16px; }
+.doc h3:first-child { margin-top: 0; }
+.doc p, .doc li { max-width: 52rem; }
+.doc dl { margin: 0; }
+.doc dt { font-weight: 600; margin-top: 12px; }
+.doc dd { margin: 2px 0 0; max-width: 52rem; }
+.doc dd .m { color: var(--fg-muted); font-size: 13px; }
+.doc :target { background: color-mix(in srgb, var(--ldk-hellblau) 25%, transparent); border-radius: 4px; }
+.formel { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; background: var(--bg); padding: 8px 10px; border-radius: 6px; overflow-x: auto; }
+.steps { padding-left: 1.2rem; }
+.steps li { margin: 6px 0; }
+.btn { display: inline-block; background: var(--ldk-orange); color: #fff; text-decoration: none; padding: 8px 14px; border-radius: var(--radius); font-weight: 600; }
+.quelle { font-size: 12px; color: var(--fg-muted); margin: 0; padding-top: 10px; border-top: 1px solid var(--line); }
+@media print { .tabs, .info { display: none; } .page[hidden] { display: flex; } }
+</style>
+</head>
+<body>
+<div class="kz">
+  <header class="head">
+    <p class="kicker">Lahn-Dill-Kreis · Bildungsbüro · <a href="../">Kreiszahlen</a></p>
+    <h1>Sozialräume im Lahn-Dill-Kreis: Bedarfe und Angebote</h1>
+    <p class="lede">Sozial- und Infrastrukturdaten der 23 Städte und Gemeinden als Grundlage für die Auswahl von Kommunen für Sozialraumkonferenzen. Stand der Zusammenstellung: <span id="stand">—</span>.</p>
+    <p class="take">Den höchsten Bedarfsindex haben <b id="top1">—</b>, <b id="top2">—</b> und <b id="top3">—</b>. Überdurchschnittlicher Bedarf bei unterdurchschnittlichem Angebot vor Ort: <b id="hot">—</b>.</p>
+    <nav class="tabs" role="tablist" aria-label="Ansicht">
+      <button type="button" role="tab" id="tab-bedarfe" data-tab="bedarfe" aria-controls="bedarfe" aria-selected="true">Bedarfe</button>
+      <button type="button" role="tab" id="tab-angebote" data-tab="angebote" aria-controls="angebote" aria-selected="false">Angebote</button>
+      <button type="button" role="tab" id="tab-methodik" data-tab="methodik" aria-controls="methodik" aria-selected="false">Methodik und Quellen</button>
+      <button type="button" role="tab" id="tab-daten" data-tab="daten" aria-controls="daten" aria-selected="false">Daten und Mitmachen</button>
+    </nav>
+  </header>
+
+  <!-- ============ BEDARFE ============ -->
+  <main class="page" id="bedarfe" role="tabpanel" aria-labelledby="tab-bedarfe">
+    <section>
+      <h2>Der Kreis im Vergleich zu Hessen</h2>
+      <div class="tiles">
+        <div class="tile"><p class="lab">SGB-II-Quote 2023<button class="info" data-k="sgb2" aria-label="Erläuterung SGB-II-Quote">i</button></p><p class="big" data-kreis="sgb2">—</p><p class="sub">Hessen: <span data-hessen="sgb2">—</span></p></div>
+        <div class="tile"><p class="lab">Kinderarmut 2023<button class="info" data-k="kinderarmut" aria-label="Erläuterung Kinderarmut">i</button></p><p class="big" data-kreis="kinderarmut">—</p><p class="sub">Hessen: <span data-hessen="kinderarmut">—</span></p></div>
+        <div class="tile"><p class="lab">Kita-Kinder mit Migrationshintergrund 2023<button class="info" data-k="kita_mh" aria-label="Erläuterung Kita-Kinder mit Migrationshintergrund">i</button></p><p class="big" data-kreis="kita_mh">—</p><p class="sub">Hessen: <span data-hessen="kita_mh">—</span></p></div>
+        <div class="tile"><p class="lab">Nichtdeutsche Bevölkerung 2024<button class="info" data-k="nichtdt" aria-label="Erläuterung nichtdeutsche Bevölkerung">i</button></p><p class="big" data-kreis="nichtdt">—</p><p class="sub">Hessen: <span data-hessen="nichtdt">—</span></p></div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card" id="karte-index">
+        <h3>Bedarfsindex nach Kommune<button class="info" data-k="bedarfsindex" aria-label="Erläuterung Bedarfsindex">i</button></h3>
+        <p class="note">0 = Durchschnitt der Kommunen. Die fünf höchsten Werte sind hervorgehoben. Bischoffen und Siegbach: zu wenige Kennzahlen.</p>
+        <div class="chart" id="ch-index"></div>
+      </div>
+      <div class="card" id="karte-einzel">
+        <h3>Einzelkennzahl im Vergleich<button class="info" id="info-einzel" data-k="sgb2" aria-label="Erläuterung zur gewählten Kennzahl">i</button></h3>
+        <div class="ctrl"><label>Kennzahl<select id="sel-einzel" aria-label="Kennzahl"></select></label></div>
+        <p class="note">Gestrichelt: Wert des Lahn-Dill-Kreises. Hervorgehoben: Kommunen über dem Kreiswert.</p>
+        <div class="chart" id="ch-einzel"></div>
+      </div>
+    </section>
+
+    <section class="card" id="karte-streu">
+      <h3>Kinderarmut und Migrationshintergrund in Kitas<button class="info" data-k="kita_mh" aria-label="Erläuterung">i</button></h3>
+      <p class="note">Jeder Punkt eine Kommune, Größe nach Einwohnerzahl. Oben rechts: Bedarf an Armutsprävention und Sprachförderung zugleich. Hervorgehoben: die fünf höchsten Bedarfsindizes.</p>
+      <div class="chart" id="ch-streu"></div>
+    </section>
+
+    <section class="card" id="karte-hze">
+      <h3>Hilfen zur Erziehung nach Jugendamt<button class="info" data-k="hze_je1000" aria-label="Erläuterung Hilfen zur Erziehung">i</button></h3>
+      <p class="note">Laufende Hilfen am 31.12.2023. Die amtliche Statistik weist HzE nur nach Jugendamt aus, nicht nach Kommune. Kreisjugendamt: alle Kommunen außer Wetzlar. Gestrichelt: Hessen.</p>
+      <div class="grid">
+        <div><p class="note">Hilfen je 1.000 Einwohner</p><div class="chart" id="ch-hze1"></div></div>
+        <div><p class="note">Anteil der Hilfen für Familien mit Transferleistungen <button class="info" data-k="hze_transfer" aria-label="Erläuterung Transferleistungen">i</button></p><div class="chart" id="ch-hze2"></div></div>
+      </div>
+    </section>
+
+    <section class="card" id="karte-tabelle">
+      <h3>Alle Kennzahlen der Kommunen</h3>
+      <p class="note">Spaltenkopf anklicken zum Sortieren, „i“ für die Erläuterung. Je kräftiger die Farbe, desto höher der Wert im Vergleich der Kommunen. Leer: keine Angabe.</p>
+      <div class="tablewrap"><table id="tab-bedarf"></table></div>
+    </section>
+  </main>
+
+  <!-- ============ ANGEBOTE ============ -->
+  <main class="page" id="angebote" role="tabpanel" aria-labelledby="tab-angebote" hidden>
+    <p class="hint">Bestehende Angebote und Infrastruktur, Schwerpunkt psychische Gesundheit. Aus öffentlichen Quellen zusammengetragen und nicht vollständig. Ergänzungen bitte über „Daten und Mitmachen“.</p>
+    <section>
+      <h2>Angebote im Kreis</h2>
+      <div class="tiles">
+        <div class="tile"><p class="lab">Schulstandorte<button class="info" data-k="schulen" aria-label="Erläuterung Schulstandorte">i</button></p><p class="big" id="k-schulen">—</p><p class="sub">mit Ganztag oder Pakt: <span id="k-ganztag">—</span> <button class="info" data-k="ganztag" aria-label="Erläuterung Ganztag">i</button></p></div>
+        <div class="tile"><p class="lab">Familienzentren / Schulsozialarbeit<span><button class="info" data-k="familienzentren" aria-label="Erläuterung Familienzentren">i</button> <button class="info" data-k="schulsozialarbeit" aria-label="Erläuterung Schulsozialarbeit">i</button></span></p><p class="big"><span id="k-fz">—</span> / <span id="k-ssa">—</span></p><p class="sub">Jugendzentren und Jugendpflege: <span id="k-jug">—</span></p></div>
+        <div class="tile"><p class="lab">Psychotherapie, Versorgungsgrad Kreis<button class="info" data-k="versorgungsgrad" aria-label="Erläuterung Versorgungsgrad">i</button></p><p class="big" id="k-pt">—</p><p class="sub">Kinder- und Jugendpsychiatrie (Mittelhessen): <span id="k-kjp">—</span></p></div>
+        <div class="tile"><p class="lab">Hausärzte, Versorgungsgrad Haiger/Dillenburg<button class="info" data-k="hausarzt_vg" aria-label="Erläuterung Hausarzt-Versorgungsgrad">i</button></p><p class="big" id="k-ha1">—</p><p class="sub">Herborn: <span id="k-ha2">—</span> · Wetzlar: <span id="k-ha3">—</span></p></div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card" id="karte-matrix">
+        <h3>Bedarf und Angebot vor Ort<button class="info" data-k="vorort_je10k" aria-label="Erläuterung Angebote vor Ort">i</button></h3>
+        <p class="note">Waagerecht der Bedarfsindex, senkrecht die Angebote vor Ort je 10.000 Einwohner. Gestrichelt: Durchschnitt (Index 0) und Median der Angebotsdichte. Orange und hinterlegt: überdurchschnittlicher Bedarf bei unterdurchschnittlichem Angebot.</p>
+        <div class="chart" id="ch-matrix"></div>
+      </div>
+      <div class="card" id="karte-kv">
+        <h3>Ärztliche und psychotherapeutische Versorgung<button class="info" data-k="versorgungsgrad" aria-label="Erläuterung Versorgungsgrad">i</button></h3>
+        <p class="note">Versorgungsgrade der Bedarfsplanung (KV Hessen). Gestrichelt: 100 %. Ab 110 % ist ein Planungsbereich für neue Zulassungen gesperrt; über Wartezeiten sagt das nichts.</p>
+        <div class="chart" id="ch-kv"></div>
+      </div>
+    </section>
+
+    <section class="card" id="karte-atabelle">
+      <h3>Angebote je Kommune</h3>
+      <p class="note">Spaltenkopf anklicken zum Sortieren, „i“ für die Erläuterung. Gemeinsame Familienzentren zählen in jeder beteiligten Kommune.</p>
+      <div class="tablewrap"><table id="tab-angebot"></table></div>
+    </section>
+
+    <section class="card" id="karte-liste">
+      <h3>Anlaufstellen</h3>
+      <p class="note">Alle erfassten Angebote mit Standort. „Weitere Kommunen“: gemeinsame Zentren oder Außenstellen. Der Name führt zur Webseite des Angebots.</p>
+      <div class="ctrl">
+        <label>Kommune<select id="f-kom" aria-label="Kommune"></select></label>
+        <label>Bereich<select id="f-kat" aria-label="Bereich"></select></label>
+        <label>Suche<input class="search" id="f-such" type="search" placeholder="Name, Träger, Zielgruppe …" aria-label="Suche"></label>
+      </div>
+      <p class="note" id="liste-anzahl">—</p>
+      <div class="tablewrap"><table class="list" id="tab-liste"></table></div>
+    </section>
+  </main>
+
+  <!-- ============ METHODIK ============ -->
+  <main class="page" id="methodik" role="tabpanel" aria-labelledby="tab-methodik" hidden>
+    <section class="doc">
+      <h3 id="m-zweck">Wozu diese Übersicht?</h3>
+      <p>Die Übersicht soll helfen, eine oder mehrere Kommunen für Sozialraumkonferenzen auszuwählen und dort Bedarfe und Angebote strukturiert zu erfassen. Sie ersetzt keine Ortskenntnis: Die Zahlen zeigen, wo genauer hingeschaut werden sollte, nicht, was vor Ort fehlt.</p>
+      <p>Sie hat zwei Teile: <b>Bedarfe</b> (amtliche Sozialdaten je Kommune, verdichtet zu einem Bedarfsindex) und <b>Angebote</b> (Schulen, Kitas, ärztliche Versorgung und soziale Anlaufstellen, mit Schwerpunkt psychische Gesundheit).</p>
+
+      <h3 id="m-index">Der Bedarfsindex</h3>
+      <p>Für jede der sechs Kennzahlen wird ein z-Wert gebildet: der Abstand einer Kommune zum Mittelwert der Kommunen, gemessen in Standardabweichungen. So werden Kennzahlen mit unterschiedlichen Einheiten (Prozent, Euro) vergleichbar. Bei den Einkünften dreht sich das Vorzeichen um, weil niedrige Einkünfte auf mehr Bedarf hinweisen.</p>
+      <p class="formel">z = Richtung × (Wert der Kommune − Mittelwert der Kommunen) / Standardabweichung<br>Bedarfsindex = Mittelwert der vorhandenen z-Werte (mindestens 4 von 6)</p>
+      <div class="tablewrap" style="max-height:none"><table id="tab-indexdef"></table></div>
+      <p class="note" style="margin-top:8px">Alle sechs Kennzahlen zählen gleich. Probe mit anderen Gewichtungen (Stand 06.11.2026): Mit doppelt gewichteter Kinderarmut oder ohne die Einkünfte bleiben die fünf höchsten Werte gleich (Wetzlar, Aßlar, Dillenburg, Leun, Ehringshausen); ohne die beiden Migrationskennzahlen rückt Sinn für Ehringshausen auf Platz 5. Mittelwert und Standardabweichung beziehen sich auf die Kommunen mit Wert, nicht auf Kreis oder Land.</p>
+
+      <h3 id="m-angebot">Wie Angebote gezählt werden</h3>
+      <p><b>Angebote vor Ort</b> sind Familienzentren, Schulsozialarbeit, Jugendzentren und Jugendpflege sowie Quartiersarbeit. Gemeinsame Zentren mehrerer Kommunen zählen in jeder beteiligten Kommune. <b>Fachdienste</b> (Beratungsstellen, Sozialpsychiatrie, Psychiatrie, Sucht, Gewaltschutz, Selbsthilfe, Frühe Hilfen, Migration, Existenzsicherung) sind an ihrem Sitz eingetragen, arbeiten aber meist für den ganzen Kreis oder eine Region. Sie gehen deshalb nicht in die Angebotsdichte ein.</p>
+      <p>Ob ein Angebot vor Ort zählt, entscheiden Kategorie und Reichweite: Kreisweite Dienste in diesen Kategorien (z. B. die Kreisjugendpflege) zählen als Fachdienst.</p>
+      <p>„Hoher Bedarf, wenig Angebot vor Ort“ heißt: Bedarfsindex über 0 und Angebotsdichte unter dem Median der Kommunen (<span id="median-text">—</span> je 10.000 Einwohner). Eingestuft wird mit ungerundeten Werten. Dietzhölztal liegt mit einem Index von knapp über 0 genau an der Grenze.</p>
+
+      <h3 id="m-lesen">Beim Lesen beachten</h3>
+      <ul>
+        <li>Alle Werte gelten für die ganze Kommune. Stadtteile mit hohem Bedarf (z. B. in Wetzlar oder Dillenburg) gehen im Durchschnitt unter.</li>
+        <li>Die Daten haben unterschiedliche Stände (2021 bis 2026; Schulsozialarbeit nach den Förderanträgen für 2027). Die Jahreszahl steht bei jeder Kennzahl.</li>
+        <li>Kleine Kommunen schwanken stärker; Bischoffen und Siegbach fehlen im Wegweiser Kommune ganz.</li>
+        <li>Wetzlar hat ein eigenes Jugendamt; die übrigen 22 Kommunen betreut das Kreisjugendamt.</li>
+        <li>Die Liste der Anlaufstellen ist eine Recherche, kein amtliches Verzeichnis.</li>
+      </ul>
+
+      <h3 id="m-kennzahlen">Kennzahlen</h3>
+      <dl id="liste-kennzahlen"></dl>
+
+      <h3 id="m-quellen">Quellen</h3>
+      <dl id="liste-quellen"></dl>
+
+      <h3 id="m-luecken">Was fehlt</h3>
+      <dl id="liste-luecken"></dl>
+    </section>
+  </main>
+
+  <!-- ============ DATEN UND MITMACHEN ============ -->
+  <main class="page" id="daten" role="tabpanel" aria-labelledby="tab-daten" hidden>
+    <section class="doc">
+      <h3 id="d-download">Daten herunterladen</h3>
+      <p>Alle Daten liegen als CSV-Dateien (UTF-8, Komma als Trennzeichen, Punkt als Dezimalzeichen) im Ordner <code>sozialraum/daten/</code> des GitHub-Repositorys. Die Originaldateien der amtlichen Quellen liegen unter <code>quellen/sozialraum/</code>.</p>
+      <ul id="liste-downloads"></ul>
+
+      <h3 id="d-mitmachen">Daten einreichen</h3>
+      <p>Sie kennen ein Angebot, das fehlt, haben aktuellere Zahlen oder Daten für einzelne Kommunen (z. B. aus der Jugendhilfeplanung, dem Gesundheitsamt oder einer Kommune)? Reichen Sie sie ein. Jede Einreichung wird vom Bildungsbüro geprüft, bevor sie in die Übersicht übernommen wird.</p>
+      <ol class="steps">
+        <li><b>Vorlage wählen</b>: für Angebote <a href="vorlagen/angebote_vorlage.csv">angebote_vorlage.csv</a>, für Kennzahlen je Kommune <a href="vorlagen/kennzahl_vorlage.csv">kennzahl_vorlage.csv</a>. Eigene Tabellen (Excel, CSV) gehen auch, wenn Quelle und Stand dabeistehen.</li>
+        <li><b>Einreichen</b> über das Formular auf GitHub (kostenloses Konto nötig). Datei anhängen, Quelle und Stand angeben. Formular und Anhänge sind öffentlich sichtbar; eine Ansprechperson nur nennen, wenn sie damit einverstanden ist.</li>
+        <li><b>Prüfung</b>: Das Bildungsbüro prüft Herkunft, Datenschutz und Plausibilität und meldet sich bei Rückfragen im Formular.</li>
+        <li><b>Übernahme</b>: Nach Freigabe werden die Daten eingearbeitet, das Werkzeug prüft sie automatisch, und die Seite wird neu gebaut. Die Änderung ist im Repository nachvollziehbar.</li>
+      </ol>
+      <p><a class="btn" href="https://github.com/bildungsbuero-ldk/kreiszahlen-ldk/issues/new?template=datenlieferung.yml" target="_blank" rel="noopener">Daten einreichen</a></p>
+      <p class="note">Bitte nur Daten einreichen, die veröffentlicht werden dürfen, und keine personenbezogenen Daten (keine Namen von Klient:innen, keine Einzelfälle, keine Werte unter 3 Fällen). Ist die Freigabe noch unklar, bitte vorher das <a href="https://bildungslandschaft.schulen-ldk.de/bildungsbuero/" target="_blank" rel="noopener">Bildungsbüro</a> ansprechen statt das Formular zu nutzen.</p>
+
+      <h3 id="d-technik">Technik</h3>
+      <p>Die Seite ist eine einzelne HTML-Datei ohne Verbindung zu fremden Servern. Sie wird mit <code>python3 werkzeuge/sozialraum.py seite</code> aus den CSV-Dateien, dem Methodik-Katalog <code>werkzeuge/sozialraum/methodik.json</code> und der Vorlage gebaut. Das Werkzeug prüft vorher jede Datei (Spalten, Kommunennamen, Zahlenbereiche, Kategorien) und baut die Seite nur ohne Fehler. Anleitung: <code>werkzeuge/sozialraum/ANLEITUNG.md</code>.</p>
+    </section>
+  </main>
+
+  <p class="quelle">Quellen: Hessisches Statistisches Landesamt, Bertelsmann Stiftung (Wegweiser Kommune, CC0), Kassenärztliche Vereinigung Hessen, Lahn-Dill-Kreis, Träger und eigene Recherche. Kennzahlen, Bedarfsindex und Darstellung: eigene Berechnungen des Bildungsbüros. Details unter „Methodik und Quellen“.</p>
+</div>
+<div class="pop" id="pop" role="dialog" aria-modal="false" hidden></div>
+
+<script>/*__D3__*/</script>
+<script>
+const D = /*__DATEN__*/null;
+const M = D.methodik;
+const de = d3.formatLocale({ decimal: ',', thousands: '.', grouping: [3], currency: ['', ' €'] });
+const f1 = de.format(',.1f'), f0 = de.format(',.0f'), fs = de.format('+.2f');
+const el = (id) => document.getElementById(id);
+const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const C = { blau: css('--ldk-blau'), muted: css('--muted-bar'), grid: css('--grid'), axis: css('--axis'), ref: css('--ref'), fgm: css('--fg-muted'), orange: css('--ldk-orange') };
+const KZ = (k) => M.kennzahlen[k] || { label: k, einheit: '' };
+const fmt = (k, v) => {
+  if (v == null || Number.isNaN(v)) return '—';
+  const e = KZ(k).einheit;
+  if (k === 'bedarfsindex') return fs(v);
+  if (e === '€') return f0(v) + ' €';
+  if (e === 'Anzahl') return f0(v);
+  return f1(v) + (e === '%' ? ' %' : '');
+};
+const G = D.gemeinden;
+const KREIS = D.vergleich.find((r) => r.gemeinde === 'Lahn-Dill-Kreis');
+const HESSEN = D.vergleich.find((r) => r.gemeinde === 'Hessen');
+const HOT = (r) => r.hoher_bedarf_wenig_angebot === true;
+
+// ---------- Info-Popups ----------
+const pop = el('pop');
+let popBtn = null;
+function popClose() { pop.hidden = true; if (popBtn) popBtn.setAttribute('aria-expanded', 'false'); popBtn = null; }
+function popOpen(btn) {
+  const k = btn.getAttribute('data-k');
+  const z = KZ(k);
+  pop.replaceChildren();
+  const x = document.createElement('button'); x.className = 'x'; x.type = 'button'; x.setAttribute('aria-label', 'Schließen'); x.textContent = '×'; x.onclick = popClose;
+  const h = document.createElement('h4'); h.textContent = z.label + (z.jahr ? ' (' + z.jahr + ')' : '');
+  pop.append(x, h);
+  const p = (t, cls) => { if (!t) return; const e = document.createElement('p'); if (cls) e.className = cls; e.textContent = t; pop.append(e); };
+  p(z.definition); p(z.hinweis, 'm');
+  (z.quelle || []).forEach((q) => {
+    const s = M.quellen[q]; if (!s) return;
+    const e = document.createElement('p'); e.className = 'm'; e.append('Quelle: ');
+    const a = document.createElement('a'); a.href = s.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = s.titel; e.append(a, ' – ' + s.herausgeber + ', Stand ' + s.stand + '.');
+    pop.append(e);
+  });
+  const mm = document.createElement('p'); const ma = document.createElement('a'); ma.href = '#m-k-' + k; ma.textContent = 'Mehr unter Methodik und Quellen →';
+  ma.onclick = (ev) => { ev.preventDefault(); popClose(); show('methodik', 'm-k-' + k); }; mm.append(ma); pop.append(mm);
+  pop.hidden = false;
+  const r = btn.getBoundingClientRect();
+  const w = pop.offsetWidth;
+  let left = window.scrollX + r.left - 8; if (left + w > window.scrollX + document.documentElement.clientWidth - 12) left = window.scrollX + document.documentElement.clientWidth - w - 12;
+  pop.style.left = Math.max(window.scrollX + 12, left) + 'px';
+  pop.style.top = (window.scrollY + r.bottom + 6) + 'px';
+  popBtn = btn; btn.setAttribute('aria-expanded', 'true');
+  x.focus({ preventScroll: true });
+}
+document.addEventListener('click', (ev) => {
+  const b = ev.target.closest('button.info');
+  if (b) { ev.stopPropagation(); if (popBtn === b) popClose(); else popOpen(b); return; }
+  if (!pop.hidden && !pop.contains(ev.target)) popClose();
+});
+document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && !pop.hidden) { const b = popBtn; popClose(); if (b) b.focus(); } });
+const infoBtn = (k) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'info'; b.setAttribute('data-k', k); b.setAttribute('aria-label', 'Erläuterung ' + KZ(k).label); b.textContent = 'i'; return b; };
+
+// ---------- Tooltip in Diagrammen ----------
+function tipper(box) {
+  let t = box.querySelector('.tip');
+  if (!t) { t = document.createElement('div'); t.className = 'tip'; t.hidden = true; box.append(t); }
+  return {
+    show(ev, lines) {
+      t.replaceChildren(...lines.map((l, i) => { const d = document.createElement('div'); if (i === 0) { d.className = 'h'; d.textContent = l[0]; } else d.textContent = l[0] + ': ' + l[1]; return d; }));
+      t.hidden = false;
+      const r = box.getBoundingClientRect();
+      let x = ev.clientX - r.left + 12, y = ev.clientY - r.top + 12;
+      if (x + t.offsetWidth > r.width) x = Math.max(0, ev.clientX - r.left - t.offsetWidth - 12);
+      if (y + t.offsetHeight > r.height) y = Math.max(0, ev.clientY - r.top - t.offsetHeight - 12);
+      t.style.left = x + 'px'; t.style.top = y + 'px';
+    },
+    hide() { t.hidden = true; }
+  };
+}
+
+// ---------- Balkendiagramm ----------
+function bars(box, rows, o) {
+  box.querySelectorAll('svg').forEach((s) => s.remove());
+  const W = Math.max(280, box.clientWidth), rowH = 22, top = 6, bottom = 24;
+  const H = top + bottom + rows.length * rowH;
+  box.style.minHeight = H + 'px';
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  const meas = svg.append('text').attr('class', 'name');
+  let lw = 0; rows.forEach((r) => { meas.text(r.n); lw = Math.max(lw, meas.node().getComputedTextLength()); }); meas.remove();
+  const vals = rows.map((r) => r.v).filter((v) => v != null);
+  const lo = Math.min(0, d3.min(vals) ?? 0, o.ref ?? 0), hi = Math.max(0, d3.max(vals) ?? 1, o.ref ?? 0);
+  const left = lw + 10, right = 58;
+  const x = d3.scaleLinear([lo, hi], [left, W - right]).nice();
+  const y = d3.scaleBand(rows.map((r) => r.n), [top, H - bottom]).padding(0.25);
+  const nt = Math.max(2, Math.floor((W - left - right) / 95));
+  const tv = []; x.ticks(nt).forEach((t) => { if (!tv.length || x(t) - x(tv[tv.length - 1]) >= 44) tv.push(t); });
+  svg.append('g').selectAll('line').data(tv).join('line').attr('x1', (d) => x(d)).attr('x2', (d) => x(d)).attr('y1', top).attr('y2', H - bottom).attr('stroke', C.grid);
+  const ax = svg.append('g').attr('transform', `translate(0,${H - bottom})`).call(d3.axisBottom(x).tickValues(tv).tickFormat(o.tick || f1).tickSize(0));
+  ax.attr('font-size', null).attr('font-family', null); ax.select('.domain').remove(); ax.selectAll('text').attr('class', 'tick').attr('dy', '1.1em');
+  svg.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', top).attr('y2', H - bottom).attr('stroke', C.axis);
+  if (o.ref != null) svg.append('line').attr('x1', x(o.ref)).attr('x2', x(o.ref)).attr('y1', top).attr('y2', H - bottom).attr('stroke', C.ref).attr('stroke-width', 1.5).attr('stroke-dasharray', '4 3');
+  const tip = tipper(box);
+  const g = svg.append('g').selectAll('g').data(rows).join('g');
+  g.append('text').attr('class', 'name').attr('x', left - 6).attr('y', (r) => y(r.n) + y.bandwidth() / 2).attr('dy', '.35em').attr('text-anchor', 'end').attr('fill', (r) => (r.v == null ? C.fgm : null)).text((r) => r.n);
+  g.append('rect').attr('x', (r) => (r.v == null ? x(0) : Math.min(x(0), x(r.v)))).attr('y', (r) => y(r.n)).attr('height', y.bandwidth()).attr('rx', 3)
+    .attr('width', (r) => (r.v == null ? 0 : Math.abs(x(r.v) - x(0)))).attr('fill', (r) => (o.hi && o.hi(r) ? C.blau : C.muted));
+  g.append('text').attr('class', 'val').attr('y', (r) => y(r.n) + y.bandwidth() / 2).attr('dy', '.35em')
+    .attr('x', (r) => (r.v == null || r.v < 0 ? x(0) + 4 : x(r.v) + 4)).attr('text-anchor', 'start')
+    .text((r) => (r.v == null ? (o.na || 'k. A.') : o.label(r.v)));
+  g.append('rect').attr('x', 0).attr('width', W).attr('y', (r) => y(r.n) - (y.step() - y.bandwidth()) / 2).attr('height', y.step()).attr('fill', 'transparent')
+    .on('mousemove', (ev, r) => tip.show(ev, o.tip(r))).on('mouseleave', () => tip.hide());
+}
+
+// ---------- Streudiagramm ----------
+function scatter(box, rows, o) {
+  box.querySelectorAll('svg').forEach((s) => s.remove());
+  const W = Math.max(280, box.clientWidth), H = Math.min(440, Math.max(300, W * 0.55));
+  box.style.minHeight = H + 'px';
+  const m = { t: 18, r: 16, b: 38, l: 42 };
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  const x = d3.scaleLinear(o.xdom || [0, d3.max(rows, (r) => r.x) * 1.08], [m.l, W - m.r]).nice();
+  const y = d3.scaleLinear([0, d3.max(rows, (r) => r.y) * 1.1], [H - m.b, m.t]).nice();
+  const rr = o.size ? d3.scaleSqrt([0, d3.max(rows, (r) => r.s)], [3, 22]) : () => 6;
+  if (o.quad) svg.append('rect').attr('x', x(o.quad[0])).attr('y', y(o.quad[1])).attr('width', W - m.r - x(o.quad[0])).attr('height', H - m.b - y(o.quad[1])).attr('fill', C.orange).attr('fill-opacity', 0.07);
+  svg.append('g').selectAll('line').data(y.ticks(5)).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', (v) => y(v)).attr('y2', (v) => y(v)).attr('stroke', C.grid);
+  const ax = svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(Math.max(2, Math.floor((W - m.l - m.r) / 90))).tickFormat(o.xtick || f1).tickSizeOuter(0));
+  ax.selectAll('.tick').filter((t) => x(t) - m.l < 16).select('text').remove();
+  const ay = svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(f1).tickSizeOuter(0));
+  [ax, ay].forEach((a) => { a.attr('font-size', null).attr('font-family', null); a.selectAll('text').attr('class', 'tick'); a.selectAll('line').attr('stroke', C.grid); a.select('.domain').attr('stroke', C.axis); });
+  if (o.refx != null) svg.append('line').attr('x1', x(o.refx)).attr('x2', x(o.refx)).attr('y1', m.t).attr('y2', H - m.b).attr('stroke', C.ref).attr('stroke-dasharray', '4 3');
+  if (o.refy != null) svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(o.refy)).attr('y2', y(o.refy)).attr('stroke', C.ref).attr('stroke-dasharray', '4 3');
+  svg.append('text').attr('class', 'axt').attr('x', W - m.r).attr('y', H - 4).attr('text-anchor', 'end').text(o.xlab);
+  svg.append('text').attr('class', 'axt').attr('x', m.l).attr('y', m.t - 6).text(o.ylab);
+  if (o.quadlab && W >= 520) svg.append('text').attr('class', 'axt halo').attr('x', W - m.r - 4).attr('y', y(o.quad[1]) + 14).attr('text-anchor', 'end').text(o.quadlab);
+  const tip = tipper(box);
+  const data = rows.slice().sort((a, b) => (b.s || 0) - (a.s || 0));
+  svg.append('g').selectAll('circle').data(data).join('circle').attr('cx', (r) => x(r.x)).attr('cy', (r) => y(r.y)).attr('r', (r) => rr(r.s))
+    .attr('fill', (r) => (o.hi(r) ? (o.hicolor || C.blau) : C.muted)).attr('fill-opacity', 0.85).attr('stroke', '#fff').attr('stroke-width', 1.2)
+    .on('mousemove', (ev, r) => tip.show(ev, o.tip(r))).on('mouseleave', () => tip.hide());
+  const placed = [];
+  svg.append('g').selectAll('text').data(data.filter(o.label).sort((a, b) => Number(o.hi(b)) - Number(o.hi(a)) || (b.s || 0) - (a.s || 0))).join('text')
+    .attr('class', 'name halo').attr('pointer-events', 'none').attr('dy', '.35em').text((r) => r.n)
+    .each(function (r) {
+      const t = d3.select(this), cx = x(r.x), cy = y(r.y), rad = rr(r.s);
+      const cand = [[cx + rad + 3, cy, 'start'], [cx - rad - 3, cy, 'end'], [cx, cy - rad - 8, 'middle'], [cx, cy + rad + 9, 'middle'], [cx + rad + 3, cy - 11, 'start'], [cx + rad + 3, cy + 11, 'start']];
+      const hit = (b) => b.x < m.l || b.x + b.width > W - m.r + 4 || placed.some((p) => !(b.x > p.x + p.width || b.x + b.width < p.x || b.y > p.y + p.height || b.y + b.height < p.y));
+      for (const [lx, ly, an] of (o.hi(r) ? cand : cand.slice(0, 2))) {
+        t.attr('x', lx).attr('y', ly).attr('text-anchor', an);
+        const b = this.getBBox();
+        if (!hit(b)) { placed.push(b); return; }
+      }
+      t.remove();
+    });
+}
+
+// ---------- Sortierbare Tabelle ----------
+function sortTable(tbl, cols, rows, state, heat) {
+  const thead = document.createElement('thead'), tr = document.createElement('tr');
+  cols.forEach((c) => {
+    const th = document.createElement('th'); const w = document.createElement('div'); w.className = 'thw';
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'sort'; b.textContent = c.t;
+    b.onclick = () => { state.dir = state.key === c.k ? -state.dir : (c.k === 'gemeinde' ? 1 : -1); state.key = c.k; draw(); };
+    w.append(b); if (c.info !== false && M.kennzahlen[c.k]) w.append(infoBtn(c.k));
+    th.append(w); th.dataset.k = c.k; tr.append(th);
+  });
+  thead.append(tr);
+  const tbody = document.createElement('tbody');
+  tbl.replaceChildren(thead, tbody);
+  const ext = {}; (heat || []).forEach((k) => { ext[k] = d3.extent(rows, (r) => r[k]); });
+  function draw() {
+    thead.querySelectorAll('th').forEach((th) => { if (th.dataset.k === state.key) th.setAttribute('aria-sort', state.dir === 1 ? 'ascending' : 'descending'); else th.removeAttribute('aria-sort'); });
+    const s = rows.slice().sort((a, b) => {
+      const va = a[state.key], vb = b[state.key];
+      if (va == null && vb == null) return 0; if (va == null) return 1; if (vb == null) return -1;
+      return typeof va === 'string' ? state.dir * va.localeCompare(vb, 'de') : state.dir * (va - vb);
+    });
+    tbody.replaceChildren(...s.map((r) => {
+      const tr = document.createElement('tr');
+      cols.forEach((c) => {
+        const td = document.createElement('td'); const v = r[c.k];
+        if (c.k === 'gemeinde' || c.text) td.textContent = v ?? '';
+        else if (v == null) { td.className = 'na'; td.textContent = ''; }
+        else td.textContent = c.f ? c.f(v) : fmt(c.k, v).replace(' %', '').replace(' €', '');
+        if (ext[c.k] && v != null && ext[c.k][1] > ext[c.k][0]) td.style.background = `color-mix(in srgb, ${C.blau} ${Math.round(((v - ext[c.k][0]) / (ext[c.k][1] - ext[c.k][0])) * 40)}%, transparent)`;
+        tr.append(td);
+      });
+      return tr;
+    }));
+  }
+  draw();
+}
+
+// ---------- Kopf ----------
+el('stand').textContent = M.stand;
+const ranked = G.filter((r) => r.rang).sort((a, b) => a.rang - b.rang);
+['top1', 'top2', 'top3'].forEach((id, i) => { el(id).textContent = ranked[i] ? ranked[i].gemeinde : '—'; });
+el('median-text').textContent = f1(D.median_vorort);
+el('hot').textContent = G.filter(HOT).sort((a, b) => b.bedarfsindex - a.bedarfsindex).map((r) => r.gemeinde).join(', ') || '—';
+
+// ---------- Bedarfe ----------
+document.querySelectorAll('[data-kreis]').forEach((e) => { const k = e.getAttribute('data-kreis'); e.textContent = fmt(k, KREIS[k]); });
+document.querySelectorAll('[data-hessen]').forEach((e) => { const k = e.getAttribute('data-hessen'); e.textContent = fmt(k, HESSEN[k]); });
+
+const EINZEL = ['sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'einkuenfte_je_stpfl', 'ab65', 'u6', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein', 'efh_anteil', 'kita_u3', 'kita_3_5'];
+const selE = el('sel-einzel');
+EINZEL.forEach((k) => { const z = KZ(k); selE.append(new Option(z.label + ' (' + (z.einheit && z.einheit !== 'Anzahl' ? z.einheit + ', ' : '') + z.jahr + ')', k)); });
+
+function drawBedarfe() {
+  const top5 = new Set(ranked.slice(0, 5).map((r) => r.gemeinde));
+  bars(el('ch-index'), G.map((r) => ({ n: r.gemeinde, v: r.bedarfsindex, r })).sort((a, b) => (b.v ?? -99) - (a.v ?? -99)), {
+    label: fs, na: 'zu wenig Daten', hi: (x) => top5.has(x.n),
+    tip: (x) => [[x.n], ['Bedarfsindex', x.v == null ? 'k. A.' : fs(x.v)], ['Rang', x.r.rang ?? '–'], ['Kennzahlen vorhanden', x.r.n_ind + ' von 6']]
+  });
+  const k = selE.value || 'sgb2';
+  el('info-einzel').setAttribute('data-k', k);
+  const ref = KREIS[k];
+  bars(el('ch-einzel'), G.map((r) => ({ n: r.gemeinde, v: r[k], r })).sort((a, b) => (b.v ?? -1e12) - (a.v ?? -1e12)), {
+    ref, label: (v) => fmt(k, v), tick: KZ(k).einheit === '€' ? de.format(',.0f') : f1, hi: (x) => ref != null && x.v != null && x.v > ref,
+    tip: (x) => [[x.n], [KZ(k).label, fmt(k, x.v)], ['Kreis', fmt(k, ref)], ['Hessen', fmt(k, HESSEN[k])], ['Einwohner', f0(x.r.einwohner)]]
+  });
+  scatter(el('ch-streu'), G.filter((r) => r.kinderarmut != null && r.kita_mh != null).map((r) => ({ n: r.gemeinde, x: r.kita_mh, y: r.kinderarmut, s: r.einwohner, r })), {
+    size: true, xlab: 'Kita-Kinder mit Migrationshintergrund in %', ylab: 'Kinderarmut in %', xtick: f1,
+    hi: (p) => top5.has(p.n), label: (p) => p.s > 9000 || top5.has(p.n),
+    tip: (p) => [[p.n], ['Kinderarmut', fmt('kinderarmut', p.y)], ['Kita-Kinder mit MH', fmt('kita_mh', p.x)], ['Einwohner', f0(p.s)]]
+  });
+  const hes = D.hze.find((r) => r.bezirk === 'Hessen');
+  const short = (b) => (b.startsWith('Kreisjugendamt') ? 'Kreisjugendamt' : b.startsWith('Jugendamt Stadt') ? 'Jugendamt Wetzlar' : b === 'Lahn-Dill-Kreis gesamt' ? 'Kreis gesamt' : b);
+  const hz = D.hze.filter((r) => r.bezirk !== 'Hessen');
+  bars(el('ch-hze1'), hz.map((r) => ({ n: short(r.bezirk), v: r.je_1000_ew, r })), { ref: hes.je_1000_ew, label: f1, hi: (x) => x.n.startsWith('Kreisjugendamt'),
+    tip: (x) => [[x.n], ['Hilfen je 1.000 EW', f1(x.v)], ['Hilfen', f0(x.r.hilfen)], ['Hessen', f1(hes.je_1000_ew)]] });
+  bars(el('ch-hze2'), hz.map((r) => ({ n: short(r.bezirk), v: r.anteil_transfer, r })), { ref: hes.anteil_transfer, label: (v) => f1(v) + ' %', hi: (x) => x.n.startsWith('Kreisjugendamt'),
+    tip: (x) => [[x.n], ['mit Transferleistungen', f1(x.v) + ' %'], ['Hessen', f1(hes.anteil_transfer) + ' %']] });
+}
+sortTable(el('tab-bedarf'), [
+  { k: 'gemeinde', t: 'Kommune' }, { k: 'einwohner', t: 'Einwohner', info: false, f: f0 }, { k: 'bedarfsindex', t: 'Bedarfsindex', f: fs },
+  { k: 'sgb2', t: 'SGB II %' }, { k: 'kinderarmut', t: 'Kinderarmut %' }, { k: 'altersarmut', t: 'Altersarmut %' },
+  { k: 'alo_svb', t: 'Arbeitslose/SvB %' }, { k: 'kita_mh', t: 'Kita mit MH %' }, { k: 'nichtdt', t: 'Nichtdt. %' },
+  { k: 'kinder_u15_nichtdt', t: 'Nichtdt. Kinder %' }, { k: 'einkuenfte_je_stpfl', t: 'Einkünfte €', f: f0 }, { k: 'ab65', t: '65+ %' }
+], G, { key: 'bedarfsindex', dir: -1 }, ['bedarfsindex', 'sgb2', 'kinderarmut', 'altersarmut', 'alo_svb', 'kita_mh', 'nichtdt', 'kinder_u15_nichtdt']);
+selE.addEventListener('change', drawBedarfe);
+
+// ---------- Angebote ----------
+const vg = (pred) => D.versorgungsgrade.find(pred);
+const pv = (r) => (r ? f1(Number(r.versorgungsgrad_prozent)) + ' %' : '—');
+el('k-schulen').textContent = f0(D.kreis.schulen); el('k-ganztag').textContent = f0(D.kreis.ganztag);
+el('k-fz').textContent = f0(D.kreis.familienzentren); el('k-ssa').textContent = f0(D.kreis.schulsozialarbeit); el('k-jug').textContent = f0(D.kreis.jugend);
+el('k-pt').textContent = pv(vg((r) => r.arztgruppe.startsWith('Psychotherapeuten')));
+el('k-kjp').textContent = pv(vg((r) => r.arztgruppe === 'Kinder- und Jugendpsychiater'));
+el('k-ha1').textContent = pv(vg((r) => r.planungsbereich === 'Mittelbereich Haiger/Dillenburg'));
+el('k-ha2').textContent = pv(vg((r) => r.planungsbereich === 'Mittelbereich Herborn'));
+el('k-ha3').textContent = pv(vg((r) => r.planungsbereich === 'Mittelbereich Wetzlar'));
+
+function drawAngebote() {
+  scatter(el('ch-matrix'), G.filter((r) => r.bedarfsindex != null).map((r) => ({ n: r.gemeinde, x: r.bedarfsindex, y: r.vorort_je10k, s: 0, r })), {
+    xdom: [Math.min(-1.3, d3.min(G, (r) => r.bedarfsindex) - 0.2), d3.max(G, (r) => r.bedarfsindex) + 0.3], xtick: f1,
+    xlab: 'Bedarfsindex', ylab: 'Angebote vor Ort je 10.000 Einwohner', refx: 0, refy: D.median_vorort, quad: [0, D.median_vorort],
+    hi: (p) => HOT(p.r), hicolor: C.orange, label: () => true,
+    tip: (p) => [[p.n], ['Bedarfsindex', fs(p.x)], ['Angebote vor Ort', f0(p.r.vorort)], ['je 10.000 Einwohner', f1(p.y)], ['Fachdienste mit Sitz hier', f0(p.r.fachdienste)]]
+  });
+  const lab = (r) => (r.arztgruppe === 'Hausärzte' ? 'Hausärzte ' + r.planungsbereich.replace('Mittelbereich ', '') : r.arztgruppe.startsWith('Nerven') ? 'Nervenärzte' : r.arztgruppe.startsWith('Psychotherapeuten') ? 'Psychotherapie' : r.arztgruppe === 'Kinder- und Jugendpsychiater' ? 'Kinder- und Jugendpsychiatrie' : 'Kinderärzte');
+  bars(el('ch-kv'), D.versorgungsgrade.map((r) => ({ n: lab(r), v: Number(r.versorgungsgrad_prozent), r })), {
+    ref: 100, label: (v) => f1(v) + ' %', tick: (v) => f0(v) + ' %', hi: (x) => x.v < 100,
+    tip: (x) => [[x.n], ['Versorgungsgrad', f1(x.v) + ' %'], ['Planungsbereich', x.r.planungsbereich], ['Ärzt:innen/Therapeut:innen', x.r.anzahl_aerzte === '' ? 'k. A.' : f0(Number(x.r.anzahl_aerzte))], ['Freie Sitze', x.r.offene_sitze === '' ? 'k. A.' : f1(Number(x.r.offene_sitze))], ['Stand', x.r.stand]]
+  });
+}
+sortTable(el('tab-angebot'), [
+  { k: 'gemeinde', t: 'Kommune' }, { k: 'bedarfsindex', t: 'Bedarfs­index', f: fs }, { k: 'schulen', t: 'Schulen' }, { k: 'ganztag', t: 'Ganztag/Pakt' },
+  { k: 'kita_u3', t: 'Kita U3 %' }, { k: 'kita_3_5', t: 'Kita 3–5 %' }, { k: 'hausaerzte', t: 'Hausärzt:innen' }, { k: 'hausarzt_vg', t: 'Hausarzt-VG %' },
+  { k: 'familienzentren', t: 'Familien­zentren' }, { k: 'schulsozialarbeit', t: 'Schulsozial­arbeit' }, { k: 'jugend', t: 'Jugend­pflege' },
+  { k: 'vorort_je10k', t: 'Vor Ort je 10.000' }, { k: 'fachdienste', t: 'Fach­dienste' }, { k: 'psychiatrie', t: 'Psychiatrie' }
+], G, { key: 'bedarfsindex', dir: -1 }, ['bedarfsindex', 'vorort_je10k']);
+
+const fKom = el('f-kom'), fKat = el('f-kat'), fSu = el('f-such');
+fKom.append(new Option('Alle Kommunen', ''), ...G.map((r) => new Option(r.gemeinde)));
+const kats = [...new Set(D.angebote.map((a) => a.kategorie))].sort((a, b) => a.localeCompare(b, 'de'));
+fKat.append(new Option('Alle Bereiche', ''), ...kats.map((k) => new Option(k)));
+function drawListe() {
+  const k = fKom.value, c = fKat.value, q = fSu.value.trim().toLowerCase();
+  const rows = D.angebote.filter((a) => (!k || a.kommune === k || (a.weitere_kommunen || '').split('; ').includes(k)) && (!c || a.kategorie === c)
+    && (!q || [a.name, a.traeger, a.zielgruppe, a.kommune].join(' ').toLowerCase().includes(q)))
+    .sort((a, b) => a.kategorie.localeCompare(b.kategorie, 'de') || a.name.localeCompare(b.name, 'de'));
+  el('liste-anzahl').textContent = rows.length + ' von ' + D.angebote.length + ' Einträgen';
+  const tbl = el('tab-liste');
+  const thead = document.createElement('thead'); const tr = document.createElement('tr');
+  ['Angebot', 'Bereich', 'Standort', 'Weitere Kommunen', 'Zielgruppe', 'Träger'].forEach((t) => { const th = document.createElement('th'); const w = document.createElement('div'); w.className = 'thw'; w.textContent = t; th.append(w); tr.append(th); });
+  thead.append(tr);
+  const tb = document.createElement('tbody');
+  rows.forEach((a) => {
+    const r = document.createElement('tr');
+    const td0 = document.createElement('td');
+    if (/^https?:\/\//.test(a.url)) { const l = document.createElement('a'); l.href = a.url; l.target = '_blank'; l.rel = 'noopener'; l.textContent = a.name; td0.append(l); } else td0.textContent = a.name;
+    r.append(td0);
+    [a.kategorie, a.kommune, a.weitere_kommunen, a.zielgruppe, a.traeger].forEach((v) => { const td = document.createElement('td'); td.textContent = v || ''; r.append(td); });
+    tb.append(r);
+  });
+  tbl.replaceChildren(thead, tb);
+}
+[fKom, fKat].forEach((s) => s.addEventListener('change', drawListe)); fSu.addEventListener('input', drawListe);
+drawListe();
+
+// ---------- Methodik ----------
+(function () {
+  const t = el('tab-indexdef');
+  const th = document.createElement('thead'); th.innerHTML = '<tr><th><div class="thw">Kennzahl</div></th><th><div class="thw">Richtung</div></th><th><div class="thw">Mittelwert</div></th><th><div class="thw">Standardabw.</div></th><th><div class="thw">Jahr</div></th></tr>';
+  const tb = document.createElement('tbody');
+  D.index_def.kennzahlen.forEach((k) => {
+    const r = document.createElement('tr');
+    const cells = [KZ(k).label, D.index_def.richtung[k] > 0 ? 'höher = mehr Bedarf' : 'niedriger = mehr Bedarf', fmt(k, D.index_def.mittel[k]), fmt(k, D.index_def.sd[k]), KZ(k).jahr];
+    cells.forEach((v) => { const td = document.createElement('td'); td.textContent = v; r.append(td); });
+    tb.append(r);
+  });
+  t.replaceChildren(th, tb);
+  const dl = el('liste-kennzahlen');
+  Object.entries(M.kennzahlen).forEach(([k, z]) => {
+    const dt = document.createElement('dt'); dt.id = 'm-k-' + k; dt.textContent = z.label + (z.einheit && z.einheit !== 'Anzahl' ? ' (' + z.einheit + ')' : '') + ', ' + z.jahr;
+    const dd = document.createElement('dd'); dd.append(z.definition);
+    if (z.hinweis) { const s = document.createElement('div'); s.className = 'm'; s.textContent = z.hinweis; dd.append(s); }
+    const q = document.createElement('div'); q.className = 'm'; q.textContent = 'Quelle: ' + (z.quelle || []).map((x) => (M.quellen[x] || {}).titel).join('; '); dd.append(q);
+    dl.append(dt, dd);
+  });
+  const ql = el('liste-quellen');
+  Object.entries(M.quellen).forEach(([k, s]) => {
+    const dt = document.createElement('dt'); dt.id = 'm-q-' + k; const a = document.createElement('a'); a.href = s.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = s.titel; dt.append(a);
+    const dd = document.createElement('dd'); dd.textContent = s.herausgeber + '. Stand: ' + s.stand + '. Nutzung: ' + s.lizenz + '.';
+    const m = document.createElement('div'); m.className = 'm'; m.textContent = (s.hinweis ? s.hinweis + ' ' : '') + 'Datei: ' + s.datei; dd.append(m);
+    ql.append(dt, dd);
+  });
+  const ll = el('liste-luecken');
+  M.luecken.forEach(([t1, t2]) => { const dt = document.createElement('dt'); dt.textContent = t1; const dd = document.createElement('dd'); dd.textContent = t2; ll.append(dt, dd); });
+  const dl2 = el('liste-downloads');
+  const files = [['kennzahlen_kommunen.csv', 'Alle Kennzahlen je Kommune einschließlich Bedarfsindex und Angebotszählung (berechnet)'],
+    ['hsl_gemeindestatistik.csv', 'Auszug aus der Hessischen Gemeindestatistik 2025'], ['wegweiser_kommune_2023.csv', 'Sozial- und Integrationskennzahlen 2023 (Wegweiser Kommune)'],
+    ['kita_quoten_2023.csv', 'Kita-Betreuungsquoten 2023 (Wegweiser Kommune)'], ['hze_jugendamt_2023.csv', 'Hilfen zur Erziehung 2023 nach Jugendamt (HSL)'],
+    ['versorgungsgrade_kv.csv', 'Versorgungsgrade der Bedarfsplanung (KV Hessen)'], ['aerzte_kommune.csv', 'Haus- und Kinderärzt:innen je Kommune (sanego.de)'],
+    ['schulen_liste.csv', 'Schulstandorte mit Schulform und Ganztag'], ['angebote_liste.csv', 'Anlaufstellen und soziale Angebote']];
+  files.forEach(([f, t]) => { const li = document.createElement('li'); const a = document.createElement('a'); a.href = 'daten/' + f; a.textContent = f; li.append(a, ' – ' + t); dl2.append(li); });
+})();
+
+// ---------- Reiter ----------
+const drawn = {};
+const draws = { bedarfe: drawBedarfe, angebote: drawAngebote };
+function show(tab, anchor) {
+  if (!['bedarfe', 'angebote', 'methodik', 'daten'].includes(tab)) tab = 'bedarfe';
+  document.querySelectorAll('.page').forEach((p) => { p.hidden = p.id !== tab; });
+  document.querySelectorAll('.tabs button').forEach((b) => b.setAttribute('aria-selected', b.dataset.tab === tab ? 'true' : 'false'));
+  if (draws[tab]) { draws[tab](); drawn[tab] = true; }
+  const h = anchor || tab;
+  if (location.hash.slice(1) !== h) history.replaceState(null, '', '#' + h);
+  if (anchor) { const t = el(anchor); if (t) t.scrollIntoView(); }
+}
+document.querySelectorAll('.tabs button').forEach((b) => b.addEventListener('click', () => { popClose(); show(b.dataset.tab); }));
+function fromHash() {
+  const h = location.hash.slice(1);
+  if (h.startsWith('m-')) show('methodik', h); else if (h.startsWith('d-')) show('daten', h); else show(h || 'bedarfe');
+}
+window.addEventListener('hashchange', fromHash);
+let rz; window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { const t = document.querySelector('.page:not([hidden])'); if (t && draws[t.id]) draws[t.id](); }, 150); });
+fromHash();
+</script>
+</body>
+</html>

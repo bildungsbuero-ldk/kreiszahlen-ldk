@@ -1,0 +1,42 @@
+Sozialraum-Dashboard: Prüfbericht
+
+Dateien:
+  hsl_gemeindestatistik.csv: 25 Zeilen
+  wegweiser_kommune_2023.csv: 25 Zeilen
+  kita_quoten_2023.csv: 25 Zeilen
+  aerzte_kommune.csv: 23 Zeilen
+  versorgungsgrade_kv.csv: 7 Zeilen
+  hze_jugendamt_2023.csv: 4 Zeilen
+  schulen_liste.csv: 95 Zeilen
+  angebote_liste.csv: 138 Zeilen
+
+Fehler (0):
+  keine
+
+Hinweise (0):
+  keine
+
+Bedarfsindex (Rang, Kommune, Wert):
+   1. Wetzlar        +2.03
+   2. Aßlar          +1.26
+   3. Dillenburg     +1.08
+   4. Leun           +0.74
+   5. Ehringshausen  +0.70
+   6. Sinn           +0.49
+   7. Herborn        +0.42
+   8. Solms          +0.38
+   9. Braunfels      +0.04
+  10. Dietzhölztal   +0.00
+  11. Haiger         -0.11
+  12. Mittenaar      -0.32
+  13. Driedorf       -0.36
+  14. Lahnau         -0.40
+  15. Eschenburg     -0.56
+  16. Greifenstein   -0.73
+  17. Schöffengrund  -0.82
+  18. Hohenahr       -0.84
+  19. Breitscheid    -0.89
+  20. Hüttenberg     -1.09
+  21. Waldsolms      -1.14
+
+Seite gebaut: sozialraum/index.html (420 KB)

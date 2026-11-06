@@ -1,0 +1,64 @@
+name: Daten für die Sozialraum-Übersicht einreichen
+description: Fehlende Angebote, neue Kennzahlen oder Korrekturen für die Übersicht „Sozialräume im Lahn-Dill-Kreis“ melden.
+title: "Datenlieferung: "
+labels: ["datenlieferung"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke für Ihre Unterstützung! Das Bildungsbüro prüft jede Einreichung, bevor sie in die Übersicht übernommen wird.
+        Vorlagen: [Angebote](https://github.com/bildungsbuero-ldk/kreiszahlen-ldk/blob/main/sozialraum/vorlagen/angebote_vorlage.csv) · [Kennzahlen je Kommune](https://github.com/bildungsbuero-ldk/kreiszahlen-ldk/blob/main/sozialraum/vorlagen/kennzahl_vorlage.csv). Eigene Tabellen gehen auch.
+        **Dieses Formular und angehängte Dateien sind öffentlich sichtbar.** Bitte nur Daten einreichen, die veröffentlicht werden dürfen, und keine personenbezogenen Daten (keine Namen von Klient:innen, keine Einzelfälle, keine Werte unter 3 Fällen).
+        Ist die Freigabe noch unklar, bitte **vorher** das [Bildungsbüro](https://bildungslandschaft.schulen-ldk.de/bildungsbuero/) ansprechen und das Formular erst danach nutzen.
+  - type: dropdown
+    id: art
+    attributes:
+      label: Art der Einreichung
+      options:
+        - Fehlendes oder geändertes Angebot (Beratung, Familienzentrum, Jugendtreff …)
+        - Neue Kennzahl je Kommune
+        - Aktualisierung einer vorhandenen Kennzahl
+        - Korrektur eines Fehlers
+        - Sonstiges
+    validations:
+      required: true
+  - type: input
+    id: kommunen
+    attributes:
+      label: Betroffene Kommune(n)
+      placeholder: "z. B. Leun, Solms oder: alle 23 Kommunen"
+    validations:
+      required: true
+  - type: textarea
+    id: beschreibung
+    attributes:
+      label: Was soll ergänzt oder geändert werden?
+      description: Kurz beschreiben. Daten als Datei anhängen (Datei per Drag-and-drop in dieses Feld ziehen) oder als Tabelle einfügen.
+    validations:
+      required: true
+  - type: input
+    id: quelle
+    attributes:
+      label: Quelle der Daten
+      placeholder: "z. B. Jugendhilfeplanung Lahn-Dill-Kreis, Auswertung vom 01.10.2026"
+    validations:
+      required: true
+  - type: input
+    id: stand
+    attributes:
+      label: Stand oder Stichtag
+      placeholder: "z. B. 31.12.2025"
+    validations:
+      required: true
+  - type: checkboxes
+    id: veroeffentlichung
+    attributes:
+      label: Veröffentlichung
+      options:
+        - label: Die Daten sind öffentlich oder zur Veröffentlichung freigegeben und enthalten keine personenbezogenen Angaben.
+          required: true
+  - type: input
+    id: kontakt
+    attributes:
+      label: Einrichtung und Ansprechperson für Rückfragen
+      description: Optional und öffentlich sichtbar. Nur angeben, wenn die genannte Person damit einverstanden ist.
