@@ -39,4 +39,4 @@ Bedarfsindex (Rang, Kommune, Wert):
   20. Hüttenberg     -1.09
   21. Waldsolms      -1.14
 
-Seite gebaut: sozialraum/index.html (419 KB)
+Seite gebaut: sozialraum/index.html (420 KB)

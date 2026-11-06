@@ -105,12 +105,12 @@
   "luecken": [
     ["Alleinerziehende", "Auf Gemeindeebene nur im Zensus 2022 bzw. beim Kommunalen Jobcenter Lahn-Dill."],
     ["Gesundheit von Kindern", "Gesundheitsdaten liegen öffentlich nur auf Kreisebene vor. Für Kommunen eignen sich die Schuleingangsuntersuchungen des Gesundheitsamts (Sprache, Motorik, Übergewicht, Impfstatus)."],
-    ["Hilfen zur Erziehung nach Kommune", "Nur nach Jugendamt veröffentlicht. Werte nach Kommune hat die Jugendhilfeplanung des Kreises."],
+    ["Hilfen zur Erziehung nach Kommune", "Nur nach Jugendamt veröffentlicht. Der Online-Geschäftsbericht hat zwar Diagramme mit Filter nach Kommune (Hilfen zur Erziehung, § 35a, Kindeswohlgefährdung, Inobhutnahmen u. a.), der Server liefert dafür aber keine Daten, auch nicht für den ganzen Kreis (geprüft am 06.11.2026). Werte nach Kommune hat die Jugendhilfeplanung des Kreises."],
     ["Psychotherapie nach Kommune", "Öffentlich nur der Versorgungsgrad für den Kreis. Zahlen je Kommune sind nicht verfügbar."],
     ["Kita-Plätze", "Die Zahl der Einrichtungen ist nur für 8 Kommunen veröffentlicht; Plätze je Kommune gar nicht."],
     ["Vereine", "Nur kreisweit: 435 Sportvereine (Landessportbund 2023)."],
     ["Bischoffen und Siegbach", "Keine Sozialdaten im Wegweiser Kommune (kleinste Kommunen des Kreises); SGB-II-Daten hat das Kommunale Jobcenter Lahn-Dill."],
-    ["Krisendienst und Fachberatung sexualisierte Gewalt", "Im Kreis kein regionaler Krisendienst und keine eigene Fachberatungsstelle gefunden. Schulpsychologie sitzt im Staatlichen Schulamt Weilburg."],
+    ["Krisendienst und Fachberatung sexualisierte Gewalt", "Im Kreis wurde kein regionaler Krisendienst gefunden. Der Online-Geschäftsbericht der Jugendhilfe führt beim Fachdienst 32.1 eine Überschrift „Fachstelle gegen sexualisierte Gewalt“, der Abschnitt ist aber leer (Stand 06.11.2026). Angebot, Träger und Erreichbarkeit sind daher offen und sollten beim Fachdienst erfragt werden. Schulpsychologie sitzt im Staatlichen Schulamt Weilburg."],
     ["Teilräume", "Alle Werte gelten für die ganze Kommune. Unterschiede zwischen Stadtteilen sind nicht sichtbar."]
   ]
 }
