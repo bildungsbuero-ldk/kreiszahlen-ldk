@@ -21,7 +21,7 @@ Seite: https://bildungsbuero-ldk.github.io/kreiszahlen-ldk/sozialraum/
 
 - `sozialraum/index.html` – die Seite (gebaut mit `python3 werkzeuge/sozialraum.py seite`)
 - `sozialraum/daten/` – alle Daten als CSV
-- `sozialraum/vorlagen/` – Vorlagen für Einreichungen; eingereicht wird über das [GitHub-Formular](https://github.com/bildungsbuero-ldk/kreiszahlen-ldk/issues/new?template=datenlieferung.yml)
+- Ergänzungen schicken Nutzer:innen an das Bildungsbüro; eingearbeitet wird nach Freigabe (siehe Anleitung)
 - `werkzeuge/sozialraum/` – Vorlage der Seite, Methodik-Katalog und Anleitung (`ANLEITUNG.md`)
 - `quellen/sozialraum/` – unveränderte Originaldateien amtlicher Quellen
 
