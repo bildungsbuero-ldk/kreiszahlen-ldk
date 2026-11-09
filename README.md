@@ -17,10 +17,10 @@ Quelle: Hessisches Statistisches Landesamt, Hessische Kreiszahlen (https://www.s
 Übersicht der 23 Städte und Gemeinden im Lahn-Dill-Kreis als Grundlage für Sozialraumkonferenzen:
 Bedarfsindex aus Sozialdaten, Angebote und Infrastruktur (Schwerpunkt psychische Gesundheit), Methodik und Quellen.
 
-Seite: https://bildungsbuero-ldk.github.io/kreiszahlen-ldk/sozialraum/
+Seite: https://bildungsbuero-ldk.github.io/kreiszahlen-ldk/sozialraum/ (passwortgeschützt; Passwort beim Bildungsbüro)
 
-- `sozialraum/index.html` – die Seite (gebaut mit `python3 werkzeuge/sozialraum.py seite`)
-- `sozialraum/daten/` – alle Daten als CSV
+- `sozialraum/index.html` – die Seite, verschlüsselt (gebaut mit `python3 werkzeuge/sozialraum.py seite`)
+- `werkzeuge/sozialraum/daten.verschluesselt` – alle Daten, verschlüsselt. Im Klartext liegen sie nur lokal in `intern/` und nie im Repository
 - Ergänzungen schicken Nutzer:innen an das Bildungsbüro; eingearbeitet wird nach Freigabe (siehe Anleitung)
 - `werkzeuge/sozialraum/` – Vorlage der Seite, Methodik-Katalog und Anleitung (`ANLEITUNG.md`)
 - `quellen/sozialraum/` – unveränderte Originaldateien amtlicher Quellen
