@@ -53,7 +53,10 @@ die Kreiszahlen ein Derivat mit der Excel-Datei, z. B. Ausgabe 2025: `HEHeft_der
 4. Hat das Landesamt Tabellen umgebaut (neue Nummern, neue Spalten), Referenz nicht still wechseln, sondern melden. Ein Wechsel der
    Referenz (`REFERENZ` in `gemeindezahlen.py`) heißt: `python3 werkzeuge/gemeindezahlen.py katalog` neu, Kacheln
    (`kacheln_gemeinden.json`) und Bezugsgrößen (`bezugsgroessen_gemeinden.json`) prüfen und alle älteren Ausgaben neu abgleichen.
-5. Veröffentlichen wie oben (Commit als Bildungsbüro). Das Claude-Dashboard enthält bisher nur die Kreiszahlen.
+5. Karte: Die Gemeindegrenzen (`werkzeuge/geo/gemeinden_ldk.geojson`) ändern sich nur bei Gebietsreformen. Dann mit
+   `python3 werkzeuge/gemeindezahlen.py grenzen` neu holen (BKG-WFS VG250, Domain sgx.geodatenzentrum.de) und das Jahr im
+   Quellenvermerk (`karteQuelle` in `SEITEN`, `werkzeuge/kreiszahlen.py`) anpassen.
+6. Veröffentlichen wie oben (Commit als Bildungsbüro). Das Claude-Dashboard enthält bisher nur die Kreiszahlen.
 
 ## Aufbau
 - `quellen/` – die Original-Excel-Dateien aller Ausgaben (unverändert).

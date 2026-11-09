@@ -22,6 +22,8 @@ Seite: https://bildungsbuero-ldk.github.io/kreiszahlen-ldk/gemeinden.html
 - `gemeinden.html`, `gemeinden.json` – Seite und Daten
 - `quellen/HGSt_j<JJJJ>.xlsx` – die unveränderten Excel-Dateien
 - `werkzeuge/gemeindezahlen.py` – Aufbereitung (Seitenbau gemeinsam mit den Kreiszahlen über `werkzeuge/kreiszahlen.py seite`)
+- Kartenansicht (Umschalter Balken | Karte im Gemeindevergleich): Gemeindegrenzen in `werkzeuge/geo/gemeinden_ldk.geojson`,
+  © BKG (2026) dl-de/by-2-0, VG250 (geholt mit `python3 werkzeuge/gemeindezahlen.py grenzen`)
 
 Quelle: Hessisches Statistisches Landesamt, Hessische Gemeindestatistik (https://www.statistischebibliothek.de/mir/receive/HESerie_mods_00000449, aktuell auch https://statistik.hessen.de/publikationen/hessische-gemeindestatistik).
 

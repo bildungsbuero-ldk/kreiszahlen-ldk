@@ -14,6 +14,7 @@
   color-scheme: light;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 15px; line-height: 1.45; }
 .kz { max-width: 1200px; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; gap: 28px; }
@@ -75,8 +76,9 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-hellblau) 25%, transparent)
 .idx { display: inline-flex; align-items: center; gap: 4px; justify-content: flex-end; }
 .idx i { display: inline-block; height: 8px; border-radius: 2px; background: var(--muted-bar); }
 .idx i.hi { background: var(--ldk-gruen); }
-.ansicht { margin: 4px 0 2px; }
-.karte svg { display: block; overflow: visible; }
+.ansicht { margin: 4px 0 2px; align-self: flex-start; }
+.karte svg { display: block; overflow: hidden; }
+.karte .note { overflow-wrap: anywhere; }
 .karte .gem { stroke: #fff; stroke-width: 1; cursor: pointer; }
 .karte .gem:hover { stroke: var(--fg); stroke-width: 1.5; }
 .karte .gem.leer { fill: url(#kz-schraffur); }
@@ -87,8 +89,8 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-hellblau) 25%, transparent)
 .kleg { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--fg-muted); margin: 8px 0 0; font-variant-numeric: tabular-nums; }
 .kleg span { display: inline-flex; align-items: center; gap: 4px; }
 .kleg i { width: 14px; height: 10px; border-radius: 2px; display: inline-block; border: 1px solid rgba(0,0,0,.08); }
-.sw-fo { background: transparent; border: 3px solid var(--ldk-orange); width: 12px; height: 10px; }
-.sw-vo { background: transparent; border: 2px dashed var(--ldk-blau-dunkel); width: 12px; height: 10px; }
+.kleg i.sw-fo { background: transparent; border: 3px solid var(--ldk-orange); width: 12px; height: 10px; }
+.kleg i.sw-vo { background: transparent; border: 2px dashed var(--ldk-blau-dunkel); width: 12px; height: 10px; }
 .pct { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: flex-end; margin: 4px 0 2px; }
 .pct label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--fg-muted); flex: 1 1 14rem; min-width: 0; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 .pct select { font-size: 13px; padding: 4px 8px; }
@@ -154,7 +156,8 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-hellblau) 25%, transparent)
       <div class="card">
         <h3 id="merkmal-titel">—</h3>
         <p class="note" id="einheit" hidden></p>
-        <p class="note">{{BALKEN_NOTE}}</p>
+        <p class="note" id="note-balken">{{BALKEN_NOTE}}</p>
+        <p class="note" id="note-karte" hidden>Die 23 Städte und Gemeinden, eingefärbt nach dem gewählten Merkmal. Ein Klick auf eine Gemeinde macht sie zur Fokus-Region.</p>
         <p class="note">Berichtszeitraum: <span id="bezug-aktuell">—</span></p>
         <div class="pct" id="pct">
           <label>Prozent bezogen auf<select id="sel-basis" aria-label="Bezugsgröße für Prozentwerte"></select></label>
@@ -613,7 +616,7 @@ const ORANGE = ['#fbd9c2', '#f5a676', '#ee5d05'];
 function renderKarte() {
   if (!KARTE) return;
   const karte = P.ansicht === 'karte';
-  $('#bars').hidden = karte; $('#leg-balken').hidden = karte; $('#karte').hidden = !karte;
+  $('#bars').hidden = karte; $('#leg-balken').hidden = karte; $('#karte').hidden = !karte; $('#note-balken').hidden = karte; $('#note-karte').hidden = !karte;
   document.querySelectorAll('.seg button[data-ansicht]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.ansicht === P.ansicht)));
   const host = $('#karte');
   host.replaceChildren();
@@ -630,7 +633,8 @@ function renderKarte() {
   const rang = new Map(sorted.map((d, i) => [d.ags, i + 1]));
   // Klassen: fünf möglichst gleich besetzte Klassen; mit negativen Werten getrennt nach Vorzeichen
   let classes = [];
-  const fmtC = (x) => pct ? fmtP(x) : fmt(x);
+  const unitP = !pct && / › %$/.test(MI.get(P.mid).merkmal) ? ' %' : ''; // Merkmal ist selbst ein Prozentwert
+  const fmtC = (x) => pct ? fmtP(x) : fmt(x) + unitP;
   if (vals.length) {
     const neg = vals.filter((x) => x < 0).sort((a, b) => a - b), pos = vals.filter((x) => x >= 0).sort((a, b) => a - b);
     const split = (arr, n, pal) => { // arr aufsteigend sortiert; Grenzen bei gleich großen Anteilen, ohne doppelte Grenzen
@@ -650,7 +654,7 @@ function renderKarte() {
   const svg = d3.select(host).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Karte der Städte und Gemeinden: ' + MI.get(P.mid).merkmal);
   const pat = svg.append('defs').append('pattern').attr('id', 'kz-schraffur').attr('width', 6).attr('height', 6).attr('patternUnits', 'userSpaceOnUse').attr('patternTransform', 'rotate(45)');
   pat.append('rect').attr('width', 6).attr('height', 6).attr('fill', '#f1f2f4'); pat.append('line').attr('x1', 0).attr('y1', 0).attr('x2', 0).attr('y2', 6).attr('stroke', '#c9ccd2').attr('stroke-width', 2);
-  svg.append('g').selectAll('path').data(feats).join('path').attr('class', (d) => 'gem' + (colOf(v(d.ags)) ? '' : ' leer')).attr('d', (d) => path(d.f)).style('fill', (d) => colOf(v(d.ags)))
+  svg.append('g').selectAll('path').data(feats).join('path').attr('class', (d) => 'gem' + (colOf(v(d.ags)) ? '' : ' leer')).attr('data-ags', (d) => d.ags).attr('d', (d) => path(d.f)).style('fill', (d) => colOf(v(d.ags)))
     .on('mousemove', (ev, d) => { const r = rang.get(d.ags); tip.replaceChildren(el('div', 'h', REG[RI.get(d.ags)].region), el('div', null, ok(raw(d.ags)) || ok(v(d.ags)) ? lab(d.ags) + (r ? ' · Rang ' + r + ' von ' + sorted.length : '') : 'Wert geheim oder nicht vorhanden'), ...(bi && pct ? [el('div', 'h', 'Prozent bezogen auf: ' + bi.label)] : [])); tip.hidden = false; const [mx, my] = d3.pointer(ev, host); place(host, tip, mx, my); })
     .on('mouseleave', () => { tip.hidden = true; })
     .on('click', (ev, d) => set({ fokus: d.ags }));
@@ -666,7 +670,7 @@ function renderKarte() {
   host.append(leg);
   const kreis = v(CFG.ref);
   const notes = [];
-  if (ok(kreis) && !(pct && bi.chosen === 'land')) notes.push('Lahn-Dill-Kreis: ' + (pct ? fmtP(kreis) : fmt(kreis)) + '.');
+  if (ok(kreis) && !(pct && bi.chosen === 'land')) notes.push('Lahn-Dill-Kreis: ' + fmtC(kreis) + '.');
   notes.push('Klassen mit möglichst gleich vielen Gemeinden (Anzahl in Klammern)' + (classes.some((c) => c.max < 0) ? '; negative Werte orange, positive blau.' : '.'));
   if (!pct && !isRateM(MI.get(P.mid))) notes.push('Bei Anzahlen und Summen zeigt die Färbung vor allem die Größe der Gemeinde; für Vergleiche eignen sich der Prozent-Modus oder Werte je Einwohner/-in.');
   host.append(el('p', 'note', notes.join(' ')));
