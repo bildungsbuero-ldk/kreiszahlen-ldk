@@ -446,7 +446,8 @@ SEITEN = {
             'Hessen-Vergleich in der Detailtabelle: bei Anteilen, Quoten und Durchschnitten der Index (Hessen = 100), bei Anzahlen und Summen der Anteil am Landeswert.',
         ],
         QUELLE='Quelle: Hessisches Statistisches Landesamt, Hessische Kreiszahlen (Excel-Ausgaben {{SPANNE}}). Kennzahlen und Darstellung: eigene Berechnungen. Geheim gehaltene oder fehlende Werte werden nicht angezeigt.',
-        cfg=dict(daten='daten.json', fokus='532000', vergleich='000000', mid='17_15', einheiten=['Landkreis', 'Kreisfreie Stadt'],
+        geo=None,
+        cfg=dict(daten='daten.json', karte=False, fokus='532000', vergleich='000000', mid='17_15', einheiten=['Landkreis', 'Kreisfreie Stadt'],
                  gruppen=[['Landkreise', ['Landkreis']], ['Kreisfreie Städte', ['Kreisfreie Stadt', 'Sonderstatusstadt']], ['Regierungsbezirke', ['Regierungsbezirk']], ['Land und Zusammenfassungen', ['Land', 'Summe', 'Verband']]],
                  ref='000000', refName='Hessen', refVon='Hessen', refOption='Landeswert Hessen (Anteil des Kreises)', linien=[['000000', 'Hessen']],
                  keinRang='Kein Rang (Region ist kein Kreis)', einheitDat='Kreisen', keineWerte='Für dieses Merkmal liegen keine Werte auf Kreisebene vor.',
@@ -475,7 +476,10 @@ SEITEN = {
             'Kreis-Vergleich in der Detailtabelle: bei Anteilen, Quoten und Durchschnitten der Index (Lahn-Dill-Kreis = 100), bei Anzahlen und Summen der Anteil am Kreiswert.',
         ],
         QUELLE='Quelle: Hessisches Statistisches Landesamt, Hessische Gemeindestatistik (Excel-Ausgaben {{SPANNE}}). Kennzahlen und Darstellung: eigene Berechnungen. Geheim gehaltene oder fehlende Werte werden nicht angezeigt.',
-        cfg=dict(daten='gemeinden.json', fokus='532023', vergleich='532000', mid='1_4', einheiten=['Stadt', 'Gemeinde'],
+        geo='geo/gemeinden_ldk.geojson',
+        cfg=dict(daten='gemeinden.json', karte=True,
+                 karteQuelle='Gemeindegrenzen: © BKG (2026) dl-de/by-2-0, Verwaltungsgebiete 1:250 000 (VG250), Stand 1. Januar; Datenquellen: https://sg.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf',
+                 fokus='532023', vergleich='532000', mid='1_4', einheiten=['Stadt', 'Gemeinde'],
                  gruppen=[['Städte', ['Stadt']], ['Gemeinden', ['Gemeinde']], ['Kreis und Land', ['Landkreis', 'Land']]],
                  ref='532000', refName='Kreis', refVon='Kreis', refOption='Kreiswert Lahn-Dill-Kreis (Anteil der Gemeinde)', linien=[['532000', 'Lahn-Dill-Kreis'], ['000000', 'Hessen']],
                  keinRang='Kein Rang (Region ist keine Gemeinde des Kreises)', einheitDat='Städten und Gemeinden', keineWerte='Für dieses Merkmal liegen keine Werte für die Gemeinden vor.',
@@ -496,8 +500,11 @@ def build_page(mode):
     spanne = S['spanne'](D)
     basis = open(os.path.join(TOOLS, S['basis']), encoding='utf-8').read().strip()
     schalter = ''.join(f'<a href="{href}"' + (' aria-current="page"' if m == mode else '') + f'>{lab}</a>' for m, _, href, lab in SCHALTER)
-    for k in ('/*D3*/', '/*KACHELN*/', '/*BASIS*/', '/*CFG*/'): assert t.count(k) == 1, k
-    out = t.replace('/*BASIS*/', basis, 1).replace('/*KACHELN*/', kacheln, 1).replace('/*CFG*/', json.dumps(S['cfg'], ensure_ascii=False), 1)
+    for k in ('/*D3*/', '/*KACHELN*/', '/*BASIS*/', '/*CFG*/', '/*GEO*/'): assert t.count(k) == 1, k
+    gp = os.path.join(TOOLS, S['geo']) if S.get('geo') else None
+    geo = open(gp, encoding='utf-8').read().strip() if gp and os.path.exists(gp) else 'null'
+    if S.get('geo') and geo == 'null': print('Hinweis: ' + S['geo'] + ' fehlt, Karte wird nicht angezeigt (python3 werkzeuge/gemeindezahlen.py grenzen)')
+    out = t.replace('/*GEO*/', geo, 1).replace('/*BASIS*/', basis, 1).replace('/*KACHELN*/', kacheln, 1).replace('/*CFG*/', json.dumps(S['cfg'], ensure_ascii=False), 1)
     out = out.replace('{{SCHALTER}}', schalter).replace('{{BERECHNUNGEN}}', '\n'.join(f'          <li>{x}</li>' for x in S['BERECHNUNGEN']))
     for k in ('TITEL', 'BESCHREIBUNG', 'LEDE', 'TAKE', 'KACHEL_NOTE', 'VERGLEICH_H2', 'VERGLEICH_NOTE', 'BALKEN_NOTE', 'DETAIL_NOTE', 'ERL_NOTE', 'QUELLE'):
         out = out.replace('{{' + k + '}}', S[k])

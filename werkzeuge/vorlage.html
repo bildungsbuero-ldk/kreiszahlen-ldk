@@ -75,6 +75,20 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-hellblau) 25%, transparent)
 .idx { display: inline-flex; align-items: center; gap: 4px; justify-content: flex-end; }
 .idx i { display: inline-block; height: 8px; border-radius: 2px; background: var(--muted-bar); }
 .idx i.hi { background: var(--ldk-gruen); }
+.ansicht { margin: 4px 0 2px; }
+.karte svg { display: block; overflow: visible; }
+.karte .gem { stroke: #fff; stroke-width: 1; cursor: pointer; }
+.karte .gem:hover { stroke: var(--fg); stroke-width: 1.5; }
+.karte .gem.leer { fill: url(#kz-schraffur); }
+.karte .rand-f { fill: none; stroke: var(--ldk-orange); stroke-width: 3; pointer-events: none; }
+.karte .rand-v { fill: none; stroke: var(--ldk-blau-dunkel); stroke-width: 2.5; stroke-dasharray: 5 3; pointer-events: none; }
+.karte .lab { font-size: 11px; font-family: var(--font); fill: var(--fg); paint-order: stroke; stroke: rgba(255,255,255,.85); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; text-anchor: middle; }
+.karte .lab.on { font-weight: 700; }
+.kleg { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--fg-muted); margin: 8px 0 0; font-variant-numeric: tabular-nums; }
+.kleg span { display: inline-flex; align-items: center; gap: 4px; }
+.kleg i { width: 14px; height: 10px; border-radius: 2px; display: inline-block; border: 1px solid rgba(0,0,0,.08); }
+.sw-fo { background: transparent; border: 3px solid var(--ldk-orange); width: 12px; height: 10px; }
+.sw-vo { background: transparent; border: 2px dashed var(--ldk-blau-dunkel); width: 12px; height: 10px; }
 .pct { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: flex-end; margin: 4px 0 2px; }
 .pct label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--fg-muted); flex: 1 1 14rem; min-width: 0; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 .pct select { font-size: 13px; padding: 4px 8px; }
@@ -147,8 +161,10 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-hellblau) 25%, transparent)
           <div class="seg" role="group" aria-label="Balken zeigen"><button type="button" data-skala="abs">Anzahl</button><button type="button" data-skala="pct">Prozent</button></div>
         </div>
         <p class="note" id="pct-none" hidden>Dieses Merkmal ist bereits ein Anteil, eine Quote oder ein Durchschnitt; Prozentwerte werden dafür nicht berechnet.</p>
-        <p class="legend"><span><i class="sw sw-f"></i>Fokus-Region</span><span><i class="sw sw-v"></i>Vergleichsregion</span></p>
+        <div class="seg ansicht" role="group" aria-label="Darstellung" id="ansicht" hidden><button type="button" data-ansicht="balken">Balken</button><button type="button" data-ansicht="karte">Karte</button></div>
+        <p class="legend" id="leg-balken"><span><i class="sw sw-f"></i>Fokus-Region</span><span><i class="sw sw-v"></i>Vergleichsregion</span></p>
         <div class="chart" id="bars"></div>
+        <div class="chart karte" id="karte" hidden></div>
         <div class="notes" id="fn-merkmal" hidden></div>
       </div>
       <div class="card">
@@ -207,8 +223,10 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-hellblau) 25%, transparent)
 'use strict';
 const CFG = /*CFG*/;
 const TILESETS = /*KACHELN*/;
+const GEO = /*GEO*/; // Gemeindegrenzen (nur Gemeindezahlen), sonst null
+const KARTE = !!(CFG.karte && GEO);
 const SPEC = new Map(TILESETS.flatMap(([, ts]) => ts.map(([k, , , f]) => [k, f])));
-const DEF = { fokus: CFG.fokus, vergleich: CFG.vergleich, mid: CFG.mid, basis: '', skala: 'abs' };
+const DEF = { fokus: CFG.fokus, vergleich: CFG.vergleich, mid: CFG.mid, basis: '', skala: 'abs', ansicht: 'balken' };
 const nfc = {};
 const num = (v, d) => (nfc[d] ||= new Intl.NumberFormat('de-DE', { maximumFractionDigits: d })).format(v);
 const ok = (v) => v != null && Number.isFinite(v);
@@ -226,7 +244,7 @@ let D, REG, RI, MM, MI, LATEST, P = { ...DEF }, KPI;
 
 function readHash() {
   const q = new URLSearchParams(location.hash.slice(1));
-  P = { fokus: q.get('fokus') || DEF.fokus, vergleich: q.get('vergleich') || DEF.vergleich, mid: q.get('mid') || DEF.mid, basis: q.get('basis') || '', skala: q.get('skala') === 'pct' ? 'pct' : 'abs' };
+  P = { fokus: q.get('fokus') || DEF.fokus, vergleich: q.get('vergleich') || DEF.vergleich, mid: q.get('mid') || DEF.mid, basis: q.get('basis') || '', skala: q.get('skala') === 'pct' ? 'pct' : 'abs', ansicht: KARTE && q.get('ansicht') === 'karte' ? 'karte' : 'balken' };
   if (!RI.has(P.fokus)) P.fokus = DEF.fokus;
   if (!RI.has(P.vergleich)) P.vergleich = DEF.vergleich;
   if (!MI.has(P.mid)) P.mid = DEF.mid;
@@ -398,7 +416,7 @@ function renderBasis(bi) {
   if (!bi) { sel.replaceChildren(); return; }
   sel.replaceChildren(...bi.opts.map(([id, l]) => new Option(l, id)));
   sel.value = bi.chosen;
-  document.querySelectorAll('.seg button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.skala === P.skala)));
+  document.querySelectorAll('.seg button[data-skala]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.skala === P.skala)));
 }
 
 function renderBars() {
@@ -586,7 +604,73 @@ function renderErlaeuterungen() {
 }
 
 function render() {
-  renderHead(); renderSelectors(); renderBars(); renderVerlauf(); renderDetail(); renderNotes();
+  renderHead(); renderSelectors(); renderBars(); renderKarte(); renderVerlauf(); renderDetail(); renderNotes();
+}
+
+// Karte der Städte und Gemeinden: Färbung nach dem gewählten Merkmal (Anzahl oder Prozent wie im Balkendiagramm)
+const BLAU = ['#e3eef7', '#b9d4ea', '#8cbce0', '#4f81a5', '#2c5272'];
+const ORANGE = ['#fbd9c2', '#f5a676', '#ee5d05'];
+function renderKarte() {
+  if (!KARTE) return;
+  const karte = P.ansicht === 'karte';
+  $('#bars').hidden = karte; $('#leg-balken').hidden = karte; $('#karte').hidden = !karte;
+  document.querySelectorAll('.seg button[data-ansicht]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.ansicht === P.ansicht)));
+  const host = $('#karte');
+  host.replaceChildren();
+  if (!karte) return;
+  const tip = tipFor(host); tip.hidden = true;
+  const bi = basisInfo(P.mid), pct = !!bi && P.skala === 'pct';
+  const raw = (ags) => val(LATEST, P.mid, ags);
+  const v = (ags) => pct ? share(bi, P.mid, ags) : raw(ags);
+  const lab = (ags) => { const a = fmt(raw(ags)), p = bi ? fmtP(share(bi, P.mid, ags)) : null; return p == null ? a : pct ? p + ' · ' + a : a + ' · ' + p; };
+  const feats = GEO.features.map((f) => ({ f, ags: f.properties.ags.slice(2), name: f.properties.gen })).filter((d) => RI.has(d.ags));
+  const vals = feats.map((d) => v(d.ags)).filter(ok);
+  // Rang wie im Balkendiagramm
+  const sorted = feats.filter((d) => ok(v(d.ags))).sort((a, b) => v(b.ags) - v(a.ags));
+  const rang = new Map(sorted.map((d, i) => [d.ags, i + 1]));
+  // Klassen: fünf möglichst gleich besetzte Klassen; mit negativen Werten getrennt nach Vorzeichen
+  let classes = [];
+  const fmtC = (x) => pct ? fmtP(x) : fmt(x);
+  if (vals.length) {
+    const neg = vals.filter((x) => x < 0).sort((a, b) => a - b), pos = vals.filter((x) => x >= 0).sort((a, b) => a - b);
+    const split = (arr, n, pal) => { // arr aufsteigend sortiert; Grenzen bei gleich großen Anteilen, ohne doppelte Grenzen
+      if (!arr.length) return [];
+      const th = [];
+      for (let i = 1; i <= n; i++) { const t = arr[Math.max(0, Math.round(arr.length * i / n) - 1)]; if (!th.length || t > th[th.length - 1]) th.push(t); }
+      const out = []; let prev = -Infinity;
+      for (const t of th) { const part = arr.filter((x) => x > prev && x <= t); if (part.length) out.push({ min: part[0], max: t, n: part.length }); prev = t; }
+      return out.map((c, i) => ({ ...c, col: pal[out.length === 1 ? pal.length - 1 : Math.round(i * (pal.length - 1) / (out.length - 1))] }));
+    };
+    classes = neg.length ? [...split(neg, 3, [...ORANGE].reverse()), ...split(pos, 3, BLAU.slice(1, 4))] : split(pos, 5, BLAU);
+  }
+  const colOf = (x) => { if (!ok(x)) return null; const c = classes.find((k) => x >= k.min && x <= k.max); return c ? c.col : null; };
+  const W = Math.max(280, host.clientWidth || 560), H = Math.round(W * 1.15);
+  const proj = d3.geoMercator().fitExtent([[8, 8], [W - 8, H - 8]], GEO);
+  const path = d3.geoPath(proj);
+  const svg = d3.select(host).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Karte der Städte und Gemeinden: ' + MI.get(P.mid).merkmal);
+  const pat = svg.append('defs').append('pattern').attr('id', 'kz-schraffur').attr('width', 6).attr('height', 6).attr('patternUnits', 'userSpaceOnUse').attr('patternTransform', 'rotate(45)');
+  pat.append('rect').attr('width', 6).attr('height', 6).attr('fill', '#f1f2f4'); pat.append('line').attr('x1', 0).attr('y1', 0).attr('x2', 0).attr('y2', 6).attr('stroke', '#c9ccd2').attr('stroke-width', 2);
+  svg.append('g').selectAll('path').data(feats).join('path').attr('class', (d) => 'gem' + (colOf(v(d.ags)) ? '' : ' leer')).attr('d', (d) => path(d.f)).style('fill', (d) => colOf(v(d.ags)))
+    .on('mousemove', (ev, d) => { const r = rang.get(d.ags); tip.replaceChildren(el('div', 'h', REG[RI.get(d.ags)].region), el('div', null, ok(raw(d.ags)) || ok(v(d.ags)) ? lab(d.ags) + (r ? ' · Rang ' + r + ' von ' + sorted.length : '') : 'Wert geheim oder nicht vorhanden'), ...(bi && pct ? [el('div', 'h', 'Prozent bezogen auf: ' + bi.label)] : [])); tip.hidden = false; const [mx, my] = d3.pointer(ev, host); place(host, tip, mx, my); })
+    .on('mouseleave', () => { tip.hidden = true; })
+    .on('click', (ev, d) => set({ fokus: d.ags }));
+  const byAgs = new Map(feats.map((d) => [d.ags, d]));
+  if (byAgs.has(P.vergleich) && P.vergleich !== P.fokus) svg.append('path').attr('class', 'rand-v').attr('d', path(byAgs.get(P.vergleich).f));
+  if (byAgs.has(P.fokus)) svg.append('path').attr('class', 'rand-f').attr('d', path(byAgs.get(P.fokus).f));
+  svg.append('g').selectAll('text').data(feats).join('text').attr('class', (d) => 'lab' + (d.ags === P.fokus || d.ags === P.vergleich ? ' on' : ''))
+    .attr('transform', (d) => { const [x, y] = path.centroid(d.f); return `translate(${x},${y})`; }).attr('dy', '0.35em').text((d) => W < 420 && !(d.ags === P.fokus || d.ags === P.vergleich) ? '' : shortName(d.name));
+  const leg = el('div', 'kleg');
+  for (const c of classes) { const s = el('span'); const i = el('i'); i.style.background = c.col; s.append(i, (c.min === c.max ? fmtC(c.min) : fmtC(c.min) + ' bis ' + fmtC(c.max)) + ' (' + c.n + ')'); leg.append(s); }
+  if (feats.some((d) => !ok(v(d.ags)))) { const s = el('span'); const i = el('i'); i.style.background = 'repeating-linear-gradient(45deg,#f1f2f4 0 3px,#c9ccd2 3px 5px)'; s.append(i, 'geheim oder keine Angabe'); leg.append(s); }
+  const s1 = el('span'); s1.append(el('i', 'sw-fo'), 'Fokus-Region'); const s2 = el('span'); s2.append(el('i', 'sw-vo'), 'Vergleichsregion'); leg.append(s1, s2);
+  host.append(leg);
+  const kreis = v(CFG.ref);
+  const notes = [];
+  if (ok(kreis) && !(pct && bi.chosen === 'land')) notes.push('Lahn-Dill-Kreis: ' + (pct ? fmtP(kreis) : fmt(kreis)) + '.');
+  notes.push('Klassen mit möglichst gleich vielen Gemeinden (Anzahl in Klammern)' + (classes.some((c) => c.max < 0) ? '; negative Werte orange, positive blau.' : '.'));
+  if (!pct && !isRateM(MI.get(P.mid))) notes.push('Bei Anzahlen und Summen zeigt die Färbung vor allem die Größe der Gemeinde; für Vergleiche eignen sich der Prozent-Modus oder Werte je Einwohner/-in.');
+  host.append(el('p', 'note', notes.join(' ')));
+  host.append(el('p', 'note', CFG.karteQuelle));
 }
 
 // Höhe an eine einbettende Seite melden (für automatisch passende iFrames)
@@ -617,14 +701,16 @@ async function init() {
   $('#sel-tabelle').addEventListener('change', (e) => { const f = MM.find((m) => m.tab === Number(e.target.value)); if (f) set({ mid: f.mid, basis: '' }); });
   $('#sel-merkmal').addEventListener('change', (e) => set({ mid: e.target.value, basis: '' }));
   $('#sel-basis').addEventListener('change', (e) => set({ basis: e.target.value }));
-  document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => set({ skala: b.dataset.skala })));
+  document.querySelectorAll('.seg button[data-skala]').forEach((b) => b.addEventListener('click', () => set({ skala: b.dataset.skala })));
+  document.querySelectorAll('.seg button[data-ansicht]').forEach((b) => b.addEventListener('click', () => set({ ansicht: b.dataset.ansicht })));
+  $('#ansicht').hidden = !KARTE;
   $('#suche').addEventListener('input', renderDetail);
   readHash();
   renderErlaeuterungen();
   $('#loading').remove();
   render();
   let w = window.innerWidth, timer;
-  window.addEventListener('resize', () => { if (window.innerWidth === w) return; w = window.innerWidth; clearTimeout(timer); timer = setTimeout(() => { renderBars(); renderVerlauf(); }, 120); });
+  window.addEventListener('resize', () => { if (window.innerWidth === w) return; w = window.innerWidth; clearTimeout(timer); timer = setTimeout(() => { renderBars(); renderKarte(); renderVerlauf(); }, 120); });
   window.addEventListener('hashchange', () => { readHash(); render(); });
   new ResizeObserver(postHeight).observe(document.body);
   postHeight();

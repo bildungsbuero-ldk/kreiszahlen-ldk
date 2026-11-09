@@ -5,6 +5,7 @@ für das Dashboard des Bildungsbüros Lahn-Dill-Kreis. Gleiche Systematik wie we
 Aufruf (aus dem Hauptordner des Repositorys):
     python3 werkzeuge/gemeindezahlen.py katalog   # schreibt werkzeuge/katalog/gemeinden_merkmale.csv aus der Referenzausgabe neu
     python3 werkzeuge/gemeindezahlen.py daten     # liest quellen/HGSt_j*.xlsx, schreibt gemeinden.json und werkzeuge/ausgabe/gemeinden_*
+    python3 werkzeuge/gemeindezahlen.py grenzen   # holt die Gemeindegrenzen (BKG, VG250) nach werkzeuge/geo/ für die Karte
     python3 werkzeuge/gemeindezahlen.py seite     # baut gemeinden.html aus werkzeuge/vorlage.html
 
 Grundsätze:
@@ -390,9 +391,30 @@ def bezug_for(path, title, fn_text=''):
         y = str(int(p[1]) - 1); p = (y, y, 'Jahr')
     return p
 
+# ---------------------------------------------------------------- Befehl: grenzen
+WFS = 'https://sgx.geodatenzentrum.de/wfs_vg250'
+def cmd_grenzen():
+    """Gemeindegrenzen der 23 Städte und Gemeinden aus dem WFS VG250 des BKG (dl-de/by-2-0) nach werkzeuge/geo/."""
+    import urllib.parse, urllib.request
+    flt = ('<fes:Filter xmlns:fes="http://www.opengis.net/fes/2.0"><fes:PropertyIsLike wildCard="*" singleChar="." escapeChar="!">'
+           '<fes:ValueReference>ags</fes:ValueReference><fes:Literal>06532*</fes:Literal></fes:PropertyIsLike></fes:Filter>')
+    q = dict(SERVICE='WFS', VERSION='2.0.0', REQUEST='GetFeature', TYPENAMES='vg250:vg250_gem', OUTPUTFORMAT='application/json', SRSNAME='EPSG:4326', FILTER=flt)
+    with urllib.request.urlopen(WFS + '?' + urllib.parse.urlencode(q), timeout=60) as r: j = json.load(r)
+    reg = {r['ags'] for r in csv.DictReader(open(REGIONEN, encoding='utf-8'))}
+    feats = [f for f in j['features'] if f['properties'].get('gf') == 4]
+    agss = sorted(f['properties']['ags'][2:] for f in feats)
+    want = sorted(a for a in reg if a.startswith('532') and a != '532000')
+    if agss != want: raise SystemExit(f'Gemeinden passen nicht zu den Regionen: {sorted(set(agss) ^ set(want))}')
+    def rnd(c): return [rnd(x) for x in c] if isinstance(c[0], list) else [round(c[0], 4), round(c[1], 4)]
+    out = dict(type='FeatureCollection', features=[dict(type='Feature', properties={k: f['properties'][k] for k in ('ags', 'gen', 'bez')},
+               geometry=dict(type=f['geometry']['type'], coordinates=rnd(f['geometry']['coordinates']))) for f in sorted(feats, key=lambda f: f['properties']['ags'])])
+    os.makedirs(os.path.join(TOOLS, 'geo'), exist_ok=True)
+    json.dump(out, open(os.path.join(TOOLS, 'geo', 'gemeinden_ldk.geojson'), 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+    print(f'{len(feats)} Gemeinden → werkzeuge/geo/gemeinden_ldk.geojson')
+
 # ---------------------------------------------------------------- Befehl: seite
 def cmd_seite():
     K.build_page('gemeinden')
 
 if __name__ == '__main__':
-    {'katalog': cmd_katalog, 'daten': cmd_daten, 'seite': cmd_seite}.get(sys.argv[1] if len(sys.argv) > 1 else '', lambda: sys.exit(__doc__))()
+    {'katalog': cmd_katalog, 'daten': cmd_daten, 'grenzen': cmd_grenzen, 'seite': cmd_seite}.get(sys.argv[1] if len(sys.argv) > 1 else '', lambda: sys.exit(__doc__))()
