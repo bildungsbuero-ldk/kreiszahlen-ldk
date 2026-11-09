@@ -40,6 +40,21 @@ python3 werkzeuge/kreiszahlen.py seite
   Katalog und Regionen (`datasets/merkmale`, `datasets/regionen`) nur ersetzen, wenn sich `werkzeuge/katalog/` geändert hat.
   Kacheln und Bezugsgrößen sind im Dashboard fest in der Seite (`files/index.html`) hinterlegt; ändern sie sich, dort mit nachziehen.
 
+## Hessische Gemeindestatistik (Gemeindezahlen)
+Erscheint einmal im Jahr (meist im November oder Dezember).
+Quelle: https://www.statistischebibliothek.de/mir/receive/HESerie_mods_00000449 (Liste „Inhalt“, z. B. „2026“); die Ausgabe hat wie
+die Kreiszahlen ein Derivat mit der Excel-Datei, z. B. Ausgabe 2025: `HEHeft_derivate_00015438/HGSt_j2025.xlsx`.
+1. Die `.xlsx` unverändert als `quellen/HGSt_j<JJJJ>.xlsx` ablegen (JJJJ = Jahr der Ausgabe).
+2. `python3 werkzeuge/gemeindezahlen.py daten`, danach `python3 werkzeuge/kreiszahlen.py seite` (baut beide Seiten).
+3. Prüfen wie oben, mit `werkzeuge/ausgabe/gemeinden_bericht.txt` und `gemeinden_werte.csv`: frühere Ausgaben unverändert,
+   jede unsichere Zuordnung und jede Meldung „weicht von der Art der Referenz ab“ gegen die Excel-Datei prüfen, Stichprobe von
+   mindestens 30 Werten (Lahn-Dill-Kreis 532000, Wetzlar 532023 und eine kleine Gemeinde, Tabellen 1, 8, 16–20), Seite
+   `gemeinden.html` lokal ansehen (alle Themen haben Kachelwerte, Zeitverlauf hat einen Punkt mehr).
+4. Hat das Landesamt Tabellen umgebaut (neue Nummern, neue Spalten), Referenz nicht still wechseln, sondern melden. Ein Wechsel der
+   Referenz (`REFERENZ` in `gemeindezahlen.py`) heißt: `python3 werkzeuge/gemeindezahlen.py katalog` neu, Kacheln
+   (`kacheln_gemeinden.json`) und Bezugsgrößen (`bezugsgroessen_gemeinden.json`) prüfen und alle älteren Ausgaben neu abgleichen.
+5. Veröffentlichen wie oben (Commit als Bildungsbüro). Das Claude-Dashboard enthält bisher nur die Kreiszahlen.
+
 ## Aufbau
 - `quellen/` – die Original-Excel-Dateien aller Ausgaben (unverändert).
 - `werkzeuge/kreiszahlen.py` – Einlesen, Zuordnung zur Referenzausgabe Herbst 2026, Berichtszeiträume, Seitenbau.
@@ -47,7 +62,10 @@ python3 werkzeuge/kreiszahlen.py seite
 - `werkzeuge/ausgabe/hinweise.json` – Fußnoten, Quellenangaben, Hinweise und Zeichenerklärung der neuesten Ausgabe (für das Claude-Dashboard).
 - `werkzeuge/kacheln.json` – Kennzahlen der Themen-Kacheln (Formeln über Merkmals-IDs).
 - `werkzeuge/bezugsgroessen.json` – geprüfte Bezugsgrößen für den Prozent-Modus (Merkmal → Summe).
-- `werkzeuge/vorlage.html`, `werkzeuge/d3.min.js` – Vorlage der Seite und Diagrammbibliothek (d3 v7.9.0, ISC-Lizenz).
+- `werkzeuge/vorlage.html`, `werkzeuge/d3.min.js` – gemeinsame Vorlage beider Seiten und Diagrammbibliothek (d3 v7.9.0, ISC-Lizenz).
+  Texte und Einstellungen je Seite stehen in `SEITEN` in `werkzeuge/kreiszahlen.py`.
+- `werkzeuge/gemeindezahlen.py`, `werkzeuge/katalog/gemeinden_*.csv`, `werkzeuge/kacheln_gemeinden.json`,
+  `werkzeuge/bezugsgroessen_gemeinden.json` – dasselbe für die Gemeindestatistik (Referenz Ausgabe 2025).
 
 ## Sozialraum-Übersicht
 Eigene Anleitung: `werkzeuge/sozialraum/ANLEITUNG.md`. Der Link von der Kreiszahlen-Seite steht in `werkzeuge/vorlage.html` (Kopfzeile).

@@ -12,6 +12,19 @@ Seite: https://bildungsbuero-ldk.github.io/kreiszahlen-ldk/
 
 Quelle: Hessisches Statistisches Landesamt, Hessische Kreiszahlen (https://www.statistischebibliothek.de/mir/receive/HESerie_mods_00000870). Kennzahlen und Darstellung: eigene Berechnungen.
 
+## Gemeindezahlen
+
+Die 23 Städte und Gemeinden des Lahn-Dill-Kreises im Vergleich, nach der Hessischen Gemeindestatistik (Excel-Ausgaben ab 2021),
+mit Lahn-Dill-Kreis und Land Hessen als Bezugswerten. Gleicher Aufbau wie die Kreiszahlen; oben rechts schaltet man zwischen beiden Seiten um.
+
+Seite: https://bildungsbuero-ldk.github.io/kreiszahlen-ldk/gemeinden.html
+
+- `gemeinden.html`, `gemeinden.json` – Seite und Daten
+- `quellen/HGSt_j<JJJJ>.xlsx` – die unveränderten Excel-Dateien
+- `werkzeuge/gemeindezahlen.py` – Aufbereitung (Seitenbau gemeinsam mit den Kreiszahlen über `werkzeuge/kreiszahlen.py seite`)
+
+Quelle: Hessisches Statistisches Landesamt, Hessische Gemeindestatistik (https://www.statistischebibliothek.de/mir/receive/HESerie_mods_00000449, aktuell auch https://statistik.hessen.de/publikationen/hessische-gemeindestatistik).
+
 ## Sozialräume: Bedarfe und Angebote
 
 Übersicht der 23 Städte und Gemeinden im Lahn-Dill-Kreis als Grundlage für Sozialraumkonferenzen:

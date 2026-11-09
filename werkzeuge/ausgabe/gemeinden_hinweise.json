@@ -1,0 +1,373 @@
+{
+"ausgabe": "Ausgabe 2025",
+"rows": [
+{
+"id": "5-1",
+"tab": "5",
+"art": "fussnote",
+"nr": "1",
+"text": "Aus technischen Gründen werden in dieser Tabelle sowohl Werte, die \"genau Null (—)\" sind, als auch Werte, deren Zahlenwert ungleich Null ist, deren Betrag jedoch kleiner als die Hälfte der darzustellenden Einheit ist, als (—) dargestellt.",
+"mids": "*"
+},
+{
+"id": "6-1",
+"tab": "6",
+"art": "fussnote",
+"nr": "1",
+"text": "Aus technischen Gründen werden in dieser Tabelle sowohl Werte, die \"genau Null (—)\" sind, als auch Werte, deren Zahlenwert ungleich Null ist, deren Betrag jedoch kleiner als die Hälfte der darzustellenden Einheit ist, als (—) dargestellt.",
+"mids": "*"
+},
+{
+"id": "7-1",
+"tab": "7",
+"art": "fussnote",
+"nr": "1",
+"text": "Aus technischen Gründen werden in dieser Tabelle sowohl Werte, die \"genau Null (—)\" sind, als auch Werte, deren Zahlenwert ungleich Null ist, deren Betrag jedoch kleiner als die Hälfte der darzustellenden Einheit ist, als (—) dargestellt.",
+"mids": "*"
+},
+{
+"id": "8-1",
+"tab": "8",
+"art": "fussnote",
+"nr": "1",
+"text": "Die hier nachgewiesene \"Siedlungs- und Verkehrsfläche\" dient der Berechnung des Nachhaltigkeitsindikators \"Anstieg der Siedlungs- und Verkehrsfläche\". Berechnung: Siedlung und Verkehr abzüglich Bergbaubetrieb, Tagebau, Grube und Steinbruch.",
+"mids": "8_18,8_19"
+},
+{
+"id": "10-1",
+"tab": "10",
+"art": "fussnote",
+"nr": "1",
+"text": "Stichtag: 30. Juni 2024.",
+"mids": "10_3,10_4"
+},
+{
+"id": "11-1",
+"tab": "11",
+"art": "fussnote",
+"nr": "1",
+"text": "Einschließlich Wohnheime.",
+"mids": "11_10,11_11"
+},
+{
+"id": "12-1",
+"tab": "12",
+"art": "fussnote",
+"nr": "1",
+"text": "Einschließlich Wohnheime.",
+"mids": "12_10,12_11"
+},
+{
+"id": "13-1",
+"tab": "13",
+"art": "fussnote",
+"nr": "1",
+"text": "Einschließlich Wohnheime.",
+"mids": "*"
+},
+{
+"id": "16-1",
+"tab": "16",
+"art": "fussnote",
+"nr": "1",
+"text": "Einwohnerzahlen auf der Basis Zensus 2022 zum Stichtag 30.06.2024.",
+"mids": "16_3"
+},
+{
+"id": "16-2",
+"tab": "16",
+"art": "fussnote",
+"nr": "2",
+"text": "Der Finanzierungssaldo berechnet sich als Differenz aus den bereinigten Einzahlungen und bereinigten Auszahlungen. Die „bereinigende“ Wirkung entsteht dadurch, dass bestimmte vermögenswirksame Finanzierungsvorgänge der Kommunen wie beispielsweise die Aufnahme oder Tilgung von Krediten unberücksichtigt bleiben.",
+"mids": "16_17"
+},
+{
+"id": "17-1",
+"tab": "17",
+"art": "fussnote",
+"nr": "1",
+"text": "Einwohnerzahlen auf der Basis Zensus 2022 zum Stichtag 30.06.2024.",
+"mids": "17_3"
+},
+{
+"id": "17-2",
+"tab": "17",
+"art": "fussnote",
+"nr": "2",
+"text": "Beziehungsweise gewogener Durchschnittshebesatz.",
+"mids": "17_8,17_9,17_10"
+},
+{
+"id": "17-3",
+"tab": "17",
+"art": "fussnote",
+"nr": "3",
+"text": "Ohne Ausgleichsleistungen nach dem Familienleistungsausgleich.",
+"mids": "17_14,17_15"
+},
+{
+"id": "18-1",
+"tab": "18",
+"art": "fussnote",
+"nr": "1",
+"text": "Einwohnerzahlen auf der Basis Zensus 2022 zum Stichtag 30.06.2024.",
+"mids": "18_3"
+},
+{
+"id": "19-q1",
+"tab": "19",
+"art": "quelle",
+"nr": "",
+"text": "Abweichende Zeichenerklärung für \" — \" : Genau Null oder auf Null geändert (nichts vorhanden) bzw. keine Veränderung. Hinweis:Alle Zahlen wurden aus Gründen der Geheimhaltung einer 5er-Rundung unterzogen. Das Ergebnis der Summierung der Einzelwerte kann deshalb geringfügig von der Endsumme abweichen.",
+"mids": "*"
+},
+{
+"id": "h1",
+"tab": "",
+"art": "hinweis",
+"nr": "1",
+"text": "Aus Gründen der Übersichtlichkeit sind nur negative Veränderungsraten und Salden mit einem Vorzeichen versehen. Positive Veränderungsraten und Salden sind ohne Vorzeichen. Im Allgemeinen ist ohne Rücksicht auf die Endsumme auf- beziehungsweise abgerundet worden. Das Ergebnis der Summierung der Einzelzahlen kann deshalb geringfügig von der Endsumme abweichen.",
+"mids": ""
+},
+{
+"id": "h2",
+"tab": "",
+"art": "hinweis",
+"nr": "2",
+"text": "Die hier vorliegende Ausgabe der \"Hessischen Gemeindestatistik\" beinhaltet ausgewählte Daten für alle Gemeinden, Landkreise, Regierungsbezirke, das Land Hessen sowie Nachweise für den Regionalverband FrankfurtRheinMain und für den Zweckverband Kassel.",
+"mids": ""
+},
+{
+"id": "h3",
+"tab": "",
+"art": "hinweis",
+"nr": "3",
+"text": "Die in dieser Publikation veröffentlichten Einwohnerzahlen sind – soweit nicht anders gekennzeichnet – endgültige Fortschreibungsergebnisse auf Basis des Zensus 2022.",
+"mids": ""
+},
+{
+"id": "h4",
+"tab": "",
+"art": "hinweis",
+"nr": "4",
+"text": "Die Zusammensetzungen des Regionalverbands FrankfurtRheinMain und des Zweckverbands Raum Kassel sind im Tabellenblatt 22 dieser Datei aufgeführt.",
+"mids": ""
+},
+{
+"id": "h5",
+"tab": "",
+"art": "hinweis",
+"nr": "5",
+"text": "In den Tabellen 16, 17 und 18 werden außerdem Zahlen für den Landeswohlfahrtsverband Hessen ausgewiesen.",
+"mids": ""
+},
+{
+"id": "z1",
+"tab": "",
+"art": "zeichen",
+"nr": "—",
+"text": "genau Null (nichts vorhanden) bzw. keine Veränderung eingetreten",
+"mids": ""
+},
+{
+"id": "z2",
+"tab": "",
+"art": "zeichen",
+"nr": "0",
+"text": "Zahlenwert ungleich null, Betrag jedoch kleiner als die Hälfte von 1 in der letzten besetzten Stelle",
+"mids": ""
+},
+{
+"id": "z3",
+"tab": "",
+"art": "zeichen",
+"nr": "•",
+"text": "Zahlenwert unbekannt oder geheim zu halten",
+"mids": ""
+},
+{
+"id": "z4",
+"tab": "",
+"art": "zeichen",
+"nr": "x",
+"text": "Tabellenfeld gesperrt, weil Aussage nicht sinnvoll (oder bei Veränderungsraten ist die Ausgangszahl kleiner als 100)",
+"mids": ""
+},
+{
+"id": "z5",
+"tab": "",
+"art": "zeichen",
+"nr": "/",
+"text": "keine Angabe, da Zahlenwert nicht sicher genug",
+"mids": ""
+},
+{
+"id": "z6",
+"tab": "",
+"art": "zeichen",
+"nr": "r",
+"text": "berichtigte Zahl",
+"mids": ""
+},
+{
+"id": "m1",
+"tab": "",
+"art": "methodik",
+"nr": "1",
+"text": "1. Allgemeine Vorbemerkungen\nDie Tabellen dieser Ausgabe zeigen Ergebnisse für alle hessischen Gemeinden. Ihnen haben wir Summen für Landkreise, Regierungsbezirke und das Land vorangestellt. Als Basis für die Daten gilt der Gebietsstand zum 1. Januar 2023, mit Ausnahme der Daten zur Landwirtschaft, die auf dem Gebietsstand vom 1. Januar 2020 basieren. Die 6-stelligen Gebietsschlüssel setzen sich wie folgt zusammen: Landkreis/kreisfreie Stadt (Stellen 1 bis 3), Gemeinde (Stellen 4 bis 6).\nDie Zusammensetzung des Regionalverbands FrankfurtRheinMain und des Zweckverbands Raum Kassel entnehmen Sie bitte dem Tabellenblatt 22 dieser Datei.",
+"mids": ""
+},
+{
+"id": "m2",
+"tab": "1,2,3,4",
+"art": "methodik",
+"nr": "2",
+"text": "2. Begriffsbestimmungen / Bevölkerung in Hessen am 31. Dezember 2024 / Deutsche Bevölkerung in Hessen am 31. Dezember 2024 / Nichtdeutsche Bevölkerung in Hessen am 31. Dezember 2024 / Bevölkerungsbewegung in Hessen 2024\nDie Bevölkerung umfasst diejenigen Personen, die im jeweiligen Gebiet ihre Haupt- oder alleinige Wohnung haben. Für die Zuordnung von Einwohnerinnen und Einwohnern mit mehreren Wohnungen ist der Ort der Hauptwohnung maßgeblich. Angehörige der in Hessen stationierten ausländischen Streitkräfte sowie der ausländischen diplomatischen Vertretungen gehören nicht zur Bevölkerung.\nLaufend aktuelle Bevölkerungszahlen werden auf Grundlage der Ergebnisse der letzten Volkszählung (Zensus 2022) nach einer bundeseinheitlichen Fortschreibungsmethode ermittelt. Hierzu greift die amtliche Statistik auf die Meldungen der Standesämter und Einwohnermeldeämter zurück. Folgende Komponenten der Bevölkerungsbewegungen werden ermittelt:\n1) Lebendgeborene (am Ort der Hauptwohnung der Mutter)\n2) Gestorbene (am Ort der Hauptwohnung)\n3) Zugezogene über die Gebietsgrenze bei:\n- Zuzug aus einer anderen Gemeinde in Deutschland oder aus dem Ausland\n- Umwandlung einer bisherigen Neben- oder weiteren Wohnung in eine Hauptwohnung (Statuswechsel)\n4) Fortgezogene über die Gebietsgrenze aufgrund einer:\n- Abbuchung am Ort der bisherigen Hauptwohnung bei Anmeldung einer neuen Hauptwohnung in einer anderen Gemeinde in Deutschland oder Abmeldung einer Hauptwohnung bei Fortzug ins Ausland\n- Abbuchung am Ort der bisherigen Hauptwohnung in Deutschland bei Umwandlung einer bisherigen Neben-/weiteren Wohnung in eine Hauptwohnung (Statuswechsel)\n5) Bestandskorrekturen aufgrund nachträglich berichtigter Meldefälle\n6) Staatsangehörigkeitswechsel\nDie fortgeschriebene Bevölkerung (Stand 31. Dezember 2024) auf der Ebene der Gemeinden und der übergeordneten Verwaltungsbezirke errechnet sich aus dem letzten Bestand (31. Dezember 2023), zuzüglich der Lebendgeborenen und der im laufenden Jahr (2024) über die Gebietsgrenzen Zugezogenen, abzüglich der Gestorbenen und der über die Gebietsgrenzen Fortgezogenen sowie der Bestandskorrekturen aufgrund nachträglich berichtigter Meldefälle.\nDeutsche, Nichtdeutsche: In der Bevölkerungsfortschreibung wird die Bevölkerung in der Gliederung „deutsch/nichtdeutsch” nachgewiesen. Angaben zur Nationalitätenstruktur bis auf Kreisebene liegen aus dem Ausländerzentralregister (AZR) vor. Die Ergebnisse dieser beiden Datenquellen weichen sehr stark voneinander ab. Eine Verknüpfung von Daten aus beiden Quellen innerhalb einer Tabelle ist aus methodischer Sicht nicht sinnvoll.\nGeborene: Für die Unterscheidung von Lebend- und Totgeborenen gilt seit 1. Januar 1958 die in § 31 der Verordnung zur Ausführung des Personenstandsgesetzes vom 12. August 1957 und der Änderung zum 1. April 1994 festgelegte Definition.\nGestorbene: In der Zahl der Gestorbenen nicht enthalten sind die tot Geborenen, die nachträglich beurkundeten Kriegssterbefälle und die gerichtlichen Todeserklärungen.\nZu- und Fortgezogene: Aufgrund der gesetzlichen Bestimmungen über die Meldepflicht wird jeder Wohnungswechsel von einer Gemeinde zu einer anderen erfasst. Wohnungswechsel innerhalb einer Gemeinde werden nicht berücksichtigt. Die Summen für die Kreise, die Regierungsbezirke und das Land enthalten jeweils alle Wanderungen über die Gemeindegrenzen.",
+"mids": ""
+},
+{
+"id": "m3",
+"tab": "5,6,7",
+"art": "methodik",
+"nr": "3",
+"text": "Landwirtschaftszählung (LZ) im Jahr 2020\nDie LZ wurde in Hessen zum Stichtag 1. März 2020 als Kombination einer allgemeinen Erhebung mit einer Stichprobenerhebung durchgeführt. Befragt wurden landwirtschaftliche Betriebe ab einer bestimmten Mindestgröße, die im Agrarstatistikgesetz (AgrStatG) festgelegt ist. Die Bodennutzungshaupterhebung 2020 wurde in die LZ integriert. Mit den Ergebnissen der LZ werden zugleich die statistischen Anforderungen der Europäischen Union in der EU-Betriebsstrukturerhebung abgedeckt. Über die allgemein erhobenen Merkmale soll der nationale Bedarf an Regionaldaten gedeckt werden.\nVergleichbarkeit der Erhebung: Aufgrund deutlich geänderter Erfassungsgrenzen (vgl. auch AgrStatG) sind die Ergebnisse der LZ 2020 sowohl mit denen der LZ 1999 als auch mit den Agrarstrukturerhebungen (ASE) der Jahre 2001, 2003, 2005 und 2007 nur eingeschränkt vergleichbar. Voll vergleichbar sind sie mit denen der LZ 2010 sowie der ASE 2013, 2016 und 2023.",
+"mids": ""
+},
+{
+"id": "m4",
+"tab": "5,6,7",
+"art": "methodik",
+"nr": "4",
+"text": "Erfassungsgrenzen ab 2010\n1 ha1) Dauerkulturfläche im Freiland\n5 ha1) landwirtschaftlich genutzte Fläche\n10 ha1) Waldfläche bzw. KUP2)3)\n10 Stück Rinder\n10 Stück Zuchtsauen\n20 Stück Schafe\n20 Stück Ziegen\n50 Stück Schweine\n1 000 Stück Geflügel4)\n10 Ar5) Kulturen unter hohen begehbaren Schutzabdeckungen\n10 Ar5) Speisepilze\n30 Ar5) Blumen- und Zierpflanzen im Freiland\n50 Ar5) bestockte Rebfläche\n50 Ar5) Obstanlagen\n50 Ar5) Tabak\n50 Ar5) Baumschulen\n50 Ar5) Gemüseanbau im Freiland\n50 Ar5) Hopfen\n1) ha: Hektar. — 2) KUP: Kurzumtriebsplantagen. — 3) Im Jahr 2022 nicht erfasst. — 4) Ab 2015 Haltungsplätze für Geflügel. — 5) Ar (ein Ar entspricht 0,01 Hektar).",
+"mids": ""
+},
+{
+"id": "m5",
+"tab": "5",
+"art": "methodik",
+"nr": "5",
+"text": "Landwirtschaftliche Betriebe in Hessen im Mai 2020 nach Größenklassen der landwirtschaftlich genutzten Fläche\nLandwirtschaftlicher Betrieb: Ein Betrieb ist eine technisch-wirtschaftliche Einheit, die mindestens eine der Erfassungsgrenzen der Agrarstatistik erreicht, für Rechnung einer Inhaberin oder eines Inhabers (Betriebsinhaberin und Betriebsinhaber oder Gesellschaft) bewirtschaftet wird, einer einheitlichen Betriebsführung untersteht und land- oder forstwirtschaftliche Erzeugnisse hervorbringt.\nNachgewiesen werden alle Betriebe mit einer landwirtschaftlich genutzten Fläche von mindestens 5 Hektar oder darunter mit entsprechenden Erzeugungseinheiten.\nLandwirtschaftlich genutzte Fläche (LF): Summe der genutzten Fläche von Ackerland, Dauergrünland, Gartenland, Obstanlagen, Baumschulen, Rebland, Korbweiden- und Pappelanlagen sowie Weihnachtsbaumkulturen außerhalb des Waldes. Ebenfalls enthalten sind stillgelegte Flächen mit Beihilferegelung.",
+"mids": ""
+},
+{
+"id": "m6",
+"tab": "6",
+"art": "methodik",
+"nr": "6",
+"text": "Bodennutzung in den landwirtschaftlichen Betrieben in Hessen 2020\nBetriebssitzprinzip: Die Flächen werden in der Gemeinde nachgewiesen, in der sich der Betriebssitz der Bewirtschafterin oder des Bewirtschafters befindet, ohne Rücksicht darauf, in welchen Gemarkungen die Flächen liegen. Nachgewiesen werden alle Betriebe mit einer landwirtschaftlich genutzten Fläche von mindestens 5 Hektar oder darunter mit entsprechenden Erzeugungseinheiten.\nDauergrünland: Zum Dauergrünland zählen Wiesen und Mähweiden, Weiden mit Almen, Hutungen und Streuwiesen sowie aus der Erzeugung genommenes Dauergrünland mit Beihilfe-/Prämienanspruch. Außerdem gehören zum Dauergrünland auch Grünlandflächen mit Obstbäumen, sofern das Obst nur die Nebennutzung, die Gras- oder Heugewinnung aber die Hauptnutzung darstellt. Andernfalls zählen diese Flächen zu den Obst-, Beeren- oder Nussanlagen und werden unter den Dauerkulturen nachgewiesen.\nNicht zum Dauergrünland zählen Ackerwiesen und -weiden, wenn diese die Fläche mindestens 1 Jahr bis weniger als 5 Jahre beanspruchen. Ferner zählen Grünlandflächen, die aus sozialen, wirtschaftlichen oder ähnlichen Gründen nicht mehr genutzt werden (Sozialbrache), ebenfalls nicht zum Dauergrünland, sondern werden als dauerhaft aus der landwirtschaftlichen Produktion genommenen Flächen ohne Prämienanspruch erfasst.\nAckerland: Flächen der landwirtschaftlichen Feldfrüchte (einschließlich Ackergrünland), des Gemüses, der Erdbeeren und anderer Gartengewächse im feldmäßigen Anbau und im Erwerbsgartenbau, auch unter Glas.\nGetreide: Einschließlich Körnermais und Corn-Cob-Mix.",
+"mids": ""
+},
+{
+"id": "m7",
+"tab": "7",
+"art": "methodik",
+"nr": "7",
+"text": "Ausgewählte Merkmale der landwirtschaftlichen Betriebe in Hessen 2020\nBetriebe mit ökologischem Landbau: Betriebe, die einem Kontrollverfahren zum ökologischen Landbau nach der Verordnung (EG) Nr. 834/2007 unterliegen.\nÖkologisch bewirtschaftete landwirtschaftlich genutzte Fläche (LF): LF der ökologisch wirtschaftenden Betriebe, einschließlich der Flächen, die nicht in die ökologische Wirtschaftsweise einbezogen sind.",
+"mids": ""
+},
+{
+"id": "m8",
+"tab": "8",
+"art": "methodik",
+"nr": "8",
+"text": "Flächennutzung in Hessen 2024 nach der Belegenheit\nDas Hessisches Landesamt für Bodenmanagement und Geoinformation (HLBG) hat die bisherigen Nachweise des Liegenschaftskatasters (dem Automatisierten Liegenschaftsbuch (ALB) davor „Hauptübersicht der Liegenschaften“) in das bundeseinheitliche Datenmodell des Amtlichen Liegenschaftskataster-Informationssystems (ALKIS) überführt und seit dem Jahr 2010 hieraus erstmals die Angaben für die Bodenflächen nach Art der tatsächlichen Nutzung abgeleitet. Seit Dezember 2015 ist ALKIS in allen Bundesländern eingeführt. Aufgrund dessen hat die amtliche Statistik in Zusammenarbeit mit der Arbeitsgemeinschaft der Vermessungsverwaltungen die Veröffentlichung auf das Datenmodell des ALKIS umgestellt. Die Geobasisdaten werden bundeseinheitlich von der Arbeitsgemeinschaft der Vermessungsverwaltungen (AdV) in der GeoInfoDok dokumentiert. 2023 kam es durch die Umstellung von der GeoInfoDok 6 auf die GeoInfoDok 7 zu einer neuen Klassifizierung der Nutzungsarten. Der Nutzungsartenkatalog wurde erweitert von 28 Nutzungsarten (TN) auf 54 Nutzungsarten (TN+).\nSiedlung: Beinhaltet die Nutzungsarten Wohnbaufläche, Industrie und Gewerbefläche, Halde, Bergbaubetrieb, Tagebau, Grube, Steinbruch, Fläche gemischter Nutzung, Fläche besonderer funktionaler Prägung, Sport-, Freizeit und Erholungsfläche sowie Friedhof mit ihren jeweiligen Untergliederungen.\nVerkehr: Beinhaltet die Nutzungsarten Straßenverkehr, Weg, Platz, Bahnverkehr, Flugverkehr sowie Schiffsverkehr mit ihren jeweiligen Untergliederungen.\nVegetation: Beinhaltet die Nutzungsarten Landwirtschaft, Wald, Gehölz, Heide, Moor, Sumpf sowie Unland, vegetationslose Fläche mit ihren jeweiligen Untergliederungen.\nGewässer: Beinhaltet die Nutzungsarten Fließgewässer, Hafenbecken, stehendes Gewässer sowie Meer mit ihren jeweiligen Untergliederungen.",
+"mids": ""
+},
+{
+"id": "m9",
+"tab": "9",
+"art": "methodik",
+"nr": "9",
+"text": "Jahresbericht für Betriebe im Bereich Verarbeitendes Gewerbe, Bergbau und Gewinnung von Steinen und Erden in Hessen 2024\nBetriebe: Der Berichtskreis umfasst alle Betriebe des Bergbaus, der Gewinnung von Steinen und Erden sowie des Verarbeitenden Gewerbes (Industrie und Verarbeitendes Handwerk) von Unternehmen des Produzierenden Gewerbes mit 20 und mehr Beschäftigten. Dies bedeutet, dass auch Betriebe mit in die Erhebungen einbezogen werden, die weniger als 20 Beschäftigte haben, sofern das Unternehmen zum Produzierenden Gewerbe gehört und die Beschäftigtenzahl über der Abschneidegrenze liegt. Außerdem sind die Betriebe des Bergbaus, der Gewinnung von Steinen und Erden sowie des Verarbeitenden Gewerbes mit 20 und mehr Beschäftigten von Unternehmen außerhalb des Produzierenden Gewerbes meldepflichtig. Wegen der besonderen kleinbetrieblichen Struktur dieser Branchen wird bundeseinheitlich bei folgenden Wirtschaftszweigen die Abschneidegrenze von 10 und mehr Beschäftigten angewendet:\n- Gewinnung von Naturwerksteinen und Natursteinen\n- Gewinnung von Kies und Sand\n- Herstellung von Futtermitteln für Nutztiere\n- Herstellung von Futtermitteln für sonstige Tiere\n- Herstellung von Malz\n- Herstellung von Frischbeton (Transportbeton)\n- Säge, Hobel- und Holzimprägnierwerke (Abschneidegrenze gilt nur für Sägewerke).\nBeschäftigte: Alle am 30. September des Berichtsjahres im Betrieb tätigen Personen, das heißt tätige Inhaberinnen und Inhaber, mithelfende Familienangehörige, Angestellte (einschließlich kaufmännisch und technisch Auszubildende), Arbeiterinnen und Arbeiter (einschließlich gewerblich Auszubildende).\nEntgelte: Bruttobeträge einschließlich aller Zuschläge (zum Beispiel Akkord- und Schichtzuschläge, Gratifikationen), aber ohne die Pflichtanteile der Arbeitgeberin/des Arbeitgebers zur Sozialversicherung. Nicht erfasst werden allgemeine soziale Aufwendungen (zum Beispiel Kosten für Kantinen, Werkskindergärten) und Vergütungen, die als Spesensatz anzusehen sind.\nUmsätze: Rechnungsbeträge ohne Mehrwertsteuer der aus eigener Produktion stammenden Lieferung sowie der ausgeführten Reparaturen, Montagen, Lohnarbeiten und Lohnveredelungen einschließlich der darin enthaltenen Verbrauchssteuern sowie der Kosten für Fracht, Transportversicherung, Porto, Verpackung und Spesen, auch wenn diese gesondert berechnet wurden. Eingeschlossen sind der Umsatz aus Verkauf von Energie, Nebenerzeugnissen und verkaufsfähigen Produktionsrückständen sowie der Umsatz aus sonstigen Betriebsteilen, wie baugewerblicher Umsatz, der Umsatz aus Handelsware, aus Vermietungen und Verpachtungen von betrieblichen Anlagen und Einrichtungen, aus Lizenzverträgen. Nicht einbezogen werden außerordentliche und betriebsfremde Erträge, wie Erlöse aus dem Verkauf von Anlagegütern. Da es sich grundsätzlich um fakturierte Werte handelt, enthalten die Umsätze nicht den Wert von Lieferungen, die innerhalb eines Unternehmens von Werk zu Werk erfolgen. Es kann daher vorkommen, dass Erzeugnisse, die in einem Kreis produziert wurden, im Umsatz eines anderen Kreises oder sogar eines anderen Landes enthalten sind. Die regional gegliederten Umsätze entsprechen somit teilweise nicht der Produktion in den einzelnen Kreisen oder der im Land.\nInlandsumsatz: Umsatz mit Abnehmerinnen und Abnehmern in der Bundesrepublik Deutschland (einschließlich Umsatz mit den im Bundesgebiet stationierten ausländischen Streitkräften).\nAuslandsumsatz: Direktumsatz der Betriebe mit Abnehmerinnen und Abnehmern im Ausland und – soweit einwandfrei erkennbar – Umsatz mit deutschen Exporteuren.",
+"mids": ""
+},
+{
+"id": "m10",
+"tab": "10",
+"art": "methodik",
+"nr": "10",
+"text": "Bauhauptgewerbe in Hessen im Juni 2024\nBerichtskreis: Alle Betriebe des Bauhauptgewerbes, also einschließlich schwerpunktmäßig bauhauptgewerblich tätiger Betriebe von Unternehmen außerhalb des Bauhauptgewerbes (einschließlich der zugehörigen Anteile der Arbeitsgemeinschaften ARGEN).\nBetriebe: Örtlich erfasste Betriebseinheiten einschließlich der zugehörigen Verwaltungs- und Hilfseinrichtungen der in Hessen gelegenen Bauniederlassungen (auch Baustellen mit eigenem Bau- oder Lohnbüro) von Unternehmen des Bauhauptgewerbes sowie anderen Unternehmen mit Sitz innerhalb und außerhalb des Landes Hessen. Arbeitsgemeinschaften melden grundsätzlich nicht selbst, um Doppelzählungen zu vermeiden.\nBeschäftigte: Alle am Monatsende im Betrieb tätigen Personen einschließlich tätiger Inhaberinnen und Inhaber und Mitinhaberinnen und Mitinhaber, unbezahlt mithelfende Familienangehörige, soweit sie mindestens 55 Stunden monatlich im Betrieb tätig sind. Arbeitskräfte, die in einem Arbeitsverhältnis zum Betrieb stehen (wie Vorstandsmitglieder, Direktorinnen/Direktoren, Volontärinnen/Volontäre, Heimarbeiterinnen/Heimarbeiter, Praktikantinnen/Praktikanten und Auszubildende), sowie Arbeitskräfte, die von anderen Unternehmen gegen Entgelt zur Arbeitsleistung gemäß dem Arbeitnehmerüberlassungsgesetz überlassen wurden. Zu den tätigen Personen zählen auch die Erkrankten, Urlauber, im Mutterschutz oder Erziehungsurlaub befindlichen Personen und alle sonstigen vorübergehend Abwesenden, Streikende und von der Aussperrung Betroffene, solange das Arbeitsverhältnis nicht gelöst ist sowie Saison- und Aushilfsarbeiterinnen/Saison- und Aushilfsarbeiter, Teilzeitbeschäftigte, Kurzarbeiterinnen/Kurzarbeiter, Schlechtwettergeldempfängerinnen und Schlechtwettergeldempfänger.\nGeleistete Arbeitsstunden: Alle von Inhaberinnen und Inhabern, Angestellten, Arbeiterinnen und Arbeitern und Auszubildenden auf Baustellen, Bauhöfen und in Werkstätten tatsächlich geleisteten (nicht die bezahlten) Arbeitsstunden. Nicht einbezogen sind die für Bürotätigkeit geleisteten Arbeitsstunden und die Berufsschulstunden der Auszubildenden.\nEntgelte: Bei den Entgelten ist die Summe der lohnsteuerpflichtigen Bruttobezüge (Bar- und Sachbezüge) von den tätigen Personen im Baugewerbe angegeben. Diese verstehen sich ohne Arbeitgeberanteile zur Kranken-, Pflege-, Renten- und Arbeitslosenversicherung, ohne Beiträge zu den Sozialkassen des Baugewerbes, ohne Winterbeschäftigungsumlage, ohne Aufwendungen für die betriebliche Alters-, Invaliditäts- und Hinterbliebenenversorgung, ohne gezahltes Vorruhestandsgeld, ohne geleistete Zuschüsse der Bundesagentur für Arbeit (wie Kurzarbeitergeld, Winterausfallgeld ab der 101. witterungsbedingten Ausfallstunde, Leistungen nach dem Altersteilzeitgesetz). In den Entgelten sind auch Bezüge von Gesellschaftern, Vorstandsmitgliedern und anderen leitenden Kräften enthalten, soweit sie steuerlich als Einkünfte aus nichtselbstständiger Arbeit anzusehen sind.\nEinzubeziehen sind auch Zahlungen für eine Beschäftigung, die nur wegen Unterschreitung der Steuerpflichtgrenzen steuerfrei sind.\nUmsatz des Vorjahres: Baugewerblicher Umsatz einschließlich Umsätze aus Subunternehmertätigkeit und der einbehaltenen Teilleistungen aus Vergabe an Subunternehmerinnen und Subunternehmer, Umsatz aus sonstigen eigenen Erzeugnissen und aus industriellen/handwerklichen Dienstleistungen sowie Umsatz aus Handelsware und aus sonstigen nichtindustriellen/nichthandwerklichen Dienstleistungen.",
+"mids": ""
+},
+{
+"id": "m11",
+"tab": "11,12",
+"art": "methodik",
+"nr": "11",
+"text": "Baugenehmigungen in Hessen 2024 / Baufertigstellungen in Hessen 2024\nGebäude: Frei stehendes oder durch Brandmauer von einem anderen getrenntes Bauwerk. Bei Doppel-, Gruppen- oder Reihenhäusern zählt jedes einzelne, von dem anderen durch eine vom Dach bis zum Keller reichende Trennmauer geschiedene Bauwerk als selbstständiges Gebäude.\nWohngebäude: Gebäude, die ausschließlich oder mindestens zur Hälfte (gemessen an der Gesamtnutzfläche nach den Regeln zur Berechnung der Geschossfläche) Wohnzwecken dienen. Dazu rechnen Wochenend-/Ferienhäuser mit 50 m2 oder mehr Wohnfläche und bei den Baugenehmigungen und -fertigstellungen auch die Wohnheime.\nNichtwohngebäude: Gebäude, die nicht überwiegend Wohnzwecken dienen.\nWohnung: Nach außen abgeschlossene, zu Wohnzwecken bestimmte einzelne oder zusammenliegende Räume, die das Führen eines eigenen Haushalts ermöglichen. Sie sollen einen eigenen Wohnungseingang aufweisen.\nGeplante und fertig gestellte Wohnungen insgesamt: Im Rahmen von Baumaßnahmen an bestehenden Gebäuden und damit verbundenen eventuell Nutzungsänderungen können Wohnungen wegfallen und somit negative Werte in Tabellenfeldern enthalten sein. Im Einzelfall bedeutet dies, dass durch Umbaumaßnahmen an bestehenden Objekten die Anzahl der wegfallenden oder weggefallenen Wohnungen größer ist als die Anzahl der neu geplanten oder entstandenen Wohnungen. Korrekturen sind in diesen Fällen nicht angebracht.",
+"mids": ""
+},
+{
+"id": "m12",
+"tab": "13",
+"art": "methodik",
+"nr": "12",
+"text": "Wohnungen in Wohn- und Nichtwohngebäuden in Hessen am 31. Dezember 2024\nDer Fortschreibung des Wohnungsbestandes liegen als Ausgangsdaten die Ergebnisse des Zensus 2022 zugrunde, die mit Hilfe der Ergebnisse der jährlichen Bautätigkeitsstatistik (Fertigstellungen abzüglich Abgängen) und der Veränderungsmeldungen über die von ausländischen Streitkräften beanspruchten Wohnungen ergänzt werden. Wohnheime werden seit dem Zensus 2011 zu Wohngebäuden und Wohnungen mit 3 oder mehr Wohnungen in Wohngebäuden gezählt.",
+"mids": ""
+},
+{
+"id": "m13",
+"tab": "14",
+"art": "methodik",
+"nr": "13",
+"text": "Tourismus in Hessen 2024\nRechtsgrundlage für die Erhebung der monatlichen Statistik ist das Beherbergungsstatistikgesetz (BeherbStatG) vom 22. Mai 2002 (BGBl. I S. 1642), zuletzt geändert durch Artikel 11 des Gesetzes vom 28. Juli 2015 (BGBl. I S. 1400) in Verbindung mit dem Bundesstatistikgesetz (BStatG) vom 20. Oktober 2016 (BGBl. I S. 2394), in der derzeit geltenden Fassung sowie die Verordnung (EU) Nr. 692/2011 des Europäischen Parlaments und des Rates über die europäische Tourismusstatistik und zur Aufhebung der Richtlinie 95/57/EG des Rates (ABI. L 192 vom 22. Juli 2011, S. 17).\nAuskunftspflichtig sind alle Beherbergungsbetriebe mit zehn oder mehr Gästebetten und Campingplätze mit zehn oder mehr Stellplätzen (ohne Dauercampingplätze).",
+"mids": ""
+},
+{
+"id": "m14",
+"tab": "15",
+"art": "methodik",
+"nr": "14",
+"text": "Straßenverkehrsunfälle in Hessen 2024\nAuf Grund des Gesetzes über die Statistik der Straßenverkehrsunfälle (Straßenverkehrsunfallstatistikgesetz — StVUnfStatG) vom 15. Juni 1990 (BGBI. I S. 1078) und der Verordnung zur näheren Bestimmung des schwerwiegenden Unfalls mit Sachschaden im Sinne des Straßenverkehrsunfallstatistikgesetzes vom 21. Dezember 1994 (BGBl. I S. 3970), in der jeweils gültigen Fassung, wird über Unfälle, bei denen infolge des Fahrverkehrs auf öffentlichen Wegen und Plätzen Personen getötet oder verletzt oder Sachschäden verursacht worden sind, eine Bundesstatistik durchgeführt.\nStraßenverkehrsunfälle insgesamt: Unfälle mit Personenschaden, schwerwiegende Unfälle mit Sachschaden im engeren Sinne und sonstige Sachschadensunfälle unter Einfluss berauschender Mittel.\nSchwerwiegende Straßenverkehrsunfälle mit Sachschaden im engeren Sinne: Unfälle, bei denen ein Straftatbestand oder eine Ordnungswidrigkeit (Bußgeld) vorlag und bei denen gleichzeitig mindestens ein Kraftfahrzeug als nicht fahrbereit von der Unfallstelle abgeschleppt werden musste.\nSonstige Sachschadensunfälle unter Einfluss berauschender Mittel: Unfälle, bei denen mindestens eine Unbeteiligte oder ein Unbeteiligter oder eine Unfallbeteiligte oder ein Unfallbeteiligter unter Einwirkung eines berauschenden Mittels stand und alle beteiligten Kraftfahrzeuge fahrbereit waren.\nGetötete: Personen, die auf der Stelle getötet wurden oder innerhalb von 30 Tagen an den Unfallfolgen starben.\nSchwerverletzte: Personen, die unmittelbar in ein Krankenhaus zur stationären Behandlung eingeliefert wurden.\nLeichtverletzte: Personen, deren Verletzungen keinen stationären Krankenhausaufenthalt erforderten.",
+"mids": ""
+},
+{
+"id": "m15",
+"tab": "16",
+"art": "methodik",
+"nr": "15",
+"text": "Ein- und Auszahlungen der Gemeinden und Gemeindeverbände in Hessen 2024\nAlle Daten beziehen sich auf die Kernhaushalte der Gemeinden und Gemeindeverbände.\nStand für sämtliche Daten der Finanzstatistiken ist der 07.10.2025. Nach diesem Termin eingereichte Korrekturen finden hier keine Berücksichtigung.\nEinzahlungen aus laufender Verwaltungstätigkeit (Spalte F): Summe der kassenmäßigen Einzahlungen aus laufender Verwaltungstätigkeit aus den vierteljährlichen Kassenergebnissen nach doppischer Haushaltssystematik (finanzstatistische Konten 60, 61, 62, 63, 64, 65 und 66) entgegen früherer Jahre ohne Abzug der Gewerbesteuerumlage (Konto 7341).\nEinzahlungen aus Investitions- und Finanzierungstätigkeit (Spalte G): Summe der kassenmäßigen Einzahlungen aus Investitions- und Finanzierungstätigkeit aus den vierteljährlichen Kassenergebnissen nach doppischer Haushaltssystematik (finanzstatistische Konten 68 und 69).\nSchlüsselzuweisungen (Spalte H): Allgemeine Finanzzuweisungen des Landes an seine kommunalen Gebietskörperschaften. Die im Rahmen des kommunalen Finanzausgleichs zur Verfügung gestellte Finanzausgleichsmasse des Landes wird – nach Abzug der Beträge für die Allgemeine Finanzzuweisung an den Landeswohlfahrtsverband Hessen, für besondere Finanzzuweisungen und für die Ausgaben zur Finanzierung von Investitionen – als Schlüsselzuweisung (finanzstatistisches Konto 6111) auf die einzelnen Gemeinden aufgeteilt. Der Verteilungsschlüssel bestimmt sich nach den jeweils gültigen Rechtsgrundlagen des kommunalen Finanzausgleichs.\nSteuern und ähnliche Abgaben insgesamt (Spalte I): kassenmäßige Einzahlungen aus Realsteuern: Grundsteuer A und B sowie Gewerbesteuer (finanzstatistisches Konto 601), den Gemeindeanteilen an Gemeinschaftssteuern: Einkommensteuer sowie Umsatzsteuer (finanzstatistisches Konto 602), sonstigen Gemeindesteuern: u. a. Vergnügungssteuer und Hundesteuer (finanzstatistisches Konto 603) sowie steuerähnlichen Einzahlungen (finanzstatistisches Konto 604), entgegen früherer Jahre ohne Abzug der Gewerbesteuerumlage (finanzstatistisches Konto 7341).\nAuszahlungen aus laufender Verwaltungstätigkeit (Spalte L): Summe der kassenmäßigen Auszahlungen aus laufender Verwaltungstätigkeit aus den vierteljährlichen Kassenergebnissen nach doppischer Haushaltssystematik (finanzstatistische Konten 70, 71, 72, 73, 74 und 75) entgegen früherer Jahre ohne Abzug der Gewerbesteuerumlage (Konto 7341).\nAuszahlungen aus Investitions- und Finanzierungstätigkeit (Spalte M): Summe der kassenmäßigen Auszahlungen aus Investitions- und Finanzierungstätigkeit aus den vierteljährlichen Kassenergebnissen nach doppischer Haushaltssystematik (finanzstatistische Konten 78 und 79).\nBaumaßnahmen (Spalte N): Summe der Erweiterungs-, Neu-, Um- und Ausbau-, Abbruch- und Aufschließungskosten, wenn sie zur Durchführung von Bauten erforderlich sind (finanzstatistisches Konto 785). Zu den Baumaßnahmen gehören auch alle Baunebenkosten, wie Vergütungen für Vertragsarchitekteninnen und Vertragsarchitekten, Vertragsingenieurbüros usw., Leistungen an freischaffende Mitarbeiterinnen und Mitarbeiter, Auslagen für Werks- und ähnliche Verträge, Wettbewerbskosten, künstlerische Ausgestaltung, Planung, Entwurf, Bauleitung. Ebenfalls enthalten sind Auszahlungen für dauerhafte Einbauten und Ausstattungen, die normalerweise vor dem Bezug oder Ingebrauchnahme installiert werden und wesentliche Bestandteile der Bauten sind.\nPersonal- und Versorgungsauszahlungen (Spalten O und P): kassenmäßige Zahlungen an aktive Mitarbeiterinnen und Mitarbeiter des öffentlichen Dienstes als auch Zahlungen an Personen im Ruhestand. Die Personalausgaben umfassen daher Bezüge und Versorgungsbezüge genauso wie Beihilfen und andere Fürsorgeleistungen aus den Vierteljährlichen Kassenergebnissen nach doppischer Haushaltssystematik (finanzstatistische Konten 70 und 71).",
+"mids": ""
+},
+{
+"id": "m16",
+"tab": "17",
+"art": "methodik",
+"nr": "16",
+"text": "Realsteuern der Gemeinden und Gemeindeverbände in Hessen 2024\nGrundsteuern (Spalte D und E): Grundsteuer A für land- und forstwirtschaftliche Betriebe (finanzstatistisches Konto 6011) und Grundsteuer B für Wohn- und Betriebsgrundstücke (finanzstatistisches Konto 6012).\nGewerbesteuer netto (Spalte F): Aufkommen der Gewerbesteuer (finanzstatistisches Konto 6013) abzüglich der je zur Hälfte an Bund und Land abzuführenden Gewerbesteuerumlage (finanzstatistisches Konto 7431).\nRealsteuerhebesätze (Spalten H, I und J): Von den Gemeinden in der Haushaltssatzung festgelegte Prozentsätze, die auf die Steuermessbeträge der jeweiligen Realsteuer anzuwenden sind.\nGemeindeanteile an Gemeinschaftssteuern (Spalten K und L): Die Gemeindeanteile an Gemeinschaftssteuern (finanzstatistisches Konto 602) setzen sich zusammen aus dem Gemeindeanteil an der Einkommensteuer (finanzstatistisches Konto 6021) und dem Gemeindeanteil an der Umsatzsteuer (finanzstatistisches Konto 6022).\nSteuereinnahmekraft (Spalte N und O): Die gemeindliche Steuereinnahmekraft ist hier wie folgt berechnet: Realsteueraufbringungskraft zuzüglich des Gemeindeanteils an der Einkommensteuer (finanzstatistisches Konto 6021) und der Umsatzsteuer (finanzstatistisches Konto 6022) abzüglich der Gewerbesteuerumlage (finanzstatistisches Konto 7341).",
+"mids": ""
+},
+{
+"id": "m17",
+"tab": "18",
+"art": "methodik",
+"nr": "17",
+"text": "Schulden der Gemeinden und Gemeindeverbände in Hessen 2024\nAufnahmen und Tilgungen von Investitionskrediten und Wertpapierschulden (Spalten F und G): In der Zeit vom 1. Januar bis 31. Dezember des jeweiligen Jahres aufgenommene und im Haushalt vereinnahmte Investitionskredite und Wertpapierschulden sowie deren Tilgung.\nKassenkredite (Spalte H): Unter Kassenkrediten (auch als Kassenverstärkungskredite oder Kredite zur Liquiditätssicherung bezeichnet) werden die kurzfristigen Verbindlichkeiten erfasst, welche die Gemeindehaushalte zur Überbrückung vorübergehender Kassenanspannungen eingehen. Sie dienen keinen investiven Zwecken, sondern der Aufrechterhaltung einer ordnungsgemäßen Kassenwirtschaft oder der Liquiditätssicherung. Cashpooling (Liquiditätsverbund) wird ebenfalls den Kassenkrediten zugerechnet. Bei den Verbindlichkeiten im Rahmen von „Cash-Pooling“ wird unterschieden zwischen den Entnahmen durch Teilnehmer des Cash-Pools sowie den Verbindlichkeiten, die beim Cash-Pool-Führer durch Zuführungen der Teilnehmer entstehen. Die aus dem Cash-Pool für den eigenen Liquiditätsbedarf entnommenen Mittel sind bei den Kassenkrediten berücksichtigt.\nStand von Investitionskrediten und Wertpapierschulden (Spalte I): Vorläufige Ergebnisse. Für Mai/Juni 2026 ist eine bundesweite Revision der Schuldenstatistik 2024 geplant. Nachgewiesen wird der Stand der Investitionskredite und Wertpapierschulden der Kernhaushalte. Nicht einbezogen wurden also beispielsweise die Schulden der kommunalen Eigenbetriebe.\nFinanzvermögen (Spalte J): Das Finanzvermögen der Gemeindehaushalte wird im Rahmen der Finanzvermögenstatistik jährlich zum 31. Dezember erhoben. Neben dem Bestand an Bargeld und Einlagen wird das Vermögen aus Wertpapieren sowie Ausleihungen, Anteilsrechten und sonstigen Forderungen im Rahmen der Statistik einbezogen.",
+"mids": ""
+},
+{
+"id": "m18",
+"tab": "19",
+"art": "methodik",
+"nr": "18",
+"text": "Personal der Gemeinden und Gemeindeverbände in Hessen am 30. Juni 2024\nDie Landkreisergebnisse errechnen sich aus der Summe der kreisangehörigen Gemeinden des jeweiligen Landkreises plus seiner Landkreisverwaltung (nicht einzeln ausgewiesen), die Landessumme enthält außerdem noch die Ergebnisse des Landeswohlfahrtsverbandes.\nOrganisations-/Beschäftigungsbereiche\nDie Spalten C bis R enthalten Werte der drei folgenden Beschäftigungsbereiche:\n- Der Kernhaushalt enthält alle im Haushalt geführten Ämter und Einrichtungen.\n- Die Sonderrechnungen ohne Krankenhäuser umfassen die – bis auf die Krankenhäuser – aus den Haushalten ausgegliederten Einrichtungen und Unternehmen (beispielweise Eigenbetriebe).\n- Die als Sonderrechnungen geführten, rechtlich unselbstständigen Krankenhäuser.\nBeamtinnen und Beamte sind Bedienstete, die – auf Lebenszeit, Zeit, Probe, Widerruf – durch eine Ernennungsurkunde in das Beamtenverhältnis berufen worden sind. Nicht als Beamtinnen und Beamte zählen Arbeitnehmerinnen und Arbeitnehmer, die nach einem Besoldungsgesetz bezahlt werden.\nArbeitnehmerinnen und Arbeitnehmer sind alle in einem privatrechtlichen Arbeitsvertragsverhältnis Beschäftigten, die in der Regel in der Rentenversicherung für Angestellte oder für Arbeiterinnen und Arbeiter versicherungspflichtig sind, einschließlich Arbeitnehmerinnen und Arbeitnehmer in Ausbildung.\nVollzeitbeschäftigte sind Beschäftigte, deren regelmäßige Arbeitszeit die übliche volle Wochenarbeitsstundenzahl beträgt.\nBei den Teilzeitbeschäftigten unterscheidet man drei Gruppen:\n- Beschäftigte mit mindestens der Hälfte der regelmäßigen Wochenarbeitszeit\n- Beschäftigte mit weniger als der Hälfte der regelmäßigen Wochenarbeitszeit\n- Altersteilzeitbeschäftigte\nDie Altersteilzeit erleichtert Beschäftigten, die das 55. Lebensjahr vollendet haben, den Übergang in den Ruhestand. Im Blockmodell schließt sich an die Arbeitsphase mit der bisher üblichen Arbeitszeit eine Freistellungsphase an, was zu einer früheren Beendigung des aktiven Berufslebens führt. Im Teilzeitmodell wird die bisher übliche Arbeitszeit während der Gesamtlaufzeit auf die Hälfte reduziert, was einen gleitenden Übergang in den Ruhestand ermöglicht.",
+"mids": ""
+},
+{
+"id": "m19",
+"tab": "20",
+"art": "methodik",
+"nr": "19",
+"text": "Lohn- und Einkommensteuerstatistik in Hessen 2021\nFür die Lohn- und Einkommensteuerstatistik gilt der Gebietsstand vom 01.01.2023.\nSteuerpflichtige: Zu den Lohn- und Einkommensteuerpflichtigen zählen die nicht veranlagten und veranlagten abhängig Beschäftigten sowie die veranlagten Einkommensteuerpflichtigen, die keine Lohneinkünfte bezogen haben. Ehepaare, die gemeinsam zur Einkommensteuer veranlagt wurden, zählen als ein Steuerpflichtiger.\nSumme der Einkünfte, Gesamtbetrag der Einkünfte, Einkommen und zu versteuerndes Einkommen: Das folgende Schema zur Ermittlung des zu versteuernden Einkommens klärt die Bedeutung der einzelnen Begriffe und deren Zusammenhang:\nEinkünfte aus Land- und Forstwirtschaft\nplus Einkünfte aus Gewerbebetrieb\nplus Einkünfte aus selbständiger Arbeit\nplus Einkünfte aus nichtselbständiger Arbeit\nplus Einkünfte aus Kapitalvermögen1)\nplus Einkünfte aus Vermietung und Verpachtung\nplus sonstige Einkünfte\ngleich Summe der Einkünfte\nminus Altersentlastungsbetrag\nminus Entlastungsbetrag für Alleinerziehende\nminus Freibetrag für Land- und Forstwirte\ngleich Gesamtbetrag der Einkünfte\nminus Sonderausgaben\nminus außergewöhnliche Belastungen\nminus Altersvorsorgebeiträge\nminus Steuerbegünstigung\nminus Verlustabzug nach § 10d Einkommensteuergesetz\ngleich Einkommen\nminus Freibeträge für Kinder\nminus Härteausgleich\ngleich zu versteuerndes Einkommen\nFestgesetzte Steuern: Die festgesetzten Steuern umfassen die Einkommensteuer der Einkommensteuerpflichtigen (Pflichtveranlagte) und die Jahreslohnsteuer der Lohnsteuerpflichtigen (Nicht- oder Antragsveranlagte).\nZur Ermittlung der festgesetzten Steuern wird folgende Berechnung vorgenommen:\nSteuerbetrag gemäß Grund- oder Splittingtarif\ngleich tarifliche Einkommensteuer\nminus ausländische Steuer\nminus Steuerermäßigungen\nplus Anspruch auf Altersvorsorgezulage\nplus hinzuzurechnendes Kindergeld\ngleich festgesetzte Einkommensteuer\nBruttolohn: Als Bruttolohn werden die auf der Lohnsteuerkarte bzw. der elektronischen Lohnsteuerbescheinigung eingetragenen Arbeitslöhne erfasst. Im Einzelnen sind dies beispielweise Gehälter, Löhne, Provisionen, Versorgungsbezüge, Ruhe-, Warte-, Witwen- und Waisengelder (ohne Kürzung um Arbeitnehmer-Freibetrag und Werbungskosten).\n1) Durch die Einführung der Abgeltungsteuer für Einkünfte aus Kapitalvermögen zum 1. Januar 2009 (Quellensteuer) sind die Steuerpflichtigen nicht mehr verpflichtet, ihre Einkünfte aus Kapitalvermögen in der Steuererklärung zu deklarieren. In der Einkommensteuer können seitdem nicht mehr sämtliche Einkünfte aus Kapitalvermögen nachgewiesen werden.",
+"mids": ""
+},
+{
+"id": "m20",
+"tab": "21",
+"art": "methodik",
+"nr": "20",
+"text": "Umsatzsteuerpflichtige und deren Lieferungen und Leistungen in Hessen 2023\nFür die Umsatzsteuerstatistik (Voranmeldung) 2023 gilt der Gebietsstand vom 01.01.2023.\nIn den vorliegenden Erläuterungen werden die Begriffe des Umsatzsteuergesetzes verwendet, die stets alle Geschlechter einschließen.\nUmsatzsteuerpflichtig ist der Unternehmer. Als Unternehmer gilt nach § 2 Abs. 1 UStG, wer eine gewerbliche oder berufliche Tätigkeit selbstständig ausübt. Das Unternehmen umfasst die gesamte gewerbliche oder berufliche Tätigkeit des Unternehmers.\nDie juristischen Personen des öffentlichen Rechts sind nur im Rahmen ihrer Betriebe gewerblicher Art und ihrer land- oder forstwirtschaftlichen Betriebe gewerblich oder beruflich tätig (§ 2 Abs. 3 UStG). Als gewerbliche oder berufliche Tätigkeit gelten außerdem gemäß § 2 Abs. 3 UStG bestimmte, gesondert angeführte Aktivitäten.\nDer Umsatzsteuer unterliegen nach § 1 UStG:\n- die Lieferungen und sonstigen Leistungen, die ein Unternehmer im Inland im Rahmen seines Unternehmens ausführt\n- die Einfuhr von Gegenständen im Inland oder in den österreichischen Gebieten Jungholz und Mittelberg (Einfuhrumsatzsteuer)\n- der innergemeinschaftliche Erwerb im Inland gegen Entgelt\nDie Hauptumsatzarten im Umsatzsteuerrecht fallen unter die Lieferungen und sonstigen Leistungen (§ 1 Abs. 1 UStG). Dabei ist ein Umsatz nur steuerbar, wenn die folgenden fünf Tatbestandsmerkmale erfüllt sind:\n- Lieferung oder sonstige Leistung\n- gegen Entgelt\n- durch einen Unternehmer\n- im Rahmen seines Unternehmens\n- im Inland\nLieferungen eines Unternehmers liegen vor, wenn er dem Abnehmer die Verfügungsmacht über einen Gegenstand verschafft (§ 3 Abs. 1 UStG). Als sonstige Leistungen gelten die Leistungen, die keine Lieferungen, das heißt keine Gegenstände sondern wirtschaftlich relevante Werte sind (§ 3 Abs. 9 UStG). Vor allem sind hier Dienstleistungen und Gebrauchs- und Nutzungsüberlassungen, wie Vermietung, Verpachtung, Darlehensgewährung oder Reiseleistungen im Sinne des § 25 Abs. 1 UStG, zu nennen.\nZur Abgabe von Umsatzsteuervoranmeldungen ist mit wenigen Ausnahmen jeder Unternehmer verpflichtet. Voranmeldungszeitraum ist grundsätzlich das Kalendervierteljahr. An dessen Stelle tritt der Kalendermonat, soweit die Jahressteuer (nach Abzug der Vorsteuer) für das vorangegangene Kalenderjahr mehr als 7 500 Euro betragen hatte. Bei einer Jahressteuer von nicht mehr als 1 000 Euro kann das Finanzamt den Unternehmer von der Verpflichtung zur Abgabe von Voranmeldungen befreien (§ 18 UStG).\nNicht erfasst wurden:\n- Unternehmer, die keine Umsatzsteuervoranmeldung abgegeben haben, weil ihre Jahressteuer im Vorjahr weniger als 1 000 Euro betragen hat – auch solche mit hohen steuerbaren, aber niedrigen, darin enthaltenen steuerpflichtigen Umsätzen\n- Unternehmer mit einem steuerbaren Jahresumsatz aus Lieferungen und Leistungen bis zu 22 000 Euro (z. B. Kleinunternehmer),\n- die überwiegende Zahl der land- und forstwirtschaftlichen Betriebe, für die auf Grund der Durchschnittsbesteuerung keine Steuerzahllast entsteht (diese Regelung gilt für den Großteil der Betriebe)\n- Organgesellschaften, die gemäß § 2 Umsatzsteuergesetz zusammen mit dem Organträger einen Steuerpflichtigen bilden\n- Angehörige freier Berufe des Gesundheits- und Sozialwesens, vorausgesetzt, dass nur Leistungen erbracht wurden deren Entgelte steuerfrei sind\nDie Unternehmen wurden den jeweiligen Wirtschaftsbereichen entsprechend der EU-einheitlichen Systematik der Wirtschaftszweige (WZ 2008 – Fassung für die Steuerstatistiken) nach ihrem wirtschaftlichen Schwerpunkt zugeordnet sowie institutionell und nicht funktionell gegliedert. So wird beispielweise ein Unternehmen mit Umsatzschwerpunkt im Großhandel, das auch Einzelhandelsumsätze tätigt, mit seinen gesamten Lieferungen und Leistungen im Großhandel nachgewiesen. Ferner bedingt das Unternehmensprinzip bei der Umsatzsteuer, dass der von dem Hauptbetrieb und den Zweigbetrieben eines Unternehmens an verschiedenen Orten erzielte Umsatz nur insgesamt am Ort des Sitzes beispielweise der Geschäftsleitung des Unternehmens ausgewiesen werden kann.\nSpalte M und N (ausgewählte Dienstleistungen) beinhalten:\n- Erbringung von freiberuflichen, wissenschaftlichen und technischen Dienstleistungen\n- Erbringung von sonstigen wirtschaftlichen Dienstleistungen\n- Erbringung von sonstigen Dienstleistungen\nSpalte O und P (restliche Wirtschaftsabschnitte) beinhalten:\n- Land- und Forstwirtschaft, Fischerei\n- Bergbau und Gewinnung von Steinen und Erden\n- Energieversorgung\n- Wasserversorgung; Abwasser- und Abfallentsorgung und Beseitigung von Umweltverschmutzungen\n- Baugewerbe\n- Verkehr und Lagerei\n- Gastgewerbe\n- Information und Kommunikation\n- Erbringung von Finanz- und Versicherungsdienstleistungen\n- Erziehung und Unterricht\n- Gesundheits- und Sozialwesen\n- Kunst, Unterhaltung und Erholung",
+"mids": ""
+}
+]
+}

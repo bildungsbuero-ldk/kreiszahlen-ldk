@@ -1,0 +1,626 @@
+[
+ [
+  "Bevölkerung",
+  [
+   [
+    "bev",
+    "Einwohnerinnen und Einwohner",
+    "Bevölkerung insgesamt (Tab. 1)",
+    {
+     "num": [
+      "1_4"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "bevVer",
+    "Veränderung zum Vorjahr",
+    "Zu- bzw. Abnahme der Bevölkerung in % (Tab. 1)",
+    {
+     "num": [
+      "1_10"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "u15",
+    "Anteil unter 15-Jährige",
+    "An der Bevölkerung insgesamt (Tab. 1)",
+    {
+     "num": [
+      "1_13",
+      "1_15"
+     ],
+     "den": [
+      "1_4"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "ab65",
+    "Anteil 65-Jährige und Ältere",
+    "An der Bevölkerung insgesamt (Tab. 1)",
+    {
+     "num": [
+      "1_19"
+     ],
+     "den": [
+      "1_4"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "nd",
+    "Anteil Nichtdeutsche",
+    "An der Bevölkerung insgesamt (Tab. 3)",
+    {
+     "num": [
+      "3_10"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "wand",
+    "Wanderungssaldo",
+    "Zu- minus Fortgezogene je 1.000 Einwohner/-innen (Tab. 4, 1)",
+    {
+     "num": [
+      "4_16"
+     ],
+     "den": [
+      "1_4"
+     ],
+     "f": 1000,
+     "d": 1
+    }
+   ]
+  ]
+ ],
+ [
+  "Landwirtschaft und Flächennutzung",
+  [
+   [
+    "svf",
+    "Siedlungs- und Verkehrsfläche",
+    "Anteil an der Bodenfläche in % (Tab. 8)",
+    {
+     "num": [
+      "8_19"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "wald",
+    "Waldfläche",
+    "Anteil an der Bodenfläche in % (Tab. 8)",
+    {
+     "num": [
+      "8_15"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "lwf",
+    "Landwirtschaftsfläche",
+    "Anteil an der Bodenfläche in % (Tab. 8)",
+    {
+     "num": [
+      "8_13"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "lwb",
+    "Landwirtschaftliche Betriebe",
+    "Anzahl, Landwirtschaftszählung 2020 (Tab. 5)",
+    {
+     "num": [
+      "5_3"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "oeko",
+    "Betriebe mit ökologischem Landbau",
+    "Anzahl, Landwirtschaftszählung 2020 (Tab. 7)",
+    {
+     "num": [
+      "7_10"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Produzierendes Gewerbe",
+  [
+   [
+    "indDichte",
+    "Industriebeschäftigte",
+    "Tätige Personen je 1.000 Einwohner/-innen (Tab. 9)",
+    {
+     "num": [
+      "9_5"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "indPers",
+    "Tätige Personen in der Industrie",
+    "Verarbeitendes Gewerbe, Bergbau, Steine und Erden (Tab. 9)",
+    {
+     "num": [
+      "9_4"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "indUms",
+    "Industrieumsatz",
+    "Gesamtumsatz in Millionen Euro (Tab. 9)",
+    {
+     "num": [
+      "9_7"
+     ],
+     "d": 1,
+     "u": "Mio. €"
+    }
+   ],
+   [
+    "bauPers",
+    "Tätige im Bauhauptgewerbe",
+    "Tätige Personen im Juni (Tab. 10)",
+    {
+     "num": [
+      "10_4"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Gebäude und Wohnungen",
+  [
+   [
+    "fertig",
+    "Fertiggestellte Wohnungen",
+    "Je 10.000 Einwohner/-innen, einschl. Baumaßnahmen im Bestand (Tab. 12, 1)",
+    {
+     "num": [
+      "12_16"
+     ],
+     "den": [
+      "1_4"
+     ],
+     "f": 10000,
+     "d": 1
+    }
+   ],
+   [
+    "genehm",
+    "Genehmigte Wohnungen",
+    "Je 10.000 Einwohner/-innen, einschl. Baumaßnahmen im Bestand (Tab. 11, 1)",
+    {
+     "num": [
+      "11_16"
+     ],
+     "den": [
+      "1_4"
+     ],
+     "f": 10000,
+     "d": 1
+    }
+   ],
+   [
+    "wfl",
+    "Wohnfläche je Einwohner/-in",
+    "Wohnfläche in m² je Einwohner/-in (Tab. 13, 1)",
+    {
+     "num": [
+      "13_11"
+     ],
+     "den": [
+      "1_4"
+     ],
+     "f": 1000,
+     "d": 1,
+     "u": "m²"
+    }
+   ],
+   [
+    "efh",
+    "Anteil Einfamilienhäuser",
+    "An allen Wohngebäuden in % (Tab. 13)",
+    {
+     "num": [
+      "13_13"
+     ],
+     "den": [
+      "13_12"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ]
+  ]
+ ],
+ [
+  "Tourismus",
+  [
+   [
+    "uebern",
+    "Übernachtungen",
+    "Im Jahr (Tab. 14)",
+    {
+     "num": [
+      "14_5"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "uebernEW",
+    "Übernachtungen je Einwohner/-in",
+    "Übernachtungen im Jahr je Einwohner/-in (Tab. 14, 1)",
+    {
+     "num": [
+      "14_5"
+     ],
+     "den": [
+      "1_4"
+     ],
+     "d": 1
+    }
+   ],
+   [
+    "dauer",
+    "Aufenthaltsdauer",
+    "Durchschnitt in Tagen (Tab. 14)",
+    {
+     "num": [
+      "14_6"
+     ],
+     "d": 1
+    }
+   ],
+   [
+    "betten",
+    "Bettenangebot",
+    "Durchschnittlich angebotene Betten (Tab. 14)",
+    {
+     "num": [
+      "14_3"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Straßenverkehrsunfälle",
+  [
+   [
+    "unf",
+    "Unfälle",
+    "Straßenverkehrsunfälle insgesamt (Tab. 15)",
+    {
+     "num": [
+      "15_3"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "unfPers",
+    "Unfälle mit Personenschaden",
+    "Anzahl (Tab. 15)",
+    {
+     "num": [
+      "15_6"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "verungl",
+    "Verunglückte je 10.000 Einwohner/-innen",
+    "Getötete, Schwer- und Leichtverletzte (Tab. 15, 1)",
+    {
+     "num": [
+      "15_7",
+      "15_8",
+      "15_9"
+     ],
+     "den": [
+      "1_4"
+     ],
+     "f": 10000,
+     "d": 1
+    }
+   ],
+   [
+    "schwer",
+    "Getötete und Schwerverletzte",
+    "Anzahl (Tab. 15)",
+    {
+     "num": [
+      "15_7",
+      "15_8"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Gemeindefinanzen",
+  [
+   [
+    "steuerkraft",
+    "Steuereinnahmekraft",
+    "Euro je Einwohner/-in (Tab. 17)",
+    {
+     "num": [
+      "17_15"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "schulden",
+    "Schulden",
+    "Euro je Einwohner/-in am 31.12. (Tab. 18)",
+    {
+     "num": [
+      "18_5"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "hebeB",
+    "Hebesatz Grundsteuer B",
+    "In % (Tab. 17)",
+    {
+     "num": [
+      "17_9"
+     ],
+     "d": 0,
+     "u": "%"
+    }
+   ],
+   [
+    "hebeG",
+    "Hebesatz Gewerbesteuer",
+    "In % (Tab. 17)",
+    {
+     "num": [
+      "17_10"
+     ],
+     "d": 0,
+     "u": "%"
+    }
+   ],
+   [
+    "saldo",
+    "Finanzierungssaldo",
+    "Euro je Einwohner/-in (Tab. 16)",
+    {
+     "num": [
+      "16_17"
+     ],
+     "den": [
+      "16_3"
+     ],
+     "f": 1000,
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "persAnteil",
+    "Personalauszahlungen",
+    "Anteil an den laufenden Auszahlungen in % (Tab. 16)",
+    {
+     "num": [
+      "16_16"
+     ],
+     "d": 1,
+     "u": "%"
+    }
+   ]
+  ]
+ ],
+ [
+  "Gemeindepersonal",
+  [
+   [
+    "pers",
+    "Personal",
+    "Beschäftigte am 30. Juni (Tab. 19)",
+    {
+     "num": [
+      "19_3"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "persEW",
+    "Personal je 1.000 Einwohner/-innen",
+    "Beschäftigte je 1.000 Einwohner/-innen (Tab. 19, 1)",
+    {
+     "num": [
+      "19_3"
+     ],
+     "den": [
+      "1_4"
+     ],
+     "f": 1000,
+     "d": 1
+    }
+   ],
+   [
+    "persW",
+    "Frauenanteil",
+    "Anteil weiblich am Personal in % (Tab. 19)",
+    {
+     "num": [
+      "19_4"
+     ],
+     "den": [
+      "19_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ],
+   [
+    "persTZ",
+    "Teilzeitquote",
+    "Anteil Teilzeitbeschäftigte in % (Tab. 19)",
+    {
+     "num": [
+      "19_14"
+     ],
+     "den": [
+      "19_3"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ]
+  ]
+ ],
+ [
+  "Lohn- und Einkommensteuer",
+  [
+   [
+    "eink",
+    "Einkünfte je Steuerpflichtigen",
+    "Gesamtbetrag der Einkünfte in Euro (Tab. 20)",
+    {
+     "num": [
+      "20_5"
+     ],
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "est",
+    "Einkommensteuer je Steuerpflichtigen",
+    "Festgesetzte Einkommensteuer in Euro (Tab. 20)",
+    {
+     "num": [
+      "20_8"
+     ],
+     "den": [
+      "20_3"
+     ],
+     "f": 1000,
+     "d": 0,
+     "u": "€"
+    }
+   ],
+   [
+    "stpfl",
+    "Steuerpflichtige",
+    "Lohn- und Einkommensteuerpflichtige (Tab. 20)",
+    {
+     "num": [
+      "20_3"
+     ],
+     "d": 0
+    }
+   ]
+  ]
+ ],
+ [
+  "Umsatzsteuer",
+  [
+   [
+    "ustpfl",
+    "Umsatzsteuerpflichtige",
+    "Alle Wirtschaftsabschnitte (Tab. 21)",
+    {
+     "num": [
+      "21_3"
+     ],
+     "d": 0
+    }
+   ],
+   [
+    "lul",
+    "Lieferungen und Leistungen",
+    "Millionen Euro (Tab. 21)",
+    {
+     "num": [
+      "21_4"
+     ],
+     "d": 1,
+     "u": "Mio. €"
+    }
+   ],
+   [
+    "lulJe",
+    "Umsatz je Steuerpflichtigen",
+    "Tausend Euro (Tab. 21)",
+    {
+     "num": [
+      "21_4"
+     ],
+     "den": [
+      "21_3"
+     ],
+     "f": 1000,
+     "d": 0,
+     "u": "Tsd. €"
+    }
+   ],
+   [
+    "vgAnteil",
+    "Anteil Verarbeitendes Gewerbe",
+    "An den Lieferungen und Leistungen in % (Tab. 21)",
+    {
+     "num": [
+      "21_6"
+     ],
+     "den": [
+      "21_4"
+     ],
+     "f": 100,
+     "d": 1,
+     "u": "%"
+    }
+   ]
+  ]
+ ]
+]

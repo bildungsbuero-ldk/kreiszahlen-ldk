@@ -1,0 +1,137 @@
+== Ausgabe 2021 (HGSt_j2021.xlsx)
+   Blatt „Regional-und Zweckverband“ ohne Gegenstück in der Referenz, entfällt: Zusammensetzung des Regionalverbands FrankfurtRheinMain und des Zweckverbands Raum Kassel
+   „Bevölkerung und Gebiet“→T1: Merkmale ohne Wert in dieser Ausgabe: ['1_4', '1_5', '1_6', '1_7', '1_8', '1_9', '1_10', '1_11', '1_12', '1_13', '1_14', '1_15', '1_16', '1_17', '1_18', '1_19', '1_20']
+   „Bevölkerung und Gebiet“→T1: Merkmale ohne Wert in dieser Ausgabe: ['1_3']
+   „Bevölkerung und Gebiet“→T1: Zuordnung 'Einwohnerinnen und Einwohner je km²' → 1_12 'Einwohner/-innen je km²' (0.81)
+   „Bevölkerung und Gebiet“→T3: unsichere Zuordnung 'an der Bevölkerung insgesamt in Prozent' → 3_10 'Anteil an der Bevölkerung insgesamt › %' (0.69)
+   „Bevölkerung und Gebiet“→T4: Merkmale ohne Wert in dieser Ausgabe: ['4_6', '4_7', '4_8', '4_9', '4_10', '4_11', '4_12', '4_13', '4_14', '4_15', '4_16', '4_17']
+   „Bevölkerung und Gebiet“→T4: Zuordnung 'Mehr bzw. weniger (-) Geborene als Gestorbene' → 4_5 'Natürliche Bevölkerungsbewegung › Mehr bzw. weniger (–) Geborene als Gestorbene' (0.84)
+   „Bevölkerung und Gebiet“→T4: unsichere Zuordnung 'Gestorbene' → 4_4 'Natürliche Bevölkerungsbewegung › Gestorbene' (0.66)
+   „Bevölkerung und Gebiet“→T4: unsichere Zuordnung 'Lebendgeborene' → 4_3 'Natürliche Bevölkerungsbewegung › Lebendgeborene' (0.71)
+   „Bevölkerung und Gebiet“→T4: Merkmale ohne Wert in dieser Ausgabe: ['4_3', '4_4', '4_5']
+   Blatt „Beschäftigte“ ohne Gegenstück in der Referenz, entfällt: Sozialversicherungspflichtig beschäftigte Arbeitnehmerinnen und Arbeitnehmer am Wohnort am 30.06.202
+   Blatt „Beschäftigte“ ohne Gegenstück in der Referenz, entfällt: Sozialversicherungspflichtig beschäftigte Pendlerinnen und Pendler über die Grenzen der jeweiligen R
+   Blatt „Beschäftigte“ ohne Gegenstück in der Referenz, entfällt: Sozialversicherungspflichtig beschäftigte Arbeitnehmerinnen und Arbeitnehmer am Arbeitsort am 30.06.
+   Blatt „Beschäftigte“ ohne Gegenstück in der Referenz, entfällt: Sozialversicherungspflichtig beschäftigte ausländische Arbeitnehmerinnen und Arbeitnehmer am Arbeits
+   Blatt „Beschäftigte“ ohne Gegenstück in der Referenz, entfällt: Sozialversicherungspflichtig Beschäftigte in beruflicher Ausbildung am Arbeitsort am 30.06.2020
+   „Landwirtschaft“→T6: unsichere Zuordnung 'Hülsenfrüchte' → 6_16 'darunter entfielen auf › darunter auf dem Ackerland › Hülsenfrüchte' (0.78)
+   „Landwirtschaft“→T6: unsichere Zuordnung 'Winterraps' → 6_15 'darunter entfielen auf › darunter auf dem Ackerland › Winterraps' (0.74)
+   „Landwirtschaft“→T6: unsichere Zuordnung 'Zuckerrüben' → 6_14 'darunter entfielen auf › darunter auf dem Ackerland › Zuckerrüben' (0.75)
+   „Landwirtschaft“→T6: Zuordnung 'darunter entfielen auf › davon auf dem Ackerland › darunter › Körnermais/CornCob-Mix' → 6_13 'darunter entfielen auf › darunter auf dem Ackerland › darunter › Körnermais/ Corn-Cob-Mix' (0.89)
+   „Landwirtschaft“→T6: Zuordnung 'darunter entfielen auf › davon auf dem Ackerland › darunter › Roggen und Wintermengengetreide' → 6_9 'darunter entfielen auf › darunter auf dem Ackerland › darunter › Roggen und Wintermenggetreide' (0.97)
+   „Landwirtschaft“→T7: Merkmale ohne Wert in dieser Ausgabe: ['7_4', '7_5', '7_6', '7_7', '7_8', '7_9', '7_10', '7_11']
+   „Landwirtschaft“→T7: Merkmale ohne Wert in dieser Ausgabe: ['7_3']
+   „Landwirtschaft“→T7: unsichere Zuordnung 'Ökologisch bewirtschaftete LF in Hektar' → 7_11 'Ökologisch bewirtschaftete landwirtschaftlich genutzte Fläche in Hektar' (0.69)
+   „Flächennutzung“→T8: Zuordnung 'davon › Nachrichtlich: Siedlungsund Verkehrsfläche › %' → 8_19 'Nachrichtlich: Siedlungs- und Verkehrsfläche › %' (0.98)
+   „Flächennutzung“→T8: Zuordnung 'davon › Nachrichtlich: Siedlungsund Verkehrsfläche › Hektar' → 8_18 'Nachrichtlich: Siedlungs- und Verkehrsfläche › Hektar' (0.98)
+   „Produzierendes Gewerbe“→T9: Spalten ohne Gegenstück: ['Gesamtumsatz › davon im › Inland › in Millionen Euro', 'Gesamtumsatz › davon im › Ausland › in Millionen Euro']
+   „Produzierendes Gewerbe“→T9: unsichere Zuordnung 'im September › Beschäftigte › je 1 000 Einwohnerinnen und Einwohner' → 9_5 'Zum 30. September 2024 › Tätige Personen › je 1 000 Einwohner/ -innen' (0.71)
+   „Produzierendes Gewerbe“→T9: unsichere Zuordnung 'im September › Beschäftigte › Anzahl' → 9_4 'Zum 30. September 2024 › Tätige Personen › Anzahl' (0.75)
+   „Produzierendes Gewerbe“→T9: Zuordnung 'im September › Betriebe' → 9_3 'Zum 30. September 2024 › Betriebe' (0.86)
+   „Produzierendes Gewerbe“→T10: Zuordnung 'Baugewerblicher Umsatz des Vorjahres › in 1 000 Euro' → 10_7 'Baugewerblicher Umsatz im Jahr 2023 › 1 000 Euro' (0.85)
+   „Gebäude und Wohnungen“→T13: Merkmale ohne Wert in dieser Ausgabe: ['13_12', '13_13', '13_14', '13_15']
+   „Gebäude und Wohnungen“→T13: unsichere Zuordnung 'Wohnfläche in 1000 m²' → 13_11 'Wohnungen in Wohn- und Nichtwohngebäuden › Wohnfläche in 1 000 m²' (0.68)
+   „Gebäude und Wohnungen“→T13: Zuordnung 'davon mit … Räumen (einschl. Küche) › 6 oder mehr' → 13_9 'Wohnungen in Wohn- und Nichtwohngebäuden › davon mit … Räumen (einschl. Küche) › 6 oder mehr' (0.81)
+   „Gebäude und Wohnungen“→T13: unsichere Zuordnung 'davon mit … Räumen (einschl. Küche) › 5' → 13_8 'Wohnungen in Wohn- und Nichtwohngebäuden › davon mit … Räumen (einschl. Küche) › 5' (0.76)
+   „Gebäude und Wohnungen“→T13: unsichere Zuordnung 'davon mit … Räumen (einschl. Küche) › 4' → 13_7 'Wohnungen in Wohn- und Nichtwohngebäuden › davon mit … Räumen (einschl. Küche) › 4' (0.76)
+   „Gebäude und Wohnungen“→T13: unsichere Zuordnung 'davon mit … Räumen (einschl. Küche) › 3' → 13_6 'Wohnungen in Wohn- und Nichtwohngebäuden › davon mit … Räumen (einschl. Küche) › 3' (0.76)
+   „Gebäude und Wohnungen“→T13: unsichere Zuordnung 'davon mit … Räumen (einschl. Küche) › 2' → 13_5 'Wohnungen in Wohn- und Nichtwohngebäuden › davon mit … Räumen (einschl. Küche) › 2' (0.76)
+   „Gebäude und Wohnungen“→T13: unsichere Zuordnung 'davon mit … Räumen (einschl. Küche) › 1' → 13_4 'Wohnungen in Wohn- und Nichtwohngebäuden › davon mit … Räumen (einschl. Küche) › 1' (0.76)
+   „Gebäude und Wohnungen“→T13: Merkmale ohne Wert in dieser Ausgabe: ['13_3', '13_4', '13_5', '13_6', '13_7', '13_8', '13_9', '13_10', '13_11']
+   „Gebäude und Wohnungen“→T13: Zuordnung 'davon mit … Wohnung(en) › 3 oder mehr' → 13_15 'Wohngebäude › davon mit … Wohnung(en) › 3 oder mehr' (0.88)
+   „Gebäude und Wohnungen“→T13: Zuordnung 'davon mit … Wohnung(en) › 2' → 13_14 'Wohngebäude › davon mit … Wohnung(en) › 2' (0.82)
+   „Gebäude und Wohnungen“→T13: Zuordnung 'davon mit … Wohnung(en) › 1' → 13_13 'Wohngebäude › davon mit … Wohnung(en) › 1' (0.82)
+   „Gemeindefinanzen“→T16+17+18: Spalten ohne Gegenstück: ['Einzahlungen › Gemeindeanteile an Gemeinschaftssteuern › insgesamt › 1 000 Euro', 'Einzahlungen › Gemeindeanteile an Gemeinschaftssteuern › je Einwohnerin bzw. Einwohner in Euro (Stand: 30.06.', 'Einzahlungen › Grundsteuern A und B › 1 000 Euro', 'Einzahlungen › Gewerbesteuer (netto) › 1 000 Euro', 'Steuer-einnahmekraft je Einwohnerin bzw. Einwohner in Euro (Stand: 30.06.', 'Realsteuer-aufbringungs-kraft je Einwohnerin bzw. Einwohner in Euro (Stand: 30.06.', 'Auszahlungen › Personal- und Versorgungsauszahlungen › je Einwohnerin bzw. Einwohner in Euro (Stand: 30.06.', 'Investitionskredite und Wertpapierschulden › Stand am 31.12. › zusammen › 1 000 Euro', 'Investitionskredite und Wertpapierschulden › Stand am 31.12. › je Einwohnerin bzw. Einwohner in Euro (Stand: 30.06.', 'Investitionskredite und Wertpapierschulden › Aufnahmen › 1 000 Euro', 'Investitionskredite und Wertpapierschulden › Tilgungen › 1 000 Euro']
+   „Gemeindefinanzen“→T16+17+18: Merkmale ohne Wert in dieser Ausgabe: ['16_3', '16_4', '16_5', '16_10', '16_11', '16_17', '17_3', '17_4', '17_5', '17_6', '17_7', '17_11', '17_12', '17_13', '17_14', '17_15', '17_16', '18_3', '18_4', '18_5', '18_6', '18_7', '18_9']
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Einzahlungen › Einzahlungen insgesamt › Laufende Verwaltungstätigkeit › 1 000 Euro' → 16_6 'Einzahlungen › davon › laufende Verwaltungstätigkeit › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Einzahlungen › Einzahlungen insgesamt › Investitions- und Finanzierungs- tätigkeit › 1 000 Euro' → 16_7 'Einzahlungen › davon › Investitions- und Finanzierungs- tätigkeit › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Einzahlungen › Schlüsselzuweisungen vom Land › 1 000 Euro' → 16_8 'Einzahlungen › darunter › Schlüsselzuweisungen vom Land › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Einzahlungen › Steuern und steuerähnliche Abgaben insgesamt › 1 000 Euro' → 16_9 'Einzahlungen › darunter › Steuern und ähnliche Abgaben insgesamt › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Realsteuerhebesätze › Grundsteuer A › %' → 17_8 'Realsteuerhebesatz › Grundsteuer A › %' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Realsteuerhebesätze › Grundsteuer B › %' → 17_9 'Realsteuerhebesatz › Grundsteuer B › %' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Realsteuerhebesätze › Gewerbesteuer › %' → 17_10 'Realsteuerhebesatz › Gewerbesteuer › %' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Auszahlungen › Auszahlungen insgesamt › Laufende Verwaltungstätigkeit › 1 000 Euro' → 16_12 'Auszahlungen › davon › laufende Verwaltungstätigkeit › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Auszahlungen › Auszahlungen insgesamt › Investitionsund Finanzierungstätigkeit › 1 000 Euro' → 16_13 'Auszahlungen › davon › Investitions- und Finanzierungstätigkeit › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Auszahlungen › Baumaßnahmen › 1 000 Euro' → 16_14 'Auszahlungen › darunter › Baumaßnahmen › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Auszahlungen › Personal- und Versorgungsauszahlungen › insgesamt › 1 000 Euro' → 16_15 'Auszahlungen › darunter › Personal- und Versorgungsauszahlungen › insgesamt › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Auszahlungen › Personal- und Versorgungsauszahlungen › der laufenden Verwaltungstätigkeit in Prozent' → 16_16 'Auszahlungen › darunter › Personal- und Versorgungsauszahlungen › Anteil an der laufenden Verwaltungstätigkeit › %' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Kassenkredite am 31.12. › 1 000 Euro' → 18_8 'davon › Kassenkredite › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Finanzvermögen am 31.12. › 1 000 Euro' → 18_10 'Finanzvermögen › 1 000 Euro' (1.00)
+   „Gemeindepersonal“→T19: Zuordnung 'Vollzeitbeschäftigte › und zwar › Sonderrechnung ohne Krankenhäuser › Arbeitnehmerinnen und Arbeitnehmer' → 19_13 'Vollzeitbeschäftigte › und zwar › Sonderrechnung ohne Krankenhäuser › Arbeitnehmer/ -innen' (0.85)
+   „Gemeindepersonal“→T19: Zuordnung 'Vollzeitbeschäftigte › und zwar › Kernhaushalt › Arbeitnehmerinnen und Arbeitnehmer' → 19_11 'Vollzeitbeschäftigte › und zwar › Kernhaushalt › Arbeitnehmer/ -innen' (0.83)
+   „Gemeindepersonal“→T19: Zuordnung 'Vollzeitbeschäftigte › davon › Arbeitnehmerinnen und Arbeitnehmer' → 19_8 'Vollzeitbeschäftigte › davon › Arbeitnehmer/ -innen' (0.81)
+   „Lohn- und Einkommensteuer“→T20: unsichere Zuordnung 'Gesamtbetrag der Einkünfte › Euro je Steuerpflichtige bzw. Steuerpflichtigen' → 20_5 'Gesamtbetrag der Einkünfte › Euro je Steuerpflichtigen' (0.75)
+== Ausgabe 2022 (HGSt_j2022.xlsx)
+   Blatt „Beschäftigte Wohnort“ ohne Gegenstück in der Referenz, entfällt: Sozialversicherungspflichtig beschäftigte Arbeitnehmerinnen und Arbeitnehmer am Wohnort in Hessen am
+   Blatt „Pendlerinnen und Pendler“ ohne Gegenstück in der Referenz, entfällt: Sozialversicherungspflichtig beschäftigte Pendlerinnen und Pendler über die Grenzen der jeweiligen R
+   Blatt „Beschäftigte Arbeitsort“ ohne Gegenstück in der Referenz, entfällt: Sozialversicherungspflichtig beschäftigte Arbeitnehmerinnen und Arbeitnehmer am Arbeitsort in Hessen
+   Blatt „Ausländische Beschäftigte“ ohne Gegenstück in der Referenz, entfällt: Sozialversicherungspflichtig beschäftigte ausländische Arbeitnehmerinnen und Arbeitnehmer am Arbeits
+   „Flächennutzung“→T8: Zuordnung 'Nachrichtlich: Siedlungsund Verkehrsfläche › %' → 8_19 'Nachrichtlich: Siedlungs- und Verkehrsfläche › %' (0.98)
+   „Flächennutzung“→T8: Zuordnung 'Nachrichtlich: Siedlungsund Verkehrsfläche › Hektar' → 8_18 'Nachrichtlich: Siedlungs- und Verkehrsfläche › Hektar' (0.98)
+   „Produzierendes Gewerbe“→T9: Spalten ohne Gegenstück: ['Gesamtumsatz › davon im › Inland › in Millionen Euro', 'Gesamtumsatz › davon im › Ausland › in Millionen Euro']
+   „Produzierendes Gewerbe“→T9: Zuordnung 'Zum 30. September 2021 › Beschäftigte › je 1 000 Einwohner/-innen' → 9_5 'Zum 30. September 2024 › Tätige Personen › je 1 000 Einwohner/ -innen' (0.86)
+   „Produzierendes Gewerbe“→T9: Zuordnung 'Zum 30. September 2021 › Beschäftigte › Anzahl' → 9_4 'Zum 30. September 2024 › Tätige Personen › Anzahl' (0.81)
+   „Bauhauptgewerbe“→T10: Zuordnung 'Baugewerblicher Umsatz des Vorjahres › in 1 000 Euro' → 10_7 'Baugewerblicher Umsatz im Jahr 2023 › 1 000 Euro' (0.85)
+   „Gemeindefinanzen“→T16+17+18: Spalten ohne Gegenstück: ['Einzahlungen › Gemeindeanteile an Gemeinschaftssteuern › insgesamt › 1 000 Euro', 'Einzahlungen › Gemeindeanteile an Gemeinschaftssteuern › je Einwohner/-in in Euro', 'Einzahlungen › Grundsteuern A und B › 1 000 Euro', 'Einzahlungen › Gewerbesteuer (netto) › 1 000 Euro', 'Steuer-einnahmekraft je Einwohner/-in in Euro', 'Realsteuer-aufbringungs-kraft je Einwohner/-in in Euro', 'Auszahlungen › Personal- und Versorgungsauszahlungen › je Einwohner/-in in Euro', 'Investitionskredite und Wertpapierschulden › Stand am 31.12.2021 › zusammen › 1 000 Euro', 'Investitionskredite und Wertpapierschulden › Stand am 31.12.2021 › je Einwohner/-in in Euro', 'Investitionskredite und Wertpapierschulden › Aufnahmen › 1 000 Euro', 'Investitionskredite und Wertpapierschulden › Tilgungen › 1 000 Euro']
+   „Gemeindefinanzen“→T16+17+18: Merkmale ohne Wert in dieser Ausgabe: ['16_3', '16_4', '16_5', '16_10', '16_11', '16_17', '17_3', '17_4', '17_5', '17_6', '17_7', '17_11', '17_12', '17_13', '17_14', '17_15', '17_16', '18_3', '18_4', '18_5', '18_6', '18_7', '18_9']
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Einzahlungen › insgesamt › Laufende Verwaltungstätigkeit › 1 000 Euro' → 16_6 'Einzahlungen › davon › laufende Verwaltungstätigkeit › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Einzahlungen › insgesamt › Investitions- und Finanzierungstätigkeit › 1 000 Euro' → 16_7 'Einzahlungen › davon › Investitions- und Finanzierungs- tätigkeit › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Einzahlungen › Schlüsselzuweisungen vom Land › 1 000 Euro' → 16_8 'Einzahlungen › darunter › Schlüsselzuweisungen vom Land › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Einzahlungen › Steuern und steuerähnliche Abgaben insgesamt › 1 000 Euro' → 16_9 'Einzahlungen › darunter › Steuern und ähnliche Abgaben insgesamt › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Realsteuerhebesätze › Grundsteuer A › in %' → 17_8 'Realsteuerhebesatz › Grundsteuer A › %' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Realsteuerhebesätze › Grundsteuer B › in %' → 17_9 'Realsteuerhebesatz › Grundsteuer B › %' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Realsteuerhebesätze › Gewerbesteuer › in %' → 17_10 'Realsteuerhebesatz › Gewerbesteuer › %' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Auszahlungen › insgesamt › Laufende Verwaltungstätigkeit › 1 000 Euro' → 16_12 'Auszahlungen › davon › laufende Verwaltungstätigkeit › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Auszahlungen › insgesamt › Investitionsund Finanzierungstätigkeit › 1 000 Euro' → 16_13 'Auszahlungen › davon › Investitions- und Finanzierungstätigkeit › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Auszahlungen › Baumaßnahmen › 1 000 Euro' → 16_14 'Auszahlungen › darunter › Baumaßnahmen › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Auszahlungen › Personal- und Versorgungsauszahlungen › insgesamt › 1 000 Euro' → 16_15 'Auszahlungen › darunter › Personal- und Versorgungsauszahlungen › insgesamt › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Auszahlungen › Personal- und Versorgungsauszahlungen › in Prozent der laufenden Verwaltungstätigkeit' → 16_16 'Auszahlungen › darunter › Personal- und Versorgungsauszahlungen › Anteil an der laufenden Verwaltungstätigkeit › %' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Kassenkredite am 31.12.2021 › 1 000 Euro' → 18_8 'davon › Kassenkredite › 1 000 Euro' (1.00)
+   „Gemeindefinanzen“→T16+17+18: Zuordnung 'Finanzvermögen am 31.12.2021 › 1 000 Euro' → 18_10 'Finanzvermögen › 1 000 Euro' (1.00)
+   „Lohn- und Einkommensteuer“→T20: Zuordnung 'Gesamtbetrag der Einkünfte › Euro je Steuerpflichtige/-n' → 20_5 'Gesamtbetrag der Einkünfte › Euro je Steuerpflichtigen' (0.95)
+   Blatt „Regional-und Zweckverband“ ohne Gegenstück in der Referenz, entfällt: Zusammensetzung des Regionalverbands FrankfurtRheinMain und des Zweckverbands Raum Kassel
+== Ausgabe 2023 (HGSt_j2023.xlsx)
+   Blatt „Beschäftigte Wohnort“ ohne Gegenstück in der Referenz, entfällt: Sozialversicherungspflichtig beschäftigte Arbeitnehmerinnen und Arbeitnehmer am Wohnort in Hessen am
+   Blatt „Pendlerinnen und Pendler“ ohne Gegenstück in der Referenz, entfällt: Sozialversicherungspflichtig beschäftigte Pendlerinnen und Pendler über die Grenzen der jeweiligen R
+   Blatt „Beschäftigte Arbeitsort“ ohne Gegenstück in der Referenz, entfällt: Sozialversicherungspflichtig beschäftigte Arbeitnehmerinnen und Arbeitnehmer am Arbeitsort in Hessen
+   „Produzierendes Gewerbe“→T9: Spalten ohne Gegenstück: ['Gesamtumsatz › davon im › Inland › in Millionen Euro', 'Gesamtumsatz › davon im › Ausland › in Millionen Euro']
+   „Produzierendes Gewerbe“→T9: Zuordnung 'Zum 30. September 2022 › Beschäftigte › je 1 000 Einwohner/-innen' → 9_5 'Zum 30. September 2024 › Tätige Personen › je 1 000 Einwohner/ -innen' (0.86)
+   „Produzierendes Gewerbe“→T9: Zuordnung 'Zum 30. September 2022 › Beschäftigte › Anzahl' → 9_4 'Zum 30. September 2024 › Tätige Personen › Anzahl' (0.81)
+   „Baufertigstellungen“→T12: Zuordnung 'Fertig gestellte Wohnungen insgesamt (einschleßlich Baumaßnahmen an bestehenden Gebäuden)' → 12_16 'Fertiggestellte Wohnungen insgesamt (einschleßlich Baumaßnahmen an bestehenden Gebäuden)' (0.88)
+   „Ein- und Auszahlungen“→T16: Zuordnung 'Finanzierungssaldo am 31.12. › 1 000 Euro' → 16_17 'Finanzierungssaldo am 31.12.2024 › 1 000 Euro' (0.92)
+   „Ein- und Auszahlungen“→T16: Zuordnung 'Einwohner/-innen (30.06.2022)' → 16_3 'Einwohner/-innen' (0.83)
+   „Realsteuern“→T17: Zuordnung 'Realsteuerhebsatz › Gewerbesteuer › %' → 17_10 'Realsteuerhebesatz › Gewerbesteuer › %' (0.99)
+   „Realsteuern“→T17: Zuordnung 'Realsteuerhebsatz › Grundsteuer B › %' → 17_9 'Realsteuerhebesatz › Grundsteuer B › %' (0.99)
+   „Realsteuern“→T17: Zuordnung 'Realsteuerhebsatz › Grundsteuer A › %' → 17_8 'Realsteuerhebesatz › Grundsteuer A › %' (0.99)
+   „Realsteuern“→T17: Zuordnung 'Einwohner/-innen (30.06.2022)' → 17_3 'Einwohner/-innen' (0.83)
+   „Schuldenstand“→T18: Zuordnung 'Einwohner/-innen (30.06.2022)' → 18_3 'Einwohner/-innen' (0.83)
+   „Lohn- und Einkommensteuer“→T20: Zuordnung 'Gesamtbetrag der Einkünfte › Euro je Steuerpflichtige/-n' → 20_5 'Gesamtbetrag der Einkünfte › Euro je Steuerpflichtigen' (0.95)
+   Blatt „Regional-und Zweckverband“ ohne Gegenstück in der Referenz, entfällt: Zusammensetzung des Regionalverbands FrankfurtRheinMain und des Zweckverbands Raum Kassel
+== Ausgabe 2024 (HGSt_j2024.xlsx)
+   „9“→T9: Spalten ohne Gegenstück: ['Gesamtumsatz › davon im › Inland › Millionen Euro', 'Gesamtumsatz › davon im › Ausland › Millionen Euro']
+   „9“→T9: Zuordnung 'Zum 30. September 2023 › Beschäftigte › je 1 000 Einwohner/ -innen' → 9_5 'Zum 30. September 2024 › Tätige Personen › je 1 000 Einwohner/ -innen' (0.86)
+   „9“→T9: Zuordnung 'Zum 30. September 2023 › Beschäftigte › Anzahl' → 9_4 'Zum 30. September 2024 › Tätige Personen › Anzahl' (0.81)
+   Blatt „22“ ohne Gegenstück in der Referenz, entfällt: Zusammensetzung des Regionalverbands FrankfurtRheinMain und des Zweckverbands Raum Kassel
+== Ausgabe 2025 (HGSt_j2025.xlsx)
+== Auffällige Sprünge des Kreiswerts (Faktor > 2,5 zur Vorjahresausgabe)
+   1_9 Ausgabe 2021: 54 → Ausgabe 2022: -9  (Zu- bzw. Abnahme (–) gegenüber 31.12.2023 › Anzahl)
+   1_9 Ausgabe 2022: -9 → Ausgabe 2023: 3925  (Zu- bzw. Abnahme (–) gegenüber 31.12.2023 › Anzahl)
+   1_9 Ausgabe 2023: 3925 → Ausgabe 2024: 1199  (Zu- bzw. Abnahme (–) gegenüber 31.12.2023 › Anzahl)
+   1_9 Ausgabe 2024: 1199 → Ausgabe 2025: -370  (Zu- bzw. Abnahme (–) gegenüber 31.12.2023 › Anzahl)
+   3_8 Ausgabe 2022: 782 → Ausgabe 2023: 4862  (Zu- bzw. Abnahme (–) gegenüber 31.12.2023 › Anzahl)
+   3_8 Ausgabe 2024: 2322 → Ausgabe 2025: 563  (Zu- bzw. Abnahme (–) gegenüber 31.12.2023 › Anzahl)
+   3_9 Ausgabe 2022: 2.7142 → Ausgabe 2023: 16.4296  (Zu- bzw. Abnahme (–) gegenüber 31.12.2023 › %)
+   3_9 Ausgabe 2024: 6.7392 → Ausgabe 2025: 1.7117  (Zu- bzw. Abnahme (–) gegenüber 31.12.2023 › %)
+   4_14 Ausgabe 2022: -35 → Ausgabe 2023: 215  (Wanderungsbewegung über die Gemeindegrenze › Mehr bzw. weniger (–) Zug)
+   4_14 Ausgabe 2023: 215 → Ausgabe 2024: -69  (Wanderungsbewegung über die Gemeindegrenze › Mehr bzw. weniger (–) Zug)
+   4_14 Ausgabe 2024: -69 → Ausgabe 2025: 33  (Wanderungsbewegung über die Gemeindegrenze › Mehr bzw. weniger (–) Zug)
+   4_15 Ausgabe 2022: 989 → Ausgabe 2023: 5080  (Wanderungsbewegung über die Gemeindegrenze › Mehr bzw. weniger (–) Zug)
+   4_15 Ausgabe 2024: 2407 → Ausgabe 2025: 932  (Wanderungsbewegung über die Gemeindegrenze › Mehr bzw. weniger (–) Zug)
+   4_16 Ausgabe 2022: 954 → Ausgabe 2023: 5295  (Wanderungsbewegung über die Gemeindegrenze › Mehr bzw. weniger (–) Zug)
+   4_17 Ausgabe 2022: 426 → Ausgabe 2023: 2509  (Wanderungsbewegung über die Gemeindegrenze › Mehr bzw. weniger (–) Zug)
+   4_17 Ausgabe 2024: 1581 → Ausgabe 2025: 412  (Wanderungsbewegung über die Gemeindegrenze › Mehr bzw. weniger (–) Zug)
+   11_10 Ausgabe 2023: 408 → Ausgabe 2024: 118  (Wohngebäude (ohne Baumaßnahmen an bestehenden Gebäuden) › Wohnungen › )
+   11_14 Ausgabe 2024: 604763 → Ausgabe 2025: 234115  (Nichtwohngebäude (ohne Baumaßnahmen an bestehenden Gebäuden) › Umbaute)
+   18_8 Ausgabe 2021: 9743.62 → Ausgabe 2022: 1350  (davon › Kassenkredite › 1 000 Euro)
+   16_17 Ausgabe 2023: 16069.2 → Ausgabe 2024: -33421.5  (Finanzierungssaldo am 31.12.2024 › 1 000 Euro)
+   16_17 Ausgabe 2024: -33421.5 → Ausgabe 2025: -121759  (Finanzierungssaldo am 31.12.2024 › 1 000 Euro)

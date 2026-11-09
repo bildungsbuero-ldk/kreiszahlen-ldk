@@ -3,7 +3,7 @@
 
 Aufruf (aus dem Hauptordner des Repositorys):
     python3 werkzeuge/kreiszahlen.py daten   # liest quellen/*.xlsx, schreibt daten.json und werkzeuge/ausgabe/*.csv + bericht.txt
-    python3 werkzeuge/kreiszahlen.py seite   # baut index.html aus werkzeuge/vorlage.html, werkzeuge/kacheln.json und werkzeuge/d3.min.js
+    python3 werkzeuge/kreiszahlen.py seite   # baut index.html (und gemeinden.html) aus werkzeuge/vorlage.html, kacheln*.json, bezugsgroessen*.json und d3.min.js
 
 Grundsätze:
 - Referenz für Tabellen- und Spaltennummern (mid = "<Tabelle>_<Spalte>") ist die Ausgabe Herbst 2026 (REFERENZ).
@@ -422,17 +422,94 @@ def cmd_daten():
     print(f'{len(labels)} Ausgaben, {len(werte)} Werte, {len(bezug)} Berichtszeiträume. Bericht: werkzeuge/ausgabe/bericht.txt')
 
 # ---------------------------------------------------------------- Befehl: seite
-def cmd_seite():
+# Zwei Seiten aus derselben Vorlage: Kreiszahlen (index.html) und Gemeindezahlen (gemeinden.html).
+SCHALTER = [('kreis', 'index.html', './', 'Kreiszahlen'), ('gemeinde', 'gemeinden.html', 'gemeinden.html', 'Gemeindezahlen')]
+SEITEN = {
+    'kreis': dict(
+        datei='index.html', daten='daten.json', kacheln='kacheln.json', basis='bezugsgroessen.json', spanne=lambda D: f'{D["ausgaben"][0]} bis {D["ausgaben"][-1]}',
+        TITEL='Kreiszahlen Lahn-Dill-Kreis',
+        BESCHREIBUNG='Bildungs- und Strukturdaten des Lahn-Dill-Kreises im Vergleich der hessischen Kreise, nach den Hessischen Kreiszahlen des Statistischen Landesamts.',
+        LEDE='Hessische Kreiszahlen des Statistischen Landesamts, Ausgabe',
+        TAKE='<span class="rn" data-slot="fokus">—</span>: <b class="kv" data-k="abi" data-slot="fokus">—</b> der Schulentlassenen verlassen die Schule mit allgemeiner Hochschulreife, <b class="kv" data-k="ohneHSA" data-slot="fokus">—</b> ohne Hauptschulabschluss (<span class="rn" data-slot="vgl">—</span>: <span class="kv" data-k="abi" data-slot="vgl">—</span> bzw. <span class="kv" data-k="ohneHSA" data-slot="vgl">—</span>).',
+        KACHEL_NOTE='Kennzahlen zum oben gewählten Thema, Werte der neuesten Ausgabe. Rang 1 = höchster Wert unter den Landkreisen und kreisfreien Städten.',
+        VERGLEICH_H2='Jedes Merkmal im Kreisvergleich',
+        VERGLEICH_NOTE='Alle rund 800 Merkmale aus 66 Tabellen. Wählen Sie Thema, Tabelle und Merkmal. Ein Klick auf einen Balken macht den Kreis zur Fokus-Region.',
+        BALKEN_NOTE='Landkreise und kreisfreien Städte, absteigend sortiert. Gestrichelt: Land Hessen und eine Vergleichsregion, die kein Kreis ist, sofern ihr Wert in den Maßstab der Kreise passt.',
+        DETAIL_NOTE='Alle Merkmale der gewählten Tabelle für Fokus- und Vergleichsregion, neueste Ausgabe. Hessen-Vergleich: bei Anteilen, Quoten und Durchschnitten der Index (Hessen = 100), bei Anzahlen und Summen der Anteil am Landeswert; bei Veränderungsraten, Salden und Anteilen am Land kein Vergleich (—). Klick auf eine Zeile zeigt das Merkmal oben im Kreisvergleich.',
+        ERL_NOTE='Methodische Hinweise des Hessischen Statistischen Landesamts aus der Ausgabe <span id="erl-ausgabe">—</span> der Hessischen Kreiszahlen sowie Erläuterungen zu den Berechnungen in diesem Dashboard. Die Fußnoten zu einzelnen Tabellen und Merkmalen stehen jeweils direkt unter dem Kreisvergleich und der Detailtabelle.',
+        BERECHNUNGEN=[
+            'Grundlage sind die Excel-Ausgaben der Hessischen Kreiszahlen ab Frühjahr 2023. Ältere Ausgaben sind über Tabellentitel und Spaltenköpfe den Merkmalen der Ausgabe Herbst 2026 zugeordnet; Tabellen, die es dort nicht mehr gibt, sind nicht enthalten.',
+            'Kreisvergleich, Kacheln und Detailtabelle zeigen die neueste Ausgabe. Der Zeitverlauf zeigt je Berichtszeitraum den Wert der neuesten Ausgabe, die ihn enthält; Halbjahres- und Jahreswerte werden nicht gemischt.',
+            'Kacheln: Anteile und Quoten sind aus den genannten Tabellenspalten berechnet (Zähler geteilt durch Nenner). Rang 1 ist der höchste Wert unter den Landkreisen und kreisfreien Städten; gleiche Werte erhalten den gleichen Rang.',
+            'Hanau ist seit 1. Januar 2026 kreisfrei. Weisen die Tabellen einer Kennzahl Hanau unterschiedlich aus, wird der Main-Kinzig-Kreis einschließlich Hanau gerechnet und so gekennzeichnet.',
+            'Prozent-Modus im Kreisvergleich: Anteil des Merkmals an einer geprüften Summe derselben Tabelle (z. B. Abiturientinnen und Abiturienten an allen Schulentlassenen) oder am Landeswert.',
+            'Hessen-Vergleich in der Detailtabelle: bei Anteilen, Quoten und Durchschnitten der Index (Hessen = 100), bei Anzahlen und Summen der Anteil am Landeswert.',
+        ],
+        QUELLE='Quelle: Hessisches Statistisches Landesamt, Hessische Kreiszahlen (Excel-Ausgaben {{SPANNE}}). Kennzahlen und Darstellung: eigene Berechnungen. Geheim gehaltene oder fehlende Werte werden nicht angezeigt.',
+        cfg=dict(daten='daten.json', fokus='532000', vergleich='000000', mid='17_15', einheiten=['Landkreis', 'Kreisfreie Stadt'],
+                 gruppen=[['Landkreise', ['Landkreis']], ['Kreisfreie Städte', ['Kreisfreie Stadt', 'Sonderstatusstadt']], ['Regierungsbezirke', ['Regierungsbezirk']], ['Land und Zusammenfassungen', ['Land', 'Summe', 'Verband']]],
+                 ref='000000', refName='Hessen', refVon='Hessen', refOption='Landeswert Hessen (Anteil des Kreises)', linien=[['000000', 'Hessen']],
+                 keinRang='Kein Rang (Region ist kein Kreis)', einheitDat='Kreisen', keineWerte='Für dieses Merkmal liegen keine Werte auf Kreisebene vor.',
+                 rateTabs=[13, 23, 25, 33], noIdxTabs=[21], ohneBasisTabs=[10], nurRef=[],
+                 hinweise=[[[7, 11, 12, 13], 'Bevölkerungszahlen bis zum Stand Ende 2023 beruhen auf dem Zensus 2011, ab Stand 2024 auf dem Zensus 2022. Werte davor und danach sind nicht direkt vergleichbar.'],
+                           [[52], 'Laut Statistischem Landesamt sind die Ergebnisse ab 2025 nicht mit den Vorjahren vergleichbar (bereinigter Abgleich mit den Melderegistern).']])),
+    'gemeinde': dict(
+        datei='gemeinden.html', daten='gemeinden.json', kacheln='kacheln_gemeinden.json', basis='bezugsgroessen_gemeinden.json', spanne=lambda D: f'{D["ausgaben"][0][-4:]} bis {D["ausgaben"][-1][-4:]}',
+        TITEL='Gemeindezahlen Lahn-Dill-Kreis',
+        BESCHREIBUNG='Strukturdaten der 23 Städte und Gemeinden des Lahn-Dill-Kreises im Vergleich, nach der Hessischen Gemeindestatistik des Statistischen Landesamts.',
+        LEDE='Hessische Gemeindestatistik des Statistischen Landesamts für die 23 Städte und Gemeinden des Lahn-Dill-Kreises,',
+        TAKE='<span class="rn" data-slot="fokus">—</span>: <b class="kv" data-k="bev" data-slot="fokus">—</b> Einwohnerinnen und Einwohner, Veränderung zum Vorjahr <b class="kv" data-k="bevVer" data-slot="fokus">—</b> (<span class="rn" data-slot="vgl">—</span>: <span class="kv" data-k="bev" data-slot="vgl">—</span> bzw. <span class="kv" data-k="bevVer" data-slot="vgl">—</span>).',
+        KACHEL_NOTE='Kennzahlen zum oben gewählten Thema, Werte der neuesten Ausgabe. Rang 1 = höchster Wert unter den 23 Städten und Gemeinden des Lahn-Dill-Kreises.',
+        VERGLEICH_H2='Jedes Merkmal im Gemeindevergleich',
+        VERGLEICH_NOTE='Alle rund 250 Merkmale aus 21 Tabellen. Wählen Sie Thema, Tabelle und Merkmal. Ein Klick auf einen Balken macht die Gemeinde zur Fokus-Region.',
+        BALKEN_NOTE='Die 23 Städte und Gemeinden, absteigend sortiert. Gestrichelt: Lahn-Dill-Kreis und Land Hessen, sofern ihr Wert in den Maßstab der Gemeinden passt (bei Anteilen, Quoten und Durchschnitten).',
+        DETAIL_NOTE='Alle Merkmale der gewählten Tabelle für Fokus- und Vergleichsregion, neueste Ausgabe. Kreis-Vergleich: bei Anteilen, Quoten und Durchschnitten der Index (Lahn-Dill-Kreis = 100), bei Anzahlen und Summen der Anteil am Kreiswert; bei Veränderungsraten und Salden kein Vergleich (—). Klick auf eine Zeile zeigt das Merkmal oben im Gemeindevergleich.',
+        ERL_NOTE='Methodische Hinweise und Begriffe des Hessischen Statistischen Landesamts aus der <span id="erl-ausgabe">—</span> der Hessischen Gemeindestatistik sowie Erläuterungen zu den Berechnungen in diesem Dashboard. Fußnoten und Begriffe zu einzelnen Tabellen stehen jeweils direkt unter dem Gemeindevergleich und der Detailtabelle.',
+        BERECHNUNGEN=[
+            'Grundlage sind die Excel-Ausgaben 2021 bis 2025 der Hessischen Gemeindestatistik, daraus nur der Lahn-Dill-Kreis, seine 23 Städte und Gemeinden und das Land Hessen. Ältere Ausgaben sind über Tabellentitel und Spaltenköpfe den Merkmalen der Ausgabe 2025 zugeordnet; Tabellen, die es dort nicht mehr gibt (Beschäftigte und Pendler bis Ausgabe 2023), sind nicht enthalten.',
+            'Die Ausgabe 2021 stellte mehrere Tabellen auf einem Blatt zusammen, die Ausgaben 2021 und 2022 die Gemeindefinanzen in einer einzigen Tabelle. Aus diesen sind nur Spalten mit gleichem Inhalt wie heute übernommen, jede einzeln geprüft.',
+            'Gemeindevergleich, Kacheln und Detailtabelle zeigen die neueste Ausgabe. Der Zeitverlauf zeigt je Berichtszeitraum den Wert der neuesten Ausgabe, die ihn enthält.',
+            'Kacheln: Anteile, Quoten und Werte je Einwohner/-in sind aus den genannten Tabellenspalten derselben Ausgabe berechnet (Zähler geteilt durch Nenner). Rang 1 ist der höchste Wert unter den 23 Städten und Gemeinden; gleiche Werte erhalten den gleichen Rang.',
+            'In den Tabellen zu Gemeindefinanzen und Gemeindepersonal enthält der Wert des Lahn-Dill-Kreises auch die Kreisverwaltung. Er ist dort größer als die Summe der Gemeinden.',
+            'Prozent-Modus im Gemeindevergleich: Anteil des Merkmals an einer geprüften Summe derselben Tabelle (z. B. Waldfläche an der Bodenfläche) oder am Wert des Lahn-Dill-Kreises.',
+            'Kreis-Vergleich in der Detailtabelle: bei Anteilen, Quoten und Durchschnitten der Index (Lahn-Dill-Kreis = 100), bei Anzahlen und Summen der Anteil am Kreiswert.',
+        ],
+        QUELLE='Quelle: Hessisches Statistisches Landesamt, Hessische Gemeindestatistik (Excel-Ausgaben {{SPANNE}}). Kennzahlen und Darstellung: eigene Berechnungen. Geheim gehaltene oder fehlende Werte werden nicht angezeigt.',
+        cfg=dict(daten='gemeinden.json', fokus='532023', vergleich='532000', mid='1_4', einheiten=['Stadt', 'Gemeinde'],
+                 gruppen=[['Städte', ['Stadt']], ['Gemeinden', ['Gemeinde']], ['Kreis und Land', ['Landkreis', 'Land']]],
+                 ref='532000', refName='Kreis', refVon='Kreis', refOption='Kreiswert Lahn-Dill-Kreis (Anteil der Gemeinde)', linien=[['532000', 'Lahn-Dill-Kreis'], ['000000', 'Hessen']],
+                 keinRang='Kein Rang (Region ist keine Gemeinde des Kreises)', einheitDat='Städten und Gemeinden', keineWerte='Für dieses Merkmal liegen keine Werte für die Gemeinden vor.',
+                 rateTabs=[], noIdxTabs=[], ohneBasisTabs=[], nurRef=['15_7', '15_8', '15_9'],  # Verunglückte sind Personen, keine Unfälle
+                 hinweise=[[[1, 2, 3], 'Bevölkerungszahlen bis zum Stand Ende 2023 (Ausgaben 2021 bis 2024) beruhen auf dem Zensus 2011, ab Stand Ende 2024 (Ausgabe 2025) auf dem Zensus 2022. Werte davor und danach sind nicht direkt vergleichbar.'],
+                           [[13], 'Der Wohnungsbestand ist bis Ende 2023 aus dem Zensus 2011, ab Ende 2024 aus dem Zensus 2022 fortgeschrieben. Werte davor und danach sind nicht direkt vergleichbar.'],
+                           [[5, 6, 7], 'Die Ausgabe 2021 enthält die Agrarstrukturerhebung 2016, die späteren Ausgaben die Landwirtschaftszählung 2020; laut Statistischem Landesamt sind beide voll vergleichbar.'],
+                           [[16, 17, 18, 19], 'Der Wert des Lahn-Dill-Kreises enthält in dieser Tabelle auch die Kreisverwaltung.'],
+                           [[16, 17, 18], 'Bis zur Ausgabe 2022 standen die Gemeindefinanzen in einer gemeinsamen Tabelle; für diese Jahre sind nur Merkmale mit gleichem Inhalt vorhanden.']])),
+}
+
+def build_page(mode):
+    S = SEITEN[mode]
     t = open(os.path.join(TOOLS, 'vorlage.html'), encoding='utf-8').read()
-    kacheln = open(os.path.join(TOOLS, 'kacheln.json'), encoding='utf-8').read().strip()
+    kacheln = open(os.path.join(TOOLS, S['kacheln']), encoding='utf-8').read().strip()
     d3 = open(os.path.join(TOOLS, 'd3.min.js'), encoding='utf-8').read()
-    D = json.load(open(os.path.join(ROOT, 'daten.json'), encoding='utf-8'))
-    spanne = f'{D["ausgaben"][0]} bis {D["ausgaben"][-1]}'
-    assert '/*D3*/' in t and '/*KACHELN*/' in t and '/*BASIS*/' in t and '{{SPANNE}}' in t
-    basis = open(os.path.join(TOOLS, 'bezugsgroessen.json'), encoding='utf-8').read().strip()
-    out = t.replace('/*BASIS*/', basis, 1).replace('/*KACHELN*/', kacheln, 1).replace('{{SPANNE}}', spanne).replace('/*D3*/', d3, 1)
-    open(os.path.join(ROOT, 'index.html'), 'w', encoding='utf-8').write(out)
-    print('index.html gebaut (' + spanne + ')')
+    D = json.load(open(os.path.join(ROOT, S['daten']), encoding='utf-8'))
+    spanne = S['spanne'](D)
+    basis = open(os.path.join(TOOLS, S['basis']), encoding='utf-8').read().strip()
+    schalter = ''.join(f'<a href="{href}"' + (' aria-current="page"' if m == mode else '') + f'>{lab}</a>' for m, _, href, lab in SCHALTER)
+    for k in ('/*D3*/', '/*KACHELN*/', '/*BASIS*/', '/*CFG*/'): assert t.count(k) == 1, k
+    out = t.replace('/*BASIS*/', basis, 1).replace('/*KACHELN*/', kacheln, 1).replace('/*CFG*/', json.dumps(S['cfg'], ensure_ascii=False), 1)
+    out = out.replace('{{SCHALTER}}', schalter).replace('{{BERECHNUNGEN}}', '\n'.join(f'          <li>{x}</li>' for x in S['BERECHNUNGEN']))
+    for k in ('TITEL', 'BESCHREIBUNG', 'LEDE', 'TAKE', 'KACHEL_NOTE', 'VERGLEICH_H2', 'VERGLEICH_NOTE', 'BALKEN_NOTE', 'DETAIL_NOTE', 'ERL_NOTE', 'QUELLE'):
+        out = out.replace('{{' + k + '}}', S[k])
+    out = out.replace('{{SPANNE}}', spanne)
+    assert '{{' not in out, re.findall(r'\{\{\w+\}\}', out)
+    out = out.replace('/*D3*/', d3, 1)
+    open(os.path.join(ROOT, S['datei']), 'w', encoding='utf-8').write(out)
+    print(S['datei'] + ' gebaut (' + spanne + ')')
+
+def cmd_seite():
+    build_page('kreis')
+    if os.path.exists(os.path.join(ROOT, 'gemeinden.json')): build_page('gemeinde')
 
 if __name__ == '__main__':
     {'daten': cmd_daten, 'seite': cmd_seite}.get(sys.argv[1] if len(sys.argv) > 1 else '', lambda: sys.exit(__doc__))()
