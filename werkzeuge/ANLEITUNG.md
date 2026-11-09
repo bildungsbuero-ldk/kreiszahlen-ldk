@@ -18,7 +18,7 @@ pip install openpyxl --break-system-packages   # falls nicht vorhanden
 python3 werkzeuge/kreiszahlen.py daten
 python3 werkzeuge/kreiszahlen.py seite
 ```
-`daten` schreibt `daten.json`, `werkzeuge/ausgabe/werte.csv`, `werkzeuge/ausgabe/bezug.csv` und `werkzeuge/ausgabe/bericht.txt`.
+`daten` schreibt `daten.json`, `werkzeuge/ausgabe/werte.csv`, `werkzeuge/ausgabe/bezug.csv`, `werkzeuge/ausgabe/hinweise.json` (Fußnoten und Erläuterungen der neuesten Ausgabe) und `werkzeuge/ausgabe/bericht.txt`.
 
 ## 3. Prüfen, bevor etwas veröffentlicht wird
 - Alle Werte der früheren Ausgaben müssen unverändert bleiben (vorherige `werkzeuge/ausgabe/werte.csv` aus Git mit der neuen vergleichen).
@@ -34,8 +34,8 @@ python3 werkzeuge/kreiszahlen.py seite
 ## 4. Veröffentlichen
 - Commit mit Autor und Committer `Bildungsbüro Lahn-Dill-Kreis <bildungsbuero-ldk@users.noreply.github.com>`, Push auf `main`.
   GitHub Pages veröffentlicht die Seite danach automatisch unter https://bildungsbuero-ldk.github.io/kreiszahlen-ldk/
-- Claude-Dashboard (https://claude.ai/artifact/2C9fY57hvinTL7t9ZVA316): `werkzeuge/ausgabe/werte.csv` und `bezug.csv` als
-  Assets hochladen und in den Datensätzen `datasets/werte` und `datasets/bezug` jeweils `source.url`, `source.name` und
+- Claude-Dashboard (https://claude.ai/artifact/2C9fY57hvinTL7t9ZVA316): `werkzeuge/ausgabe/werte.csv`, `bezug.csv` und `hinweise.json` als
+  Assets hochladen und in den Datensätzen `datasets/werte`, `datasets/bezug` und `datasets/hinweise` jeweils `source.url`, `source.name` und
   `updated` ersetzen (vorher lesen, mit `if_version` schreiben). Die Beschreibung von `werte` nennt die Spanne der Ausgaben.
   Katalog und Regionen (`datasets/merkmale`, `datasets/regionen`) nur ersetzen, wenn sich `werkzeuge/katalog/` geändert hat.
   Kacheln und Bezugsgrößen sind im Dashboard fest in der Seite (`files/index.html`) hinterlegt; ändern sie sich, dort mit nachziehen.
@@ -44,6 +44,7 @@ python3 werkzeuge/kreiszahlen.py seite
 - `quellen/` – die Original-Excel-Dateien aller Ausgaben (unverändert).
 - `werkzeuge/kreiszahlen.py` – Einlesen, Zuordnung zur Referenzausgabe Herbst 2026, Berichtszeiträume, Seitenbau.
 - `werkzeuge/katalog/` – Merkmalskatalog und Regionen (Referenz Herbst 2026).
+- `werkzeuge/ausgabe/hinweise.json` – Fußnoten, Quellenangaben, Hinweise und Zeichenerklärung der neuesten Ausgabe (für das Claude-Dashboard).
 - `werkzeuge/kacheln.json` – Kennzahlen der Themen-Kacheln (Formeln über Merkmals-IDs).
 - `werkzeuge/bezugsgroessen.json` – geprüfte Bezugsgrößen für den Prozent-Modus (Merkmal → Summe).
 - `werkzeuge/vorlage.html`, `werkzeuge/d3.min.js` – Vorlage der Seite und Diagrammbibliothek (d3 v7.9.0, ISC-Lizenz).

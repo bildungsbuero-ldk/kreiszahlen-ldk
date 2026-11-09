@@ -1,0 +1,1693 @@
+{
+"ausgabe": "Herbst 2026",
+"rows": [
+{
+"id": "1-1",
+"tab": "1",
+"art": "fussnote",
+"nr": "1",
+"text": "Betriebe von Unternehmen (rechtliche Einheit) mit 20 und mehr tätigen Personen; regionale Zuordnung nach dem Standort der Betriebe.",
+"mids": "1_3"
+},
+{
+"id": "1-2",
+"tab": "1",
+"art": "fussnote",
+"nr": "2",
+"text": "Im Jahresdurchschnitt.",
+"mids": "1_3,1_4"
+},
+{
+"id": "1-3",
+"tab": "1",
+"art": "fussnote",
+"nr": "3",
+"text": "Der im Baugewerbe tätigen Personen.",
+"mids": "1_5"
+},
+{
+"id": "1-4",
+"tab": "1",
+"art": "fussnote",
+"nr": "4",
+"text": "Ohne Umsatzsteuer.",
+"mids": "1_6"
+},
+{
+"id": "2-1",
+"tab": "2",
+"art": "fussnote",
+"nr": "1",
+"text": "Betriebe von Unternehmen (rechtliche Einheit) mit 20 und mehr Beschäftigten.",
+"mids": "2_3"
+},
+{
+"id": "2-2",
+"tab": "2",
+"art": "fussnote",
+"nr": "2",
+"text": "Im Jahresdurchschnitt.",
+"mids": "2_3,2_4"
+},
+{
+"id": "2-3",
+"tab": "2",
+"art": "fussnote",
+"nr": "3",
+"text": "Ohne Umsatzsteuer.",
+"mids": "2_5,2_6"
+},
+{
+"id": "2-4",
+"tab": "2",
+"art": "fussnote",
+"nr": "4",
+"text": "Der im Ausbaugewerbe tätigen Personen.",
+"mids": "2_8"
+},
+{
+"id": "2-5",
+"tab": "2",
+"art": "fussnote",
+"nr": "5",
+"text": "Die Summen für die Regierungsbezirke errechnen sich aus den Werten der einzelnen Quartale. Sie können daher von der Summe der Landkreise und kreisfreien Städte wegen Rundungsdifferenzen abweichen.",
+"mids": ""
+},
+{
+"id": "3-1",
+"tab": "3",
+"art": "fussnote",
+"nr": "1",
+"text": "Ergebnisse auf Grundlage der Gebäude- und Wohnungszählung 2022. Stand: 15. Mai 2022.",
+"mids": "*"
+},
+{
+"id": "3-2",
+"tab": "3",
+"art": "fussnote",
+"nr": "2",
+"text": "Einschließlich Wochenend- und Ferienhäuser mit 50 oder mehr m2 Fläche, inkl. Wohnheime.",
+"mids": "3_3"
+},
+{
+"id": "3-3",
+"tab": "3",
+"art": "fussnote",
+"nr": "3",
+"text": "In Wohn- und Nichtwohngebäuden, inkl. Wohnheime.",
+"mids": "3_4,3_5,3_6,3_7,3_8,3_9,3_10,3_11,3_12"
+},
+{
+"id": "3-4",
+"tab": "3",
+"art": "fussnote",
+"nr": "4",
+"text": "Nur Wohn- und Schlafräume mit 6 oder mehr m2 Fläche sowie Küchen.",
+"mids": "3_11"
+},
+{
+"id": "3-5",
+"tab": "3",
+"art": "fussnote",
+"nr": "5",
+"text": "Bevölkerung in Hessen am 31.12.2025.",
+"mids": "3_12"
+},
+{
+"id": "4-1",
+"tab": "4",
+"art": "fussnote",
+"nr": "1",
+"text": "Errichtung neuer Gebäude, ohne Baumaßnahmen an bestehenden Gebäuden.",
+"mids": "4_3,4_4,4_6,4_7"
+},
+{
+"id": "4-2",
+"tab": "4",
+"art": "fussnote",
+"nr": "2",
+"text": "In Wohn- und Nichtwohngebäuden; einschließlich Baumaßnahmen an bestehenden Gebäuden.",
+"mids": "4_5,4_8,4_9,4_10,4_11"
+},
+{
+"id": "4-3",
+"tab": "4",
+"art": "fussnote",
+"nr": "3",
+"text": "Bevölkerung in Hessen am 31.12.2025.",
+"mids": "4_12"
+},
+{
+"id": "5-1",
+"tab": "5",
+"art": "fussnote",
+"nr": "1",
+"text": "Errichtung neuer Gebäude, ohne Baumaßnahmen an bestehenden Gebäuden.",
+"mids": "5_3,5_4,5_5,5_6,5_7,5_8,5_9,5_10,5_11"
+},
+{
+"id": "5-2",
+"tab": "5",
+"art": "fussnote",
+"nr": "2",
+"text": "In Wohn- und Nichtwohngebäuden; einschließlich Baumaßnahmen an bestehenden Gebäuden.",
+"mids": "5_12,5_13,5_14"
+},
+{
+"id": "5-3",
+"tab": "5",
+"art": "fussnote",
+"nr": "3",
+"text": "Bevölkerung in Hessen am 31.12.2025.",
+"mids": "5_14"
+},
+{
+"id": "7-1",
+"tab": "7",
+"art": "fussnote",
+"nr": "1",
+"text": "Die Bevölkerungsfortschreibung enthält neben den Bewegungsdaten auch Staatsangehörigkeitswechsel und Bestandsveränderungen.",
+"mids": "*"
+},
+{
+"id": "7-2",
+"tab": "7",
+"art": "fussnote",
+"nr": "2",
+"text": "Bevölkerungsfortschreibung auf Basis Zensus 2022.",
+"mids": "*"
+},
+{
+"id": "7-3",
+"tab": "7",
+"art": "fussnote",
+"nr": "3",
+"text": "Stichtag Zensus 2022.",
+"mids": "7_8"
+},
+{
+"id": "8-1",
+"tab": "8",
+"art": "fussnote",
+"nr": "1",
+"text": "Die Ergebnisse unterliegen der Geheimhaltung mittels Cell-Key-Methode, wodurch es bei der Summierung zu Abweichungen in der Endsumme kommen kann. Siehe auch Hinweise auf der Fachseite „Bevölkerung“ unserer Website https://statistik.hessen.de/unsere-zahlen/bevoelkerung.",
+"mids": "8_3,8_4,8_5"
+},
+{
+"id": "8-2",
+"tab": "8",
+"art": "fussnote",
+"nr": "2",
+"text": "Eheschließungen, bei denen der Familienstand zuvor ledig war.",
+"mids": "8_4,8_5"
+},
+{
+"id": "9-1",
+"tab": "9",
+"art": "fussnote",
+"nr": "1",
+"text": "Die Ergebnisse unterliegen der Geheimhaltung mittels Cell-Key-Methode, wodurch es bei der Summierung zu Abweichungen in der Endsumme kommen kann. Siehe auch Hinweise auf der Fachseite „Bevölkerung“ unserer Website https://statistik.hessen.de/unsere-zahlen/bevoelkerung.",
+"mids": "*"
+},
+{
+"id": "9-2",
+"tab": "9",
+"art": "fussnote",
+"nr": "2",
+"text": "Ohne Totgeborene, ohne nachträglich beurkundete Kriegssterbefälle und ohne Todeserklärungen.",
+"mids": "9_5,9_6,9_7,9_8"
+},
+{
+"id": "10-1",
+"tab": "10",
+"art": "fussnote",
+"nr": "1",
+"text": "Ohne Wanderungen zwischen Gemeinden desselben Kreises und ohne Umzüge innerhalb der einzelnen Gemeinden.",
+"mids": "*"
+},
+{
+"id": "10-2",
+"tab": "10",
+"art": "fussnote",
+"nr": "2",
+"text": "Die Ergebnisse unterliegen der Geheimhaltung mittels Cell-Key-Methode, wodurch es bei der Summierung zu Abweichungen in der Endsumme kommen kann. Siehe auch Hinweise auf der Fachseite „Bevölkerung“ unserer Website https://statistik.hessen.de/unsere-zahlen/bevoelkerung.",
+"mids": "*"
+},
+{
+"id": "10-3",
+"tab": "10",
+"art": "fussnote",
+"nr": "3",
+"text": "Einschließlich ungeklärt und ohne Angabe.",
+"mids": "10_32"
+},
+{
+"id": "10-q1",
+"tab": "10",
+"art": "quelle",
+"nr": "",
+"text": "Andere Bundesländer",
+"mids": "*"
+},
+{
+"id": "10-q2",
+"tab": "10",
+"art": "quelle",
+"nr": "",
+"text": "Ausland3)",
+"mids": "*"
+},
+{
+"id": "10-q3",
+"tab": "10",
+"art": "quelle",
+"nr": "",
+"text": "Fortgezogene insgesamt",
+"mids": "*"
+},
+{
+"id": "13-1",
+"tab": "13",
+"art": "fussnote",
+"nr": "1",
+"text": "Jugendquotient: unter 20-Jährige je 100 Personen im Alter von 20 bis unter 65 Jahren.",
+"mids": "13_3"
+},
+{
+"id": "13-2",
+"tab": "13",
+"art": "fussnote",
+"nr": "2",
+"text": "Altenquotient: 65-Jährige oder Ältere je 100 Personen im Alter von 20 bis unter 65 Jahren.",
+"mids": "13_4"
+},
+{
+"id": "13-3",
+"tab": "13",
+"art": "fussnote",
+"nr": "3",
+"text": "Gesamtlastquotient: Summe aus Jugend- und Altenquotient.",
+"mids": "13_5"
+},
+{
+"id": "13-4",
+"tab": "13",
+"art": "fussnote",
+"nr": "4",
+"text": "Von 15 bis unter 65 Jahre (jeweilige Bevölkerungsgruppe).",
+"mids": "13_6,13_7,13_8,13_9,13_10,13_11"
+},
+{
+"id": "14-1",
+"tab": "14",
+"art": "fussnote",
+"nr": "1",
+"text": "Ohne Grundstufen an Gesamtschulen.",
+"mids": "14_3,14_4,14_5,14_6"
+},
+{
+"id": "14-2",
+"tab": "14",
+"art": "fussnote",
+"nr": "2",
+"text": "Ohne Hauptschulzweige an Gesamtschulen.",
+"mids": "14_7,14_8,14_9,14_10"
+},
+{
+"id": "14-3",
+"tab": "14",
+"art": "fussnote",
+"nr": "3",
+"text": "Ohne Förderstufen an Gesamtschulen.",
+"mids": "14_11,14_12,14_13,14_14"
+},
+{
+"id": "14-4",
+"tab": "14",
+"art": "fussnote",
+"nr": "4",
+"text": "Ohne Realschulzweige an Gesamtschulen.",
+"mids": "14_15,14_16,14_17,14_18"
+},
+{
+"id": "14-5",
+"tab": "14",
+"art": "fussnote",
+"nr": "5",
+"text": "Ohne Mittelstufenschulen an Gesamtschulen.",
+"mids": "14_19,14_20,14_21,14_22"
+},
+{
+"id": "14-6",
+"tab": "14",
+"art": "fussnote",
+"nr": "6",
+"text": "Ohne Gymnasialzweige an Gesamtschulen.",
+"mids": "14_23,14_24,14_25,14_26"
+},
+{
+"id": "14-7",
+"tab": "14",
+"art": "fussnote",
+"nr": "7",
+"text": "Ohne Förderschulzweige an Gesamtschulen.",
+"mids": "14_27,14_28,14_29,14_30"
+},
+{
+"id": "14-8",
+"tab": "14",
+"art": "fussnote",
+"nr": "8",
+"text": "Ohne Förderschulen für Kranke.",
+"mids": "14_27,14_28,14_29,14_30"
+},
+{
+"id": "14-9",
+"tab": "14",
+"art": "fussnote",
+"nr": "9",
+"text": "Schülerinnen und Schüler aus dem Ausland, die in Intensivklassen grundlegende Kenntnisse der deutschen Sprache erwerben müssen.",
+"mids": "14_31,14_32,14_33"
+},
+{
+"id": "16-1",
+"tab": "16",
+"art": "fussnote",
+"nr": "1",
+"text": "Ohne entsprechende Zweige an Gesamtschulen.",
+"mids": "16_3,16_4,16_5,16_6,16_7,16_8,16_9,16_10,16_11,16_12,16_13,16_14,16_17,16_18"
+},
+{
+"id": "16-2",
+"tab": "16",
+"art": "fussnote",
+"nr": "2",
+"text": "Ohne Schulen für Erwachsene.",
+"mids": "16_19,16_20"
+},
+{
+"id": "16-3",
+"tab": "16",
+"art": "fussnote",
+"nr": "3",
+"text": "Einschließlich Schülerinnen und Schülern aus dem Ausland, die in Intensivklassen grundlegende Kenntnisse der deutschen Sprache erwerben.",
+"mids": "16_19,16_20"
+},
+{
+"id": "17-1",
+"tab": "17",
+"art": "fussnote",
+"nr": "1",
+"text": "Einschließlich schulischer Teil der Fachhochschulreife.",
+"mids": "17_12,17_13,17_14"
+},
+{
+"id": "17-2",
+"tab": "17",
+"art": "fussnote",
+"nr": "2",
+"text": "Einschließlich Fachhochschulreife an Schulen für Erwachsene (103 Schülerinnen und Schüler).",
+"mids": "17_15,17_16,17_17"
+},
+{
+"id": "18-1",
+"tab": "18",
+"art": "fussnote",
+"nr": "1",
+"text": "InteA: Integration durch Anschluss und Abschluss - Intensivklassen an beruflichen Schulen für Schülerinnen und Schüler nichtdeutscher Herkunftssprache.",
+"mids": "18_12,18_13"
+},
+{
+"id": "18-2",
+"tab": "18",
+"art": "fussnote",
+"nr": "2",
+"text": "Einschließlich Fachschulen der Landwirtschaft und der Agrartechnik, jedoch ohne Ausbildungsstätten für nichtärztliche Heilberufe.",
+"mids": "18_17,18_18,18_19"
+},
+{
+"id": "18-3",
+"tab": "18",
+"art": "fussnote",
+"nr": "3",
+"text": "Sofern Schulen mehrere Schulformen führen, sind sie in der Aufteilung nach Schulformen mehrfach gezählt.",
+"mids": "18_3"
+},
+{
+"id": "18-4",
+"tab": "18",
+"art": "fussnote",
+"nr": "4",
+"text": "In Vollzeitform (Berufsvorbereitungsjahr).",
+"mids": "18_9"
+},
+{
+"id": "19-1",
+"tab": "19",
+"art": "fussnote",
+"nr": "1",
+"text": "Bevölkerung im Jahresdurchschnitt (Basis Zensus 2022).",
+"mids": "19_8,19_9,19_10,19_11,19_12"
+},
+{
+"id": "19-2",
+"tab": "19",
+"art": "fussnote",
+"nr": "2",
+"text": "Quelle: eigene Berechnungen.",
+"mids": ""
+},
+{
+"id": "19-q1",
+"tab": "19",
+"art": "quelle",
+"nr": "",
+"text": "Quelle: Arbeitskreis „Volkswirtschaftliche Gesamtrechnungen der Länder\" (Berechnungsstand: Herbst 2025/Frühjahr 2026, vorläufige Werte).",
+"mids": "*"
+},
+{
+"id": "20-1",
+"tab": "20",
+"art": "fussnote",
+"nr": "1",
+"text": "Bevölkerung im Jahresdurchschnitt (Basis Zensus 2022).",
+"mids": "20_8,20_9,20_10,20_11,20_12"
+},
+{
+"id": "20-2",
+"tab": "20",
+"art": "fussnote",
+"nr": "2",
+"text": "Quelle: eigene Berechnungen.",
+"mids": ""
+},
+{
+"id": "20-q1",
+"tab": "20",
+"art": "quelle",
+"nr": "",
+"text": "Quelle: Arbeitskreis „Volkswirtschaftliche Gesamtrechnungen der Länder\" (Berechnungsstand: Herbst 2025/Frühjahr 2026, vorläufige Werte).",
+"mids": "*"
+},
+{
+"id": "21-1",
+"tab": "21",
+"art": "fussnote",
+"nr": "1",
+"text": "Anteil am Landeswert.",
+"mids": "21_4,21_6,21_8,21_10,21_12,21_14,21_16"
+},
+{
+"id": "21-2",
+"tab": "21",
+"art": "fussnote",
+"nr": "2",
+"text": "Quelle: eigene Berechnungen.",
+"mids": ""
+},
+{
+"id": "21-q1",
+"tab": "21",
+"art": "quelle",
+"nr": "",
+"text": "Quelle: Arbeitskreis „Volkswirtschaftliche Gesamtrechnungen der Länder\" (Berechnungsstand: Herbst 2025/Frühjahr 2026, vorläufige Werte).",
+"mids": "*"
+},
+{
+"id": "22-q1",
+"tab": "22",
+"art": "quelle",
+"nr": "",
+"text": "Quelle: Arbeitskreis „Volkswirtschaftliche Gesamtrechnungen der Länder\" (Berechnungsstand: Herbst 2025, vorläufige Werte).",
+"mids": "*"
+},
+{
+"id": "23-q1",
+"tab": "23",
+"art": "quelle",
+"nr": "",
+"text": "Quelle: Arbeitskreis „Volkswirtschaftliche Gesamtrechnungen der Länder\" (Berechnungsstand: Herbst 2025, vorläufige Werte).",
+"mids": "*"
+},
+{
+"id": "24-q1",
+"tab": "24",
+"art": "quelle",
+"nr": "",
+"text": "Quelle: Arbeitskreis „Volkswirtschaftliche Gesamtrechnungen der Länder\" (Berechnungsstand: Herbst 2025, vorläufige Werte).",
+"mids": "*"
+},
+{
+"id": "25-q1",
+"tab": "25",
+"art": "quelle",
+"nr": "",
+"text": "Quelle: Arbeitskreis „Volkswirtschaftliche Gesamtrechnungen der Länder\" (Berechnungsstand: Herbst 2025, vorläufige Werte).",
+"mids": "*"
+},
+{
+"id": "26-1",
+"tab": "26",
+"art": "fussnote",
+"nr": "1",
+"text": "Einschließlich der privaten Organisationen ohne Erwerbszweck.",
+"mids": "*"
+},
+{
+"id": "26-2",
+"tab": "26",
+"art": "fussnote",
+"nr": "2",
+"text": "Bevölkerung im Jahresdurchschnitt.",
+"mids": "26_5,26_6,26_7,26_10,26_11,26_12"
+},
+{
+"id": "26-q1",
+"tab": "26",
+"art": "quelle",
+"nr": "",
+"text": "Quelle: Arbeitskreis „Volkswirtschaftliche Gesamtrechnungen der Länder\" (Berechnungsstand des Statistischen Bundesamtes: Frühjahr 2025).",
+"mids": "*"
+},
+{
+"id": "27-1",
+"tab": "27",
+"art": "fussnote",
+"nr": "1",
+"text": "Quelle: eigene Berechnungen.",
+"mids": ""
+},
+{
+"id": "27-q1",
+"tab": "27",
+"art": "quelle",
+"nr": "",
+"text": "Quelle: Arbeitskreis „Erwerbstätigenrechnung der Länder” (AK ETR) — Berechnungsstand: August 2025. — Die beiliegenden Ergebnisse dürfen in dieser Form (jeweilige Darstellungseinheit mit mehreren hinterlegten Nachkommastellen) nur für eigene Berechnungen verwendet werden. Absolutzahlen dürfen nicht genauer als in der vom AK ETR freigegebenen Zahlengenauigkeit („Personen\" in Tausend – jeweils mit nur einer Nachkommastelle) mit Quellenangabe an Dritte weitergeleitet oder veröffentlicht werden. — Die Gebietsabgrenzungen beruhen auf dem Stand des Berechnungsstandes August 2025.",
+"mids": "*"
+},
+{
+"id": "28-q1",
+"tab": "28",
+"art": "quelle",
+"nr": "",
+"text": "Quelle: Arbeitskreis „Erwerbstätigenrechnung der Länder” (AK ETR) — Berechnungsstand: August 2025. — Die beiliegenden Ergebnisse dürfen in dieser Form (jeweilige Darstellungseinheit mit mehreren hinterlegten Nachkommastellen) nur für eigene Berechnungen verwendet werden. Absolutzahlen dürfen nicht genauer als in der vom AK ETR freigegebenen Zahlengenauigkeit („Vollzeitäquivalente\" in Tausend – jeweils mit nur einer Nachkommastelle) mit Quellenangabe an Dritte weitergeleitet oder veröffentlicht werden. — Die Gebietsabgrenzungen beruhen auf dem Stand des Berechnungsstandes August 2025.",
+"mids": "*"
+},
+{
+"id": "29-q1",
+"tab": "29",
+"art": "quelle",
+"nr": "",
+"text": "Quelle: Arbeitskreis „Erwerbstätigenrechnung der Länder” (AK ETR) — Berechnungsstand: August 2025. — Die beiliegenden Ergebnisse dürfen in dieser Form (jeweilige Darstellungseinheit mit mehreren hinterlegten Nachkommastellen) nur für eigene Berechnungen verwendet werden. Absolutzahlen dürfen nicht genauer als in der vom AK ETR freigegebenen Zahlengenauigkeit („Personen\" in Tausend – jeweils mit nur einer Nachkommastelle) mit Quellenangabe an Dritte weitergeleitet oder veröffentlicht werden. — Die Gebietsabgrenzungen beruhen auf dem Stand des Berechnungsstandes August 2025.",
+"mids": "*"
+},
+{
+"id": "30-q1",
+"tab": "30",
+"art": "quelle",
+"nr": "",
+"text": "Quelle: Arbeitskreis „Erwerbstätigenrechnung der Länder” (AK ETR) — Berechnungsstand: August 2025. — Die beiliegenden Ergebnisse dürfen in dieser Form (jeweilige Darstellungseinheit mit mehreren hinterlegten Nachkommastellen) nur für eigene Berechnungen verwendet werden. Absolutzahlen dürfen nicht genauer als in der vom AK ETR freigegebenen Zahlengenauigkeit („Vollzeitäquivalente\" in Tausend – jeweils mit nur einer Nachkommastelle) mit Quellenangabe an Dritte weitergeleitet oder veröffentlicht werden. — Die Gebietsabgrenzungen beruhen auf dem Stand des Berechnungsstandes August 2025.",
+"mids": "*"
+},
+{
+"id": "31-q1",
+"tab": "31",
+"art": "quelle",
+"nr": "",
+"text": "Quelle: Arbeitskreis „Erwerbstätigenrechnung der Länder” (AK ETR) — Berechnungsstand: August 2025. — Die beiliegenden Ergebnisse dürfen in dieser Form (jeweilige Darstellungseinheit mit mehreren hinterlegten Nachkommastellen) nur für eigene Berechnungen verwendet werden. Absolutzahlen dürfen nicht genauer als in der vom AK ETR freigegebenen Zahlengenauigkeit („Geleistete Arbeitsstunden“ in Millionen – jeweils mit nur einer Nachkommastelle) mit Quellenangabe an Dritte weitergeleitet oder veröffentlicht werden. — Die Gebietsabgrenzungen beruhen auf dem Stand des Berechnungsstandes August 2025.",
+"mids": "*"
+},
+{
+"id": "32-q1",
+"tab": "32",
+"art": "quelle",
+"nr": "",
+"text": "Quelle: Arbeitskreis „Erwerbstätigenrechnung der Länder” (AK ETR) — Berechnungsstand: August 2025. — Die beiliegenden Ergebnisse dürfen in dieser Form (jeweilige Darstellungseinheit mit mehreren hinterlegten Nachkommastellen) nur für eigene Berechnungen verwendet werden. Absolutzahlen dürfen nicht genauer als in der vom AK ETR freigegebenen Zahlengenauigkeit („Geleistete Arbeitsstunden“ in Millionen – jeweils mit nur einer Nachkommastelle) mit Quellenangabe an Dritte weitergeleitet oder veröffentlicht werden. — Die Gebietsabgrenzungen beruhen auf dem Stand des Berechnungsstandes August 2025.",
+"mids": "*"
+},
+{
+"id": "33-q1",
+"tab": "33",
+"art": "quelle",
+"nr": "",
+"text": "Quelle: Arbeitskreis „Erwerbstätigenrechnung der Länder” (AK ETR) — Berechnungsstand: August 2025. — Die Gebietsabgrenzungen beruhen auf dem Stand des Berechnungsstandes August 2025.",
+"mids": "*"
+},
+{
+"id": "34-1",
+"tab": "34",
+"art": "fussnote",
+"nr": "1",
+"text": "Einschließlich Körnermais und Corn-Cob-Mix, ohne anderes Getreide zur Körnergewinnung.",
+"mids": "34_3"
+},
+{
+"id": "34-2",
+"tab": "34",
+"art": "fussnote",
+"nr": "2",
+"text": "Einschließlich Dinkel und Einkorn.",
+"mids": "34_4"
+},
+{
+"id": "34-3",
+"tab": "34",
+"art": "fussnote",
+"nr": "3",
+"text": "Einschließlich Wintermenggetreide.",
+"mids": "34_5"
+},
+{
+"id": "35-1",
+"tab": "35",
+"art": "fussnote",
+"nr": "1",
+"text": "Einschließlich Dinkel und Einkorn.",
+"mids": "35_8"
+},
+{
+"id": "37-1",
+"tab": "37",
+"art": "fussnote",
+"nr": "1",
+"text": "Einschließlich Betriebe mit vorübergehend nicht genutzten Anlagen und Brut- und Aufzuchtanlagen.",
+"mids": "37_3"
+},
+{
+"id": "37-2",
+"tab": "37",
+"art": "fussnote",
+"nr": "2",
+"text": "Speisefische, ohne sonstige Satzfischproduktion.",
+"mids": "37_5,37_6,37_7"
+},
+{
+"id": "38-1",
+"tab": "38",
+"art": "fussnote",
+"nr": "1",
+"text": "Stichtag: 31.12.2025. — Quelle: Hessisches Landesamt für Bodenmanagement und Geoinformation.",
+"mids": "*"
+},
+{
+"id": "39-1",
+"tab": "39",
+"art": "fussnote",
+"nr": "1",
+"text": "Schlachtungen von Tieren (Rinder, Schweine, Schafe, Lämmer, Ziegen, Pferde) in- und ausländischer Herkunft.",
+"mids": "*"
+},
+{
+"id": "39-2",
+"tab": "39",
+"art": "fussnote",
+"nr": "2",
+"text": "Tiere, die jünger als 12 Monate sind.",
+"mids": "39_6"
+},
+{
+"id": "41-1",
+"tab": "41",
+"art": "fussnote",
+"nr": "1",
+"text": "Nach dem Arbeits-/Dienstort, ohne „geringfügig Beschäftigte“ und „ohne Bezüge Beurlaubte“.",
+"mids": "*"
+},
+{
+"id": "41-2",
+"tab": "41",
+"art": "fussnote",
+"nr": "2",
+"text": "Kernhaushalt und Sonderrechnungen (rechtlich unselbstständige Einrichtungen und Unternehmen).",
+"mids": "*"
+},
+{
+"id": "41-3",
+"tab": "41",
+"art": "fussnote",
+"nr": "3",
+"text": "Hinweis: Aus Gründen der Geheimhaltung wurden alle Einzelzahlen einer 5er-Rundung unterzogen. Das Ergebnis der Summierung der Einzelzahlen kann deshalb geringfügig von der Endsumme abweichen.",
+"mids": "*"
+},
+{
+"id": "41-4",
+"tab": "41",
+"art": "fussnote",
+"nr": "4",
+"text": "Einschließlich Bundeseisenbahnvermögen sowie Soldatinnen und Soldaten.",
+"mids": "41_3,41_4"
+},
+{
+"id": "41-5",
+"tab": "41",
+"art": "fussnote",
+"nr": "5",
+"text": "Einschließlich Beschäftigte in Altersteilzeit.",
+"mids": "41_4,41_6,41_8"
+},
+{
+"id": "41-6",
+"tab": "41",
+"art": "fussnote",
+"nr": "6",
+"text": "Bevölkerung in Hessen am 30.06.2024 (Basis Zensus 2022).",
+"mids": "41_10"
+},
+{
+"id": "42-1",
+"tab": "42",
+"art": "fussnote",
+"nr": "1",
+"text": "Nach dem Arbeits-/Dienstort, ohne „geringfügig Beschäftigte“ und „ohne Bezüge Beurlaubte“.",
+"mids": "*"
+},
+{
+"id": "42-2",
+"tab": "42",
+"art": "fussnote",
+"nr": "2",
+"text": "Kernhaushalt und Sonderrechnungen (rechtlich unselbstständige Einrichtungen und Unternehmen) ohne Hochschulkliniken und Hochschulen, da diese seit 2001 als rechtlich selbstständige Einrichtungen in öffentlich-rechtlicher Rechtsform unter Aufsicht des Landes geführt werden.",
+"mids": "*"
+},
+{
+"id": "42-3",
+"tab": "42",
+"art": "fussnote",
+"nr": "3",
+"text": "Hinweis: Aus Gründen der Geheimhaltung wurden alle Einzelzahlen einer 5er-Rundung unterzogen. Das Ergebnis der Summierung der Einzeldaten kann deshalb geringfügig von der Endsumme abweichen.",
+"mids": "*"
+},
+{
+"id": "42-4",
+"tab": "42",
+"art": "fussnote",
+"nr": "4",
+"text": "Bevölkerung in Hessen am 30.06.2025 (Basis Zensus 2022).",
+"mids": "42_4"
+},
+{
+"id": "42-5",
+"tab": "42",
+"art": "fussnote",
+"nr": "5",
+"text": "Bezogen auf die Vollzeitäquivalente der Beschäftigten des Landes insgesamt der jeweiligen regionalen Einheit.",
+"mids": "42_6"
+},
+{
+"id": "43-1",
+"tab": "43",
+"art": "fussnote",
+"nr": "1",
+"text": "Nach dem Arbeits-/Dienstort, ohne „geringfügig Beschäftigte“ und „ohne Bezüge Beurlaubte“.",
+"mids": "*"
+},
+{
+"id": "43-2",
+"tab": "43",
+"art": "fussnote",
+"nr": "2",
+"text": "Kernhaushalt und Sonderrechnungen (rechtlich unselbstständige Einrichtungen und Unternehmen).",
+"mids": "*"
+},
+{
+"id": "43-3",
+"tab": "43",
+"art": "fussnote",
+"nr": "3",
+"text": "Hinweis: Aus Gründen der Geheimhaltung wurden alle Einzelzahlen einer 5er-Rundung unterzogen. Das Ergebnis der Summierung der Einzeldaten kann deshalb geringfügig von der Endsumme abweichen.",
+"mids": "*"
+},
+{
+"id": "43-4",
+"tab": "43",
+"art": "fussnote",
+"nr": "4",
+"text": "Bevölkerung in Hessen am 30.06.2025 (Basis Zensus 2022).",
+"mids": "43_4"
+},
+{
+"id": "43-5",
+"tab": "43",
+"art": "fussnote",
+"nr": "5",
+"text": "Bezogen auf die Vollzeitäquivalente der Beschäftigten der Gemeinden und Gemeindeverbände insgesamt der jeweiligen regionalen Einheit.",
+"mids": "43_6"
+},
+{
+"id": "44-1",
+"tab": "44",
+"art": "fussnote",
+"nr": "1",
+"text": "Die Zahlen der Empfängerinnen und Empfänger von Leistungen werden aus Datenschutzgründen mittels 5er-Rundung geheim gehalten. Die Additivität der Randsummen ist nicht mehr gegeben.",
+"mids": "*"
+},
+{
+"id": "44-2",
+"tab": "44",
+"art": "fussnote",
+"nr": "2",
+"text": "Personen mit den Geschlechtsangaben \"divers\" und \"ohne Angabe\" (nach § 22 Abs. 3 PStG) werden in Geheimhaltungsfällen per Zufallsprinzip dem männlichen oder weiblichen Geschlecht zugeordnet.",
+"mids": "44_4,44_5"
+},
+{
+"id": "45-1",
+"tab": "45",
+"art": "fussnote",
+"nr": "1",
+"text": "Bevölkerung in Hessen am 30.06.2025 (Basis Zensus 2022).",
+"mids": "45_11"
+},
+{
+"id": "45-2",
+"tab": "45",
+"art": "fussnote",
+"nr": "2",
+"text": "Bezogen auf die Bevölkerung in Hessen am 30.06.2025 (Basis Zensus 2022).",
+"mids": ""
+},
+{
+"id": "45-3",
+"tab": "45",
+"art": "fussnote",
+"nr": "3",
+"text": "In der Landessumme sind die Ausgaben und Einnahmen der Erstaufnahmeeinrichtung Gießen enthalten.",
+"mids": ""
+},
+{
+"id": "45-4",
+"tab": "45",
+"art": "fussnote",
+"nr": "4",
+"text": "Ohne die Erstaufnahmeeinrichtung Gießen.",
+"mids": ""
+},
+{
+"id": "46-1",
+"tab": "46",
+"art": "fussnote",
+"nr": "1",
+"text": "Ab Berichtsjahr 2020 werden die Ergebnisse der Statistik mittels 5er-Rundung geheim gehalten. Die Additivität der Daten ist nicht mehr gegeben.",
+"mids": "*"
+},
+{
+"id": "46-2",
+"tab": "46",
+"art": "fussnote",
+"nr": "2",
+"text": "Bezogen auf Personen in Empfängerhaushalten und auf die Bevölkerung in Hessen am 31.12.2025.",
+"mids": "46_7"
+},
+{
+"id": "46-3",
+"tab": "46",
+"art": "fussnote",
+"nr": "3",
+"text": "Die Jahresergebnisse der Wohngeldstatistik 2025 beruhen auf einer Fortschreibung der im Quartalsverlauf gemeldeten Veränderungen. Da im ersten Quartal 2026 noch Fälle mit Bezug zum Berichtsjahr 2025 bearbeitet wurden, fließen diese Daten nachträglich in die laufende Fortschreibung ein. Zu diesem Zeitpunkt (Anfang 2026) war die Stadt Hanau im Erfassungssystem bereits als kreisfreie Stadt (Amtlicher Gemeindeschlüssel 06415000) hinterlegt. Weil das System die nachgemeldeten Fälle mit diesen aktuellen Gebietsdaten verarbeitet, wird Hanau nun auch im Jahresergebnis 2025 als kreisfreie Stadt ausgewiesen. Tatsächlich gehörte Hanau zum Stichtag 31. Dezember 2025 rechtlich aber noch zum Main-Kinzig-Kreis (Amtlicher Gemeindeschlüssel 06435014). Diese Vorgehensweise ist das übliche, deutschlandweit abgestimmte Verfahren für Gebietsänderungen in der amtlichen Wohngeldstatistik. Durch die laufende Fortschreibung nutzt das System bei Meldungen stets den aktuellen Gebietsstand. Das verhindert technische Fehler bei der Zuordnung, führt aber gegebenenfalls zu Abweichungen vom historischen Gebietsstand am Jahresende.",
+"mids": ""
+},
+{
+"id": "47-1",
+"tab": "47",
+"art": "fussnote",
+"nr": "1",
+"text": "Die Zahlen der Empfängerinnen und Empfänger von Leistungen werden aus Datenschutzgründen mittels 5er-Rundung geheim gehalten. Die Additivität der Randsummen ist nicht mehr gegeben.",
+"mids": "*"
+},
+{
+"id": "47-2",
+"tab": "47",
+"art": "fussnote",
+"nr": "2",
+"text": "Personen mit den Geschlechtsangaben \"divers\" und \"ohne Angabe\" (§ 22 Absatz 3 PStG) werden ab dem Berichtsjahr 2021 aus Gründen der statistischen Geheimhaltung per Zufallsprinzip dem männlichen oder weiblichen Geschlecht zugeordnet.",
+"mids": "47_5,47_6"
+},
+{
+"id": "47-3",
+"tab": "47",
+"art": "fussnote",
+"nr": "3",
+"text": "Altersgrenze zum Renteneintrittsalter nach § 41 Abs. 2 SGB XII.",
+"mids": "47_7,47_8,47_10,47_11,47_13,47_14"
+},
+{
+"id": "47-4",
+"tab": "47",
+"art": "fussnote",
+"nr": "4",
+"text": "Empfängerinnen und Empfänger, die vom Landeswohlfahrtsverband betreut werden, werden bei den jeweiligen Kreisen und kreisfreien Städten ausgewiesen.",
+"mids": ""
+},
+{
+"id": "48-1",
+"tab": "48",
+"art": "fussnote",
+"nr": "1",
+"text": "Die Zahlen der Empfängerinnen und Empfänger von Leistungen werden aus Datenschutzgründen mittels 5er-Rundung geheim gehalten. Die Additivität der Randsummen ist nicht mehr gegeben.",
+"mids": "*"
+},
+{
+"id": "48-2",
+"tab": "48",
+"art": "fussnote",
+"nr": "2",
+"text": "Bevölkerungsstand in Hessen 31.12.2025.",
+"mids": ""
+},
+{
+"id": "48-3",
+"tab": "48",
+"art": "fussnote",
+"nr": "3",
+"text": "Personen mit den Geschlechtsangaben \"divers\" und \"ohne Angabe\" (§ 22 Absatz 3 PStG) werden ab dem Berichtsjahr 2021 aus Gründen der statistischen Geheimhaltung per Zufallsprinzip dem männlichen oder weiblichen Geschlecht zugeordnet.",
+"mids": "48_16,48_17"
+},
+{
+"id": "48-4",
+"tab": "48",
+"art": "fussnote",
+"nr": "4",
+"text": "In der Landessumme sind die Empfängerinnen und Empfänger des Landeswohlfahrtsverbands enthalten.",
+"mids": ""
+},
+{
+"id": "48-5",
+"tab": "48",
+"art": "fussnote",
+"nr": "5",
+"text": "Ohne die Empfängerinnen und Empfänger des Landeswohlfahrtsverbandes.",
+"mids": ""
+},
+{
+"id": "49-1",
+"tab": "49",
+"art": "fussnote",
+"nr": "1",
+"text": "Die Zahlen der Empfängerinnen und Empfänger von Leistungen werden aus Datenschutzgründen mittels 5er-Rundung geheim gehalten. Die Additivität der Randsummen ist nicht mehr gegeben.",
+"mids": "*"
+},
+{
+"id": "49-2",
+"tab": "49",
+"art": "fussnote",
+"nr": "2",
+"text": "Empfängerinnen und Empfänger mehrerer verschiedener Hilfearten werden bei jeder Hilfeart und bei jedem Ort der Leistungsgewährung gezählt.",
+"mids": "*"
+},
+{
+"id": "49-3",
+"tab": "49",
+"art": "fussnote",
+"nr": "3",
+"text": "Personen mit den Geschlechtsangaben \"divers\" und \"ohne Angabe\" (§ 22 Absatz 3 PStG) werden ab dem Berichtsjahr 2021 aus Gründen der statistischen Geheimhaltung per Zufallsprinzip dem männlichen oder weiblichen Geschlecht zugeordnet.",
+"mids": "49_4,49_5,49_6,49_7"
+},
+{
+"id": "49-4",
+"tab": "49",
+"art": "fussnote",
+"nr": "4",
+"text": "Ohne an die örtlichen Träger delegierten Fälle (15).",
+"mids": ""
+},
+{
+"id": "49-5",
+"tab": "49",
+"art": "fussnote",
+"nr": "5",
+"text": "In der Landessumme sind die Empfängerinnen und Empfänger des Landeswohlfahrtsverbandes enthalten.",
+"mids": ""
+},
+{
+"id": "49-6",
+"tab": "49",
+"art": "fussnote",
+"nr": "6",
+"text": "Ohne die Empfängerinnen und Empfänger des Landeswohlfahrtsverbandes.",
+"mids": ""
+},
+{
+"id": "50-1",
+"tab": "50",
+"art": "fussnote",
+"nr": "1",
+"text": "Bevölkerung der jeweiligen kreisfreien Städte und Landkreise in Hessen am 30.06.2025 (Basis Zensus 2022).",
+"mids": "50_6"
+},
+{
+"id": "50-2",
+"tab": "50",
+"art": "fussnote",
+"nr": "2",
+"text": "Einschließlich Erstattungen an Krankenkassen für die Übernahme der Krankenbehandlung.",
+"mids": "50_10"
+},
+{
+"id": "50-3",
+"tab": "50",
+"art": "fussnote",
+"nr": "3",
+"text": "Bezogen auf die gesamte Bevölkerung in Hessen am 30.06.2025 (Basis Zensus 2022).",
+"mids": ""
+},
+{
+"id": "50-4",
+"tab": "50",
+"art": "fussnote",
+"nr": "4",
+"text": "In der Landessumme sind die Ausgaben und Einnahmen des Landeswohlfahrtsverbandes enthalten.",
+"mids": ""
+},
+{
+"id": "50-5",
+"tab": "50",
+"art": "fussnote",
+"nr": "5",
+"text": "Ohne den Landeswohlfahrtsverband.",
+"mids": ""
+},
+{
+"id": "51-1",
+"tab": "51",
+"art": "fussnote",
+"nr": "1",
+"text": "In der Landessumme sind die Leistungen des Landesjugendamtes und der obersten Landesjugendbehörde enthalten.",
+"mids": "51_15,51_16,51_17,51_18"
+},
+{
+"id": "51-2",
+"tab": "51",
+"art": "fussnote",
+"nr": "2",
+"text": "Einschl. Bewerbungen bei anerkannten Auslandsvermittlungsstellen gemäß § 4 Abs. 2 Satz 2 AdVermiG.",
+"mids": "51_13"
+},
+{
+"id": "51-3",
+"tab": "51",
+"art": "fussnote",
+"nr": "3",
+"text": "Bevölkerung in Hessen am 30.06.2024",
+"mids": "51_18"
+},
+{
+"id": "51-4",
+"tab": "51",
+"art": "fussnote",
+"nr": "4",
+"text": "In einer anderen Familie.",
+"mids": "51_5"
+},
+{
+"id": "51-5",
+"tab": "51",
+"art": "fussnote",
+"nr": "5",
+"text": "Und sonstige betreute Wohnform.",
+"mids": "51_6"
+},
+{
+"id": "52-1",
+"tab": "52",
+"art": "fussnote",
+"nr": "1",
+"text": "Daten werden mit der 5er-Rundung geheim gehalten. Die Additivität der Randsummen ist nicht mehr gegeben.",
+"mids": "*"
+},
+{
+"id": "52-2",
+"tab": "52",
+"art": "fussnote",
+"nr": "2",
+"text": "Die Ergebnisse der Statistik der schwerbehinderten Menschen in Hessen ab 2025 sind nicht mit den Vorjahreswerten vergleichbar. Einschränkungen in der Vergleichbarkeit der Ergebnisse zu früheren Zeiträumen resultieren aus einem bereinigten Abgleich der Daten mit den Melderegistern, die zu einer Verringerung der ausgewiesenen Anzahl schwerbehinderter Menschen geführt haben. Die Registerabgleiche werden laufend geführt und können auch zukünftig zu Korrekturen in den Ergebnissen der Statistik der schwerbehinderten Menschen führen.",
+"mids": "*"
+},
+{
+"id": "52-3",
+"tab": "52",
+"art": "fussnote",
+"nr": "3",
+"text": "Personen mit den Geschlechtsangaben \"divers\" und \"ohne Angabe\" (§ 22 Absatz 3 PStG) werden ab dem Berichtsjahr 2021 aus Gründen der statistischen Geheimhaltung per Zufallsprinzip dem männlichen oder weiblichen Geschlecht zugeordnet.",
+"mids": "52_3,52_4"
+},
+{
+"id": "54-1",
+"tab": "54",
+"art": "fussnote",
+"nr": "1",
+"text": "Steuerpflichtige mit mehreren Einkunftsarten werden in jeder entsprechenden (d. h. bei vorhandenem Wert) Einkunftsart gezählt.",
+"mids": "54_3,54_6,54_9,54_12,54_15,54_18,54_21"
+},
+{
+"id": "54-2",
+"tab": "54",
+"art": "fussnote",
+"nr": "2",
+"text": "In Prozent des Gesamtbetrags der Einkünfte im jeweiligen Gebiet.",
+"mids": "54_5,54_8,54_11,54_14,54_17,54_20,54_23,54_29"
+},
+{
+"id": "54-3",
+"tab": "54",
+"art": "fussnote",
+"nr": "3",
+"text": "Bei den Lohn- und Einkommensteuerpflichtigen handelt es sich um unbeschränkt einkommensteuerpflichtige natürliche Personen. Hierzu gehören die nicht veranlagten und veranlagten abhängig Beschäftigten sowie die veranlagten Einkommensteuerpflichtigen, die keine Lohneinkünfte bezogen haben. Ehepaare/eingetragene Lebenspartnerschaften, die gemeinsam zur Einkommensteuer veranlagt wurden, zählen als ein Steuerpflichtiger.",
+"mids": "54_24"
+},
+{
+"id": "55-1",
+"tab": "55",
+"art": "fussnote",
+"nr": "1",
+"text": "Bei den Lohn- und Einkommensteuerpflichtigen handelt es sich um unbeschränkt einkommensteuerpflichtige natürliche Personen. Hierzu gehören die nicht veranlagten und veranlagten abhängig Beschäftigten sowie die veranlagten Einkommensteuerpflichtigen, die keine Lohneinkünfte bezogen haben. Ehepaare/eingetragene Lebenspartnerschaften, die gemeinsam zur Einkommensteuer veranlagt wurden, zählen als ein Steuerpflichtiger.",
+"mids": "*"
+},
+{
+"id": "56-1",
+"tab": "56",
+"art": "fussnote",
+"nr": "1",
+"text": "Ergebnisse der Körperschaftsteuerstatistik; ohne Organgesellschaften.",
+"mids": "*"
+},
+{
+"id": "57-1",
+"tab": "57",
+"art": "fussnote",
+"nr": "1",
+"text": "Steuerpflichtige, deren Lieferungen und Leistungen mehr als 22 000 Euro betragen.",
+"mids": "*"
+},
+{
+"id": "57-2",
+"tab": "57",
+"art": "fussnote",
+"nr": "2",
+"text": "Bevölkerung in Hessen am 30.06.2024, Fortschreibung auf Basis Zensus 2022.",
+"mids": "57_5"
+},
+{
+"id": "58-1",
+"tab": "58",
+"art": "fussnote",
+"nr": "1",
+"text": "Datenstand: 02.09.2026.",
+"mids": "*"
+},
+{
+"id": "58-2",
+"tab": "58",
+"art": "fussnote",
+"nr": "2",
+"text": "Kassenmäßige Einzahlungen: Realsteuern, Gemeindeanteile an Gemeinschaftssteuern, sonstige Gemeindesteuern, ohne steuerähnliche Einzahlungen und ohne Abzug der Gewerbesteuerumlage (vierteljährliche Kassenergebnisse der Gemeinden und Gemeindeverbände).",
+"mids": "58_3,58_4,58_5,58_6,58_7,58_8,58_9,58_10"
+},
+{
+"id": "58-3",
+"tab": "58",
+"art": "fussnote",
+"nr": "3",
+"text": "Die Realsteueraufbringungskraft wird im Rahmen des Realsteuervergleichs berechnet, der aus methodischen Gründen die Werte des 2. bis 4. Quartals 2025 sowie des 1. Quartals 2026 berücksichtigt. Daher ist sie aus den hier dargestellten Angaben zu den Realsteuern, die das 1. bis 4. Quartal 2025 umfassen, nicht errechenbar.",
+"mids": "58_11,58_12,58_13,58_14,58_15,58_16,58_17,58_18"
+},
+{
+"id": "58-4",
+"tab": "58",
+"art": "fussnote",
+"nr": "4",
+"text": "Die gemeindliche Steuereinnahmekraft wird im Rahmen des Realsteuervergleichs berechnet, der aus methodischen Gründen die Werte des 2. bis 4. Quartals 2025 sowie des 1. Quartals 2026 berücksichtigt. Daher ist sie aus den hier dargestellten Angaben zu den Steuereinzahlungen, die das 1. bis 4. Quartal 2025 umfassen, nicht errechenbar.",
+"mids": "58_19,58_20"
+},
+{
+"id": "58-5",
+"tab": "58",
+"art": "fussnote",
+"nr": "5",
+"text": "Zuweisungen einschließlich Schlüsselzuweisungen, Bedarfszuweisungen, Schuldendiensthilfen, Einzahlungen aus Kostenerstattungen/Kostenumlagen, Einzahlungen aus Investitionszuwendungen (vierteljährliche Kassenergebnisse der Gemeinden und Gemeindeverbände).",
+"mids": "58_21,58_23,58_24,58_25"
+},
+{
+"id": "58-6",
+"tab": "58",
+"art": "fussnote",
+"nr": "6",
+"text": "Kassenmäßige Auszahlungen gemäß vierteljährlicher Kassenergebnisse der Gemeinden und Gemeindeverbände.",
+"mids": "58_26,58_28,58_29,58_30"
+},
+{
+"id": "58-7",
+"tab": "58",
+"art": "fussnote",
+"nr": "7",
+"text": "Gewerbesteueraufkommen abzüglich Gewerbesteuerumlage.",
+"mids": "58_8"
+},
+{
+"id": "58-8",
+"tab": "58",
+"art": "fussnote",
+"nr": "8",
+"text": "Bevölkerung am 30.06.2025.",
+"mids": "58_4,58_12,58_14,58_16,58_18,58_20,58_23,58_25,58_28,58_30"
+},
+{
+"id": "58-9",
+"tab": "58",
+"art": "fussnote",
+"nr": "9",
+"text": "Landessumme einschließlich Landeswohlfahrtsverband.",
+"mids": ""
+},
+{
+"id": "59-1",
+"tab": "59",
+"art": "fussnote",
+"nr": "1",
+"text": "Datenstand: 02.09.2026.",
+"mids": "*"
+},
+{
+"id": "59-2",
+"tab": "59",
+"art": "fussnote",
+"nr": "2",
+"text": "Kassenmäßige Einzahlungen: Realsteuern, Gemeindeanteile an Gemeinschaftssteuern, sonstige Gemeindesteuern, ohne steuerähnliche Einzahlungen und ohne Abzug der Gewerbesteuerumlage (vierteljährliche Kassenergebnisse der Gemeinden und Gemeindeverbände).",
+"mids": "59_3,59_4,59_5,59_6,59_7,59_8,59_9,59_10"
+},
+{
+"id": "59-3",
+"tab": "59",
+"art": "fussnote",
+"nr": "3",
+"text": "Stand vor Revision.",
+"mids": "59_11,59_12,59_13,59_14,59_15,59_16,59_17,59_18"
+},
+{
+"id": "59-4",
+"tab": "59",
+"art": "fussnote",
+"nr": "4",
+"text": "Ergebnisse der jährlichen Schuldenstatistik der Gemeinden und Gemeindeverbände, ohne Kassenkredite, innere Darlehen und ohne Schulden der Eigenbetriebe.",
+"mids": "59_11,59_12,59_13,59_14"
+},
+{
+"id": "59-5",
+"tab": "59",
+"art": "fussnote",
+"nr": "5",
+"text": "Schuldenaufnahmen ohne sonstige Zugänge, Schuldentilgungen ohne sonstige Abgänge.",
+"mids": "59_15,59_16,59_17,59_18"
+},
+{
+"id": "59-6",
+"tab": "59",
+"art": "fussnote",
+"nr": "6",
+"text": "Gewerbesteueraufkommen abzüglich Gewerbesteuerumlage.",
+"mids": "59_8"
+},
+{
+"id": "59-7",
+"tab": "59",
+"art": "fussnote",
+"nr": "7",
+"text": "Bevölkerung in Hessen am 31.12.2025.",
+"mids": "59_4"
+},
+{
+"id": "59-8",
+"tab": "59",
+"art": "fussnote",
+"nr": "8",
+"text": "Bevölkerung in Hessen am 30.06.2025.",
+"mids": "59_12,59_14,59_16,59_18"
+},
+{
+"id": "59-9",
+"tab": "59",
+"art": "fussnote",
+"nr": "9",
+"text": "Landessumme jeweils einschließlich Landeswohlfahrtsverband.",
+"mids": ""
+},
+{
+"id": "60-1",
+"tab": "60",
+"art": "fussnote",
+"nr": "1",
+"text": "Bevölkerung im Jahresdurchschnitt 2024.",
+"mids": "60_4"
+},
+{
+"id": "61-1",
+"tab": "61",
+"art": "fussnote",
+"nr": "1",
+"text": "Die regionale Zuordnung erfolgt nach dem Standort der Gewinnungsanlage.",
+"mids": "61_3"
+},
+{
+"id": "61-2",
+"tab": "61",
+"art": "fussnote",
+"nr": "2",
+"text": "Einschließlich Kleingewerbe.",
+"mids": "61_9,61_10"
+},
+{
+"id": "61-3",
+"tab": "61",
+"art": "fussnote",
+"nr": "3",
+"text": "Bevölkerung in Hessen am 31.12.2021. - Basis Zensus 2011.",
+"mids": "61_10"
+},
+{
+"id": "62-1",
+"tab": "62",
+"art": "fussnote",
+"nr": "1",
+"text": "Stand September 2025.",
+"mids": "*"
+},
+{
+"id": "62-2",
+"tab": "62",
+"art": "fussnote",
+"nr": "2",
+"text": "Die Zahl der abhängig Beschäftigten entspricht der Summe aus sozialversicherungspflichtig und geringfügig Beschäftigen.",
+"mids": "*"
+},
+{
+"id": "62-3",
+"tab": "62",
+"art": "fussnote",
+"nr": "3",
+"text": "Bei Einbetriebsunternehmen. Hinweis: Im Allgemeinen ist ohne Rücksicht auf die Endsumme auf- bzw. abgerundet worden. Das Ergebnis der Summierung der Einzelzahlen kann deshalb geringfügig von der Endsumme abweichen.",
+"mids": "*"
+},
+{
+"id": "63-1",
+"tab": "63",
+"art": "fussnote",
+"nr": "1",
+"text": "Ohne Reisegewerbe.",
+"mids": "*"
+},
+{
+"id": "63-2",
+"tab": "63",
+"art": "fussnote",
+"nr": "2",
+"text": "Kauf, Pacht, Erbfolge, Rechtsformänderung, Gesellschaftereintritt.",
+"mids": "63_6"
+},
+{
+"id": "63-3",
+"tab": "63",
+"art": "fussnote",
+"nr": "3",
+"text": "Verkauf, Verpachtung, Erbfolge, Rechtsformänderung, Gesellschafteraustritt.",
+"mids": "63_10"
+},
+{
+"id": "64-1",
+"tab": "64",
+"art": "fussnote",
+"nr": "1",
+"text": "In Hessen beantragte Insolvenzverfahren von Schuldnerinnen und Schuldnern mit Sitz/Wohnort in Hessen.",
+"mids": "*"
+},
+{
+"id": "64-2",
+"tab": "64",
+"art": "fussnote",
+"nr": "2",
+"text": "Schuldnerinnen und Schuldner mit Sitz/Wohnort in Deutschland, aber außerhalb von Hessen.",
+"mids": ""
+},
+{
+"id": "65-1",
+"tab": "65",
+"art": "fussnote",
+"nr": "1",
+"text": "Abschnitte H (Verkehr und Lagerei) und J (Information und Kommunikation) der Klassifikation der Wirtschaftszweige, Ausgabe 2008 (WZ 2008).",
+"mids": "65_8"
+},
+{
+"id": "65-2",
+"tab": "65",
+"art": "fussnote",
+"nr": "2",
+"text": "Abschnitte K (Erbringung von Finanz- und Versicherungsdienstleistungen), M (Erbringung von freiberuflichen, wissenschaftlichen und technischen Dienstleistungen), N (Erbringung von sonstigen wirtschaftlichen Dienstleistungen) und S (Erbringung von sonstigen Dienstleistungen) der Klassifikation der Wirtschaftszweige, Ausgabe 2008 (WZ 2008).",
+"mids": "65_9"
+},
+{
+"id": "65-3",
+"tab": "65",
+"art": "fussnote",
+"nr": "3",
+"text": "Gesellschaft mit beschränkter Haftung/Unternehmergesellschaft.",
+"mids": "65_11"
+},
+{
+"id": "65-4",
+"tab": "65",
+"art": "fussnote",
+"nr": "4",
+"text": "In Hessen beantragte Insolvenzverfahren von Schuldnerinnen und Schuldnern mit Sitz/Wohnort in Hessen.",
+"mids": ""
+},
+{
+"id": "65-5",
+"tab": "65",
+"art": "fussnote",
+"nr": "5",
+"text": "Schuldnerinnen und Schuldner mit Sitz/Wohnort in Deutschland, aber außerhalb von Hessen.",
+"mids": ""
+},
+{
+"id": "66-1",
+"tab": "66",
+"art": "fussnote",
+"nr": "1",
+"text": "Betriebe des Verarbeitenden Gewerbes (einschließlich Bergbau sowie Gewinnung von Steinen und Erden) mit im Allgemeinen 50 und mehr Beschäftigten.",
+"mids": "*"
+},
+{
+"id": "66-2",
+"tab": "66",
+"art": "fussnote",
+"nr": "2",
+"text": "Halbjahresdurchschnitt.",
+"mids": "66_3,66_4,66_5"
+},
+{
+"id": "66-3",
+"tab": "66",
+"art": "fussnote",
+"nr": "3",
+"text": "Geleistete Arbeitsstunden aller Beschäftigten.",
+"mids": "66_6"
+},
+{
+"id": "66-4",
+"tab": "66",
+"art": "fussnote",
+"nr": "4",
+"text": "Fakturierte Werte; ohne Mehrwertsteuer.",
+"mids": "66_8,66_9,66_10,66_11"
+},
+{
+"id": "66-5",
+"tab": "66",
+"art": "fussnote",
+"nr": "5",
+"text": "Bevölkerung in Hessen am 31.03.2026.",
+"mids": "66_5"
+},
+{
+"id": "66-6",
+"tab": "66",
+"art": "fussnote",
+"nr": "6",
+"text": "Anteil des Auslandsumsatzes am Gesamtumsatz.",
+"mids": "66_11"
+},
+{
+"id": "h1",
+"tab": "",
+"art": "hinweis",
+"nr": "1",
+"text": "Die hier vorliegende Ausgabe der \"Hessischen Kreiszahlen\" beinhaltet ausgewählte Daten für alle hessischen kreisfreien Städte, Landkreise und Regierungsbezirke sowie Nachweise für den Regionalverband FrankfurtRheinMain.",
+"mids": ""
+},
+{
+"id": "h2",
+"tab": "",
+"art": "hinweis",
+"nr": "2",
+"text": "In Tabelle 10 wird der Regionalverband FrankfurtRheinMain nicht dargestellt.",
+"mids": ""
+},
+{
+"id": "h3",
+"tab": "",
+"art": "hinweis",
+"nr": "3",
+"text": "Die Tabelle 45 enthält Daten für die Erstaufnahmeeinrichtung Gießen.",
+"mids": ""
+},
+{
+"id": "h4",
+"tab": "",
+"art": "hinweis",
+"nr": "4",
+"text": "Die Tabellen 47, 48, 49 und 50 enthalten Daten für den Landeswohlfahrtsverband.",
+"mids": ""
+},
+{
+"id": "h5",
+"tab": "",
+"art": "hinweis",
+"nr": "5",
+"text": "Die Tabellen 58 und 59 enthalten Daten für den Zweckverband Raum Kassel.",
+"mids": ""
+},
+{
+"id": "h6",
+"tab": "",
+"art": "hinweis",
+"nr": "6",
+"text": "Tabelle 52: Die Ergebnisse der Statistik der schwerbehinderten Menschen in Hessen ab 2025 sind nicht mit den Vorjahreswerten vergleichbar. Einschränkungen in der Vergleichbarkeit der Ergebnisse zu früheren Zeiträumen resultieren aus einem bereinigten Abgleich der Daten mit den Melderegistern, die zu einer Verringerung der ausgewiesenen Anzahl schwerbehinderter Menschen geführt haben. Die Registerabgleiche werden laufend geführt und können auch zukünftig zu Korrekturen in den Ergebnissen der Statistik der schwerbehinderten Menschen führen.",
+"mids": ""
+},
+{
+"id": "h7",
+"tab": "",
+"art": "hinweis",
+"nr": "7",
+"text": "Die Zusammensetzungen des Regionalverbands FrankfurtRheinMain und des Zweckverbands Raum Kassel sind im Tabellenblatt 67 aufgeführt. Aufgrund der geänderten Zusammensetzung des Regionalverbands FrankfurtRheinMain ab 01.04.2021 ist ein Vorjahresvergleich nur eingeschränkt möglich.",
+"mids": ""
+},
+{
+"id": "h8",
+"tab": "",
+"art": "hinweis",
+"nr": "8",
+"text": "Die Verwaltungseinheiten in Hessen sind im Tabellenblatt 68 aufgelistet.",
+"mids": ""
+},
+{
+"id": "h9",
+"tab": "",
+"art": "hinweis",
+"nr": "9",
+"text": "Die in dieser Publikation veröffentlichten Einwohnerzahlen sind, soweit nicht anders gekennzeichnet, endgültige Fortschreibungsergebnisse auf Basis des Zensus 2022. In der Berechnung der Bevölkerungsveränderung wurden nur Ereignisse mit Datum ab dem 15. Mai 2022 (Zensusstichtag) berücksichtigt.",
+"mids": ""
+},
+{
+"id": "h10",
+"tab": "",
+"art": "hinweis",
+"nr": "10",
+"text": "Aus Gründen der Übersichtlichkeit sind nur negative Veränderungsraten und Salden mit einem Vorzeichen versehen. Positive Veränderungsraten und Salden sind ohne Vorzeichen.",
+"mids": ""
+},
+{
+"id": "h11",
+"tab": "",
+"art": "hinweis",
+"nr": "11",
+"text": "Im Allgemeinen ist ohne Rücksicht auf die Endsumme auf- bzw. abgerundet worden. Das Ergebnis der Summierung der Einzelzahlen kann deshalb geringfügig von der Endsumme abweichen.",
+"mids": ""
+},
+{
+"id": "z1",
+"tab": "",
+"art": "zeichen",
+"nr": "—",
+"text": "Genau Null oder auf Null geändert (nichts vorhanden) bzw. keine Veränderung",
+"mids": ""
+},
+{
+"id": "z2",
+"tab": "",
+"art": "zeichen",
+"nr": "0",
+"text": "Zahlenwert ungleich null, Betrag jedoch kleiner als die Hälfte von 1 in der letzten besetzten Stelle",
+"mids": ""
+},
+{
+"id": "z3",
+"tab": "",
+"art": "zeichen",
+"nr": "•",
+"text": "Zahlenwert unbekannt oder geheim zu halten",
+"mids": ""
+},
+{
+"id": "z4",
+"tab": "",
+"art": "zeichen",
+"nr": "…",
+"text": "Zahlenwert lag bei Redaktionsschluss noch nicht vor",
+"mids": ""
+},
+{
+"id": "z5",
+"tab": "",
+"art": "zeichen",
+"nr": "()",
+"text": "Aussagewert eingeschränkt, da der Zahlenwert statistisch unsicher ist",
+"mids": ""
+},
+{
+"id": "z6",
+"tab": "",
+"art": "zeichen",
+"nr": "/",
+"text": "keine Angabe, da Zahlenwert nicht sicher genug",
+"mids": ""
+},
+{
+"id": "z7",
+"tab": "",
+"art": "zeichen",
+"nr": "x",
+"text": "Tabellenfeld gesperrt, weil Aussage nicht sinnvoll (oder bei Veränderungsraten ist die Ausgangszahl kleiner als 100)",
+"mids": ""
+},
+{
+"id": "z8",
+"tab": "",
+"art": "zeichen",
+"nr": "D",
+"text": "Durchschnitt",
+"mids": ""
+},
+{
+"id": "z9",
+"tab": "",
+"art": "zeichen",
+"nr": "s",
+"text": "geschätzte Zahl",
+"mids": ""
+},
+{
+"id": "z10",
+"tab": "",
+"art": "zeichen",
+"nr": "p",
+"text": "vorläufige Zahl",
+"mids": ""
+},
+{
+"id": "z11",
+"tab": "",
+"art": "zeichen",
+"nr": "r",
+"text": "berichtigte Zahl",
+"mids": ""
+}
+]
+}

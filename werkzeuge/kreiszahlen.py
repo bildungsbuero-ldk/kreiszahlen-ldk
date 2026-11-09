@@ -47,6 +47,37 @@ def merge_fragments(path):
             out.append(path[i]); i += 1
     return out
 
+def markers(v):
+    """Fußnotenzeichen in einer Kopf- oder Titelzelle: "Hochschulreife2)" → [2], "20251)2)" → [1, 2]."""
+    if v is None: return []
+    t = str(v)
+    out = []
+    t2 = t
+    while True:  # Jahreszahl mit angehängter Fußnote, z. B. 20251)
+        m = re.search(r'((?:19|20)\d{2})(\d)\)', t2)
+        if not m: break
+        out.append(int(m.group(2))); t2 = t2[:m.start()] + m.group(1) + t2[m.end():]
+    out += [int(x) for x in re.findall(r'(?<![\d.])(\d)\)', t2)]
+    return sorted(set(out))
+
+def notes_text(rows, start):
+    """Fußnoten und Quellenangaben unter einer Tabelle (Zeilen nach den Daten)."""
+    fn, quelle = {}, []
+    for r in rows[start:]:
+        txt = ' '.join(str(c).strip() for c in r if isinstance(c, str) and c.strip())
+        txt = re.sub(r'\s+', ' ', txt).strip()
+        if not txt or set(txt) <= set('_ '): continue
+        if txt.startswith('Quelle'): quelle.append(txt); continue
+        parts = re.split(r'(?:^|\s*—\s*)(\d+)\)\s*', txt)
+        if len(parts) > 1:
+            for i in range(1, len(parts) - 1, 2):
+                fn[int(parts[i])] = parts[i + 1].strip().rstrip('—').strip()
+        elif fn:
+            last = max(fn); fn[last] = (fn[last] + ' ' + txt).strip()
+        else:
+            quelle.append(txt)
+    return fn, quelle
+
 def parse(path):
     wb = openpyxl.load_workbook(path, data_only=True)
     out = {}
@@ -55,6 +86,7 @@ def parse(path):
         ws = wb[name]
         rows = [list(r) for r in ws.iter_rows(values_only=True)]
         title = re.sub(r'^\d+\.\s*', '', clean(rows[0][0]) if rows and rows[0] else '')
+        title_fn = markers(rows[0][0]) if rows and rows[0] else []
         hdr0 = [clean(x) for x in rows[1]]
         has_ags = 'Gebiets' in (hdr0[0] or '') or 'schlüssel' in (hdr0[0] or '')
         namecol = 1 if has_ags else 0
@@ -73,14 +105,19 @@ def parse(path):
             for j in range(mr.min_col - 1, mr.max_col): grid[(mr.min_row - 1, j)] = v
         ncol = max(len(r) for r in rows[1:first + 1])
         off = 0 if has_ags else 1
-        cols = {}
+        cols, colfn = {}, {}
         for j in range(namecol + 1, ncol):
-            path = []
+            path, mk = [], set()
             for i in range(1, first):
                 t = clean(grid.get((i, j)))
+                mk.update(markers(grid.get((i, j))))
                 if t and (not path or path[-1] != t): path.append(t)
-            if path and path != ['Zurück zum Inhalt']: cols[j + 1 + off] = merge_fragments(path)
-        data = []
+            if path and path != ['Zurück zum Inhalt']:
+                cols[j + 1 + off] = merge_fragments(path)
+                if mk: colfn[j + 1 + off] = sorted(mk)
+        data, last = [], first
+        for k, r in enumerate(rows[first:], first):
+            if r and r[0] is not None and (re.fullmatch(r'\d{6}', str(r[0]).strip()) or (not has_ags and any(isinstance(x, (int, float)) for x in r[1:]))): last = k
         for r in rows[first:]:
             if r[0] is None: continue
             nm = clean(r[namecol]) if len(r) > namecol else ''
@@ -90,8 +127,25 @@ def parse(path):
             else:
                 k = None
                 if not nm or not any(x is not None and x != '' for x in r[1:]): continue
+                if str(r[0]).lstrip().startswith(('Quelle', '_')) or re.match(r'\s*\d+\)', str(r[0])): continue
             data.append(dict(ags=k, name=nm, vals={j + 1 + off: r[j] for j in range(namecol + 1, len(r)) if j + 1 + off in cols}))
-        out[int(name)] = dict(title=title, cols=cols, rows=data, has_ags=has_ags)
+        fn, quelle = notes_text(rows, last + 1)
+        out[int(name)] = dict(title=title, cols=cols, rows=data, has_ags=has_ags, title_fn=title_fn, colfn=colfn, fn=fn, quelle=quelle)
+    # Zeichenerklärung und allgemeine Hinweise (Blatt „Impressum“)
+    zeichen, hinweise = [], []
+    if 'Impressum' in wb.sheetnames:
+        mode = None
+        for r in wb['Impressum'].iter_rows(values_only=True):
+            cells = [str(c).strip() for c in r if c is not None and str(c).strip()]
+            if not cells: continue
+            if cells[0].startswith('Zeichenerklärung'): mode = 'z'; continue
+            if cells[0].startswith('Hinweise'): mode = 'h'; continue
+            if mode == 'z':
+                if len(cells) >= 3 and cells[1] == '=': zeichen.append([cells[0], ' '.join(cells[2:])])
+                elif zeichen: zeichen[-1][1] += ' ' + ' '.join(cells)
+            elif mode == 'h':
+                hinweise += [re.sub(r'\s+', ' ', x).strip() for x in ' '.join(cells).split('\n') if x.strip()]
+    out['_allgemein'] = dict(zeichen=zeichen, hinweise=hinweise)
     return out
 
 def ausgabe_label(fn):
@@ -247,6 +301,9 @@ def cmd_daten():
     files = sorted(glob.glob(os.path.join(QUELLEN, 'HKr_*.xlsx')), key=lambda f: ausgabe_label(f)[0])
     if not any(os.path.basename(f) == REFERENZ for f in files): raise SystemExit('Referenzausgabe fehlt in quellen/: ' + REFERENZ)
     parsed = {os.path.basename(f): parse(f) for f in files}
+    allgemein = {fn: d.pop('_allgemein', {}) for fn, d in parsed.items()}
+    newest = os.path.basename(files[-1])
+    notes = {}  # Fußnoten und Quellen der neuesten Ausgabe je Tabelle der Referenz
     cur = parsed[REFERENZ]
     inv = {norm_title(d['title']): t for t, d in cur.items() if t <= MAX_TAB}
     valid = {r['ags'] for r in reg}
@@ -280,6 +337,14 @@ def cmd_daten():
             if un_o: bericht.append(f'   T{t}→T{ct}: Spalten ohne Gegenstück: {un_o}')
             if un_c: bericht.append(f'   T{t}→T{ct}: Merkmale ohne Wert in dieser Ausgabe: {un_c}')
             for w in weak: bericht.append(f'   T{t}→T{ct}: unsichere Zuordnung {w}')
+            if fn == newest:
+                spalten = {}
+                for c, m in cmap.items():
+                    nrs = sorted(set(d.get('colfn', {}).get(c, [])))
+                    if nrs: spalten[f'{ct}_{m}'] = nrs
+                notes[ct] = dict(titel=d.get('title_fn', []), fn={str(k): v for k, v in sorted(d.get('fn', {}).items())}, quelle=d.get('quelle', []), spalten=spalten)
+                missing = [n for n in set(d.get('title_fn', [])) | {x for v in spalten.values() for x in v} if n not in d.get('fn', {})]
+                if missing: bericht.append(f'   T{t}→T{ct}: Fußnotenzeichen ohne Text: {sorted(missing)}')
             for r in d['rows']:
                 ags = r['ags'] or name2ags.get(re.sub(r'\W+', '', r['name'].lower()))
                 if not ags or ags not in valid: continue
@@ -339,8 +404,21 @@ def cmd_daten():
         tabs.setdefault(r['tab'], [themen.index(r['thema']), r['tabelle']])
     D = dict(ausgaben=labels, regionen=[[r['ags'], r['region'], r['ebene']] for r in reg], themen=themen, merkmale=[[r['mid'], r['merkmal'], r.get('einheit', '')] for r in cat],
              werte=[W[l] for l in labels], bezug=[BZ[l] for l in labels],
-             quelle=f'Hessisches Statistisches Landesamt, Hessische Kreiszahlen, Excel-Ausgaben {labels[0]} bis {labels[-1]}', tabellen=tabs)
+             quelle=f'Hessisches Statistisches Landesamt, Hessische Kreiszahlen, Excel-Ausgaben {labels[0]} bis {labels[-1]}', tabellen=tabs,
+             hinweise={str(k): v for k, v in sorted(notes.items())}, erlaeuterungen=dict(ausgabe=labels[-1], **allgemein.get(newest, {})))
     open(os.path.join(ROOT, 'daten.json'), 'w', encoding='utf-8').write(json.dumps(D, ensure_ascii=False, separators=(',', ':')))
+    # Erläuterungen als Tabelle für das Claude-Dashboard
+    rows = []
+    for k, v in sorted(notes.items()):
+        for n, txt in v['fn'].items():
+            mids = '*' if int(n) in v['titel'] else ','.join(m for m, nrs in v['spalten'].items() if int(n) in nrs)
+            rows.append(dict(id=f'{k}-{n}', tab=str(k), art='fussnote', nr=n, text=txt, mids=mids))
+        for i, q in enumerate(v['quelle'], 1):
+            rows.append(dict(id=f'{k}-q{i}', tab=str(k), art='quelle', nr='', text=q, mids='*'))
+    E = allgemein.get(newest, {})
+    for i, h in enumerate(E.get('hinweise', []), 1): rows.append(dict(id=f'h{i}', tab='', art='hinweis', nr=str(i), text=h, mids=''))
+    for i, (z, t) in enumerate(E.get('zeichen', []), 1): rows.append(dict(id=f'z{i}', tab='', art='zeichen', nr=z, text=t, mids=''))
+    json.dump(dict(ausgabe=labels[-1], rows=rows), open(os.path.join(TOOLS, 'ausgabe', 'hinweise.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
     print(f'{len(labels)} Ausgaben, {len(werte)} Werte, {len(bezug)} Berichtszeiträume. Bericht: werkzeuge/ausgabe/bericht.txt')
 
 # ---------------------------------------------------------------- Befehl: seite

@@ -76,6 +76,19 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-hellblau) 25%, transparent)
 .seg button + button { border-left: 1px solid var(--line); }
 .seg button[aria-pressed="true"] { background: var(--ldk-blau); color: #fff; }
 .seg button:focus-visible { outline: 2px solid var(--ldk-orange); outline-offset: -2px; }
+.notes { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); font-size: 12px; color: var(--fg-muted); }
+.notes p { margin: 2px 0; }
+.notes .fnh { font-weight: 600; color: var(--fg); text-transform: uppercase; letter-spacing: .04em; font-size: 11px; margin-bottom: 4px; }
+.notes sup, .erl sup { font-size: 10px; margin-right: 3px; }
+.erl details { border-top: 1px solid var(--line); padding: 10px 0; }
+.erl details:first-of-type { border-top: 0; }
+.erl summary { cursor: pointer; font-weight: 600; }
+.erl summary:focus-visible { outline: 2px solid var(--ldk-orange); outline-offset: 2px; }
+.erl ul { margin: 8px 0 0; padding-left: 18px; font-size: 13px; }
+.erl li { margin: 4px 0; }
+.erl table { margin-top: 8px; width: auto; }
+.erl td { text-align: left; white-space: normal; vertical-align: top; }
+.erl td:first-child { min-width: 0; font-weight: 600; text-align: center; width: 3em; }
 .quelle { font-size: 12px; color: var(--fg-muted); margin: 0; padding-top: 10px; border-top: 1px solid var(--line); }
 .loading { padding: 40px 16px; text-align: center; color: var(--fg-muted); }
 </style>
@@ -120,6 +133,7 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-hellblau) 25%, transparent)
         <p class="note" id="pct-none" hidden>Dieses Merkmal ist bereits ein Anteil, eine Quote oder ein Durchschnitt; Prozentwerte werden dafür nicht berechnet.</p>
         <p class="legend"><span><i class="sw sw-f"></i>Fokus-Region</span><span><i class="sw sw-v"></i>Vergleichsregion</span></p>
         <div class="chart" id="bars"></div>
+        <div class="notes" id="fn-merkmal" hidden></div>
       </div>
       <div class="card">
         <h3>Zeitlicher Verlauf</h3>
@@ -138,6 +152,34 @@ tr.sel td { background: color-mix(in srgb, var(--ldk-hellblau) 25%, transparent)
       <h3 id="tabelle-titel">—</h3>
       <input class="search" id="suche" type="search" placeholder="Merkmal suchen …" aria-label="Merkmal suchen" style="margin: 8px 0">
       <div class="tablewrap"><table id="detail"></table></div>
+      <div class="notes" id="fn-tabelle" hidden></div>
+    </div>
+  </section>
+
+  <section class="erl" id="erlaeuterungen">
+    <h2>Erläuterungen</h2>
+    <p class="note">Methodische Hinweise des Hessischen Statistischen Landesamts aus der Ausgabe <span id="erl-ausgabe">—</span> der Hessischen Kreiszahlen sowie Erläuterungen zu den Berechnungen in diesem Dashboard. Die Fußnoten zu einzelnen Tabellen und Merkmalen stehen jeweils direkt unter dem Kreisvergleich und der Detailtabelle.</p>
+    <div class="card" style="margin-top: 12px">
+      <details>
+        <summary>Hinweise des Statistischen Landesamts</summary>
+        <ul id="erl-hinweise"></ul>
+      </details>
+      <details>
+        <summary>Zeichenerklärung der Quelle</summary>
+        <table id="erl-zeichen"></table>
+        <p class="note" style="margin-top: 8px">In diesem Dashboard erscheinen geheim gehaltene, unbekannte oder nicht sinnvolle Werte (•, /, x, …) als „—“ bzw. ohne Balken; „—“ der Quelle (genau null) wird als 0 dargestellt. Kennzeichnungen wie vorläufig (p), berichtigt (r) oder eingeschränkter Aussagewert ( ) kommen in den Werten der verwendeten Ausgaben nicht vor.</p>
+      </details>
+      <details>
+        <summary>Zu den Berechnungen in diesem Dashboard</summary>
+        <ul>
+          <li>Grundlage sind die Excel-Ausgaben der Hessischen Kreiszahlen ab Frühjahr 2023. Ältere Ausgaben sind über Tabellentitel und Spaltenköpfe den Merkmalen der Ausgabe Herbst 2026 zugeordnet; Tabellen, die es dort nicht mehr gibt, sind nicht enthalten.</li>
+          <li>Kreisvergleich, Kacheln und Detailtabelle zeigen die neueste Ausgabe. Der Zeitverlauf zeigt je Berichtszeitraum den Wert der neuesten Ausgabe, die ihn enthält; Halbjahres- und Jahreswerte werden nicht gemischt.</li>
+          <li>Kacheln: Anteile und Quoten sind aus den genannten Tabellenspalten berechnet (Zähler geteilt durch Nenner). Rang 1 ist der höchste Wert unter den Landkreisen und kreisfreien Städten; gleiche Werte erhalten den gleichen Rang.</li>
+          <li>Hanau ist seit 1. Januar 2026 kreisfrei. Weisen die Tabellen einer Kennzahl Hanau unterschiedlich aus, wird der Main-Kinzig-Kreis einschließlich Hanau gerechnet und so gekennzeichnet.</li>
+          <li>Prozent-Modus im Kreisvergleich: Anteil des Merkmals an einer geprüften Summe derselben Tabelle (z. B. Abiturientinnen und Abiturienten an allen Schulentlassenen) oder am Landeswert.</li>
+          <li>Hessen-Vergleich in der Detailtabelle: bei Anteilen, Quoten und Durchschnitten der Index (Hessen = 100), bei Anzahlen und Summen der Anteil am Landeswert.</li>
+        </ul>
+      </details>
     </div>
   </section>
   <p class="quelle">Quelle: Hessisches Statistisches Landesamt, Hessische Kreiszahlen (Excel-Ausgaben Frühjahr 2023 bis Herbst 2026). Kennzahlen und Darstellung: eigene Berechnungen. Geheim gehaltene oder fehlende Werte werden nicht angezeigt.</p>
@@ -1591,8 +1633,37 @@ function renderDetail() {
   }
 }
 
+// Fußnoten und Quellenangaben der Quelle (neueste Ausgabe)
+function noteLines(tab, mid) {
+  const h = (D.hinweise || {})[String(tab)];
+  if (!h) return [];
+  const nrs = mid ? [...new Set([...(h.titel || []), ...((h.spalten || {})[mid] || [])])].sort((a, b) => a - b) : Object.keys(h.fn).map(Number);
+  const out = nrs.filter((n) => h.fn[String(n)]).map((n) => [n + ')', h.fn[String(n)]]);
+  for (const q of h.quelle || []) out.push(['', q]);
+  return out;
+}
+function fillNotes(box, title, lines) {
+  box.replaceChildren();
+  box.hidden = !lines.length;
+  if (!lines.length) return;
+  box.append(el('p', 'fnh', title));
+  for (const [n, t] of lines) { const p = el('p'); if (n) p.append(el('sup', null, n)); p.append(t); box.append(p); }
+}
+function renderNotes() {
+  const cur = MI.get(P.mid);
+  fillNotes($('#fn-merkmal'), 'Fußnoten der Quelle zu diesem Merkmal', noteLines(cur.tab, cur.mid));
+  fillNotes($('#fn-tabelle'), 'Fußnoten der Quelle zu Tabelle ' + cur.tab, noteLines(cur.tab, null));
+}
+function renderErlaeuterungen() {
+  const E = D.erlaeuterungen || {};
+  $('#erl-ausgabe').textContent = E.ausgabe || D.ausgaben[LATEST];
+  $('#erl-hinweise').replaceChildren(...(E.hinweise || []).map((t) => el('li', null, t)));
+  const tb = $('#erl-zeichen'); tb.replaceChildren();
+  for (const [z, t] of E.zeichen || []) { const tr = tb.insertRow(); tr.insertCell().textContent = z; tr.insertCell().textContent = t; }
+}
+
 function render() {
-  renderHead(); renderSelectors(); renderBars(); renderVerlauf(); renderDetail();
+  renderHead(); renderSelectors(); renderBars(); renderVerlauf(); renderDetail(); renderNotes();
 }
 
 // Höhe an eine einbettende Seite melden (für automatisch passende iFrames)
@@ -1626,6 +1697,7 @@ async function init() {
   document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => set({ skala: b.dataset.skala })));
   $('#suche').addEventListener('input', renderDetail);
   readHash();
+  renderErlaeuterungen();
   $('#loading').remove();
   render();
   let w = window.innerWidth, timer;
