@@ -322,11 +322,12 @@ function basisInfo(mid) {
   const defB = BASIS_DEF[mid] && MI.get(BASIS_DEF[mid]);
   if (defB && !cands.includes(defB) && fits(defB.mid)) cands.unshift(defB); // geprüfte Bezugsgröße auch bei abweichender Einheitsangabe im Text
   let best = cands.find((m) => m.mid === BASIS_DEF[mid]);
-  if (!best) best = cands.filter((m) => { const ms = segs(m.merkmal), head = ms.slice(0, -1); return TOTAL_RE.test(ms.at(-1)) && head.length > 0 && head.length < cs.length && (ms.length < cs.length || !TOTAL_RE.test(cs.at(-1))) && head.every((x, i) => x === cs[i]); })
-    .sort((a, b) => segs(b.merkmal).length - segs(a.merkmal).length)[0];
+  const anc = cands.filter((m) => { const ms = segs(m.merkmal), head = ms.slice(0, -1); return TOTAL_RE.test(ms.at(-1)) && head.length > 0 && head.length < cs.length && (ms.length < cs.length || !TOTAL_RE.test(cs.at(-1))) && head.every((x, i) => x === cs[i]); })
+    .sort((a, b) => segs(b.merkmal).length - segs(a.merkmal).length);
+  if (!best) best = anc[0];
   if (!best) best = cands.find((m) => /^Insgesamt$/i.test(m.merkmal) || (/^(Insgesamt|Alle Wirtschaftsbereiche) › /i.test(m.merkmal) && segs(m.merkmal).at(-1) === cs.at(-1)));
   const landOk = val(LATEST, mid, '000000') > 0;
-  const opts = (landOk ? [['land', 'Landeswert Hessen (Anteil des Kreises)']] : []).concat(cands.map((m) => [m.mid, m.merkmal]));
+  const opts = (landOk ? [['land', 'Landeswert Hessen (Anteil des Kreises)']] : []).concat([best, ...anc].filter((m, i, arr) => m && arr.indexOf(m) === i).map((m) => [m.mid, m.merkmal]));
   if (!opts.length) return null;
   const def = best ? best.mid : opts[0][0];
   const chosen = opts.some(([id]) => id === P.basis) ? P.basis : def;
