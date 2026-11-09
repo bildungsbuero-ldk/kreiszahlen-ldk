@@ -16,7 +16,7 @@
       "stand": "2023 (Aktualisierung 2025)",
       "url": "https://www.wegweiser-kommune.de/open-data",
       "lizenz": "CC0 1.0",
-      "datei": "sozialraum/daten/wegweiser_kommune_2023.csv",
+      "datei": "wegweiser_kommune_2023.csv (Download unter „Daten und Ergänzungen“)",
       "hinweis": "Der Wegweiser umfasst Kommunen ab etwa 5.000 Einwohnern nach seiner eigenen Bevölkerungsbasis. Für Bischoffen und Siegbach weist er keine Werte aus. Abgerufen über die Export-Schnittstelle des Wegweisers am 06.11.2026."
     },
     "hsl_kv8": {
@@ -34,7 +34,7 @@
       "stand": "Hausärzte 14.10.2026, Fachärzte 13.10.2026, Kinder- und Jugendpsychiater 11.09.2026",
       "url": "https://www.kvhessen.de/fokus-gesundheit/",
       "lizenz": "öffentlich zugängliche Kartendaten",
-      "datei": "sozialraum/daten/versorgungsgrade_kv.csv",
+      "datei": "versorgungsgrade_kv.csv (Download unter „Daten und Ergänzungen“)",
       "hinweis": "Abgefragt aus den öffentlichen Kartendiensten (ArcGIS) der KV-Seite."
     },
     "sanego": {
@@ -43,7 +43,7 @@
       "stand": "abgerufen am 06.11.2026, ohne Datenstand",
       "url": "https://www.sanego.de/Arzt/Hessen/",
       "lizenz": "eigene Auszählung",
-      "datei": "sozialraum/daten/aerzte_kommune.csv",
+      "datei": "aerzte_kommune.csv (Download unter „Daten und Ergänzungen“)",
       "hinweis": "Nicht von der KV geprüft. Summen je Mittelbereich liegen nah an den KV-Zahlen (Haiger/Dillenburg 30 zu 28, Herborn 27 zu 31, Wetzlar 105 zu 119)."
     },
     "schulen": {
@@ -52,7 +52,7 @@
       "stand": "08/2024 bis 02/2026",
       "url": "https://www.lahn-dill-kreis.de/wp-content/uploads/2025/03/Zustaendigkeiten-Aufteilung-Schulen-Ganztag-und-Betreuung.pdf",
       "lizenz": "eigene Zusammenstellung, Quelle je Schule in der Datei",
-      "datei": "sozialraum/daten/schulen_liste.csv",
+      "datei": "schulen_liste.csv (Download unter „Daten und Ergänzungen“)",
       "hinweis": "Außenstellen in anderen Kommunen zählen dort als eigener Standort. Schülerzahlen fehlen."
     },
     "angebote": {
@@ -61,7 +61,7 @@
       "stand": "Recherche 06.11.2026",
       "url": "https://jugendfoerderung.lahn-dill-kreis.de/index.php/netzwerk/begegnungs-und-familienzentren/",
       "lizenz": "eigene Zusammenstellung, Link je Angebot in der Datei",
-      "datei": "sozialraum/daten/angebote_liste.csv",
+      "datei": "angebote_liste.csv (Download unter „Daten und Ergänzungen“)",
       "hinweis": "Nicht vollständig. Ergänzungen bitte über „Daten einreichen“."
     }
   },

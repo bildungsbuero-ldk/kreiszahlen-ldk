@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
-"""Sozialraum-Dashboard Lahn-Dill-Kreis: Daten prüfen und Seite bauen.
+"""Sozialraum-Dashboard Lahn-Dill-Kreis: Daten prüfen und passwortgeschützte Seite bauen.
 
-    python3 werkzeuge/sozialraum.py hsl      # Gemeindestatistik (Excel in quellen/sozialraum/) -> sozialraum/daten/hsl_gemeindestatistik.csv
-    python3 werkzeuge/sozialraum.py pruefen  # alle CSV-Dateien in sozialraum/daten/ prüfen, Bericht nach werkzeuge/ausgabe/sozialraum_bericht.txt
-    python3 werkzeuge/sozialraum.py seite    # prüfen, Kennzahlen berechnen, sozialraum/index.html aus werkzeuge/sozialraum/vorlage.html bauen
+Daten liegen im Klartext NUR lokal in intern/ (per .gitignore ausgeschlossen). Im Repository liegt davon nur das
+verschlüsselte Archiv werkzeuge/sozialraum/daten.verschluesselt. Die Seite sozialraum/index.html ist ebenfalls
+verschlüsselt. Passwort aus der Umgebungsvariable SOZIALRAUM_PASSWORT oder der Datei werkzeuge/sozialraum/.passwort.
 
-Nur Python-Standardbibliothek; für `hsl` zusätzlich openpyxl.
+    python3 werkzeuge/sozialraum.py entpacken  # Archiv mit dem Passwort nach intern/ entpacken (vor dem Bearbeiten)
+    python3 werkzeuge/sozialraum.py pruefen    # alle CSV-Dateien in intern/daten/ prüfen, Bericht nach intern/bericht.txt
+    python3 werkzeuge/sozialraum.py seite      # prüfen, berechnen, Seite bauen und verschlüsseln, Archiv aktualisieren
+    python3 werkzeuge/sozialraum.py hsl        # Gemeindestatistik (Excel in quellen/sozialraum/) -> intern/daten/hsl_gemeindestatistik.csv
+
+Benötigt das Paket cryptography; für `hsl` zusätzlich openpyxl.
 """
 import csv
 import glob
@@ -19,9 +24,11 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TOOLS = os.path.join(ROOT, 'werkzeuge')
 SRC = os.path.join(TOOLS, 'sozialraum')
-DATA = os.path.join(ROOT, 'sozialraum', 'daten')
+INTERN = os.path.join(ROOT, 'intern')
+DATA = os.path.join(INTERN, 'daten')
+ARCHIV = os.path.join(ROOT, 'werkzeuge', 'sozialraum', 'daten.verschluesselt')
 OUT_PAGE = os.path.join(ROOT, 'sozialraum', 'index.html')
-REPORT = os.path.join(TOOLS, 'ausgabe', 'sozialraum_bericht.txt')
+REPORT = os.path.join(INTERN, 'bericht.txt')
 
 GEMEINDEN = ['Aßlar', 'Bischoffen', 'Braunfels', 'Breitscheid', 'Dietzhölztal', 'Dillenburg', 'Driedorf',
              'Ehringshausen', 'Eschenburg', 'Greifenstein', 'Haiger', 'Herborn', 'Hohenahr', 'Hüttenberg',
@@ -312,7 +319,26 @@ def kennzahlen_csv(d):
             w.writerow(['' if r.get(c) is None else r.get(c) for c in spalten])
 
 
+def oeffentlich_pruefen():
+    """Bricht ab, wenn Daten im Klartext an einer Stelle liegen, die ins öffentliche Repository gelangen kann."""
+    import subprocess
+    ign = subprocess.run(['git', 'check-ignore', '-q', 'intern/daten/test.csv'], cwd=ROOT).returncode
+    if ign != 0:
+        sys.exit('intern/ ist nicht in .gitignore ausgeschlossen. Abbruch, damit keine Daten öffentlich werden.')
+    verfolgt = subprocess.run(['git', 'ls-files', '--', '*.csv', '*.xlsx', '*.xls', '*.ods', 'intern', 'sozialraum'],
+                              cwd=ROOT, capture_output=True, text=True).stdout.split()
+    verboten = [v for v in verfolgt if v.startswith('intern/') or (v.startswith('sozialraum/') and v != 'sozialraum/index.html')
+                or (v.endswith('.csv') and not v.startswith('werkzeuge/') and not v.startswith('quellen/'))]
+    if verboten:
+        sys.exit('Diese Dateien sind im Repository und könnten Daten im Klartext enthalten: ' + ', '.join(verboten) +
+                 '\nBitte mit „git rm --cached <datei>“ herausnehmen und nach intern/ legen.')
+
+
 def seite():
+    oeffentlich_pruefen()
+    passwort = passwort_lesen()
+    if not os.path.isdir(DATA):
+        entpacken(passwort)
     fehler, hinweise, info = pruefen()
     if fehler:
         bericht_schreiben(fehler, hinweise, info, ['Seite NICHT gebaut, erst Fehler beheben.'])
@@ -320,6 +346,7 @@ def seite():
     d = berechnen()
     kennzahlen_csv(d)
     d['methodik'] = json.load(open(os.path.join(SRC, 'methodik.json'), encoding='utf-8'))
+    d['dateien'] = {os.path.basename(p): open(p, encoding='utf-8-sig').read() for p in sorted(glob.glob(os.path.join(DATA, '*.csv')))}
     vorlage = open(os.path.join(SRC, 'vorlage.html'), encoding='utf-8').read()
     d3 = open(os.path.join(TOOLS, 'd3.min.js'), encoding='utf-8').read()
     daten = json.dumps(d, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
@@ -327,11 +354,106 @@ def seite():
     if '/*__D3__*/' in html or '/*__DATEN__*/' in html:
         sys.exit('Platzhalter in der Vorlage nicht gefunden')
     with open(OUT_PAGE, 'w', encoding='utf-8') as f:
-        f.write(html)
+        f.write(verschluesseln(html, passwort))
+    archiv_status = packen(passwort)
     rang = [f"  {r['rang']:>2}. {r['gemeinde']:<14} {r['bedarfsindex']:+.2f}" for r in sorted(
         [r for r in d['gemeinden'] if r['rang']], key=lambda r: r['rang'])]
     bericht_schreiben(fehler, hinweise, info, ['Bedarfsindex (Rang, Kommune, Wert):'] + rang +
-                      ['', f'Seite gebaut: sozialraum/index.html ({len(html) // 1024} KB)'])
+                      ['', f'Seite gebaut und verschlüsselt: sozialraum/index.html ({len(html) // 1024} KB)', archiv_status])
+
+
+PASSWORT_DATEI = os.path.join(SRC, '.passwort')
+PBKDF2_RUNDEN = 600000
+
+
+def passwort_lesen():
+    pw = os.environ.get('SOZIALRAUM_PASSWORT', '').strip()
+    if not pw and os.path.exists(PASSWORT_DATEI):
+        pw = open(PASSWORT_DATEI, encoding='utf-8').read().strip()
+    if len(pw) < 8:
+        sys.exit('Kein Passwort (mind. 8 Zeichen): SOZIALRAUM_PASSWORT setzen oder werkzeuge/sozialraum/.passwort anlegen.')
+    return pw
+
+
+def _schluessel(passwort, salz, runden):
+    from cryptography.hazmat.primitives import hashes
+    from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+    return PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salz, iterations=runden).derive(passwort.encode())
+
+
+def _zu(klartext, passwort):
+    """AES-256-GCM, Schlüssel per PBKDF2-SHA256. Ergebnis als JSON-Text (base64)."""
+    import base64
+    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+    salz, iv = os.urandom(16), os.urandom(12)
+    geheim = AESGCM(_schluessel(passwort, salz, PBKDF2_RUNDEN)).encrypt(iv, klartext, None)
+    b64 = lambda b: base64.b64encode(b).decode()
+    return json.dumps({'salz': b64(salz), 'iv': b64(iv), 'runden': PBKDF2_RUNDEN, 'daten': b64(geheim)})
+
+
+def _auf(paket, passwort):
+    import base64
+    from cryptography.exceptions import InvalidTag
+    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+    p = json.loads(paket)
+    d = lambda k: base64.b64decode(p[k])
+    try:
+        return AESGCM(_schluessel(passwort, d('salz'), p['runden'])).decrypt(d('iv'), d('daten'), None)
+    except InvalidTag:
+        sys.exit('Falsches Passwort für das Datenarchiv.')
+
+
+def _archiv_inhalt():
+    """Alle Dateien unter intern/ außer dem Prüfbericht, als sortierte Liste (Pfad, Bytes)."""
+    teile = []
+    for wurzel, _, dateien in os.walk(INTERN):
+        for n in dateien:
+            pfad = os.path.join(wurzel, n)
+            rel = os.path.relpath(pfad, INTERN).replace(os.sep, '/')
+            if rel != 'bericht.txt':
+                teile.append((rel, open(pfad, 'rb').read()))
+    return sorted(teile)
+
+
+def packen(passwort):
+    import io
+    import zipfile
+    inhalt = _archiv_inhalt()
+    if os.path.exists(ARCHIV):
+        alt = zipfile.ZipFile(io.BytesIO(_auf(open(ARCHIV, encoding='utf-8').read(), passwort)))
+        if sorted((n, alt.read(n)) for n in alt.namelist()) == inhalt:
+            return 'Datenarchiv unverändert.'
+    puffer = io.BytesIO()
+    with zipfile.ZipFile(puffer, 'w', zipfile.ZIP_DEFLATED) as z:
+        for rel, daten in inhalt:
+            z.writestr(zipfile.ZipInfo(rel, (2020, 1, 1, 0, 0, 0)), daten)
+    with open(ARCHIV, 'w', encoding='utf-8') as f:
+        f.write(_zu(puffer.getvalue(), passwort))
+    return f'Datenarchiv aktualisiert: werkzeuge/sozialraum/daten.verschluesselt ({len(inhalt)} Dateien).'
+
+
+def entpacken(passwort=None):
+    import io
+    import zipfile
+    passwort = passwort or passwort_lesen()
+    if not os.path.exists(ARCHIV):
+        sys.exit('Kein Datenarchiv werkzeuge/sozialraum/daten.verschluesselt gefunden.')
+    z = zipfile.ZipFile(io.BytesIO(_auf(open(ARCHIV, encoding='utf-8').read(), passwort)))
+    for n in z.namelist():
+        ziel = os.path.join(INTERN, *n.split('/'))
+        os.makedirs(os.path.dirname(ziel), exist_ok=True)
+        with open(ziel, 'wb') as f:
+            f.write(z.read(n))
+    print(f'{len(z.namelist())} Dateien nach intern/ entpackt.')
+
+
+def verschluesseln(html, passwort):
+    """Seite verschlüsseln; entschlüsselt wird im Browser (login.html)."""
+    paket = _zu(html.encode('utf-8'), passwort)
+    login = open(os.path.join(SRC, 'login.html'), encoding='utf-8').read()
+    if '/*__PAKET__*/null' not in login:
+        sys.exit('Platzhalter in login.html nicht gefunden')
+    return login.replace('/*__PAKET__*/null', paket)
 
 
 def hsl():
@@ -357,18 +479,21 @@ def hsl():
         zeilen.append([ags, name, ew, r[2], round(r[11]), round(r[9], 2), round(r[13], 1), round(r[15], 1), round(r[19], 1),
                        round(a3[9], 1), round((a3[10] + a3[12]) / (r[12] + r[14]) * 100, 1),
                        round(a4[2] / ew * 1000, 1), round(a4[15] / ew * 1000, 1), t[4], round((w[3] + w[4]) / w[2] * 100, 1)])
+    os.makedirs(DATA, exist_ok=True)
     ziel = os.path.join(DATA, 'hsl_gemeindestatistik.csv')
     with open(ziel, 'w', encoding='utf-8', newline='') as f:
         wr = csv.writer(f)
         wr.writerow(kopf)
         wr.writerows(zeilen)
-    print(f'{os.path.basename(pfad)} -> sozialraum/daten/hsl_gemeindestatistik.csv ({len(zeilen)} Zeilen)')
+    print(f'{os.path.basename(pfad)} -> intern/daten/hsl_gemeindestatistik.csv ({len(zeilen)} Zeilen)')
 
 
 if __name__ == '__main__':
     befehl = sys.argv[1] if len(sys.argv) > 1 else ''
     if befehl == 'hsl':
         hsl()
+    elif befehl == 'entpacken':
+        entpacken()
     elif befehl == 'pruefen':
         f, h, i = pruefen()
         bericht_schreiben(f, h, i)
