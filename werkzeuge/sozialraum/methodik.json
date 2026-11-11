@@ -1,5 +1,5 @@
 {
-  "stand": "06.11.2026",
+  "stand": "11.11.2026",
   "quellen": {
     "hsl_gemeinde": {
       "titel": "Hessische Gemeindestatistik 2025",
@@ -63,6 +63,13 @@
       "lizenz": "eigene Zusammenstellung, Link je Angebot in der Datei",
       "datei": "angebote_liste.csv (Download unter „Daten und Ergänzungen“)",
       "hinweis": "Nicht vollständig. Ergänzungen bitte über „Daten einreichen“."
+    },
+    "kita_db": {
+      "titel": "Kita-Datenbank des Lahn-Dill-Kreises (Auszug)",
+      "herausgeber": "Lahn-Dill-Kreis",
+      "stand": "Auszug vom November 2026, Stichtag nicht angegeben",
+      "datei": "kita_mh_kreis.csv (Download unter „Daten und Ergänzungen“)",
+      "hinweis": "Interne Daten, nicht öffentlich. Enthält die Kitas im Zuständigkeitsbereich des Kreisjugendamts, also alle Kommunen außer Wetzlar. Übernommen sind nur die Summen je Kommune, keine Werte einzelner Kitas. Die Zahl der Kinder ist aus Anzahl und Anteil zurückgerechnet."
     }
   },
   "kennzahlen": {
@@ -73,8 +80,9 @@
     "altersarmut": {"label": "Altersarmut", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Empfänger:innen von Grundsicherung im Alter an den Personen ab 65 Jahren."},
     "alo_svb": {"label": "Arbeitslose an den Beschäftigten", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Arbeitslose je 100 sozialversicherungspflichtig Beschäftigte am Wohnort."},
     "alo_svb_u25": {"label": "Arbeitslose unter 25 an den Beschäftigten unter 25", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Arbeitslose unter 25 Jahren je 100 sozialversicherungspflichtig Beschäftigte unter 25 Jahren."},
-    "kita_mh": {"label": "Kita-Kinder mit Migrationshintergrund", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Anteil der Kinder in Kindertageseinrichtungen mit mindestens einem Elternteil ausländischer Herkunft (Kinder- und Jugendhilfestatistik).", "hinweis": "Bester verfügbarer Näherungswert für Migrationshintergrund auf Gemeindeebene. Gezählt am Standort der Kita."},
+    "kita_mh": {"label": "Kita-Kinder mit Migrationshintergrund", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Anteil der Kinder in Kindertageseinrichtungen mit mindestens einem Elternteil ausländischer Herkunft (Kinder- und Jugendhilfestatistik).", "hinweis": "Bester verfügbarer Näherungswert für Migrationshintergrund auf Gemeindeebene. Gezählt am Standort der Kita. Zum Vergleich gibt es die Kennzahl aus der Kita-Datenbank des Kreises mit engerer Definition (zusätzlich vorwiegend nicht deutsche Familiensprache)."},
     "kita3_mh": {"label": "3-Jährige in Kitas mit Migrationshintergrund", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Wie oben, nur für dreijährige Kinder."},
+    "kita_mh_kreis": {"label": "Kita-Kinder mit Migrationshintergrund (Kita-Datenbank)", "einheit": "%", "jahr": "Stand unbekannt", "quelle": ["kita_db"], "definition": "Anteil der Kinder in den Kitas der Kommune, bei denen mindestens ein Elternteil aus dem Ausland stammt und in der Familie vorwiegend nicht Deutsch gesprochen wird.", "hinweis": "Engere Definition als beim Wegweiser Kommune (dort reicht die ausländische Herkunft eines Elternteils). Die Werte liegen deshalb meist niedriger. Für Wetzlar liegen keine Werte vor (eigenes Jugendamt). Durchschnitt der 22 Kommunen: 31,3 %. Nicht Teil des Bedarfsindex."},
     "sgb2_ausl": {"label": "SGB-II-Quote Ausländer:innen", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "SGB-II-Leistungsberechtigte ohne deutsche Staatsangehörigkeit an der ausländischen Bevölkerung bis zur Regelaltersgrenze."},
     "efh_anteil": {"label": "Wohnungen in Ein- und Zweifamilienhäusern", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Anteil der Wohnungen in Gebäuden mit einer oder zwei Wohnungen."},
     "nichtdt": {"label": "Nichtdeutsche Bevölkerung", "einheit": "%", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Einwohner:innen ohne deutsche Staatsangehörigkeit an allen Einwohner:innen, 31.12.2024.", "hinweis": "Der Wegweiser Kommune weist auf älterer Bevölkerungsbasis etwas höhere Anteile aus."},

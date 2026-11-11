@@ -62,6 +62,9 @@ SCHEMA = {
          'auslaender', 'auslaender_u15', 'kita3_mh', 'kita_mh', 'sgb2_ausl', 'alo_bev']] + [('wohnflaeche', 'num', False, (20, 100))]},
     'kita_quoten_2023.csv': {'zeilen': 'gemeinden+vergleich', 'spalten': [
         ('gemeinde', 'gemeinde', True, None), ('kita_quote_u3', 'num', False, (0, 100)), ('kita_quote_3_5', 'num', False, (0, 130))]},
+    'kita_mh_kreis.csv': {'zeilen': 'gemeinden', 'spalten': [
+        ('gemeinde', 'gemeinde', True, None), ('kitas', 'int', False, (1, 60)), ('kinder', 'int', False, (10, 5000)),
+        ('migrantenkinder', 'int', False, (0, 5000)), ('kita_mh_kreis', 'num', False, (0, 100))]},
     'aerzte_kommune.csv': {'zeilen': 'gemeinden', 'spalten': [
         ('gemeinde', 'gemeinde', True, None), ('hausaerzte', 'int', True, (0, 200)), ('kinderaerzte', 'int', True, (0, 50)),
         ('mittelbereich_hausaerzte', 'enum:Haiger/Dillenburg|Herborn|Wetzlar', True, None)]},
@@ -210,6 +213,7 @@ def berechnen():
     hsl = {z['gemeinde']: z for z in lesen('hsl_gemeindestatistik.csv')}
     ww = {z['gemeinde']: z for z in lesen('wegweiser_kommune_2023.csv')}
     kita = {z['gemeinde']: z for z in lesen('kita_quoten_2023.csv')}
+    kita_db = {z['gemeinde']: z for z in lesen('kita_mh_kreis.csv')}
     aerzte = {z['gemeinde']: z for z in lesen('aerzte_kommune.csv')}
     vg = lesen('versorgungsgrade_kv.csv')
     schulen = lesen('schulen_liste.csv')
@@ -228,6 +232,7 @@ def berechnen():
             r[c] = zahl(w.get(c))
         r['kita_u3'] = zahl(k.get('kita_quote_u3'))
         r['kita_3_5'] = zahl(k.get('kita_quote_3_5'))
+        r['kita_mh_kreis'] = zahl(kita_db.get(g, {}).get('kita_mh_kreis'))
         return r
 
     gem = [zeile(g) for g in GEMEINDEN]
@@ -307,7 +312,7 @@ def berechnen():
 
 def kennzahlen_csv(d):
     spalten = ['gemeinde', 'einwohner', 'bedarfsindex', 'rang', 'n_ind', 'sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut',
-               'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt',
+               'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt',
                'einkuenfte_je_stpfl', 'ab65', 'u6', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
                'efh_anteil', 'kita_u3', 'kita_3_5', 'schulen', 'grundschulen', 'weiterfuehrend', 'ganztag', 'hausaerzte',
                'kinderaerzte', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'vorort',
