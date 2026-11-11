@@ -65,6 +65,8 @@ SCHEMA = {
     'kita_mh_kreis.csv': {'zeilen': 'gemeinden', 'spalten': [
         ('gemeinde', 'gemeinde', True, None), ('kitas', 'int', False, (1, 60)), ('kinder', 'int', False, (10, 5000)),
         ('migrantenkinder', 'int', False, (0, 5000)), ('kita_mh_kreis', 'num', False, (0, 100))]},
+    'kjp_psychotherapeuten.csv': {'zeilen': 'gemeinden', 'spalten': [
+        ('gemeinde', 'gemeinde', True, None), ('kjp_pt', 'int', True, (0, 100))]},
     'aerzte_kommune.csv': {'zeilen': 'gemeinden', 'spalten': [
         ('gemeinde', 'gemeinde', True, None), ('hausaerzte', 'int', True, (0, 200)), ('kinderaerzte', 'int', True, (0, 50)),
         ('mittelbereich_hausaerzte', 'enum:Haiger/Dillenburg|Herborn|Wetzlar', True, None)]},
@@ -215,6 +217,7 @@ def berechnen():
     kita = {z['gemeinde']: z for z in lesen('kita_quoten_2023.csv')}
     kita_db = {z['gemeinde']: z for z in lesen('kita_mh_kreis.csv')}
     aerzte = {z['gemeinde']: z for z in lesen('aerzte_kommune.csv')}
+    kjp = {z['gemeinde']: int(zahl(z['kjp_pt'])) for z in lesen('kjp_psychotherapeuten.csv')}
     vg = lesen('versorgungsgrade_kv.csv')
     schulen = lesen('schulen_liste.csv')
     angebote = lesen('angebote_liste.csv')
@@ -267,6 +270,7 @@ def berechnen():
         r['ganztag'] = sum(1 for s in sch if s['ganztag_kurz'] in GANZTAG_ZAEHLT)
         r['hausaerzte'] = int(zahl(a['hausaerzte'])) if a else None
         r['kinderaerzte'] = int(zahl(a['kinderaerzte'])) if a else None
+        r['kjp_pt'] = kjp.get(g)
         r['mittelbereich'] = a.get('mittelbereich_hausaerzte', '')
         mb = ha_vg.get(r['mittelbereich'])
         r['hausarzt_vg'] = zahl(mb['versorgungsgrad_prozent']) if mb else None
@@ -292,6 +296,8 @@ def berechnen():
         'schulsozialarbeit': sum(1 for a in angebote if a['kategorie'] == 'Schulsozialarbeit' and vor_ort(a)),
         'jugend': sum(1 for a in angebote if a['kategorie'] == 'Jugendzentrum/Jugendpflege' and vor_ort(a)),
         'angebote': len(angebote),
+        'kjp_pt': sum(kjp.values()),
+        'kjp_pt_kommunen': sum(1 for x in kjp.values() if x > 0),
     }
     median_vorort = statistics.median(r['_dichte'] for r in gem if r['_index'] is not None)
     for r in gem:
@@ -315,7 +321,7 @@ def kennzahlen_csv(d):
                'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt',
                'einkuenfte_je_stpfl', 'ab65', 'u6', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
                'efh_anteil', 'kita_u3', 'kita_3_5', 'schulen', 'grundschulen', 'weiterfuehrend', 'ganztag', 'hausaerzte',
-               'kinderaerzte', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'vorort',
+               'kinderaerzte', 'kjp_pt', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'vorort',
                'vorort_je10k', 'hoher_bedarf_wenig_angebot', 'fachdienste', 'psychiatrie']
     with open(os.path.join(DATA, 'kennzahlen_kommunen.csv'), 'w', encoding='utf-8', newline='') as f:
         w = csv.writer(f)

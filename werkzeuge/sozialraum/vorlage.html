@@ -170,7 +170,7 @@ td.na { color: var(--fg-muted); }
       <div class="tiles">
         <div class="tile"><p class="lab">Schulstandorte<button class="info" data-k="schulen" aria-label="Erläuterung Schulstandorte">i</button></p><p class="big" id="k-schulen">—</p><p class="sub">mit Ganztag oder Pakt: <span id="k-ganztag">—</span> <button class="info" data-k="ganztag" aria-label="Erläuterung Ganztag">i</button></p></div>
         <div class="tile"><p class="lab">Familienzentren / Schulsozialarbeit<span><button class="info" data-k="familienzentren" aria-label="Erläuterung Familienzentren">i</button> <button class="info" data-k="schulsozialarbeit" aria-label="Erläuterung Schulsozialarbeit">i</button></span></p><p class="big"><span id="k-fz">—</span> / <span id="k-ssa">—</span></p><p class="sub">Jugendzentren und Jugendpflege: <span id="k-jug">—</span></p></div>
-        <div class="tile"><p class="lab">Psychotherapie, Versorgungsgrad Kreis<button class="info" data-k="versorgungsgrad" aria-label="Erläuterung Versorgungsgrad">i</button></p><p class="big" id="k-pt">—</p><p class="sub">Kinder- und Jugendpsychiatrie (Mittelhessen): <span id="k-kjp">—</span></p></div>
+        <div class="tile"><p class="lab">Psychotherapie, Versorgungsgrad Kreis<button class="info" data-k="versorgungsgrad" aria-label="Erläuterung Versorgungsgrad">i</button></p><p class="big" id="k-pt">—</p><p class="sub">Kinder- und Jugendpsychiatrie (Mittelhessen): <span id="k-kjp">—</span></p><p class="sub">Psychotherapie für Kinder und Jugendliche: <span id="k-kjpt">—</span> <button class="info" data-k="kjp_pt" aria-label="Erläuterung Psychotherapie für Kinder und Jugendliche">i</button></p></div>
         <div class="tile"><p class="lab">Hausärzte, Versorgungsgrad Haiger/Dillenburg<button class="info" data-k="hausarzt_vg" aria-label="Erläuterung Hausarzt-Versorgungsgrad">i</button></p><p class="big" id="k-ha1">—</p><p class="sub">Herborn: <span id="k-ha2">—</span> · Wetzlar: <span id="k-ha3">—</span></p></div>
       </div>
     </section>
@@ -513,6 +513,7 @@ el('k-schulen').textContent = f0(D.kreis.schulen); el('k-ganztag').textContent =
 el('k-fz').textContent = f0(D.kreis.familienzentren); el('k-ssa').textContent = f0(D.kreis.schulsozialarbeit); el('k-jug').textContent = f0(D.kreis.jugend);
 el('k-pt').textContent = pv(vg((r) => r.arztgruppe.startsWith('Psychotherapeuten')));
 el('k-kjp').textContent = pv(vg((r) => r.arztgruppe === 'Kinder- und Jugendpsychiater'));
+el('k-kjpt').textContent = f0(D.kreis.kjp_pt) + ' Therapeut:innen in ' + f0(D.kreis.kjp_pt_kommunen) + ' Kommunen';
 el('k-ha1').textContent = pv(vg((r) => r.planungsbereich === 'Mittelbereich Haiger/Dillenburg'));
 el('k-ha2').textContent = pv(vg((r) => r.planungsbereich === 'Mittelbereich Herborn'));
 el('k-ha3').textContent = pv(vg((r) => r.planungsbereich === 'Mittelbereich Wetzlar'));
@@ -532,7 +533,7 @@ function drawAngebote() {
 }
 sortTable(el('tab-angebot'), [
   { k: 'gemeinde', t: 'Kommune' }, { k: 'bedarfsindex', t: 'Bedarfs­index', f: fs }, { k: 'schulen', t: 'Schulen' }, { k: 'ganztag', t: 'Ganztag/Pakt' },
-  { k: 'kita_u3', t: 'Kita U3 %' }, { k: 'kita_3_5', t: 'Kita 3–5 %' }, { k: 'hausaerzte', t: 'Hausärzt:innen' }, { k: 'hausarzt_vg', t: 'Hausarzt-VG %' },
+  { k: 'kita_u3', t: 'Kita U3 %' }, { k: 'kita_3_5', t: 'Kita 3–5 %' }, { k: 'hausaerzte', t: 'Hausärzt:innen' }, { k: 'hausarzt_vg', t: 'Hausarzt-VG %' }, { k: 'kjp_pt', t: 'Psycho­therapie Kinder/Jugend' },
   { k: 'familienzentren', t: 'Familien­zentren' }, { k: 'schulsozialarbeit', t: 'Schulsozial­arbeit' }, { k: 'jugend', t: 'Jugend­pflege' },
   { k: 'vorort_je10k', t: 'Vor Ort je 10.000' }, { k: 'fachdienste', t: 'Fach­dienste' }, { k: 'psychiatrie', t: 'Psychiatrie' }
 ], G, { key: 'bedarfsindex', dir: -1 }, ['bedarfsindex', 'vorort_je10k']);
