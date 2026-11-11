@@ -62,7 +62,7 @@
       "url": "https://jugendfoerderung.lahn-dill-kreis.de/index.php/netzwerk/begegnungs-und-familienzentren/",
       "lizenz": "eigene Zusammenstellung, Link je Angebot in der Datei",
       "datei": "angebote_liste.csv (Download unter „Daten und Ergänzungen“)",
-      "hinweis": "Nicht vollständig. Ergänzungen bitte über „Daten einreichen“."
+      "hinweis": "Nicht vollständig. Ergänzungen bitte an das Bildungsbüro schicken."
     },
     "kita_db": {
       "titel": "Kita-Datenbank des Lahn-Dill-Kreises (Auszug)",
@@ -70,6 +70,15 @@
       "stand": "Auszug vom November 2026, Stichtag nicht angegeben",
       "datei": "kita_mh_kreis.csv (Download unter „Daten und Ergänzungen“)",
       "hinweis": "Interne Daten, nicht öffentlich. Enthält die Kitas im Zuständigkeitsbereich des Kreisjugendamts, also alle Kommunen außer Wetzlar. Übernommen sind nur die Summen je Kommune, keine Werte einzelner Kitas. Die Zahl der Kinder ist aus Anzahl und Anteil zurückgerechnet."
+    },
+    "ptk_hessen": {
+      "titel": "Psychotherapeutensuche der Psychotherapeutenkammer Hessen",
+      "herausgeber": "Psychotherapeutenkammer Hessen (Auszählung: Bildungsbüro Lahn-Dill-Kreis)",
+      "stand": "19.12.2025",
+      "url": "https://ptk-hessen.de/fur-patienten-und-ratsuchende/psychotherapeutensuche/?show_page=1",
+      "lizenz": "eigene Auszählung",
+      "datei": "kjp_psychotherapeuten.csv (Download unter „Daten und Ergänzungen“)",
+      "hinweis": "Suche mit Filter Altersbereich „Kinder und Jugendliche“, gezählt nach Ort der Praxis."
     }
   },
   "kennzahlen": {
@@ -102,6 +111,7 @@
     "kita_3_5": {"label": "Kita-Betreuungsquote 3 bis 5", "einheit": "%", "jahr": "2023", "quelle": ["wegweiser"], "definition": "Kinder von 3 bis unter 6 Jahren in Kindertageseinrichtungen je 100 Kinder dieses Alters.", "hinweis": "Gezählt am Standort der Kita. Werte über 100 % bedeuten Kinder aus Nachbarorten."},
     "hausaerzte": {"label": "Hausärzt:innen", "einheit": "Anzahl", "jahr": "2026", "quelle": ["sanego"], "definition": "Einträge in der Kategorie Hausarzt im Online-Verzeichnis sanego.de je Ort.", "hinweis": "Nicht amtlich. Hausärztlich tätige Internist:innen fehlen möglicherweise teilweise."},
     "hausarzt_vg": {"label": "Hausarzt-Versorgungsgrad", "einheit": "%", "jahr": "2026", "quelle": ["kv_hessen"], "definition": "Versorgungsgrad der Bedarfsplanung im Mittelbereich, zu dem die Kommune gehört (Haiger/Dillenburg, Herborn oder Wetzlar). 100 % entspricht dem Soll; ab 110 % ist der Bereich für neue Zulassungen gesperrt."},
+    "kjp_pt": {"label": "Psychotherapeut:innen für Kinder und Jugendliche", "einheit": "Anzahl", "jahr": "2025", "quelle": ["ptk_hessen"], "definition": "Zahl der Psychotherapeut:innen mit Praxis in der Kommune, die in der Psychotherapeutensuche der Kammer den Altersbereich Kinder und Jugendliche angeben.", "hinweis": "Ergänzt den Versorgungsgrad der KV, ist aber nicht dasselbe: Das Verzeichnis der Kammer kann auch Praxen ohne Kassensitz enthalten, und über freie Plätze oder Wartezeiten sagt die Zahl nichts. 13 der 23 Therapeut:innen haben ihre Praxis in Wetzlar, in 16 Kommunen gibt es keinen Eintrag."},
     "versorgungsgrad": {"label": "Versorgungsgrad der Bedarfsplanung", "einheit": "%", "jahr": "2026", "quelle": ["kv_hessen"], "definition": "Verhältnis der tatsächlich zugelassenen Ärzt:innen bzw. Psychotherapeut:innen zur Soll-Zahl laut Bedarfsplanungs-Richtlinie. Hausärzte werden je Mittelbereich geplant, Kinderärzte, Nervenärzte und Psychotherapeuten je Kreis, Kinder- und Jugendpsychiater je Raumordnungsregion (Mittelhessen).", "hinweis": "Ein Versorgungsgrad über 100 % sagt nichts über Wartezeiten oder die Erreichbarkeit innerhalb des Kreises."},
     "familienzentren": {"label": "Familienzentren", "einheit": "Anzahl", "jahr": "2026", "quelle": ["angebote"], "definition": "Begegnungs- und Familienzentren mit Standort in der Kommune. Gemeinsame Zentren mehrerer Kommunen zählen in jeder beteiligten Kommune."},
     "schulsozialarbeit": {"label": "Schulsozialarbeit", "einheit": "Anzahl", "jahr": "2027", "quelle": ["angebote"], "definition": "Schulen mit sozialraumorientierter Sozialarbeit des Kreises laut Förderanträgen 2027.", "hinweis": "15 der 19 Schulen erfasst, die der Kreis nennt. Schulsozialarbeit, die das Jugendamt der Stadt Wetzlar selbst anbietet oder fördert, fehlt."},
@@ -114,7 +124,7 @@
     ["Alleinerziehende", "Auf Gemeindeebene nur im Zensus 2022 bzw. beim Kommunalen Jobcenter Lahn-Dill."],
     ["Gesundheit von Kindern", "Gesundheitsdaten liegen öffentlich nur auf Kreisebene vor. Für Kommunen eignen sich die Schuleingangsuntersuchungen des Gesundheitsamts (Sprache, Motorik, Übergewicht, Impfstatus)."],
     ["Hilfen zur Erziehung nach Kommune", "Nur nach Jugendamt veröffentlicht. Der Online-Geschäftsbericht hat zwar Diagramme mit Filter nach Kommune (Hilfen zur Erziehung, § 35a, Kindeswohlgefährdung, Inobhutnahmen u. a.), der Server liefert dafür aber keine Daten, auch nicht für den ganzen Kreis (geprüft am 06.11.2026). Werte nach Kommune hat die Jugendhilfeplanung des Kreises."],
-    ["Psychotherapie nach Kommune", "Öffentlich nur der Versorgungsgrad für den Kreis. Zahlen je Kommune sind nicht verfügbar."],
+    ["Psychotherapie für Erwachsene nach Kommune", "Öffentlich nur der Versorgungsgrad für den Kreis. Für Kinder und Jugendliche gibt es eine Auszählung der Kammer-Suche (siehe Kennzahl), für Erwachsene noch nicht."],
     ["Kita-Plätze", "Die Zahl der Einrichtungen ist nur für 8 Kommunen veröffentlicht; Plätze je Kommune gar nicht."],
     ["Vereine", "Nur kreisweit: 435 Sportvereine (Landessportbund 2023)."],
     ["Bischoffen und Siegbach", "Keine Sozialdaten im Wegweiser Kommune (kleinste Kommunen des Kreises); SGB-II-Daten hat das Kommunale Jobcenter Lahn-Dill."],
