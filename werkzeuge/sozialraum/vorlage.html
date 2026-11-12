@@ -474,7 +474,7 @@ el('hot').textContent = G.filter(HOT).sort((a, b) => b.bedarfsindex - a.bedarfsi
 document.querySelectorAll('[data-kreis]').forEach((e) => { const k = e.getAttribute('data-kreis'); e.textContent = fmt(k, KREIS[k]); });
 document.querySelectorAll('[data-hessen]').forEach((e) => { const k = e.getAttribute('data-hessen'); e.textContent = fmt(k, HESSEN[k]); });
 
-const EINZEL = ['sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein', 'efh_anteil', 'kita_u3', 'kita_3_5'];
+const EINZEL = ['sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'nichtdt_4_7', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein', 'efh_anteil', 'kita_u3', 'kita_3_5'];
 const selE = el('sel-einzel');
 EINZEL.forEach((k) => { const z = KZ(k); selE.append(new Option(z.label + ' (' + (z.einheit && z.einheit !== 'Anzahl' ? z.einheit + ', ' : '') + z.jahr + ')', k)); });
 
@@ -490,6 +490,7 @@ function drawBedarfe() {
   bars(el('ch-einzel'), G.map((r) => ({ n: r.gemeinde, v: r[k], r })).sort((a, b) => (b.v ?? -1e12) - (a.v ?? -1e12)), {
     ref, label: (v) => fmt(k, v), tick: KZ(k).einheit === '€' ? de.format(',.0f') : f1, hi: (x) => ref != null && x.v != null && x.v > ref,
     tip: (x) => [[x.n], [KZ(k).label, fmt(k, x.v)], ['Kreis', fmt(k, ref)], ['Hessen', fmt(k, HESSEN[k])], ['Einwohner', f0(x.r.einwohner)]].concat(k === 'anteil_4_7' && x.r.kinder_4_7 != null ? [['Kinder von 4 bis 7', f0(x.r.kinder_4_7)]] : [])
+      .concat(k === 'nichtdt_4_7' && x.r.kinder_4_7 != null ? [['Nichtdeutsche Kinder von 4 bis 7', f0(x.r.kinder_4_7_nichtdt) + ' von ' + f0(x.r.kinder_4_7)]] : [])
   });
   scatter(el('ch-streu'), G.filter((r) => r.kinderarmut != null && r.kita_mh != null).map((r) => ({ n: r.gemeinde, x: r.kita_mh, y: r.kinderarmut, s: r.einwohner, r })), {
     size: true, xlab: 'Kita-Kinder mit Migrationshintergrund in %', ylab: 'Kinderarmut in %', xtick: f1,

@@ -243,6 +243,8 @@ def berechnen():
         r['kita_mh_kreis'] = zahl(kita_db.get(g, {}).get('kita_mh_kreis'))
         r['anteil_4_7'] = zahl(bev47.get(g, {}).get('anteil_4_7'))
         r['kinder_4_7'] = int(zahl(bev47[g]['kinder_4_7'])) if g in bev47 else None
+        r['kinder_4_7_nichtdt'] = int(zahl(bev47[g]['kinder_4_7_nichtdt'])) if g in bev47 else None
+        r['nichtdt_4_7'] = round(r['kinder_4_7_nichtdt'] / r['kinder_4_7'] * 100, 1) if r['kinder_4_7'] else None
         return r
 
     gem = [zeile(g) for g in GEMEINDEN]
@@ -333,7 +335,7 @@ def berechnen():
 def kennzahlen_csv(d):
     spalten = ['gemeinde', 'einwohner', 'bedarfsindex', 'rang', 'n_ind', 'sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut',
                'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt',
-               'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'kinder_4_7', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
+               'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'kinder_4_7', 'nichtdt_4_7', 'kinder_4_7_nichtdt', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
                'efh_anteil', 'kita_u3', 'kita_3_5', 'schulen', 'grundschulen', 'weiterfuehrend', 'ganztag', 'hausaerzte',
                'kinderaerzte', 'kjp_pt', 'kjp_je10k_u15', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'vorort',
                'vorort_je10k', 'hoher_bedarf_wenig_angebot', 'bedarf_ueber_schnitt', 'fachdienste', 'psychiatrie']
