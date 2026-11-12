@@ -271,6 +271,10 @@ def berechnen():
         r['hausaerzte'] = int(zahl(a['hausaerzte'])) if a else None
         r['kinderaerzte'] = int(zahl(a['kinderaerzte'])) if a else None
         r['kjp_pt'] = kjp.get(g)
+        hz = hsl.get(g, {})
+        u15 = r['einwohner'] * (zahl(hz.get('u6')) + zahl(hz.get('u6_15'))) / 100 if hz.get('u6') and hz.get('u6_15') else None
+        r['kinder_u15'] = round(u15) if u15 else None
+        r['kjp_je10k_u15'] = round(r['kjp_pt'] / u15 * 10000, 1) if u15 and r['kjp_pt'] is not None else None
         r['mittelbereich'] = a.get('mittelbereich_hausaerzte', '')
         mb = ha_vg.get(r['mittelbereich'])
         r['hausarzt_vg'] = zahl(mb['versorgungsgrad_prozent']) if mb else None
@@ -299,10 +303,13 @@ def berechnen():
         'kjp_pt': sum(kjp.values()),
         'kjp_pt_kommunen': sum(1 for x in kjp.values() if x > 0),
     }
+    kinder = sum(r['kinder_u15'] for r in gem if r.get('kinder_u15'))
+    kreis['kjp_je10k_u15'] = round(kreis['kjp_pt'] / kinder * 10000, 1) if kinder else None
     median_vorort = statistics.median(r['_dichte'] for r in gem if r['_index'] is not None)
     for r in gem:
         # Einstufung mit ungerundeten Werten
         r['hoher_bedarf_wenig_angebot'] = bool(r['_index'] is not None and r['_index'] > 0 and r['_dichte'] < median_vorort)
+        r['bedarf_ueber_schnitt'] = bool(r['_index'] is not None and r['_index'] > 0)
     for r in gem:
         r.pop('_index'); r.pop('_dichte')
     median_vorort = round(median_vorort, 2)
@@ -321,8 +328,8 @@ def kennzahlen_csv(d):
                'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt',
                'einkuenfte_je_stpfl', 'ab65', 'u6', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
                'efh_anteil', 'kita_u3', 'kita_3_5', 'schulen', 'grundschulen', 'weiterfuehrend', 'ganztag', 'hausaerzte',
-               'kinderaerzte', 'kjp_pt', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'vorort',
-               'vorort_je10k', 'hoher_bedarf_wenig_angebot', 'fachdienste', 'psychiatrie']
+               'kinderaerzte', 'kjp_pt', 'kjp_je10k_u15', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'vorort',
+               'vorort_je10k', 'hoher_bedarf_wenig_angebot', 'bedarf_ueber_schnitt', 'fachdienste', 'psychiatrie']
     with open(os.path.join(DATA, 'kennzahlen_kommunen.csv'), 'w', encoding='utf-8', newline='') as f:
         w = csv.writer(f)
         w.writerow(spalten)
