@@ -65,6 +65,10 @@ SCHEMA = {
     'kita_mh_kreis.csv': {'zeilen': 'gemeinden', 'spalten': [
         ('gemeinde', 'gemeinde', True, None), ('kitas', 'int', False, (1, 60)), ('kinder', 'int', False, (10, 5000)),
         ('migrantenkinder', 'int', False, (0, 5000)), ('kita_mh_kreis', 'num', False, (0, 100))]},
+    'bevoelkerung_4_7_2025.csv': {'zeilen': 'gemeinden+vergleich', 'spalten': [
+        ('gemeinde', 'gemeinde', True, None), ('einwohner_31_12_2025', 'int', True, (1000, 10000000)),
+        ('kinder_4_7', 'int', True, (10, 1000000)), ('kinder_4_7_nichtdt', 'int', True, (0, 1000000)),
+        ('anteil_4_7', 'num', True, (1, 10))]},
     'kjp_psychotherapeuten.csv': {'zeilen': 'gemeinden', 'spalten': [
         ('gemeinde', 'gemeinde', True, None), ('kjp_pt', 'int', True, (0, 100))]},
     'aerzte_kommune.csv': {'zeilen': 'gemeinden', 'spalten': [
@@ -216,6 +220,7 @@ def berechnen():
     ww = {z['gemeinde']: z for z in lesen('wegweiser_kommune_2023.csv')}
     kita = {z['gemeinde']: z for z in lesen('kita_quoten_2023.csv')}
     kita_db = {z['gemeinde']: z for z in lesen('kita_mh_kreis.csv')}
+    bev47 = {z['gemeinde']: z for z in lesen('bevoelkerung_4_7_2025.csv')}
     aerzte = {z['gemeinde']: z for z in lesen('aerzte_kommune.csv')}
     kjp = {z['gemeinde']: int(zahl(z['kjp_pt'])) for z in lesen('kjp_psychotherapeuten.csv')}
     vg = lesen('versorgungsgrade_kv.csv')
@@ -236,6 +241,8 @@ def berechnen():
         r['kita_u3'] = zahl(k.get('kita_quote_u3'))
         r['kita_3_5'] = zahl(k.get('kita_quote_3_5'))
         r['kita_mh_kreis'] = zahl(kita_db.get(g, {}).get('kita_mh_kreis'))
+        r['anteil_4_7'] = zahl(bev47.get(g, {}).get('anteil_4_7'))
+        r['kinder_4_7'] = int(zahl(bev47[g]['kinder_4_7'])) if g in bev47 else None
         return r
 
     gem = [zeile(g) for g in GEMEINDEN]
@@ -326,7 +333,7 @@ def berechnen():
 def kennzahlen_csv(d):
     spalten = ['gemeinde', 'einwohner', 'bedarfsindex', 'rang', 'n_ind', 'sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut',
                'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt',
-               'einkuenfte_je_stpfl', 'ab65', 'u6', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
+               'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'kinder_4_7', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
                'efh_anteil', 'kita_u3', 'kita_3_5', 'schulen', 'grundschulen', 'weiterfuehrend', 'ganztag', 'hausaerzte',
                'kinderaerzte', 'kjp_pt', 'kjp_je10k_u15', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'vorort',
                'vorort_je10k', 'hoher_bedarf_wenig_angebot', 'bedarf_ueber_schnitt', 'fachdienste', 'psychiatrie']

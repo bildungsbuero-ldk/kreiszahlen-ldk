@@ -79,6 +79,15 @@
       "lizenz": "eigene Auszählung",
       "datei": "kjp_psychotherapeuten.csv (Download unter „Daten und Ergänzungen“)",
       "hinweis": "Suche mit Filter Altersbereich „Kinder und Jugendliche“, gezählt nach Ort der Praxis."
+    },
+    "hsl_bev_2025": {
+      "titel": "Bevölkerung in Hessen am 31. Dezember 2025 nach Gemeinden, Alter, Nationalität und Geschlecht",
+      "herausgeber": "Hessisches Statistisches Landesamt (Auszählung 4 bis unter 8 Jahre: Bildungsbüro Lahn-Dill-Kreis)",
+      "stand": "31.12.2025 (veröffentlicht Juni 2026, abgerufen 12.11.2026)",
+      "url": "https://statistik.hessen.de/unsere-zahlen/bevoelkerung",
+      "lizenz": "amtliche Statistik, eigene Berechnung",
+      "datei": "bevoelkerung_4_7_2025.csv (Download unter „Daten und Ergänzungen“)",
+      "hinweis": "Summe der Altersjahre 4, 5, 6 und 7 (4 bis unter 8 Jahre) je Kommune, im Kreis und in Hessen."
     }
   },
   "kennzahlen": {
@@ -99,6 +108,7 @@
     "einkuenfte_je_stpfl": {"label": "Einkünfte je Steuerpflichtigem", "einheit": "€", "jahr": "2021", "quelle": ["hsl_gemeinde"], "definition": "Gesamtbetrag der Einkünfte je Steuerpflichtigem laut Lohn- und Einkommensteuerstatistik 2021."},
     "ab65": {"label": "Anteil 65 Jahre und älter", "einheit": "%", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Einwohner:innen ab 65 Jahren an allen Einwohner:innen."},
     "u6": {"label": "Anteil unter 6 Jahren", "einheit": "%", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Kinder unter 6 Jahren an allen Einwohner:innen."},
+    "anteil_4_7": {"label": "Anteil 4- bis 7-Jährige", "einheit": "%", "jahr": "2025", "quelle": ["hsl_bev_2025"], "definition": "Kinder im Alter von 4 bis unter 8 Jahren an allen Einwohner:innen am 31.12.2025.", "hinweis": "Kernzielgruppe der Sozialraumkonferenzen (Übergang Kita–Grundschule). Ergänzt den Anteil unter 6 Jahren aus der Gemeindestatistik 2024. Die Unterschiede zwischen den Kommunen sind klein (3,3 bis 4,2 %); für die Planung zählt oft eher die Zahl der Kinder, die im Tooltip steht. Nicht Teil des Bedarfsindex."},
     "geburten_je1000": {"label": "Geburten je 1.000 Einwohner", "einheit": "", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Lebendgeborene 2024 je 1.000 Einwohner:innen am 31.12.2024."},
     "wanderungssaldo_je1000": {"label": "Wanderungssaldo je 1.000 Einwohner", "einheit": "", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Zuzüge minus Fortzüge über die Gemeindegrenze 2024 je 1.000 Einwohner:innen."},
     "veraend_vj": {"label": "Bevölkerungsveränderung zum Vorjahr", "einheit": "%", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Veränderung der Einwohnerzahl vom 31.12.2023 zum 31.12.2024."},
