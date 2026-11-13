@@ -58,11 +58,11 @@
     "angebote": {
       "titel": "Anlaufstellen und soziale Angebote",
       "herausgeber": "eigene Zusammenstellung aus Kreis-, Träger- und Vitos-Webseiten, Kreistagsvorlagen und der Landesförderliste Familienzentren",
-      "stand": "Recherche 06.11.2026",
+      "stand": "Recherche 06.11.2026, abgeglichen 13.11.2026",
       "url": "https://jugendfoerderung.lahn-dill-kreis.de/index.php/netzwerk/begegnungs-und-familienzentren/",
       "lizenz": "eigene Zusammenstellung, Link je Angebot in der Datei",
       "datei": "angebote_liste.csv (Download unter „Daten und Ergänzungen“)",
-      "hinweis": "Nicht vollständig. Ergänzungen bitte an das Bildungsbüro schicken."
+      "hinweis": "Nicht vollständig. Sozialarbeit an Schulen, Begegnungs- und Familienzentren und offene Kinder- und Jugendarbeit sind mit der Standortkarte des Kreises (Präsentation „Sozialraumorientierte Sozialarbeit im Lahn-Dill-Kreis“, 02.11.2026) und den Förderanträgen 2027 im Jugendhilfeausschuss (11.08.2026) abgeglichen. Ergänzungen bitte an das Bildungsbüro schicken."
     },
     "kita_db": {
       "titel": "Kita-Datenbank des Lahn-Dill-Kreises (Auszug)",
