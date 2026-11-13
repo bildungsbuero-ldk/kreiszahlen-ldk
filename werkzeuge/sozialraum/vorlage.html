@@ -474,7 +474,8 @@ el('hot').textContent = G.filter(HOT).sort((a, b) => b.bedarfsindex - a.bedarfsi
 document.querySelectorAll('[data-kreis]').forEach((e) => { const k = e.getAttribute('data-kreis'); e.textContent = fmt(k, KREIS[k]); });
 document.querySelectorAll('[data-hessen]').forEach((e) => { const k = e.getAttribute('data-hessen'); e.textContent = fmt(k, HESSEN[k]); });
 
-const EINZEL = ['sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'nichtdt_4_7', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein', 'efh_anteil', 'kita_u3', 'kita_3_5'];
+const EINZEL = ['sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'nichtdt_4_7', 'hze25_je1000', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein', 'efh_anteil', 'kita_u3', 'kita_3_5'];
+const klein = (v) => v == null ? 'k. A.' : (v > 0 && v < 3 ? 'unter 3' : f0(v));
 const selE = el('sel-einzel');
 EINZEL.forEach((k) => { const z = KZ(k); selE.append(new Option(z.label + ' (' + (z.einheit && z.einheit !== 'Anzahl' ? z.einheit + ', ' : '') + z.jahr + ')', k)); });
 
@@ -490,6 +491,7 @@ function drawBedarfe() {
   bars(el('ch-einzel'), G.map((r) => ({ n: r.gemeinde, v: r[k], r })).sort((a, b) => (b.v ?? -1e12) - (a.v ?? -1e12)), {
     ref, label: (v) => fmt(k, v), tick: KZ(k).einheit === '€' ? de.format(',.0f') : f1, hi: (x) => ref != null && x.v != null && x.v > ref,
     tip: (x) => [[x.n], [KZ(k).label, fmt(k, x.v)], ['Kreis', fmt(k, ref)], ['Hessen', fmt(k, HESSEN[k])], ['Einwohner', f0(x.r.einwohner)]].concat(k === 'anteil_4_7' && x.r.kinder_4_7 != null ? [['Kinder von 4 bis 7', f0(x.r.kinder_4_7)]] : [])
+      .concat(k === 'hze25_je1000' && x.r.hze25_hze != null ? [['Hilfen 2025 (ohne § 33)', klein(x.r.hze25_hze)], ['davon ambulant/teilstationär', klein(x.r.hze25_ambulant)], ['davon stationär (§§ 34, 35)', klein(x.r.hze25_34)], ['Eingliederungshilfe § 35a (nicht enthalten)', klein(x.r.hze25_35a)]] : [])
       .concat(k === 'nichtdt_4_7' && x.r.kinder_4_7 != null ? [['Nichtdeutsche Kinder von 4 bis 7', f0(x.r.kinder_4_7_nichtdt) + ' von ' + f0(x.r.kinder_4_7)]] : [])
   });
   scatter(el('ch-streu'), G.filter((r) => r.kinderarmut != null && r.kita_mh != null).map((r) => ({ n: r.gemeinde, x: r.kita_mh, y: r.kinderarmut, s: r.einwohner, r })), {
@@ -614,7 +616,12 @@ drawListe();
     ['hsl_gemeindestatistik.csv', 'Auszug aus der Hessischen Gemeindestatistik 2025'], ['wegweiser_kommune_2023.csv', 'Sozial- und Integrationskennzahlen 2023 (Wegweiser Kommune)'],
     ['kita_quoten_2023.csv', 'Kita-Betreuungsquoten 2023 (Wegweiser Kommune)'], ['hze_jugendamt_2023.csv', 'Hilfen zur Erziehung 2023 nach Jugendamt (HSL)'],
     ['versorgungsgrade_kv.csv', 'Versorgungsgrade der Bedarfsplanung (KV Hessen)'], ['aerzte_kommune.csv', 'Haus- und Kinderärzt:innen je Kommune (sanego.de)'],
-    ['schulen_liste.csv', 'Schulstandorte mit Schulform und Ganztag'], ['angebote_liste.csv', 'Anlaufstellen und soziale Angebote']];
+    ['schulen_liste.csv', 'Schulstandorte mit Schulform und Ganztag'], ['angebote_liste.csv', 'Anlaufstellen und soziale Angebote'],
+    ['kita_mh_kreis.csv', 'Kita-Kinder mit Migrationshintergrund je Kommune (Kita-Datenbank des Kreises, intern)'],
+    ['kjp_psychotherapeuten.csv', 'Psychotherapeut:innen für Kinder und Jugendliche je Kommune (Psychotherapeutenkammer Hessen)'],
+    ['bevoelkerung_4_7_2025.csv', 'Kinder von 4 bis 7 Jahren je Kommune, 31.12.2025 (HSL)'],
+    ['hze_kommunen_2025.csv', 'Hilfen zur Erziehung 2025 je Kommune (Kreisjugendamt, intern; Werte unter 3 als „<3“)']];
+  Object.keys(D.dateien || {}).forEach((f) => { if (!files.some(([g]) => g === f)) files.push([f, 'weitere Daten']); });
   files.forEach(([f, t]) => { const li = document.createElement('li'); const a = document.createElement('a'); if (!(D.dateien && D.dateien[f])) return; a.href = URL.createObjectURL(new Blob(['\ufeff' + D.dateien[f]], { type: 'text/csv;charset=utf-8' })); a.download = f; a.textContent = f; li.append(a, ' – ' + t); dl2.append(li); });
 })();
 
