@@ -221,15 +221,15 @@ td.na { color: var(--fg-muted); }
       <p>Sie hat zwei Teile: <b>Bedarfe</b> (amtliche Sozialdaten je Kommune, verdichtet zu einem Bedarfsindex) und <b>Angebote</b> (Schulen, Kitas, ärztliche Versorgung und soziale Anlaufstellen, mit Schwerpunkt psychische Gesundheit).</p>
 
       <h3 id="m-index">Der Bedarfsindex</h3>
-      <p>Für jede der sechs Kennzahlen wird ein z-Wert gebildet: der Abstand einer Kommune zum Mittelwert der Kommunen, gemessen in Standardabweichungen. So werden Kennzahlen mit unterschiedlichen Einheiten (Prozent, Euro) vergleichbar. Bei den Einkünften dreht sich das Vorzeichen um, weil niedrige Einkünfte auf mehr Bedarf hinweisen.</p>
-      <p class="formel">z = Richtung × (Wert der Kommune − Mittelwert der Kommunen) / Standardabweichung<br>Bedarfsindex = Mittelwert der vorhandenen z-Werte (mindestens 4 von 6)</p>
+      <p>Für jede der sieben Kennzahlen wird ein z-Wert gebildet: der Abstand einer Kommune zum Mittelwert der Kommunen, gemessen in Standardabweichungen. So werden Kennzahlen mit unterschiedlichen Einheiten (Prozent, Euro) vergleichbar. Bei den Einkünften dreht sich das Vorzeichen um, weil niedrige Einkünfte auf mehr Bedarf hinweisen.</p>
+      <p class="formel">z = Richtung × (Wert der Kommune − Mittelwert der Kommunen) / Standardabweichung<br>Bedarfsindex = Mittelwert der vorhandenen z-Werte (mindestens 4 von 7)</p>
       <div class="tablewrap" style="max-height:none"><table id="tab-indexdef"></table></div>
-      <p class="note" style="margin-top:8px">Alle sechs Kennzahlen zählen gleich. Probe mit anderen Gewichtungen (Stand 06.11.2026): Mit doppelt gewichteter Kinderarmut oder ohne die Einkünfte bleiben die fünf höchsten Werte gleich (Wetzlar, Aßlar, Dillenburg, Leun, Ehringshausen); ohne die beiden Migrationskennzahlen rückt Sinn für Ehringshausen auf Platz 5. Mittelwert und Standardabweichung beziehen sich auf die Kommunen mit Wert, nicht auf Kreis oder Land.</p>
+      <p class="note" style="margin-top:8px">Alle sieben Kennzahlen zählen gleich. Seit 13.11.2026 gehören die Hilfen zur Erziehung 2025 dazu. Für Wetzlar fehlt dieser Wert (eigenes Jugendamt), der Index von Wetzlar beruht deshalb auf sechs Kennzahlen. Mit den Hilfen zur Erziehung bleiben die fünf höchsten Werte gleich (Wetzlar, Aßlar, Dillenburg, Leun, Ehringshausen); Herborn und Dietzhölztal rücken vor, Sinn und Braunfels zurück. Frühere Probe mit sechs Kennzahlen (06.11.2026): Mit doppelt gewichteter Kinderarmut oder ohne die Einkünfte blieben die fünf höchsten Werte gleich; ohne die beiden Migrationskennzahlen rückte Sinn für Ehringshausen auf Platz 5. Mittelwert und Standardabweichung beziehen sich auf die Kommunen mit Wert, nicht auf Kreis oder Land.</p>
 
       <h3 id="m-angebot">Wie Angebote gezählt werden</h3>
       <p><b>Angebote vor Ort</b> sind Familienzentren, Schulsozialarbeit, Jugendzentren und Jugendpflege sowie Quartiersarbeit. Gemeinsame Zentren mehrerer Kommunen zählen in jeder beteiligten Kommune. <b>Fachdienste</b> (Beratungsstellen, Sozialpsychiatrie, Psychiatrie, Sucht, Gewaltschutz, Selbsthilfe, Frühe Hilfen, Migration, Existenzsicherung) sind an ihrem Sitz eingetragen, arbeiten aber meist für den ganzen Kreis oder eine Region. Sie gehen deshalb nicht in die Angebotsdichte ein.</p>
       <p>Ob ein Angebot vor Ort zählt, entscheiden Kategorie und Reichweite: Kreisweite Dienste in diesen Kategorien (z. B. die Kreisjugendpflege) zählen als Fachdienst.</p>
-      <p>„Hoher Bedarf, wenig Angebot vor Ort“ heißt: Bedarfsindex über 0 und Angebotsdichte unter dem Median der Kommunen (<span id="median-text">—</span> je 10.000 Einwohner). Eingestuft wird mit ungerundeten Werten. Dietzhölztal liegt mit einem Index von knapp über 0 genau an der Grenze.</p>
+      <p>„Hoher Bedarf, wenig Angebot vor Ort“ heißt: Bedarfsindex über 0 und Angebotsdichte unter dem Median der Kommunen (<span id="median-text">—</span> je 10.000 Einwohner). Eingestuft wird mit ungerundeten Werten.</p>
 
       <h3 id="m-lesen">Beim Lesen beachten</h3>
       <ul>
@@ -483,7 +483,7 @@ function drawBedarfe() {
   const top5 = new Set(ranked.slice(0, 5).map((r) => r.gemeinde));
   bars(el('ch-index'), G.map((r) => ({ n: r.gemeinde, v: r.bedarfsindex, r })).sort((a, b) => (b.v ?? -99) - (a.v ?? -99)), {
     label: fs, na: 'zu wenig Daten', hi: (x) => top5.has(x.n),
-    tip: (x) => [[x.n], ['Bedarfsindex', x.v == null ? 'k. A.' : fs(x.v)], ['Rang', x.r.rang ?? '–'], ['Kennzahlen vorhanden', x.r.n_ind + ' von 6']]
+    tip: (x) => [[x.n], ['Bedarfsindex', x.v == null ? 'k. A.' : fs(x.v)], ['Rang', x.r.rang ?? '–'], ['Kennzahlen vorhanden', x.r.n_ind + ' von ' + D.index_def.kennzahlen.length]]
   });
   const k = selE.value || 'sgb2';
   el('info-einzel').setAttribute('data-k', k);

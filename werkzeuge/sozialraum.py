@@ -45,7 +45,8 @@ SCHULARTEN = ['Grundschule', 'Weiterführende Schule', 'Förderschule', 'Berufli
 GANZTAG = ['Pakt für den Ganztag', 'Profil 1', 'Profil 2', 'Profil 3', 'Betreuung', 'unbekannt']
 GANZTAG_ZAEHLT = {'Pakt für den Ganztag', 'Profil 1', 'Profil 2', 'Profil 3'}
 # Bedarfsindex: Kennzahl, Richtung (+1 = höherer Wert bedeutet mehr Bedarf)
-INDEX = [('kinderarmut', 1), ('sgb2', 1), ('alo_svb', 1), ('kita_mh', 1), ('kinder_u15_nichtdt', 1), ('einkuenfte_je_stpfl', -1)]
+INDEX = [('kinderarmut', 1), ('sgb2', 1), ('alo_svb', 1), ('kita_mh', 1), ('kinder_u15_nichtdt', 1), ('einkuenfte_je_stpfl', -1),
+         ('hze25_je1000', 1)]
 INDEX_MIN = 4
 
 # Erwartete Spalten und Prüfregeln je Datei: (Spalte, Typ, Pflicht, (min, max))
