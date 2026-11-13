@@ -58,11 +58,11 @@
     "angebote": {
       "titel": "Anlaufstellen und soziale Angebote",
       "herausgeber": "eigene Zusammenstellung aus Kreis-, Träger- und Vitos-Webseiten, Kreistagsvorlagen und der Landesförderliste Familienzentren",
-      "stand": "Recherche 06.11.2026",
+      "stand": "Recherche 06.11.2026, abgeglichen 13.11.2026",
       "url": "https://jugendfoerderung.lahn-dill-kreis.de/index.php/netzwerk/begegnungs-und-familienzentren/",
       "lizenz": "eigene Zusammenstellung, Link je Angebot in der Datei",
       "datei": "angebote_liste.csv (Download unter „Daten und Ergänzungen“)",
-      "hinweis": "Nicht vollständig. Ergänzungen bitte an das Bildungsbüro schicken."
+      "hinweis": "Nicht vollständig. Sozialarbeit an Schulen, Begegnungs- und Familienzentren und offene Kinder- und Jugendarbeit sind mit der Standortkarte des Kreises (Präsentation „Sozialraumorientierte Sozialarbeit im Lahn-Dill-Kreis“, 02.11.2026) und den Förderanträgen 2027 im Jugendhilfeausschuss (11.08.2026) abgeglichen. Ergänzungen bitte an das Bildungsbüro schicken."
     },
     "kita_db": {
       "titel": "Kita-Datenbank des Lahn-Dill-Kreises (Auszug)",
@@ -95,7 +95,7 @@
       "stand": "Berichtsjahr 2025, ausgewertet am 10.11.2026",
       "lizenz": "interne Daten, nicht öffentlich",
       "datei": "hze_kommunen_2025.csv (Download unter „Daten und Ergänzungen“; Werte 1 und 2 als „<3“)",
-      "hinweis": "Interne Daten. Gezählt sind laufende und beendete Hilfen im Jahr 2025 nach Wohnort; Kinder in Wohngruppen im Kreis sind ihrem vorherigen Wohnort zugeordnet. Nur Kommunen des Kreisjugendamts, Wetzlar hat ein eigenes Jugendamt. Ein Teil der Hilfen des Kreisjugendamts ist in der Auswertung keiner Kommune zugeordnet."
+      "hinweis": "Interne Daten. Gezählt sind laufende und beendete Hilfen im Jahr 2025 nach Wohnort; Heimunterbringungen (§ 34) hat das Jugendamt einzeln dem vorherigen Wohnort zugeordnet, auch bei Wohngruppen in Dillenburg, Haiger, Herborn, Aßlar und Mittenaar; einzelne Ausreißer sind möglich. Für Vollzeitpflege (§ 33) war das nicht möglich; diese Zahlen zeigen eher, wo Pflegefamilien leben. Nur Kommunen des Kreisjugendamts, Wetzlar hat ein eigenes Jugendamt. Ein Teil der Hilfen des Kreisjugendamts ist in der Auswertung keiner Kommune zugeordnet."
     }
   },
   "kennzahlen": {
