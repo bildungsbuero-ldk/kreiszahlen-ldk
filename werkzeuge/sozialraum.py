@@ -13,6 +13,7 @@ verschlüsselt. Passwort aus der Umgebungsvariable SOZIALRAUM_PASSWORT oder der 
 Benötigt das Paket cryptography; für `hsl` zusätzlich openpyxl.
 """
 import csv
+import io
 import glob
 import json
 import math
@@ -44,7 +45,8 @@ SCHULARTEN = ['Grundschule', 'Weiterführende Schule', 'Förderschule', 'Berufli
 GANZTAG = ['Pakt für den Ganztag', 'Profil 1', 'Profil 2', 'Profil 3', 'Betreuung', 'unbekannt']
 GANZTAG_ZAEHLT = {'Pakt für den Ganztag', 'Profil 1', 'Profil 2', 'Profil 3'}
 # Bedarfsindex: Kennzahl, Richtung (+1 = höherer Wert bedeutet mehr Bedarf)
-INDEX = [('kinderarmut', 1), ('sgb2', 1), ('alo_svb', 1), ('kita_mh', 1), ('kinder_u15_nichtdt', 1), ('einkuenfte_je_stpfl', -1)]
+INDEX = [('kinderarmut', 1), ('sgb2', 1), ('alo_svb', 1), ('kita_mh', 1), ('kinder_u15_nichtdt', 1), ('einkuenfte_je_stpfl', -1),
+         ('hze25_je1000', 1)]
 INDEX_MIN = 4
 
 # Erwartete Spalten und Prüfregeln je Datei: (Spalte, Typ, Pflicht, (min, max))
@@ -65,6 +67,15 @@ SCHEMA = {
     'kita_mh_kreis.csv': {'zeilen': 'gemeinden', 'spalten': [
         ('gemeinde', 'gemeinde', True, None), ('kitas', 'int', False, (1, 60)), ('kinder', 'int', False, (10, 5000)),
         ('migrantenkinder', 'int', False, (0, 5000)), ('kita_mh_kreis', 'num', False, (0, 100))]},
+    'bevoelkerung_4_7_2025.csv': {'zeilen': 'gemeinden+vergleich', 'spalten': [
+        ('gemeinde', 'gemeinde', True, None), ('einwohner_31_12_2025', 'int', True, (1000, 10000000)),
+        ('kinder_4_7', 'int', True, (10, 1000000)), ('kinder_4_7_nichtdt', 'int', True, (0, 1000000)),
+        ('anteil_4_7', 'num', True, (1, 10))]},
+    'hze_kommunen_2025.csv': {'zeilen': 'gemeinden', 'spalten': [
+        ('gemeinde', 'gemeinde', True, None), ('unter21', 'int', True, (100, 100000)),
+        ('hilfen_hze', 'int', False, (0, 5000)), ('hilfen_ambulant', 'int', False, (0, 5000)),
+        ('hilfen_34', 'int', False, (0, 5000)), ('hilfen_35a', 'int', False, (0, 5000)),
+        ('hilfen_33', 'int', False, (0, 5000)), ('hze_je1000_u21', 'num', False, (0, 200))]},
     'kjp_psychotherapeuten.csv': {'zeilen': 'gemeinden', 'spalten': [
         ('gemeinde', 'gemeinde', True, None), ('kjp_pt', 'int', True, (0, 100))]},
     'aerzte_kommune.csv': {'zeilen': 'gemeinden', 'spalten': [
@@ -216,6 +227,8 @@ def berechnen():
     ww = {z['gemeinde']: z for z in lesen('wegweiser_kommune_2023.csv')}
     kita = {z['gemeinde']: z for z in lesen('kita_quoten_2023.csv')}
     kita_db = {z['gemeinde']: z for z in lesen('kita_mh_kreis.csv')}
+    bev47 = {z['gemeinde']: z for z in lesen('bevoelkerung_4_7_2025.csv')}
+    hze25 = {z['gemeinde']: z for z in lesen('hze_kommunen_2025.csv')}
     aerzte = {z['gemeinde']: z for z in lesen('aerzte_kommune.csv')}
     kjp = {z['gemeinde']: int(zahl(z['kjp_pt'])) for z in lesen('kjp_psychotherapeuten.csv')}
     vg = lesen('versorgungsgrade_kv.csv')
@@ -236,6 +249,14 @@ def berechnen():
         r['kita_u3'] = zahl(k.get('kita_quote_u3'))
         r['kita_3_5'] = zahl(k.get('kita_quote_3_5'))
         r['kita_mh_kreis'] = zahl(kita_db.get(g, {}).get('kita_mh_kreis'))
+        r['anteil_4_7'] = zahl(bev47.get(g, {}).get('anteil_4_7'))
+        r['kinder_4_7'] = int(zahl(bev47[g]['kinder_4_7'])) if g in bev47 else None
+        r['kinder_4_7_nichtdt'] = int(zahl(bev47[g]['kinder_4_7_nichtdt'])) if g in bev47 else None
+        r['nichtdt_4_7'] = round(r['kinder_4_7_nichtdt'] / r['kinder_4_7'] * 100, 1) if r['kinder_4_7'] else None
+        hz25 = hze25.get(g, {})
+        r['hze25_je1000'] = zahl(hz25.get('hze_je1000_u21'))
+        for c in ['hilfen_hze', 'hilfen_ambulant', 'hilfen_34', 'hilfen_35a']:
+            r['hze25_' + c.replace('hilfen_', '')] = int(zahl(hz25[c])) if hz25.get(c) not in (None, '') else None
         return r
 
     gem = [zeile(g) for g in GEMEINDEN]
@@ -271,6 +292,10 @@ def berechnen():
         r['hausaerzte'] = int(zahl(a['hausaerzte'])) if a else None
         r['kinderaerzte'] = int(zahl(a['kinderaerzte'])) if a else None
         r['kjp_pt'] = kjp.get(g)
+        hz = hsl.get(g, {})
+        u15 = r['einwohner'] * (zahl(hz.get('u6')) + zahl(hz.get('u6_15'))) / 100 if hz.get('u6') and hz.get('u6_15') else None
+        r['kinder_u15'] = round(u15) if u15 else None
+        r['kjp_je10k_u15'] = round(r['kjp_pt'] / u15 * 10000, 1) if u15 and r['kjp_pt'] is not None else None
         r['mittelbereich'] = a.get('mittelbereich_hausaerzte', '')
         mb = ha_vg.get(r['mittelbereich'])
         r['hausarzt_vg'] = zahl(mb['versorgungsgrad_prozent']) if mb else None
@@ -299,10 +324,16 @@ def berechnen():
         'kjp_pt': sum(kjp.values()),
         'kjp_pt_kommunen': sum(1 for x in kjp.values() if x > 0),
     }
+    h25 = [z for z in hze25.values() if z.get('hilfen_hze')]
+    kreis['hze25_je1000'] = round(sum(zahl(z['hilfen_hze']) for z in h25) / sum(zahl(z['unter21']) for z in h25) * 1000, 1) if h25 else None
+    vergleich[0]['hze25_je1000'] = kreis['hze25_je1000']  # Kreiswert = 22 Kommunen des Kreisjugendamts
+    kinder = sum(r['kinder_u15'] for r in gem if r.get('kinder_u15'))
+    kreis['kjp_je10k_u15'] = round(kreis['kjp_pt'] / kinder * 10000, 1) if kinder else None
     median_vorort = statistics.median(r['_dichte'] for r in gem if r['_index'] is not None)
     for r in gem:
         # Einstufung mit ungerundeten Werten
         r['hoher_bedarf_wenig_angebot'] = bool(r['_index'] is not None and r['_index'] > 0 and r['_dichte'] < median_vorort)
+        r['bedarf_ueber_schnitt'] = bool(r['_index'] is not None and r['_index'] > 0)
     for r in gem:
         r.pop('_index'); r.pop('_dichte')
     median_vorort = round(median_vorort, 2)
@@ -319,10 +350,10 @@ def berechnen():
 def kennzahlen_csv(d):
     spalten = ['gemeinde', 'einwohner', 'bedarfsindex', 'rang', 'n_ind', 'sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut',
                'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt',
-               'einkuenfte_je_stpfl', 'ab65', 'u6', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
+               'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'kinder_4_7', 'nichtdt_4_7', 'kinder_4_7_nichtdt', 'hze25_je1000', 'hze25_hze', 'hze25_ambulant', 'hze25_34', 'hze25_35a', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
                'efh_anteil', 'kita_u3', 'kita_3_5', 'schulen', 'grundschulen', 'weiterfuehrend', 'ganztag', 'hausaerzte',
-               'kinderaerzte', 'kjp_pt', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'vorort',
-               'vorort_je10k', 'hoher_bedarf_wenig_angebot', 'fachdienste', 'psychiatrie']
+               'kinderaerzte', 'kjp_pt', 'kjp_je10k_u15', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'vorort',
+               'vorort_je10k', 'hoher_bedarf_wenig_angebot', 'bedarf_ueber_schnitt', 'fachdienste', 'psychiatrie']
     with open(os.path.join(DATA, 'kennzahlen_kommunen.csv'), 'w', encoding='utf-8', newline='') as f:
         w = csv.writer(f)
         w.writerow(spalten)
@@ -358,6 +389,17 @@ def seite():
     kennzahlen_csv(d)
     d['methodik'] = json.load(open(os.path.join(SRC, 'methodik.json'), encoding='utf-8'))
     d['dateien'] = {os.path.basename(p): open(p, encoding='utf-8-sig').read() for p in sorted(glob.glob(os.path.join(DATA, '*.csv')))}
+    # Fallzahlen der Jugendhilfe: Werte 1 und 2 im Download nur als „<3“
+    for name, spalten in KLEINE_FALLZAHLEN.items():
+        if name in d['dateien']:
+            zeilen = list(csv.reader(io.StringIO(d['dateien'][name])))
+            idx = [zeilen[0].index(c) for c in spalten]
+            for z in zeilen[1:]:
+                for i in idx:
+                    if z[i] in ('1', '2'):
+                        z[i] = '<3'
+            puffer = io.StringIO(); csv.writer(puffer, lineterminator='\n').writerows(zeilen)
+            d['dateien'][name] = puffer.getvalue()
     vorlage = open(os.path.join(SRC, 'vorlage.html'), encoding='utf-8').read()
     d3 = open(os.path.join(TOOLS, 'd3.min.js'), encoding='utf-8').read()
     daten = json.dumps(d, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
@@ -374,6 +416,7 @@ def seite():
 
 
 PASSWORT_DATEI = os.path.join(SRC, '.passwort')
+KLEINE_FALLZAHLEN = {'hze_kommunen_2025.csv': ['hilfen_hze', 'hilfen_ambulant', 'hilfen_34', 'hilfen_35a', 'hilfen_33']}
 PBKDF2_RUNDEN = 600000
 
 

@@ -188,6 +188,12 @@ td.na { color: var(--fg-muted); }
       </div>
     </section>
 
+    <section class="card" id="karte-kjp">
+      <h3>Bedarf und Psychotherapie für Kinder und Jugendliche<button class="info" data-k="kjp_je10k_u15" aria-label="Erläuterung Psychotherapie je 10.000 Kinder">i</button></h3>
+      <p class="note">Waagerecht der Bedarfsindex, senkrecht die Psychotherapeut:innen für Kinder und Jugendliche je 10.000 Kinder unter 15 Jahren. Gestrichelt: Index 0 und Kreisdurchschnitt. Orange: überdurchschnittlicher Bedarf und keine Psychotherapie für Kinder und Jugendliche im Ort. Getrennt von den Anlaufstellen oben, weil Praxen auch Nachbarkommunen versorgen.</p>
+      <div class="chart" id="ch-kjp"></div>
+    </section>
+
     <section class="card" id="karte-atabelle">
       <h3>Angebote je Kommune</h3>
       <p class="note">Spaltenkopf anklicken zum Sortieren, „i“ für die Erläuterung. Gemeinsame Familienzentren zählen in jeder beteiligten Kommune.</p>
@@ -215,15 +221,15 @@ td.na { color: var(--fg-muted); }
       <p>Sie hat zwei Teile: <b>Bedarfe</b> (amtliche Sozialdaten je Kommune, verdichtet zu einem Bedarfsindex) und <b>Angebote</b> (Schulen, Kitas, ärztliche Versorgung und soziale Anlaufstellen, mit Schwerpunkt psychische Gesundheit).</p>
 
       <h3 id="m-index">Der Bedarfsindex</h3>
-      <p>Für jede der sechs Kennzahlen wird ein z-Wert gebildet: der Abstand einer Kommune zum Mittelwert der Kommunen, gemessen in Standardabweichungen. So werden Kennzahlen mit unterschiedlichen Einheiten (Prozent, Euro) vergleichbar. Bei den Einkünften dreht sich das Vorzeichen um, weil niedrige Einkünfte auf mehr Bedarf hinweisen.</p>
-      <p class="formel">z = Richtung × (Wert der Kommune − Mittelwert der Kommunen) / Standardabweichung<br>Bedarfsindex = Mittelwert der vorhandenen z-Werte (mindestens 4 von 6)</p>
+      <p>Für jede der sieben Kennzahlen wird ein z-Wert gebildet: der Abstand einer Kommune zum Mittelwert der Kommunen, gemessen in Standardabweichungen. So werden Kennzahlen mit unterschiedlichen Einheiten (Prozent, Euro) vergleichbar. Bei den Einkünften dreht sich das Vorzeichen um, weil niedrige Einkünfte auf mehr Bedarf hinweisen.</p>
+      <p class="formel">z = Richtung × (Wert der Kommune − Mittelwert der Kommunen) / Standardabweichung<br>Bedarfsindex = Mittelwert der vorhandenen z-Werte (mindestens 4 von 7)</p>
       <div class="tablewrap" style="max-height:none"><table id="tab-indexdef"></table></div>
-      <p class="note" style="margin-top:8px">Alle sechs Kennzahlen zählen gleich. Probe mit anderen Gewichtungen (Stand 06.11.2026): Mit doppelt gewichteter Kinderarmut oder ohne die Einkünfte bleiben die fünf höchsten Werte gleich (Wetzlar, Aßlar, Dillenburg, Leun, Ehringshausen); ohne die beiden Migrationskennzahlen rückt Sinn für Ehringshausen auf Platz 5. Mittelwert und Standardabweichung beziehen sich auf die Kommunen mit Wert, nicht auf Kreis oder Land.</p>
+      <p class="note" style="margin-top:8px">Alle sieben Kennzahlen zählen gleich. Seit 13.11.2026 gehören die Hilfen zur Erziehung 2025 dazu. Für Wetzlar fehlt dieser Wert (eigenes Jugendamt), der Index von Wetzlar beruht deshalb auf sechs Kennzahlen. Mit den Hilfen zur Erziehung bleiben die fünf höchsten Werte gleich (Wetzlar, Aßlar, Dillenburg, Leun, Ehringshausen); Herborn und Dietzhölztal rücken vor, Sinn und Braunfels zurück. Frühere Probe mit sechs Kennzahlen (06.11.2026): Mit doppelt gewichteter Kinderarmut oder ohne die Einkünfte blieben die fünf höchsten Werte gleich; ohne die beiden Migrationskennzahlen rückte Sinn für Ehringshausen auf Platz 5. Mittelwert und Standardabweichung beziehen sich auf die Kommunen mit Wert, nicht auf Kreis oder Land.</p>
 
       <h3 id="m-angebot">Wie Angebote gezählt werden</h3>
       <p><b>Angebote vor Ort</b> sind Familienzentren, Schulsozialarbeit, Jugendzentren und Jugendpflege sowie Quartiersarbeit. Gemeinsame Zentren mehrerer Kommunen zählen in jeder beteiligten Kommune. <b>Fachdienste</b> (Beratungsstellen, Sozialpsychiatrie, Psychiatrie, Sucht, Gewaltschutz, Selbsthilfe, Frühe Hilfen, Migration, Existenzsicherung) sind an ihrem Sitz eingetragen, arbeiten aber meist für den ganzen Kreis oder eine Region. Sie gehen deshalb nicht in die Angebotsdichte ein.</p>
       <p>Ob ein Angebot vor Ort zählt, entscheiden Kategorie und Reichweite: Kreisweite Dienste in diesen Kategorien (z. B. die Kreisjugendpflege) zählen als Fachdienst.</p>
-      <p>„Hoher Bedarf, wenig Angebot vor Ort“ heißt: Bedarfsindex über 0 und Angebotsdichte unter dem Median der Kommunen (<span id="median-text">—</span> je 10.000 Einwohner). Eingestuft wird mit ungerundeten Werten. Dietzhölztal liegt mit einem Index von knapp über 0 genau an der Grenze.</p>
+      <p>„Hoher Bedarf, wenig Angebot vor Ort“ heißt: Bedarfsindex über 0 und Angebotsdichte unter dem Median der Kommunen (<span id="median-text">—</span> je 10.000 Einwohner). Eingestuft wird mit ungerundeten Werten.</p>
 
       <h3 id="m-lesen">Beim Lesen beachten</h3>
       <ul>
@@ -468,7 +474,8 @@ el('hot').textContent = G.filter(HOT).sort((a, b) => b.bedarfsindex - a.bedarfsi
 document.querySelectorAll('[data-kreis]').forEach((e) => { const k = e.getAttribute('data-kreis'); e.textContent = fmt(k, KREIS[k]); });
 document.querySelectorAll('[data-hessen]').forEach((e) => { const k = e.getAttribute('data-hessen'); e.textContent = fmt(k, HESSEN[k]); });
 
-const EINZEL = ['sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'einkuenfte_je_stpfl', 'ab65', 'u6', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein', 'efh_anteil', 'kita_u3', 'kita_3_5'];
+const EINZEL = ['sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'nichtdt_4_7', 'hze25_je1000', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein', 'efh_anteil', 'kita_u3', 'kita_3_5'];
+const klein = (v) => v == null ? 'k. A.' : (v > 0 && v < 3 ? 'unter 3' : f0(v));
 const selE = el('sel-einzel');
 EINZEL.forEach((k) => { const z = KZ(k); selE.append(new Option(z.label + ' (' + (z.einheit && z.einheit !== 'Anzahl' ? z.einheit + ', ' : '') + z.jahr + ')', k)); });
 
@@ -476,14 +483,16 @@ function drawBedarfe() {
   const top5 = new Set(ranked.slice(0, 5).map((r) => r.gemeinde));
   bars(el('ch-index'), G.map((r) => ({ n: r.gemeinde, v: r.bedarfsindex, r })).sort((a, b) => (b.v ?? -99) - (a.v ?? -99)), {
     label: fs, na: 'zu wenig Daten', hi: (x) => top5.has(x.n),
-    tip: (x) => [[x.n], ['Bedarfsindex', x.v == null ? 'k. A.' : fs(x.v)], ['Rang', x.r.rang ?? '–'], ['Kennzahlen vorhanden', x.r.n_ind + ' von 6']]
+    tip: (x) => [[x.n], ['Bedarfsindex', x.v == null ? 'k. A.' : fs(x.v)], ['Rang', x.r.rang ?? '–'], ['Kennzahlen vorhanden', x.r.n_ind + ' von ' + D.index_def.kennzahlen.length]]
   });
   const k = selE.value || 'sgb2';
   el('info-einzel').setAttribute('data-k', k);
   const ref = KREIS[k];
   bars(el('ch-einzel'), G.map((r) => ({ n: r.gemeinde, v: r[k], r })).sort((a, b) => (b.v ?? -1e12) - (a.v ?? -1e12)), {
     ref, label: (v) => fmt(k, v), tick: KZ(k).einheit === '€' ? de.format(',.0f') : f1, hi: (x) => ref != null && x.v != null && x.v > ref,
-    tip: (x) => [[x.n], [KZ(k).label, fmt(k, x.v)], ['Kreis', fmt(k, ref)], ['Hessen', fmt(k, HESSEN[k])], ['Einwohner', f0(x.r.einwohner)]]
+    tip: (x) => [[x.n], [KZ(k).label, fmt(k, x.v)], ['Kreis', fmt(k, ref)], ['Hessen', fmt(k, HESSEN[k])], ['Einwohner', f0(x.r.einwohner)]].concat(k === 'anteil_4_7' && x.r.kinder_4_7 != null ? [['Kinder von 4 bis 7', f0(x.r.kinder_4_7)]] : [])
+      .concat(k === 'hze25_je1000' && x.r.hze25_hze != null ? [['Hilfen 2025 (ohne § 33)', klein(x.r.hze25_hze)], ['davon ambulant/teilstationär', klein(x.r.hze25_ambulant)], ['davon stationär (§§ 34, 35)', klein(x.r.hze25_34)], ['Eingliederungshilfe § 35a (nicht enthalten)', klein(x.r.hze25_35a)]] : [])
+      .concat(k === 'nichtdt_4_7' && x.r.kinder_4_7 != null ? [['Nichtdeutsche Kinder von 4 bis 7', f0(x.r.kinder_4_7_nichtdt) + ' von ' + f0(x.r.kinder_4_7)]] : [])
   });
   scatter(el('ch-streu'), G.filter((r) => r.kinderarmut != null && r.kita_mh != null).map((r) => ({ n: r.gemeinde, x: r.kita_mh, y: r.kinderarmut, s: r.einwohner, r })), {
     size: true, xlab: 'Kita-Kinder mit Migrationshintergrund in %', ylab: 'Kinderarmut in %', xtick: f1,
@@ -524,6 +533,13 @@ function drawAngebote() {
     xlab: 'Bedarfsindex', ylab: 'Angebote vor Ort je 10.000 Einwohner', refx: 0, refy: D.median_vorort, quad: [0, D.median_vorort],
     hi: (p) => HOT(p.r), hicolor: C.orange, label: () => true,
     tip: (p) => [[p.n], ['Bedarfsindex', fs(p.x)], ['Angebote vor Ort', f0(p.r.vorort)], ['je 10.000 Einwohner', f1(p.y)], ['Fachdienste mit Sitz hier', f0(p.r.fachdienste)]]
+  });
+  const kjpRows = G.filter((r) => r.bedarfsindex != null && r.kjp_je10k_u15 != null);
+  scatter(el('ch-kjp'), kjpRows.map((r) => ({ n: r.gemeinde, x: r.bedarfsindex, y: r.kjp_je10k_u15, s: 0, r })), {
+    xdom: [Math.min(-1.3, d3.min(kjpRows, (r) => r.bedarfsindex) - 0.2), d3.max(kjpRows, (r) => r.bedarfsindex) + 0.3], xtick: f1,
+    xlab: 'Bedarfsindex', ylab: 'Psychotherapeut:innen je 10.000 Kinder unter 15', refx: 0, refy: D.kreis.kjp_je10k_u15, quad: [0, D.kreis.kjp_je10k_u15],
+    hi: (p) => p.r.bedarf_ueber_schnitt && p.r.kjp_pt === 0, hicolor: C.orange, label: () => true,
+    tip: (p) => [[p.n], ['Bedarfsindex', fs(p.x)], ['Psychotherapeut:innen', f0(p.r.kjp_pt)], ['je 10.000 Kinder unter 15', f1(p.y)], ['Kreisdurchschnitt', f1(D.kreis.kjp_je10k_u15)]]
   });
   const lab = (r) => (r.arztgruppe === 'Hausärzte' ? 'Hausärzte ' + r.planungsbereich.replace('Mittelbereich ', '') : r.arztgruppe.startsWith('Nerven') ? 'Nervenärzte' : r.arztgruppe.startsWith('Psychotherapeuten') ? 'Psychotherapie' : r.arztgruppe === 'Kinder- und Jugendpsychiater' ? 'Kinder- und Jugendpsychiatrie' : 'Kinderärzte');
   bars(el('ch-kv'), D.versorgungsgrade.map((r) => ({ n: lab(r), v: Number(r.versorgungsgrad_prozent), r })), {
@@ -600,7 +616,12 @@ drawListe();
     ['hsl_gemeindestatistik.csv', 'Auszug aus der Hessischen Gemeindestatistik 2025'], ['wegweiser_kommune_2023.csv', 'Sozial- und Integrationskennzahlen 2023 (Wegweiser Kommune)'],
     ['kita_quoten_2023.csv', 'Kita-Betreuungsquoten 2023 (Wegweiser Kommune)'], ['hze_jugendamt_2023.csv', 'Hilfen zur Erziehung 2023 nach Jugendamt (HSL)'],
     ['versorgungsgrade_kv.csv', 'Versorgungsgrade der Bedarfsplanung (KV Hessen)'], ['aerzte_kommune.csv', 'Haus- und Kinderärzt:innen je Kommune (sanego.de)'],
-    ['schulen_liste.csv', 'Schulstandorte mit Schulform und Ganztag'], ['angebote_liste.csv', 'Anlaufstellen und soziale Angebote']];
+    ['schulen_liste.csv', 'Schulstandorte mit Schulform und Ganztag'], ['angebote_liste.csv', 'Anlaufstellen und soziale Angebote'],
+    ['kita_mh_kreis.csv', 'Kita-Kinder mit Migrationshintergrund je Kommune (Kita-Datenbank des Kreises, intern)'],
+    ['kjp_psychotherapeuten.csv', 'Psychotherapeut:innen für Kinder und Jugendliche je Kommune (Psychotherapeutenkammer Hessen)'],
+    ['bevoelkerung_4_7_2025.csv', 'Kinder von 4 bis 7 Jahren je Kommune, 31.12.2025 (HSL)'],
+    ['hze_kommunen_2025.csv', 'Hilfen zur Erziehung 2025 je Kommune (Kreisjugendamt, intern; Werte unter 3 als „<3“)']];
+  Object.keys(D.dateien || {}).forEach((f) => { if (!files.some(([g]) => g === f)) files.push([f, 'weitere Daten']); });
   files.forEach(([f, t]) => { const li = document.createElement('li'); const a = document.createElement('a'); if (!(D.dateien && D.dateien[f])) return; a.href = URL.createObjectURL(new Blob(['\ufeff' + D.dateien[f]], { type: 'text/csv;charset=utf-8' })); a.download = f; a.textContent = f; li.append(a, ' – ' + t); dl2.append(li); });
 })();
 
