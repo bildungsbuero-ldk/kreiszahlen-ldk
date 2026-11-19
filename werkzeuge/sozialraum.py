@@ -327,6 +327,8 @@ def berechnen():
     h25 = [z for z in hze25.values() if z.get('hilfen_hze')]
     kreis['hze25_je1000'] = round(sum(zahl(z['hilfen_hze']) for z in h25) / sum(zahl(z['unter21']) for z in h25) * 1000, 1) if h25 else None
     vergleich[0]['hze25_je1000'] = kreis['hze25_je1000']  # Kreiswert = 22 Kommunen des Kreisjugendamts
+    kd = [z for z in kita_db.values() if z.get('kinder')]
+    vergleich[0]['kita_mh_kreis'] = round(sum(zahl(z['migrantenkinder']) for z in kd) / sum(zahl(z['kinder']) for z in kd) * 100, 1) if kd else None
     kinder = sum(r['kinder_u15'] for r in gem if r.get('kinder_u15'))
     kreis['kjp_je10k_u15'] = round(kreis['kjp_pt'] / kinder * 10000, 1) if kinder else None
     median_vorort = statistics.median(r['_dichte'] for r in gem if r['_index'] is not None)
