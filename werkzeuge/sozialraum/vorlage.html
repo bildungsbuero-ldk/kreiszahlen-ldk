@@ -96,6 +96,22 @@ td.na { color: var(--fg-muted); }
 .steps li { margin: 6px 0; }
 .btn { display: inline-block; background: var(--ldk-orange); color: #fff; text-decoration: none; padding: 8px 14px; border-radius: var(--radius); font-weight: 600; }
 .quelle { font-size: 12px; color: var(--fg-muted); margin: 0; padding-top: 10px; border-top: 1px solid var(--line); }
+.ber-grp { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--fg-muted); margin: 12px 0 0; }
+.ber-item { display: grid; grid-template-columns: auto 1fr auto; gap: 2px 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.ber-item input[type=checkbox] { width: 18px; height: 18px; margin: 0; accent-color: var(--ldk-blau); }
+.ber-item .lbl { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px; }
+.ber-item .lbl label { cursor: pointer; }
+.ber-item .w { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ldk-blau-dunkel); min-width: 2.6rem; text-align: right; }
+.ber-item .ri { grid-column: 2 / -1; font-size: 12px; color: var(--fg-muted); }
+.ber-item input[type=range] { grid-column: 2 / -1; width: 100%; margin: 4px 0 0; accent-color: var(--ldk-blau); }
+.ber-item.aus .lbl, .ber-item.aus .w { color: var(--fg-muted); font-weight: 400; }
+.knoepfe { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.knopf { font: inherit; font-size: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); color: var(--fg); cursor: pointer; }
+.knopf:hover { border-color: var(--ldk-blau); }
+.knopf:focus-visible { outline: 2px solid var(--ldk-orange); outline-offset: 1px; }
+.eigen { margin: 0; background: #fff; color: var(--fg); border-left: 4px solid var(--ldk-orange); padding: 6px 10px; border-radius: 6px; font-size: 14px; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.eigen[hidden] { display: none; }
+.eigen .knopf { padding: 3px 10px; font-size: 13px; }
 @media print { .tabs, .info { display: none; } .page[hidden] { display: flex; } }
 </style>
 </head>
@@ -106,9 +122,11 @@ td.na { color: var(--fg-muted); }
     <h1>Sozialräume im Lahn-Dill-Kreis: Bedarfe und Angebote</h1>
     <p class="lede">Sozial- und Infrastrukturdaten der 23 Städte und Gemeinden als Grundlage für die Auswahl von Kommunen für Sozialraumkonferenzen. Stand der Zusammenstellung: <span id="stand">—</span>.</p>
     <p class="take">Den höchsten Bedarfsindex haben <b id="top1">—</b>, <b id="top2">—</b> und <b id="top3">—</b>. Überdurchschnittlicher Bedarf bei unterdurchschnittlichem Angebot vor Ort: <b id="hot">—</b>.</p>
+    <p class="eigen" id="eigen" role="status" hidden><span><b>Eigene Berechnung aktiv:</b> <span id="eigen-text"></span></span><button type="button" class="knopf" id="eigen-reset">Zurück zum Standard</button></p>
     <nav class="tabs" role="tablist" aria-label="Ansicht">
       <button type="button" role="tab" id="tab-bedarfe" data-tab="bedarfe" aria-controls="bedarfe" aria-selected="true">Bedarfe</button>
       <button type="button" role="tab" id="tab-angebote" data-tab="angebote" aria-controls="angebote" aria-selected="false">Angebote</button>
+      <button type="button" role="tab" id="tab-berechnung" data-tab="berechnung" aria-controls="berechnung" aria-selected="false">Berechnung</button>
       <button type="button" role="tab" id="tab-methodik" data-tab="methodik" aria-controls="methodik" aria-selected="false">Methodik und Quellen</button>
       <button type="button" role="tab" id="tab-daten" data-tab="daten" aria-controls="daten" aria-selected="false">Daten und Ergänzungen</button>
     </nav>
@@ -213,6 +231,28 @@ td.na { color: var(--fg-muted); }
     </section>
   </main>
 
+  <!-- ============ BERECHNUNG ============ -->
+  <main class="page" id="berechnung" role="tabpanel" aria-labelledby="tab-berechnung" hidden>
+    <p class="hint">Hier lässt sich ausprobieren, wie sich der Bedarfsindex mit anderen Kennzahlen oder Gewichten verändert. Alle Reiter rechnen sofort mit der eigenen Einstellung. Sie gilt nur in diesem Browser und ändert nichts an der Übersicht für andere. Standard: sieben Kennzahlen, alle mit Gewicht 1.</p>
+    <section class="grid">
+      <div class="card" id="karte-gewichte">
+        <h3>Kennzahlen und Gewichte<button class="info" data-k="bedarfsindex" aria-label="Erläuterung Bedarfsindex">i</button></h3>
+        <p class="note">Haken setzen oder entfernen, um eine Kennzahl ein- oder auszuschalten. Mit dem Regler zählt sie stärker (1) oder schwächer (bis 0). Der Index ist der gewichtete Mittelwert der z-Werte; es kommt also nur auf das Verhältnis der Gewichte an.</p>
+        <div id="ber-liste"></div>
+        <div class="knoepfe">
+          <button type="button" class="knopf" id="ber-reset">Standard wiederherstellen</button>
+          <button type="button" class="knopf" id="ber-eins">Alle Gewichte auf 1</button>
+        </div>
+      </div>
+      <div class="card" id="karte-vergleich">
+        <h3>Auswirkung auf die Rangfolge</h3>
+        <p class="note" id="ber-zusammen">—</p>
+        <p class="note">Veränderung: ▲ weiter vorn, ▼ weiter hinten als im Standard. „Hoher Bedarf, wenig Angebot“: Index über 0 und Angebote vor Ort unter dem Median.</p>
+        <div class="tablewrap"><table id="tab-vergleich"></table></div>
+      </div>
+    </section>
+  </main>
+
   <!-- ============ METHODIK ============ -->
   <main class="page" id="methodik" role="tabpanel" aria-labelledby="tab-methodik" hidden>
     <section class="doc">
@@ -225,6 +265,7 @@ td.na { color: var(--fg-muted); }
       <p class="formel">z = Richtung × (Wert der Kommune − Mittelwert der Kommunen) / Standardabweichung<br>Bedarfsindex = Mittelwert der vorhandenen z-Werte (mindestens 4 von 7)</p>
       <div class="tablewrap" style="max-height:none"><table id="tab-indexdef"></table></div>
       <p class="note" style="margin-top:8px">Alle sieben Kennzahlen zählen gleich. Seit 13.11.2026 gehören die Hilfen zur Erziehung 2025 dazu; seit 19.11.2026 steht statt der nichtdeutschen Kinder unter 15 Jahren (2024) der Anteil nichtdeutscher Kinder von 4 bis 7 Jahren (2025), also die Zielgruppe der Sozialraumkonferenzen. Die Plätze 1 bis 9 bleiben dabei gleich. Für Wetzlar fehlt dieser Wert (eigenes Jugendamt), der Index von Wetzlar beruht deshalb auf sechs Kennzahlen. Mit den Hilfen zur Erziehung bleiben die fünf höchsten Werte gleich (Wetzlar, Aßlar, Dillenburg, Leun, Ehringshausen); Herborn und Dietzhölztal rücken vor, Sinn und Braunfels zurück. Frühere Probe mit sechs Kennzahlen (06.11.2026): Mit doppelt gewichteter Kinderarmut oder ohne die Einkünfte blieben die fünf höchsten Werte gleich; ohne die beiden Migrationskennzahlen rückte Sinn für Ehringshausen auf Platz 5. Mittelwert und Standardabweichung beziehen sich auf die Kommunen mit Wert, nicht auf Kreis oder Land.</p>
+      <p>Im Reiter <a href="#berechnung">„Berechnung“</a> lassen sich Kennzahlen ein- und ausschalten, weitere Kennzahlen hinzunehmen und Gewichte zwischen 0 und 1 setzen. Der Index ist dann der gewichtete Mittelwert der vorhandenen z-Werte (Summe aus Gewicht × z-Wert, geteilt durch die Summe der Gewichte). Eine Kommune braucht Werte für mindestens 4 der eingeschalteten Kennzahlen (bei weniger eingeschalteten für alle). Die Tabelle oben und die herunterladbaren Dateien zeigen immer den Standard.</p>
 
       <h3 id="m-angebot">Wie Angebote gezählt werden</h3>
       <p><b>Angebote vor Ort</b> sind Familienzentren, Schulsozialarbeit, Jugendzentren und Jugendpflege sowie Quartiersarbeit. Gemeinsame Zentren mehrerer Kommunen zählen in jeder beteiligten Kommune. <b>Fachdienste</b> (Beratungsstellen, Sozialpsychiatrie, Psychiatrie, Sucht, Gewaltschutz, Selbsthilfe, Frühe Hilfen, Migration, Existenzsicherung) sind an ihrem Sitz eingetragen, arbeiten aber meist für den ganzen Kreis oder eine Region. Sie gehen deshalb nicht in die Angebotsdichte ein.</p>
@@ -465,10 +506,13 @@ function sortTable(tbl, cols, rows, state, heat) {
 
 // ---------- Kopf ----------
 el('stand').textContent = M.stand;
-const ranked = G.filter((r) => r.rang).sort((a, b) => a.rang - b.rang);
-['top1', 'top2', 'top3'].forEach((id, i) => { el(id).textContent = ranked[i] ? ranked[i].gemeinde : '—'; });
-el('median-text').textContent = f1(D.median_vorort);
-el('hot').textContent = G.filter(HOT).sort((a, b) => b.bedarfsindex - a.bedarfsindex).map((r) => r.gemeinde).join(', ') || '—';
+let ranked = [];
+function kopf() {
+  ranked = G.filter((r) => r.rang).sort((a, b) => a.rang - b.rang);
+  ['top1', 'top2', 'top3'].forEach((id, i) => { el(id).textContent = ranked[i] ? ranked[i].gemeinde : '—'; });
+  el('median-text').textContent = f1(D.median_vorort);
+  el('hot').textContent = G.filter(HOT).sort((a, b) => (b._i ?? b.bedarfsindex) - (a._i ?? a.bedarfsindex)).map((r) => r.gemeinde).join(', ') || '—';
+}
 
 // ---------- Bedarfe ----------
 document.querySelectorAll('[data-kreis]').forEach((e) => { const k = e.getAttribute('data-kreis'); e.textContent = fmt(k, KREIS[k]); });
@@ -483,7 +527,7 @@ function drawBedarfe() {
   const top5 = new Set(ranked.slice(0, 5).map((r) => r.gemeinde));
   bars(el('ch-index'), G.map((r) => ({ n: r.gemeinde, v: r.bedarfsindex, r })).sort((a, b) => (b.v ?? -99) - (a.v ?? -99)), {
     label: fs, na: 'zu wenig Daten', hi: (x) => top5.has(x.n),
-    tip: (x) => [[x.n], ['Bedarfsindex', x.v == null ? 'k. A.' : fs(x.v)], ['Rang', x.r.rang ?? '–'], ['Kennzahlen vorhanden', x.r.n_ind + ' von ' + D.index_def.kennzahlen.length]]
+    tip: (x) => [[x.n], ['Bedarfsindex', x.v == null ? 'k. A.' : fs(x.v)], ['Rang', x.r.rang ?? '–'], ['Kennzahlen vorhanden', x.r.n_ind + ' von ' + AKTIV_N]]
   });
   const k = selE.value || 'sgb2';
   el('info-einzel').setAttribute('data-k', k);
@@ -507,7 +551,7 @@ function drawBedarfe() {
   bars(el('ch-hze2'), hz.map((r) => ({ n: short(r.bezirk), v: r.anteil_transfer, r })), { ref: hes.anteil_transfer, label: (v) => f1(v) + ' %', hi: (x) => x.n.startsWith('Kreisjugendamt'),
     tip: (x) => [[x.n], ['mit Transferleistungen', f1(x.v) + ' %'], ['Hessen', f1(hes.anteil_transfer) + ' %']] });
 }
-sortTable(el('tab-bedarf'), [
+const tabBedarf = () => sortTable(el('tab-bedarf'), [
   { k: 'gemeinde', t: 'Kommune' }, { k: 'einwohner', t: 'Einwohner', info: false, f: f0 }, { k: 'bedarfsindex', t: 'Bedarfsindex', f: fs },
   { k: 'sgb2', t: 'SGB II %' }, { k: 'kinderarmut', t: 'Kinderarmut %' }, { k: 'altersarmut', t: 'Altersarmut %' },
   { k: 'alo_svb', t: 'Arbeitslose/SvB %' }, { k: 'kita_mh', t: 'Kita mit MH %' }, { k: 'nichtdt', t: 'Nichtdt. %' },
@@ -547,7 +591,7 @@ function drawAngebote() {
     tip: (x) => [[x.n], ['Versorgungsgrad', f1(x.v) + ' %'], ['Planungsbereich', x.r.planungsbereich], ['Ärzt:innen/Therapeut:innen', x.r.anzahl_aerzte === '' ? 'k. A.' : f0(Number(x.r.anzahl_aerzte))], ['Freie Sitze', x.r.offene_sitze === '' ? 'k. A.' : f1(Number(x.r.offene_sitze))], ['Stand', x.r.stand]]
   });
 }
-sortTable(el('tab-angebot'), [
+const tabAngebot = () => sortTable(el('tab-angebot'), [
   { k: 'gemeinde', t: 'Kommune' }, { k: 'bedarfsindex', t: 'Bedarfs­index', f: fs }, { k: 'schulen', t: 'Schulen' }, { k: 'ganztag', t: 'Ganztag/Pakt' },
   { k: 'kita_u3', t: 'Kita U3 %' }, { k: 'kita_3_5', t: 'Kita 3–5 %' }, { k: 'hausaerzte', t: 'Hausärzt:innen' }, { k: 'hausarzt_vg', t: 'Hausarzt-VG %' }, { k: 'kjp_pt', t: 'Psycho­therapie Kinder/Jugend' }, { k: 'sportvereine_je1000', t: 'Sportvereine je 1.000', f: f1 }, { k: 'sport_quote', t: 'Sport-Mitglieder %' }, { k: 'sport_u18', t: 'Mitglieder unter 18 %' },
   { k: 'familienzentren', t: 'Familien­zentren' }, { k: 'schulsozialarbeit', t: 'Schulsozial­arbeit' }, { k: 'jugend', t: 'Jugend­pflege' },
@@ -626,11 +670,117 @@ drawListe();
   files.forEach(([f, t]) => { const li = document.createElement('li'); const a = document.createElement('a'); if (!(D.dateien && D.dateien[f])) return; a.href = URL.createObjectURL(new Blob(['\ufeff' + D.dateien[f]], { type: 'text/csv;charset=utf-8' })); a.download = f; a.textContent = f; li.append(a, ' – ' + t); dl2.append(li); });
 })();
 
+// ---------- Berechnung (eigene Gewichtung) ----------
+const WEITERE = ['jugendarmut', 'altersarmut', 'alo_svb_u25', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'anteil_4_7', 'u6'];
+const STD = D.index_def.kennzahlen;
+const KAND = STD.map((k) => ({ k, s: D.index_def.richtung[k], std: true }))
+  .concat(WEITERE.filter((k) => !STD.includes(k) && M.kennzahlen[k] && G.filter((r) => r[k] != null).length >= 3).map((k) => ({ k, s: 1, std: false })));
+const STAT = {};
+KAND.forEach(({ k }) => {
+  const v = G.map((r) => r[k]).filter((x) => x != null);
+  const m = d3.mean(v), sd = d3.deviation(v); // Stichproben-Standardabweichung wie im Werkzeug
+  STAT[k] = { m, sd };
+});
+const standard = () => Object.fromEntries(KAND.map(({ k, std }) => [k, { an: std, w: 1 }]));
+const SPEICHER = 'sozialraum-berechnung-v1';
+let CFG = standard();
+try { const s = JSON.parse(localStorage.getItem(SPEICHER) || 'null'); if (s) KAND.forEach(({ k }) => { if (s[k]) CFG[k] = { an: !!s[k].an, w: Math.min(1, Math.max(0, Number(s[k].w) || 0)) }; }); } catch (e) { /* kein Speicher */ }
+const istStandard = (c) => KAND.every(({ k, std }) => c[k].an === std && (!std || c[k].w === 1));
+let AKTIV_N = STD.length;
+
+function rechne(c) {
+  const aktiv = KAND.filter(({ k }) => c[k].an && c[k].w > 0 && STAT[k].sd > 0);
+  const need = Math.min(D.index_def.min, aktiv.length);
+  const out = new Map();
+  G.forEach((r) => {
+    let sw = 0, sz = 0, n = 0;
+    aktiv.forEach(({ k, s }) => { if (r[k] == null) return; const w = c[k].w; sz += w * s * (r[k] - STAT[k].m) / STAT[k].sd; sw += w; n++; });
+    out.set(r.gemeinde, { i: aktiv.length && n >= need && sw > 0 ? sz / sw : null, n });
+  });
+  const rang = [...out.entries()].filter(([, v]) => v.i != null).sort((a, b) => b[1].i - a[1].i);
+  rang.forEach(([, v], j) => { v.rang = j + 1; });
+  return { out, n: aktiv.length };
+}
+const dichte = (r) => r.vorort / r.einwohner * 10000;
+const STDERG = rechne(standard());
+
+function anwenden() {
+  const { out, n } = rechne(CFG);
+  AKTIV_N = n;
+  G.forEach((r) => { const v = out.get(r.gemeinde); r._i = v.i; r.bedarfsindex = v.i == null ? null : Math.round(v.i * 100) / 100; r.rang = v.rang ?? null; r.n_ind = v.n; });
+  const mit = G.filter((r) => r._i != null);
+  D.median_vorort = mit.length ? d3.median(mit, dichte) : null;
+  G.forEach((r) => {
+    r.bedarf_ueber_schnitt = r._i != null && r._i > 0;
+    r.hoher_bedarf_wenig_angebot = r.bedarf_ueber_schnitt && D.median_vorort != null && dichte(r) < D.median_vorort;
+  });
+  kopf(); tabBedarf(); tabAngebot(); vergleich();
+  const std = istStandard(CFG);
+  el('eigen').hidden = std;
+  if (!std) {
+    const t = KAND.filter(({ k }) => CFG[k].an && CFG[k].w > 0).map(({ k }) => KZ(k).label + (CFG[k].w < 1 ? ' ×' + de.format('.2~f')(CFG[k].w) : ''));
+    el('eigen-text').textContent = t.length ? t.join(', ') + '.' : 'keine Kennzahl eingeschaltet.';
+  }
+  try { if (std) localStorage.removeItem(SPEICHER); else localStorage.setItem(SPEICHER, JSON.stringify(CFG)); } catch (e) { /* kein Speicher */ }
+  for (const k in drawn) drawn[k] = false;
+  const t = document.querySelector('.page:not([hidden])'); if (t && draws[t.id]) { draws[t.id](); drawn[t.id] = true; }
+}
+
+function vergleich() {
+  const rows = G.map((r) => {
+    const s = STDERG.out.get(r.gemeinde);
+    return { gemeinde: r.gemeinde, rang_std: s.rang ?? null, index_std: s.i, rang_neu: r.rang, index_neu: r._i,
+      delta: s.rang && r.rang ? s.rang - r.rang : null, hot: r.hoher_bedarf_wenig_angebot ? 'ja' : '' };
+  });
+  sortTable(el('tab-vergleich'), [
+    { k: 'gemeinde', t: 'Kommune' }, { k: 'rang_neu', t: 'Rang', info: false, f: f0 }, { k: 'index_neu', t: 'Index', info: false, f: fs },
+    { k: 'delta', t: 'Veränderung', info: false, f: (v) => (v > 0 ? '▲ ' + v : v < 0 ? '▼ ' + -v : '=') },
+    { k: 'rang_std', t: 'Rang Standard', info: false, f: f0 }, { k: 'index_std', t: 'Index Standard', info: false, f: fs },
+    { k: 'hot', t: 'Hoher Bedarf, wenig Angebot', info: false, text: true }
+  ], rows, { key: 'rang_neu', dir: 1 }, []);
+  const top = (m) => [...m.entries()].filter(([, v]) => v.rang && v.rang <= 5).sort((a, b) => a[1].rang - b[1].rang).map(([g]) => g).join(', ');
+  const neu = top(new Map(G.map((r) => [r.gemeinde, { rang: r.rang }])));
+  el('ber-zusammen').textContent = istStandard(CFG) ? 'Standardeinstellung. Die fünf höchsten Werte: ' + top(STDERG.out) + '.'
+    : 'Die fünf höchsten Werte: ' + (neu || '—') + '. Im Standard: ' + top(STDERG.out) + '.';
+}
+
+function berListe() {
+  const box = el('ber-liste'); box.replaceChildren();
+  [[true, 'Im Standard-Index'], [false, 'Weitere Kennzahlen (im Standard nicht enthalten)']].forEach(([std, titel]) => {
+    const h = document.createElement('p'); h.className = 'ber-grp'; h.textContent = titel; box.append(h);
+    KAND.filter((x) => x.std === std).forEach(({ k, s }) => {
+      const z = KZ(k), c = CFG[k];
+      const it = document.createElement('div'); it.className = 'ber-item' + (c.an ? '' : ' aus');
+      const cb = document.createElement('input'); cb.type = 'checkbox'; cb.id = 'ber-an-' + k; cb.checked = c.an;
+      const lw = document.createElement('div'); lw.className = 'lbl';
+      const lb = document.createElement('label'); lb.htmlFor = cb.id; lb.textContent = z.label + (z.jahr ? ' (' + z.jahr + ')' : '');
+      lw.append(lb, infoBtn(k));
+      const wv = document.createElement('output'); wv.className = 'w'; wv.htmlFor = 'ber-w-' + k;
+      const ri = document.createElement('div'); ri.className = 'ri';
+      const fehlt = G.filter((r) => r[k] == null).map((r) => r.gemeinde);
+      ri.textContent = (s > 0 ? 'Höher = mehr Bedarf' : 'Niedriger = mehr Bedarf') + (fehlt.length ? ' · ohne Wert: ' + fehlt.join(', ') : '');
+      const sl = document.createElement('input'); sl.type = 'range'; sl.id = 'ber-w-' + k; sl.min = 0; sl.max = 1; sl.step = 0.05; sl.value = c.w;
+      sl.setAttribute('aria-label', 'Gewicht ' + z.label);
+      const zeig = () => { wv.textContent = de.format('.2f')(CFG[k].w); sl.disabled = !CFG[k].an; it.classList.toggle('aus', !CFG[k].an); };
+      zeig();
+      cb.addEventListener('change', () => { CFG[k].an = cb.checked; if (cb.checked && CFG[k].w === 0) { CFG[k].w = 1; sl.value = 1; } zeig(); anwenden(); });
+      let tm;
+      sl.addEventListener('input', () => { CFG[k].w = Number(sl.value); zeig(); clearTimeout(tm); tm = setTimeout(anwenden, 120); });
+      it.append(cb, lw, wv, ri, sl);
+      box.append(it);
+    });
+  });
+}
+const zurueck = () => { CFG = standard(); berListe(); anwenden(); };
+el('ber-reset').addEventListener('click', zurueck);
+el('eigen-reset').addEventListener('click', zurueck);
+el('ber-eins').addEventListener('click', () => { KAND.forEach(({ k }) => { CFG[k].w = 1; }); berListe(); anwenden(); });
+
 // ---------- Reiter ----------
 const drawn = {};
 const draws = { bedarfe: drawBedarfe, angebote: drawAngebote };
 function show(tab, anchor) {
-  if (!['bedarfe', 'angebote', 'methodik', 'daten'].includes(tab)) tab = 'bedarfe';
+  if (!['bedarfe', 'angebote', 'berechnung', 'methodik', 'daten'].includes(tab)) tab = 'bedarfe';
   document.querySelectorAll('.page').forEach((p) => { p.hidden = p.id !== tab; });
   document.querySelectorAll('.tabs button').forEach((b) => b.setAttribute('aria-selected', b.dataset.tab === tab ? 'true' : 'false'));
   if (draws[tab]) { draws[tab](); drawn[tab] = true; }
@@ -645,6 +795,8 @@ function fromHash() {
 }
 window.addEventListener('hashchange', fromHash);
 let rz; window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { const t = document.querySelector('.page:not([hidden])'); if (t && draws[t.id]) draws[t.id](); }, 150); });
+berListe();
+anwenden();
 fromHash();
 </script>
 </body>
