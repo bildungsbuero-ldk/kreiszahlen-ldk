@@ -76,6 +76,9 @@ SCHEMA = {
         ('hilfen_hze', 'int', False, (0, 5000)), ('hilfen_ambulant', 'int', False, (0, 5000)),
         ('hilfen_34', 'int', False, (0, 5000)), ('hilfen_35a', 'int', False, (0, 5000)),
         ('hilfen_33', 'int', False, (0, 5000)), ('hze_je1000_u21', 'num', False, (0, 200))]},
+    'sportvereine_2026.csv': {'zeilen': 'gemeinden', 'spalten': [
+        ('gemeinde', 'gemeinde', True, None), ('vereine', 'int', True, (0, 500)), ('mitglieder', 'int', True, (0, 100000)),
+        ('mitgliederquote', 'num', True, (0, 100)), ('anteil_u18', 'num', True, (0, 100))]},
     'kjp_psychotherapeuten.csv': {'zeilen': 'gemeinden', 'spalten': [
         ('gemeinde', 'gemeinde', True, None), ('kjp_pt', 'int', True, (0, 100))]},
     'aerzte_kommune.csv': {'zeilen': 'gemeinden', 'spalten': [
@@ -229,6 +232,7 @@ def berechnen():
     kita_db = {z['gemeinde']: z for z in lesen('kita_mh_kreis.csv')}
     bev47 = {z['gemeinde']: z for z in lesen('bevoelkerung_4_7_2025.csv')}
     hze25 = {z['gemeinde']: z for z in lesen('hze_kommunen_2025.csv')}
+    sport = {z['gemeinde']: z for z in lesen('sportvereine_2026.csv')}
     aerzte = {z['gemeinde']: z for z in lesen('aerzte_kommune.csv')}
     kjp = {z['gemeinde']: int(zahl(z['kjp_pt'])) for z in lesen('kjp_psychotherapeuten.csv')}
     vg = lesen('versorgungsgrade_kv.csv')
@@ -253,6 +257,11 @@ def berechnen():
         r['kinder_4_7'] = int(zahl(bev47[g]['kinder_4_7'])) if g in bev47 else None
         r['kinder_4_7_nichtdt'] = int(zahl(bev47[g]['kinder_4_7_nichtdt'])) if g in bev47 else None
         r['nichtdt_4_7'] = round(r['kinder_4_7_nichtdt'] / r['kinder_4_7'] * 100, 1) if r['kinder_4_7'] else None
+        sp = sport.get(g)
+        r['sportvereine'] = int(zahl(sp['vereine'])) if sp else None
+        r['sportvereine_je1000'] = round(r['sportvereine'] / r['einwohner'] * 1000, 2) if sp and r.get('einwohner') else None
+        r['sport_quote'] = zahl(sp['mitgliederquote']) if sp else None
+        r['sport_u18'] = zahl(sp['anteil_u18']) if sp else None
         hz25 = hze25.get(g, {})
         r['hze25_je1000'] = zahl(hz25.get('hze_je1000_u21'))
         for c in ['hilfen_hze', 'hilfen_ambulant', 'hilfen_34', 'hilfen_35a']:
@@ -326,6 +335,13 @@ def berechnen():
     }
     h25 = [z for z in hze25.values() if z.get('hilfen_hze')]
     kreis['hze25_je1000'] = round(sum(zahl(z['hilfen_hze']) for z in h25) / sum(zahl(z['unter21']) for z in h25) * 1000, 1) if h25 else None
+    sv = list(sport.values())
+    if sv:
+        ew = sum(r['einwohner'] for r in gem if r.get('einwohner'))
+        mg = sum(zahl(z['mitglieder']) for z in sv)
+        vergleich[0]['sportvereine_je1000'] = round(sum(zahl(z['vereine']) for z in sv) / ew * 1000, 2)
+        vergleich[0]['sport_quote'] = round(mg / ew * 100, 1)
+        vergleich[0]['sport_u18'] = round(sum(zahl(z['mitglieder']) * zahl(z['anteil_u18']) for z in sv) / mg, 1)
     vergleich[0]['hze25_je1000'] = kreis['hze25_je1000']  # Kreiswert = 22 Kommunen des Kreisjugendamts
     kd = [z for z in kita_db.values() if z.get('kinder')]
     vergleich[0]['kita_mh_kreis'] = round(sum(zahl(z['migrantenkinder']) for z in kd) / sum(zahl(z['kinder']) for z in kd) * 100, 1) if kd else None
@@ -354,7 +370,7 @@ def kennzahlen_csv(d):
                'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt',
                'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'kinder_4_7', 'nichtdt_4_7', 'kinder_4_7_nichtdt', 'hze25_je1000', 'hze25_hze', 'hze25_ambulant', 'hze25_34', 'hze25_35a', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
                'efh_anteil', 'kita_u3', 'kita_3_5', 'schulen', 'grundschulen', 'weiterfuehrend', 'ganztag', 'hausaerzte',
-               'kinderaerzte', 'kjp_pt', 'kjp_je10k_u15', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'vorort',
+               'kinderaerzte', 'kjp_pt', 'kjp_je10k_u15', 'sportvereine', 'sportvereine_je1000', 'sport_quote', 'sport_u18', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'vorort',
                'vorort_je10k', 'hoher_bedarf_wenig_angebot', 'bedarf_ueber_schnitt', 'fachdienste', 'psychiatrie']
     with open(os.path.join(DATA, 'kennzahlen_kommunen.csv'), 'w', encoding='utf-8', newline='') as f:
         w = csv.writer(f)
