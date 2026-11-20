@@ -54,7 +54,7 @@ Ergänzungen schicken Nutzer:innen formlos an das Bildungsbüro (E-Mail, Excel, 
 Einarbeitung weiter.
 
 1. **Sichten**: Was wird geliefert, für welche Kommunen, Quelle, Stand, Veröffentlichung erlaubt? Personenbezogene
-   Daten oder Werte unter 3 Fällen nicht übernehmen; im Zweifel nachfragen.
+   Daten oder Werte unter 5 Fällen nicht übernehmen; im Zweifel nachfragen.
 2. **Rücksprache**: Vorschlag für die Einarbeitung (welche Datei, welche Spalte, neue Kennzahl ja/nein, Änderung am
    Bedarfsindex ja/nein) dem Bildungsbüro vorlegen und freigeben lassen. Ohne Freigabe nichts einarbeiten.
 3. **Einarbeiten** auf einem eigenen Branch:
