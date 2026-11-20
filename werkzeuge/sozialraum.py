@@ -407,15 +407,21 @@ def seite():
     kennzahlen_csv(d)
     d['methodik'] = json.load(open(os.path.join(SRC, 'methodik.json'), encoding='utf-8'))
     d['dateien'] = {os.path.basename(p): open(p, encoding='utf-8-sig').read() for p in sorted(glob.glob(os.path.join(DATA, '*.csv')))}
-    # Fallzahlen der Jugendhilfe: Werte 1 und 2 im Download nur als „<3“
+    # Fallzahlen der Jugendhilfe: Werte 1 bis 4 im Download nur als „<5“; ist ambulant oder
+    # stationär verdeckt, wird auch der andere Teil verdeckt (sonst per Differenz zur Summe ablesbar)
     for name, spalten in KLEINE_FALLZAHLEN.items():
         if name in d['dateien']:
             zeilen = list(csv.reader(io.StringIO(d['dateien'][name])))
             idx = [zeilen[0].index(c) for c in spalten]
+            paar = [zeilen[0].index(c) for c in KLEINE_FALLZAHLEN_PAAR.get(name, [])]
             for z in zeilen[1:]:
                 for i in idx:
-                    if z[i] in ('1', '2'):
-                        z[i] = '<3'
+                    if klein_fallzahl(z[i]):
+                        z[i] = '<5'
+                if paar and any(z[i] == '<5' for i in paar):
+                    for i in paar:
+                        if z[i] not in ('', '0', '<5'):
+                            z[i] = 'verdeckt'
             puffer = io.StringIO(); csv.writer(puffer, lineterminator='\n').writerows(zeilen)
             d['dateien'][name] = puffer.getvalue()
     vorlage = open(os.path.join(SRC, 'vorlage.html'), encoding='utf-8').read()
@@ -435,6 +441,15 @@ def seite():
 
 PASSWORT_DATEI = os.path.join(SRC, '.passwort')
 KLEINE_FALLZAHLEN = {'hze_kommunen_2025.csv': ['hilfen_hze', 'hilfen_ambulant', 'hilfen_34', 'hilfen_35a', 'hilfen_33']}
+KLEINE_FALLZAHLEN_PAAR = {'hze_kommunen_2025.csv': ['hilfen_ambulant', 'hilfen_34']}
+SCHWELLE_FALLZAHL = 5
+
+
+def klein_fallzahl(wert):
+    try:
+        return 0 < int(wert) < SCHWELLE_FALLZAHL
+    except ValueError:
+        return False
 PBKDF2_RUNDEN = 600000
 
 

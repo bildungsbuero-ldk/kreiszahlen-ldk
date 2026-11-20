@@ -302,7 +302,7 @@ td.na { color: var(--fg-muted); }
       <h3 id="d-mitmachen">Ergänzungen und Korrekturen</h3>
       <p>Sie kennen ein Angebot, das fehlt, haben aktuellere Zahlen oder Daten für einzelne Kommunen (z. B. aus der Jugendhilfeplanung, dem Gesundheitsamt oder einer Kommune)? Schicken Sie sie einfach an das <a href="https://bildungslandschaft.schulen-ldk.de/bildungsbuero/" target="_blank" rel="noopener">Bildungsbüro des Lahn-Dill-Kreises</a>, in welcher Form auch immer: E-Mail, Excel-Tabelle oder Liste. Bitte Quelle und Stand dazuschreiben.</p>
       <p>Das Bildungsbüro prüft jede Zusendung und übernimmt sie nach Freigabe in die Übersicht.</p>
-      <p class="note">Bitte nur Daten schicken, die veröffentlicht werden dürfen, und keine personenbezogenen Daten (keine Namen von Klient:innen, keine Einzelfälle, keine Werte unter 3 Fällen).</p>
+      <p class="note">Bitte nur Daten schicken, die veröffentlicht werden dürfen, und keine personenbezogenen Daten (keine Namen von Klient:innen, keine Einzelfälle, keine Werte unter 5 Fällen).</p>
 
       <h3 id="d-technik">Technik</h3>
       <p>Die Seite ist eine einzelne HTML-Datei ohne Verbindung zu fremden Servern. Sie ist mit einem Passwort verschlüsselt (AES-256) und wird erst im Browser entschlüsselt; die Daten liegen auch im Repository nur verschlüsselt. Sie wird mit <code>python3 werkzeuge/sozialraum.py seite</code> aus den CSV-Dateien, dem Methodik-Katalog <code>werkzeuge/sozialraum/methodik.json</code> und der Vorlage gebaut. Das Werkzeug prüft vorher jede Datei (Spalten, Kommunennamen, Zahlenbereiche, Kategorien) und baut die Seite nur ohne Fehler. Anleitung: <code>werkzeuge/sozialraum/ANLEITUNG.md</code>.</p>
@@ -519,7 +519,10 @@ document.querySelectorAll('[data-kreis]').forEach((e) => { const k = e.getAttrib
 document.querySelectorAll('[data-hessen]').forEach((e) => { const k = e.getAttribute('data-hessen'); e.textContent = fmt(k, HESSEN[k]); });
 
 const EINZEL = ['sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'nichtdt_4_7', 'hze25_je1000', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein', 'efh_anteil', 'kita_u3', 'kita_3_5'];
-const klein = (v) => v == null ? 'k. A.' : (v > 0 && v < 3 ? 'unter 3' : f0(v));
+const klein = (v) => v == null ? 'k. A.' : (v > 0 && v < 5 ? 'unter 5' : f0(v));
+// ambulant und stationär gemeinsam verdecken, sonst per Differenz zur Summe ablesbar
+const istKlein = (v) => v > 0 && v < 5;
+const kleinPaar = (a, b) => (istKlein(a) || istKlein(b) ? [a, b].map((v) => (istKlein(v) ? 'unter 5' : v ? 'verdeckt' : f0(0))) : [klein(a), klein(b)]);
 const selE = el('sel-einzel');
 EINZEL.forEach((k) => { const z = KZ(k); selE.append(new Option(z.label + ' (' + (z.einheit && z.einheit !== 'Anzahl' ? z.einheit + ', ' : '') + z.jahr + ')', k)); });
 
@@ -535,7 +538,7 @@ function drawBedarfe() {
   bars(el('ch-einzel'), G.map((r) => ({ n: r.gemeinde, v: r[k], r })).sort((a, b) => (b.v ?? -1e12) - (a.v ?? -1e12)), {
     ref, label: (v) => fmt(k, v), tick: KZ(k).einheit === '€' ? de.format(',.0f') : f1, hi: (x) => ref != null && x.v != null && x.v > ref,
     tip: (x) => [[x.n], [KZ(k).label, fmt(k, x.v)], ['Kreis', fmt(k, ref)], ['Hessen', fmt(k, HESSEN[k])], ['Einwohner', f0(x.r.einwohner)]].concat(k === 'anteil_4_7' && x.r.kinder_4_7 != null ? [['Kinder von 4 bis 7', f0(x.r.kinder_4_7)]] : [])
-      .concat(k === 'hze25_je1000' && x.r.hze25_hze != null ? [['Hilfen 2025 (ohne § 33)', klein(x.r.hze25_hze)], ['davon ambulant/teilstationär', klein(x.r.hze25_ambulant)], ['davon stationär (§§ 34, 35)', klein(x.r.hze25_34)], ['Eingliederungshilfe § 35a (nicht enthalten)', klein(x.r.hze25_35a)]] : [])
+      .concat(k === 'hze25_je1000' && x.r.hze25_hze != null ? [['Hilfen 2025 (ohne § 33)', klein(x.r.hze25_hze)], ['davon ambulant/teilstationär', kleinPaar(x.r.hze25_ambulant, x.r.hze25_34)[0]], ['davon stationär (§§ 34, 35)', kleinPaar(x.r.hze25_ambulant, x.r.hze25_34)[1]], ['Eingliederungshilfe § 35a (nicht enthalten)', klein(x.r.hze25_35a)]] : [])
       .concat(k === 'nichtdt_4_7' && x.r.kinder_4_7 != null ? [['Nichtdeutsche Kinder von 4 bis 7', f0(x.r.kinder_4_7_nichtdt) + ' von ' + f0(x.r.kinder_4_7)]] : [])
   });
   scatter(el('ch-streu'), G.filter((r) => r.kinderarmut != null && r.kita_mh != null).map((r) => ({ n: r.gemeinde, x: r.kita_mh, y: r.kinderarmut, s: r.einwohner, r })), {
@@ -665,7 +668,7 @@ drawListe();
     ['kjp_psychotherapeuten.csv', 'Psychotherapeut:innen für Kinder und Jugendliche je Kommune (Psychotherapeutenkammer Hessen)'],
     ['sportvereine_2026.csv', 'Sportvereine und Mitglieder je Kommune (Stabsstelle Sport, Kultur und Ehrenamt, Bildungsbericht 5.2)'],
     ['bevoelkerung_4_7_2025.csv', 'Kinder von 4 bis 7 Jahren je Kommune, 31.12.2025 (HSL)'],
-    ['hze_kommunen_2025.csv', 'Hilfen zur Erziehung 2025 je Kommune (Kreisjugendamt, intern; Werte unter 3 als „<3“)']];
+    ['hze_kommunen_2025.csv', 'Hilfen zur Erziehung 2025 je Kommune (Kreisjugendamt, intern; Werte unter 5 als „<5“, Gegenwert ambulant/stationär als „verdeckt“)']];
   Object.keys(D.dateien || {}).forEach((f) => { if (!files.some(([g]) => g === f)) files.push([f, 'weitere Daten']); });
   files.forEach(([f, t]) => { const li = document.createElement('li'); const a = document.createElement('a'); if (!(D.dateien && D.dateien[f])) return; a.href = URL.createObjectURL(new Blob(['\ufeff' + D.dateien[f]], { type: 'text/csv;charset=utf-8' })); a.download = f; a.textContent = f; li.append(a, ' – ' + t); dl2.append(li); });
 })();
