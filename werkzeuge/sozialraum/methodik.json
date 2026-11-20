@@ -1,5 +1,5 @@
 {
-  "stand": "19.11.2026",
+  "stand": "20.11.2026",
   "quellen": {
     "hsl_gemeinde": {
       "titel": "Hessische Gemeindestatistik 2025",
@@ -156,12 +156,12 @@
   "luecken": [
     ["Alleinerziehende", "Auf Gemeindeebene nur im Zensus 2022 bzw. beim Kommunalen Jobcenter Lahn-Dill."],
     ["Gesundheit von Kindern", "Gesundheitsdaten liegen öffentlich nur auf Kreisebene vor. Für Kommunen eignen sich die Schuleingangsuntersuchungen des Gesundheitsamts (Sprache, Motorik, Übergewicht, Impfstatus)."],
-    ["Hilfen zur Erziehung nach Kommune (Lücken)", "Für 2025 liegt eine interne Auswertung des Kreisjugendamts nach Kommune vor (siehe Kennzahl), ohne Vollzeitpflege und ohne Wetzlar. Offen: Vollzeitpflege nach Herkunftsort, Erziehungsberatung (§ 28), Werte für Wetzlar."],
+    ["Hilfen zur Erziehung nach Kommune (Lücken)", "Für 2025 liegt eine interne Auswertung des Kreisjugendamts nach Kommune vor (siehe Kennzahl), ohne Vollzeitpflege und ohne Wetzlar. Erziehungsberatung (§ 28) liefert die Erziehungs- und Familienberatung nach (angekündigt 20.11.2026). Vollzeitpflege (§ 33) lässt sich nach Einzelfallprüfung durch das Jugendamt dem Herkunftsort zuordnen; das ist noch offen. Werte für Wetzlar (eigenes Jugendamt) liegen nicht vor."],
     ["Psychotherapie für Erwachsene nach Kommune", "Öffentlich nur der Versorgungsgrad für den Kreis. Für Kinder und Jugendliche gibt es eine Auszählung der Kammer-Suche (siehe Kennzahl), für Erwachsene noch nicht."],
     ["Kita-Plätze", "Die Zahl der Einrichtungen ist nur für 8 Kommunen veröffentlicht; Plätze je Kommune gar nicht."],
     ["Vereine außer Sport", "Sportvereine je Kommune liegen vor (Bildungsbericht 5.2); für Kultur-, Jugend- und andere Vereine gibt es keine Zahlen je Kommune."],
     ["Bischoffen und Siegbach", "Keine Sozialdaten im Wegweiser Kommune (kleinste Kommunen des Kreises); SGB-II-Daten hat das Kommunale Jobcenter Lahn-Dill."],
-    ["Krisendienst und Fachberatung sexualisierte Gewalt", "Im Kreis wurde kein regionaler Krisendienst gefunden. Der Online-Geschäftsbericht der Jugendhilfe führt beim Fachdienst 32.1 eine Überschrift „Fachstelle gegen sexualisierte Gewalt“, der Abschnitt ist aber leer (Stand 06.11.2026). Angebot, Träger und Erreichbarkeit sind daher offen und sollten beim Fachdienst erfragt werden. Schulpsychologie sitzt im Staatlichen Schulamt Weilburg."],
+    ["Krisendienst und Fachberatung sexualisierte Gewalt", "Im Kreis wurde kein regionaler Krisendienst gefunden. Die Fachstelle gegen sexualisierte Gewalt ist als Spezialdienst im Fachdienst 32.1 Soziale Dienste des Kreises angesiedelt (Auskunft des Kreisjugendamts, 20.11.2026); im Online-Geschäftsbericht ist sie noch nicht beschrieben. Standort, Zielgruppe und Erreichbarkeit sind noch nicht erfasst. Schulpsychologie sitzt im Staatlichen Schulamt Weilburg."],
     ["Teilräume", "Alle Werte gelten für die ganze Kommune. Unterschiede zwischen Stadtteilen sind nicht sichtbar."]
   ]
 }
