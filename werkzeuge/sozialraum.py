@@ -76,6 +76,9 @@ SCHEMA = {
         ('hilfen_hze', 'int', False, (0, 5000)), ('hilfen_ambulant', 'int', False, (0, 5000)),
         ('hilfen_34', 'int', False, (0, 5000)), ('hilfen_35a', 'int', False, (0, 5000)),
         ('hilfen_33', 'int', False, (0, 5000)), ('hze_je1000_u21', 'num', False, (0, 200))]},
+    'efb_2025.csv': {'zeilen': 'gemeinden', 'spalten': [
+        ('gemeinde', 'gemeinde', True, None), ('efb_dillenburg', 'int', True, (0, 5000)), ('efb_kreis_wetzlar', 'int', True, (0, 5000)),
+        ('efb_diakonie_wetzlar', 'int', True, (0, 5000)), ('efb_dekanat_herborn', 'int', True, (0, 5000)), ('efb_faelle', 'int', True, (0, 10000))]},
     'sportvereine_2026.csv': {'zeilen': 'gemeinden', 'spalten': [
         ('gemeinde', 'gemeinde', True, None), ('vereine', 'int', True, (0, 500)), ('mitglieder', 'int', True, (0, 100000)),
         ('mitgliederquote', 'num', True, (0, 100)), ('anteil_u18', 'num', True, (0, 100))]},
@@ -234,6 +237,7 @@ def berechnen():
     kita_db = {z['gemeinde']: z for z in lesen('kita_mh_kreis.csv')}
     bev47 = {z['gemeinde']: z for z in lesen('bevoelkerung_4_7_2025.csv')}
     hze25 = {z['gemeinde']: z for z in lesen('hze_kommunen_2025.csv')}
+    efb = {z['gemeinde']: z for z in lesen('efb_2025.csv')}
     sport = {z['gemeinde']: z for z in lesen('sportvereine_2026.csv')}
     aerzte = {z['gemeinde']: z for z in lesen('aerzte_kommune.csv')}
     kjp = {z['gemeinde']: int(zahl(z['kjp_pt'])) for z in lesen('kjp_psychotherapeuten.csv')}
@@ -269,6 +273,10 @@ def berechnen():
         r['hze25_je1000'] = zahl(hz25.get('hze_je1000_u21'))
         for c in ['hilfen_hze', 'hilfen_ambulant', 'hilfen_34', 'hilfen_35a']:
             r['hze25_' + c.replace('hilfen_', '')] = int(zahl(hz25[c])) if hz25.get(c) not in (None, '') else None
+        u21 = zahl(hz25.get('unter21'))
+        ef = efb.get(g)
+        r['efb25'] = int(zahl(ef['efb_faelle'])) if ef else None
+        r['efb25_je1000'] = round(r['efb25'] / u21 * 1000, 1) if ef and u21 else None
         return r
 
     gem = [zeile(g) for g in GEMEINDEN]
@@ -351,7 +359,9 @@ def berechnen():
         vergleich[0]['sportvereine_je1000'] = round(sum(zahl(z['vereine']) for z in sv) / ew * 1000, 2)
         vergleich[0]['sport_quote'] = round(mg / ew * 100, 1)
         vergleich[0]['sport_u18'] = round(sum(zahl(z['mitglieder']) * zahl(z['anteil_u18']) for z in sv) / mg, 1)
-    vergleich[0]['hze25_je1000'] = kreis['hze25_je1000']  # Kreiswert = 22 Kommunen des Kreisjugendamts
+    vergleich[0]['hze25_je1000'] = kreis['hze25_je1000']
+    if efb:  # Kreiswert: alle 23 Kommunen, nur Fälle mit Wohnort in einer Kommune
+        vergleich[0]['efb25_je1000'] = round(sum(zahl(z['efb_faelle']) for z in efb.values()) / sum(zahl(z['unter21']) for z in hze25.values()) * 1000, 1)  # Kreiswert = 22 Kommunen des Kreisjugendamts
     kd = [z for z in kita_db.values() if z.get('kinder')]
     vergleich[0]['kita_mh_kreis'] = round(sum(zahl(z['migrantenkinder']) for z in kd) / sum(zahl(z['kinder']) for z in kd) * 100, 1) if kd else None
     kinder = sum(r['kinder_u15'] for r in gem if r.get('kinder_u15'))
@@ -380,7 +390,7 @@ def berechnen():
 def kennzahlen_csv(d):
     spalten = ['gemeinde', 'einwohner', 'bedarfsindex', 'rang', 'n_ind', 'sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut',
                'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt',
-               'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'kinder_4_7', 'nichtdt_4_7', 'kinder_4_7_nichtdt', 'hze25_je1000', 'hze25_hze', 'hze25_ambulant', 'hze25_34', 'hze25_35a', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
+               'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'kinder_4_7', 'nichtdt_4_7', 'kinder_4_7_nichtdt', 'hze25_je1000', 'hze25_hze', 'hze25_ambulant', 'hze25_34', 'hze25_35a', 'efb25', 'efb25_je1000', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
                'efh_anteil', 'kita_u3', 'kita_3_5', 'schulen', 'grundschulen', 'weiterfuehrend', 'ganztag', 'hausaerzte',
                'kinderaerzte', 'kjp_pt', 'kjp_je10k_u15', 'pt_erw', 'erwachsene', 'pt_erw_je10k', 'sportvereine', 'sportvereine_je1000', 'sport_quote', 'sport_u18', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'vorort',
                'vorort_je10k', 'hoher_bedarf_wenig_angebot', 'bedarf_ueber_schnitt', 'fachdienste', 'psychiatrie']
@@ -452,8 +462,10 @@ def seite():
 
 
 PASSWORT_DATEI = os.path.join(SRC, '.passwort')
-KLEINE_FALLZAHLEN = {'hze_kommunen_2025.csv': ['hilfen_hze', 'hilfen_ambulant', 'hilfen_34', 'hilfen_35a', 'hilfen_33']}
-KLEINE_FALLZAHLEN_PAAR = {'hze_kommunen_2025.csv': ['hilfen_ambulant', 'hilfen_34']}
+KLEINE_FALLZAHLEN = {'hze_kommunen_2025.csv': ['hilfen_hze', 'hilfen_ambulant', 'hilfen_34', 'hilfen_35a', 'hilfen_33'],
+                     'efb_2025.csv': ['efb_dillenburg', 'efb_kreis_wetzlar', 'efb_diakonie_wetzlar', 'efb_dekanat_herborn', 'efb_faelle'],
+                     'kennzahlen_kommunen.csv': ['hze25_hze', 'hze25_ambulant', 'hze25_34', 'hze25_35a', 'efb25']}
+KLEINE_FALLZAHLEN_PAAR = {'hze_kommunen_2025.csv': ['hilfen_ambulant', 'hilfen_34'], 'kennzahlen_kommunen.csv': ['hze25_ambulant', 'hze25_34']}
 SCHWELLE_FALLZAHL = 5
 
 

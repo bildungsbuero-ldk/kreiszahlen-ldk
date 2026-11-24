@@ -518,7 +518,7 @@ function kopf() {
 document.querySelectorAll('[data-kreis]').forEach((e) => { const k = e.getAttribute('data-kreis'); e.textContent = fmt(k, KREIS[k]); });
 document.querySelectorAll('[data-hessen]').forEach((e) => { const k = e.getAttribute('data-hessen'); e.textContent = fmt(k, HESSEN[k]); });
 
-const EINZEL = ['sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'nichtdt_4_7', 'hze25_je1000', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein', 'efh_anteil', 'kita_u3', 'kita_3_5'];
+const EINZEL = ['sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'nichtdt_4_7', 'hze25_je1000', 'efb25_je1000', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein', 'efh_anteil', 'kita_u3', 'kita_3_5'];
 const klein = (v) => v == null ? 'k. A.' : (v > 0 && v < 5 ? 'unter 5' : f0(v));
 // ambulant und stationär gemeinsam verdecken, sonst per Differenz zur Summe ablesbar
 const istKlein = (v) => v > 0 && v < 5;
@@ -538,6 +538,7 @@ function drawBedarfe() {
   bars(el('ch-einzel'), G.map((r) => ({ n: r.gemeinde, v: r[k], r })).sort((a, b) => (b.v ?? -1e12) - (a.v ?? -1e12)), {
     ref, label: (v) => fmt(k, v), tick: KZ(k).einheit === '€' ? de.format(',.0f') : f1, hi: (x) => ref != null && x.v != null && x.v > ref,
     tip: (x) => [[x.n], [KZ(k).label, fmt(k, x.v)], ['Kreis', fmt(k, ref)], ['Hessen', fmt(k, HESSEN[k])], ['Einwohner', f0(x.r.einwohner)]].concat(k === 'anteil_4_7' && x.r.kinder_4_7 != null ? [['Kinder von 4 bis 7', f0(x.r.kinder_4_7)]] : [])
+      .concat(k === 'efb25_je1000' && x.r.efb25 != null ? [['Beratungsfälle 2025', klein(x.r.efb25)]] : [])
       .concat(k === 'hze25_je1000' && x.r.hze25_hze != null ? [['Hilfen 2025 (ohne § 33)', klein(x.r.hze25_hze)], ['davon ambulant/teilstationär', kleinPaar(x.r.hze25_ambulant, x.r.hze25_34)[0]], ['davon stationär (§§ 34, 35)', kleinPaar(x.r.hze25_ambulant, x.r.hze25_34)[1]], ['Eingliederungshilfe § 35a (nicht enthalten)', klein(x.r.hze25_35a)]] : [])
       .concat(k === 'nichtdt_4_7' && x.r.kinder_4_7 != null ? [['Nichtdeutsche Kinder von 4 bis 7', f0(x.r.kinder_4_7_nichtdt) + ' von ' + f0(x.r.kinder_4_7)]] : [])
   });
@@ -558,8 +559,8 @@ const tabBedarf = () => sortTable(el('tab-bedarf'), [
   { k: 'gemeinde', t: 'Kommune' }, { k: 'einwohner', t: 'Einwohner', info: false, f: f0 }, { k: 'bedarfsindex', t: 'Bedarfsindex', f: fs },
   { k: 'sgb2', t: 'SGB II %' }, { k: 'kinderarmut', t: 'Kinderarmut %' }, { k: 'altersarmut', t: 'Altersarmut %' },
   { k: 'alo_svb', t: 'Arbeitslose/SvB %' }, { k: 'kita_mh', t: 'Kita mit MH %' }, { k: 'nichtdt', t: 'Nichtdt. %' },
-  { k: 'nichtdt_4_7', t: 'Nichtdt. 4–7 J. %' }, { k: 'einkuenfte_je_stpfl', t: 'Einkünfte €', f: f0 }, { k: 'hze25_je1000', t: 'HzE je 1.000' }, { k: 'ab65', t: '65+ %' }
-], G, { key: 'bedarfsindex', dir: -1 }, ['bedarfsindex', 'sgb2', 'kinderarmut', 'altersarmut', 'alo_svb', 'kita_mh', 'nichtdt', 'nichtdt_4_7', 'hze25_je1000']);
+  { k: 'nichtdt_4_7', t: 'Nichtdt. 4–7 J. %' }, { k: 'einkuenfte_je_stpfl', t: 'Einkünfte €', f: f0 }, { k: 'hze25_je1000', t: 'HzE je 1.000' }, { k: 'efb25_je1000', t: 'Erziehungs­beratung je 1.000' }, { k: 'ab65', t: '65+ %' }
+], G, { key: 'bedarfsindex', dir: -1 }, ['bedarfsindex', 'sgb2', 'kinderarmut', 'altersarmut', 'alo_svb', 'kita_mh', 'nichtdt', 'nichtdt_4_7', 'hze25_je1000', 'efb25_je1000']);
 selE.addEventListener('change', drawBedarfe);
 
 // ---------- Angebote ----------
@@ -667,6 +668,7 @@ drawListe();
     ['schulen_liste.csv', 'Schulstandorte mit Schulform und Ganztag'], ['angebote_liste.csv', 'Anlaufstellen und soziale Angebote'],
     ['kita_mh_kreis.csv', 'Kita-Kinder mit Migrationshintergrund je Kommune (Kita-Datenbank des Kreises, intern)'],
     ['kjp_psychotherapeuten.csv', 'Psychotherapeut:innen für Kinder und Jugendliche je Kommune (Psychotherapeutenkammer Hessen)'],
+    ['efb_2025.csv', 'Erziehungs- und Familienberatung 2025 je Kommune und Beratungsstelle (Geschäftsberichte der Beratungsstellen, intern; Werte unter 5 als „<5“)'],
     ['pt_erwachsene.csv', 'Psychotherapeut:innen für Erwachsene je Kommune (Psychotherapeutenkammer Hessen) und Erwachsene ab 18 (HSL)'],
     ['sportvereine_2026.csv', 'Sportvereine und Mitglieder je Kommune (Stabsstelle Sport, Kultur und Ehrenamt, Bildungsbericht 5.2)'],
     ['bevoelkerung_4_7_2025.csv', 'Kinder von 4 bis 7 Jahren je Kommune, 31.12.2025 (HSL)'],
@@ -676,7 +678,7 @@ drawListe();
 })();
 
 // ---------- Berechnung (eigene Gewichtung) ----------
-const WEITERE = ['jugendarmut', 'altersarmut', 'alo_svb_u25', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'anteil_4_7', 'u6'];
+const WEITERE = ['efb25_je1000', 'jugendarmut', 'altersarmut', 'alo_svb_u25', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'anteil_4_7', 'u6'];
 const STD = D.index_def.kennzahlen;
 const KAND = STD.map((k) => ({ k, s: D.index_def.richtung[k], std: true }))
   .concat(WEITERE.filter((k) => !STD.includes(k) && M.kennzahlen[k] && G.filter((r) => r[k] != null).length >= 3).map((k) => ({ k, s: 1, std: false })));
