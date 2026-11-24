@@ -48,6 +48,10 @@ GANZTAG_ZAEHLT = {'Pakt für den Ganztag', 'Profil 1', 'Profil 2', 'Profil 3'}
 INDEX = [('kinderarmut', 1), ('sgb2', 1), ('alo_svb', 1), ('kita_mh', 1), ('nichtdt_4_7', 1), ('einkuenfte_je_stpfl', -1),
          ('hze25_je1000', 1)]
 INDEX_MIN = 4
+# Angebotsindex: Kennzahl, Richtung (+1 = höherer Wert bedeutet mehr Angebot); Dichten auf 2 Stellen gerundet,
+# damit die Seite im Browser mit denselben Werten rechnet
+ANGEBOT = [('fz_je10k', 1), ('ssa_je10k', 1), ('jug_je10k', 1), ('quartier_je10k', 1), ('kjp_je10k_u15', 1), ('pt_erw_je10k', 1)]
+ANGEBOT_MIN = 3
 
 # Erwartete Spalten und Prüfregeln je Datei: (Spalte, Typ, Pflicht, (min, max))
 SCHEMA = {
@@ -326,6 +330,12 @@ def berechnen():
         r['familienzentren'] = sum(1 for x in mine if x['kategorie'] == 'Familienzentrum' and vor_ort(x))
         r['schulsozialarbeit'] = sum(1 for x in mine if x['kategorie'] == 'Schulsozialarbeit' and vor_ort(x))
         r['jugend'] = sum(1 for x in mine if x['kategorie'] == 'Jugendzentrum/Jugendpflege' and vor_ort(x))
+        r['quartier'] = sum(1 for x in mine if x['kategorie'] == 'Quartier/Mehrgenerationen' and vor_ort(x))
+        je10k = lambda n: round(n / r['einwohner'] * 10000, 2)
+        r['fz_je10k'], r['ssa_je10k'], r['jug_je10k'], r['quartier_je10k'] = (je10k(r[k]) for k in ('familienzentren', 'schulsozialarbeit', 'jugend', 'quartier'))
+        r['hausaerzte_je10k'] = je10k(r['hausaerzte']) if r['hausaerzte'] is not None else None
+        r['kinderaerzte_je10k_u15'] = round(r['kinderaerzte'] / r['kinder_u15'] * 10000, 2) if r['kinderaerzte'] is not None and r['kinder_u15'] else None
+        r['ganztag_anteil'] = round(r['ganztag'] / r['schulen'] * 100, 1) if r['schulen'] else None
         r['vorort'] = sum(1 for x in mine if vor_ort(x))
         r['_dichte'] = r['vorort'] / r['einwohner'] * 10000
         r['vorort_je10k'] = round(r['_dichte'], 1)
@@ -370,29 +380,41 @@ def berechnen():
     kreis['pt_erw_je10k'] = round(kreis['pt_erw'] / erw_kreis * 10000, 1) if erw_kreis else None
     vergleich[0]['pt_erw_je10k'] = kreis['pt_erw_je10k']
     median_vorort = statistics.median(r['_dichte'] for r in gem if r['_index'] is not None)
+    stats_a = {}
+    for c, s in ANGEBOT:
+        werte = [r[c] for r in gem if r[c] is not None]
+        stats_a[c] = (statistics.mean(werte), statistics.stdev(werte))
     for r in gem:
-        # Einstufung mit ungerundeten Werten
-        r['hoher_bedarf_wenig_angebot'] = bool(r['_index'] is not None and r['_index'] > 0 and r['_dichte'] < median_vorort)
+        z = [s * (r[c] - stats_a[c][0]) / stats_a[c][1] for c, s in ANGEBOT if r[c] is not None]
+        r['_aindex'] = sum(z) / len(z) if len(z) >= ANGEBOT_MIN else None
+        r['angebotsindex'] = round(r['_aindex'], 2) if r['_aindex'] is not None else None
+    median_angebot = statistics.median(r['_aindex'] for r in gem if r['_index'] is not None and r['_aindex'] is not None)
+    for r in gem:
+        # Einstufung mit ungerundeten Werten: Bedarf über 0, Angebotsindex unter dem Median
+        r['hoher_bedarf_wenig_angebot'] = bool(r['_index'] is not None and r['_index'] > 0 and r['_aindex'] is not None and r['_aindex'] < median_angebot)
         r['bedarf_ueber_schnitt'] = bool(r['_index'] is not None and r['_index'] > 0)
     for r in gem:
-        r.pop('_index'); r.pop('_dichte')
+        r.pop('_index'); r.pop('_dichte'); r.pop('_aindex')
     median_vorort = round(median_vorort, 2)
     return {
         'gemeinden': gem, 'vergleich': vergleich, 'hze': hze_rows, 'versorgungsgrade': vg, 'kreis': kreis,
         'median_vorort': median_vorort,
+        'median_angebot': round(median_angebot, 3),
         'angebote': [{k: a.get(k, '') for k in ['kategorie', 'name', 'traeger', 'kommune', 'weitere_kommunen', 'reichweite', 'zielgruppe', 'url']} for a in angebote],
         'schulen_liste': [{k: s.get(k, '') for k in ['kommune', 'name', 'schulart', 'schulform', 'ganztag_kurz']} for s in schulen],
         'index_def': {'kennzahlen': [c for c, _ in INDEX], 'richtung': {c: s for c, s in INDEX}, 'min': INDEX_MIN,
                       'mittel': {c: round(stats[c][0], 3) for c, _ in INDEX}, 'sd': {c: round(stats[c][1], 3) for c, _ in INDEX}},
+        'angebot_def': {'kennzahlen': [c for c, _ in ANGEBOT], 'richtung': {c: s for c, s in ANGEBOT}, 'min': ANGEBOT_MIN,
+                        'mittel': {c: round(stats_a[c][0], 3) for c, _ in ANGEBOT}, 'sd': {c: round(stats_a[c][1], 3) for c, _ in ANGEBOT}},
     }
 
 
 def kennzahlen_csv(d):
-    spalten = ['gemeinde', 'einwohner', 'bedarfsindex', 'rang', 'n_ind', 'sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut',
+    spalten = ['gemeinde', 'einwohner', 'bedarfsindex', 'rang', 'n_ind', 'angebotsindex', 'sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut',
                'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt',
                'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'kinder_4_7', 'nichtdt_4_7', 'kinder_4_7_nichtdt', 'hze25_je1000', 'hze25_hze', 'hze25_ambulant', 'hze25_34', 'hze25_35a', 'efb25', 'efb25_je1000', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
                'efh_anteil', 'kita_u3', 'kita_3_5', 'schulen', 'grundschulen', 'weiterfuehrend', 'ganztag', 'hausaerzte',
-               'kinderaerzte', 'kjp_pt', 'kjp_je10k_u15', 'pt_erw', 'erwachsene', 'pt_erw_je10k', 'sportvereine', 'sportvereine_je1000', 'sport_quote', 'sport_u18', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'vorort',
+               'kinderaerzte', 'kjp_pt', 'kjp_je10k_u15', 'pt_erw', 'erwachsene', 'pt_erw_je10k', 'sportvereine', 'sportvereine_je1000', 'sport_quote', 'sport_u18', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'quartier', 'fz_je10k', 'ssa_je10k', 'jug_je10k', 'quartier_je10k', 'hausaerzte_je10k', 'kinderaerzte_je10k_u15', 'ganztag_anteil', 'vorort',
                'vorort_je10k', 'hoher_bedarf_wenig_angebot', 'bedarf_ueber_schnitt', 'fachdienste', 'psychiatrie']
     with open(os.path.join(DATA, 'kennzahlen_kommunen.csv'), 'w', encoding='utf-8', newline='') as f:
         w = csv.writer(f)
