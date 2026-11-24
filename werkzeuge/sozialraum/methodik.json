@@ -1,5 +1,5 @@
 {
-  "stand": "20.11.2026",
+  "stand": "24.11.2026",
   "quellen": {
     "hsl_gemeinde": {
       "titel": "Hessische Gemeindestatistik 2025",
@@ -80,6 +80,15 @@
       "datei": "kjp_psychotherapeuten.csv (Download unter „Daten und Ergänzungen“)",
       "hinweis": "Suche mit Filter Altersbereich „Kinder und Jugendliche“, gezählt nach Ort der Praxis."
     },
+    "ptk_hessen_erw": {
+      "titel": "Psychotherapeutensuche der Psychotherapeutenkammer Hessen, Altersbereich Erwachsene",
+      "herausgeber": "Psychotherapeutenkammer Hessen (Auszählung: Bildungsbüro Lahn-Dill-Kreis)",
+      "stand": "23.11.2026",
+      "url": "https://ptk-hessen.de/fur-patienten-und-ratsuchende/psychotherapeutensuche/?show_page=1",
+      "lizenz": "eigene Auszählung",
+      "datei": "pt_erwachsene.csv (Download unter „Daten und Ergänzungen“)",
+      "hinweis": "Suche mit Filter Altersbereich „Erwachsene“, gezählt nach Ort der Praxis. Erwachsene ab 18 Jahren je Kommune aus der Bevölkerung nach Einzelalter am 31.12.2025 (HSL)."
+    },
     "hsl_bev_2025": {
       "titel": "Bevölkerung in Hessen am 31. Dezember 2025 nach Gemeinden, Alter, Nationalität und Geschlecht",
       "herausgeber": "Hessisches Statistisches Landesamt (Auszählung 4 bis unter 8 Jahre: Bildungsbüro Lahn-Dill-Kreis)",
@@ -141,6 +150,8 @@
     "hausaerzte": {"label": "Hausärzt:innen", "einheit": "Anzahl", "jahr": "2026", "quelle": ["sanego"], "definition": "Einträge in der Kategorie Hausarzt im Online-Verzeichnis sanego.de je Ort.", "hinweis": "Nicht amtlich. Hausärztlich tätige Internist:innen fehlen möglicherweise teilweise."},
     "hausarzt_vg": {"label": "Hausarzt-Versorgungsgrad", "einheit": "%", "jahr": "2026", "quelle": ["kv_hessen"], "definition": "Versorgungsgrad der Bedarfsplanung im Mittelbereich, zu dem die Kommune gehört (Haiger/Dillenburg, Herborn oder Wetzlar). 100 % entspricht dem Soll; ab 110 % ist der Bereich für neue Zulassungen gesperrt."},
     "kjp_pt": {"label": "Psychotherapeut:innen für Kinder und Jugendliche", "einheit": "Anzahl", "jahr": "2025", "quelle": ["ptk_hessen"], "definition": "Zahl der Psychotherapeut:innen mit Praxis in der Kommune, die in der Psychotherapeutensuche der Kammer den Altersbereich Kinder und Jugendliche angeben.", "hinweis": "Ergänzt den Versorgungsgrad der KV, ist aber nicht dasselbe: Das Verzeichnis der Kammer kann auch Praxen ohne Kassensitz enthalten, und über freie Plätze oder Wartezeiten sagt die Zahl nichts. 13 der 23 Therapeut:innen haben ihre Praxis in Wetzlar, in 16 Kommunen gibt es keinen Eintrag."},
+    "pt_erw": {"label": "Psychotherapeut:innen für Erwachsene", "einheit": "Anzahl", "jahr": "2026", "quelle": ["ptk_hessen_erw"], "definition": "Zahl der Psychotherapeut:innen mit Praxis in der Kommune, die in der Psychotherapeutensuche der Kammer den Altersbereich Erwachsene angeben.", "hinweis": "Wie bei Kindern und Jugendlichen: Das Verzeichnis der Kammer ist nicht dasselbe wie die Kassensitze der KV, und über freie Plätze oder Wartezeiten sagt die Zahl nichts. Wer beide Altersbereiche angibt, steht in beiden Auszählungen. 31 der 58 Therapeut:innen haben ihre Praxis in Wetzlar, in 11 Kommunen gibt es keinen Eintrag. Für die Zielgruppe zählt das Angebot für Eltern: Psychische Belastungen der Eltern wirken auf Kinder."},
+    "pt_erw_je10k": {"label": "Psychotherapie für Erwachsene je 10.000 Erwachsene", "einheit": "je 10.000", "jahr": "2026", "quelle": ["ptk_hessen_erw", "hsl_bev_2025"], "definition": "Psychotherapeut:innen für Erwachsene mit Praxis in der Kommune je 10.000 Einwohner:innen ab 18 Jahren (Bevölkerung am 31.12.2025)."},
     "kjp_je10k_u15": {"label": "Psychotherapie für Kinder und Jugendliche je 10.000 Kinder", "einheit": "je 10.000", "jahr": "2025", "quelle": ["ptk_hessen", "hsl_gemeinde"], "definition": "Psychotherapeut:innen für Kinder und Jugendliche mit Praxis in der Kommune je 10.000 Kinder unter 15 Jahren. Die Zahl der Kinder ist aus Einwohnerzahl und den Anteilen unter 6 und 6 bis unter 15 Jahren berechnet.", "hinweis": "Getrennt von den Anlaufstellen vor Ort ausgewertet: Praxen versorgen auch Kinder aus Nachbarkommunen, und eine einzelne Praxis verändert den Wert kleiner Kommunen stark. Jugendliche ab 15 sind im Nenner nicht enthalten, weil die übernommenen Altersgruppen der Gemeindestatistik nur bis unter 15 Jahre reichen."},
     "sportvereine_je1000": {"label": "Sportvereine je 1.000 Einwohner", "einheit": "je 1.000", "jahr": "2026", "quelle": ["sport_ldk", "hsl_gemeinde"], "definition": "Zahl der Sportvereine mit Sitz in der Kommune je 1.000 Einwohner:innen.", "hinweis": "Sagt nichts über Größe und Angebot der Vereine; große Vereine in kleinen Orten heben den Wert. Wird nicht zu den Anlaufstellen vor Ort gezählt."},
     "sport_quote": {"label": "Mitglieder in Sportvereinen", "einheit": "%", "jahr": "2026", "quelle": ["sport_ldk"], "definition": "Mitglieder der Sportvereine in der Kommune im Verhältnis zur Einwohnerzahl (Organisationsgrad).", "hinweis": "Mehrfachmitgliedschaften werden mehrfach gezählt, und Mitglieder können außerhalb wohnen. Der Wert ist daher kein Anteil der Bevölkerung im engen Sinn. Der Kreiswert ist aus der Summe der Mitglieder und der Einwohnerzahl berechnet."},
@@ -157,7 +168,6 @@
     ["Alleinerziehende", "Auf Gemeindeebene nur im Zensus 2022 bzw. beim Kommunalen Jobcenter Lahn-Dill."],
     ["Gesundheit von Kindern", "Gesundheitsdaten liegen öffentlich nur auf Kreisebene vor. Für Kommunen eignen sich die Schuleingangsuntersuchungen des Gesundheitsamts (Sprache, Motorik, Übergewicht, Impfstatus)."],
     ["Hilfen zur Erziehung nach Kommune (Lücken)", "Für 2025 liegt eine interne Auswertung des Kreisjugendamts nach Kommune vor (siehe Kennzahl), ohne Vollzeitpflege und ohne Wetzlar. Erziehungsberatung (§ 28) liefert die Erziehungs- und Familienberatung nach (angekündigt 20.11.2026). Vollzeitpflege (§ 33) lässt sich nach Einzelfallprüfung durch das Jugendamt dem Herkunftsort zuordnen; das ist noch offen. Werte für Wetzlar (eigenes Jugendamt) liegen nicht vor."],
-    ["Psychotherapie für Erwachsene nach Kommune", "Öffentlich nur der Versorgungsgrad für den Kreis. Für Kinder und Jugendliche gibt es eine Auszählung der Kammer-Suche (siehe Kennzahl), für Erwachsene noch nicht."],
     ["Kita-Plätze", "Die Zahl der Einrichtungen ist nur für 8 Kommunen veröffentlicht; Plätze je Kommune gar nicht."],
     ["Vereine außer Sport", "Sportvereine je Kommune liegen vor (Bildungsbericht 5.2); für Kultur-, Jugend- und andere Vereine gibt es keine Zahlen je Kommune."],
     ["Bischoffen und Siegbach", "Keine Sozialdaten im Wegweiser Kommune (kleinste Kommunen des Kreises); SGB-II-Daten hat das Kommunale Jobcenter Lahn-Dill."],

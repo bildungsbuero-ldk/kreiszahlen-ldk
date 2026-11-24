@@ -188,7 +188,7 @@ td.na { color: var(--fg-muted); }
       <div class="tiles">
         <div class="tile"><p class="lab">Schulstandorte<button class="info" data-k="schulen" aria-label="Erläuterung Schulstandorte">i</button></p><p class="big" id="k-schulen">—</p><p class="sub">mit Ganztag oder Pakt: <span id="k-ganztag">—</span> <button class="info" data-k="ganztag" aria-label="Erläuterung Ganztag">i</button></p></div>
         <div class="tile"><p class="lab">Familienzentren / Schulsozialarbeit<span><button class="info" data-k="familienzentren" aria-label="Erläuterung Familienzentren">i</button> <button class="info" data-k="schulsozialarbeit" aria-label="Erläuterung Schulsozialarbeit">i</button></span></p><p class="big"><span id="k-fz">—</span> / <span id="k-ssa">—</span></p><p class="sub">Jugendzentren und Jugendpflege: <span id="k-jug">—</span></p></div>
-        <div class="tile"><p class="lab">Psychotherapie, Versorgungsgrad Kreis<button class="info" data-k="versorgungsgrad" aria-label="Erläuterung Versorgungsgrad">i</button></p><p class="big" id="k-pt">—</p><p class="sub">Kinder- und Jugendpsychiatrie (Mittelhessen): <span id="k-kjp">—</span></p><p class="sub">Psychotherapie für Kinder und Jugendliche: <span id="k-kjpt">—</span> <button class="info" data-k="kjp_pt" aria-label="Erläuterung Psychotherapie für Kinder und Jugendliche">i</button></p></div>
+        <div class="tile"><p class="lab">Psychotherapie, Versorgungsgrad Kreis<button class="info" data-k="versorgungsgrad" aria-label="Erläuterung Versorgungsgrad">i</button></p><p class="big" id="k-pt">—</p><p class="sub">Kinder- und Jugendpsychiatrie (Mittelhessen): <span id="k-kjp">—</span></p><p class="sub">Psychotherapie für Kinder und Jugendliche: <span id="k-kjpt">—</span> <button class="info" data-k="kjp_pt" aria-label="Erläuterung Psychotherapie für Kinder und Jugendliche">i</button></p><p class="sub">Psychotherapie für Erwachsene: <span id="k-pterw">—</span> <button class="info" data-k="pt_erw" aria-label="Erläuterung Psychotherapie für Erwachsene">i</button></p></div>
         <div class="tile"><p class="lab">Hausärzte, Versorgungsgrad Haiger/Dillenburg<button class="info" data-k="hausarzt_vg" aria-label="Erläuterung Hausarzt-Versorgungsgrad">i</button></p><p class="big" id="k-ha1">—</p><p class="sub">Herborn: <span id="k-ha2">—</span> · Wetzlar: <span id="k-ha3">—</span></p></div>
       </div>
     </section>
@@ -570,6 +570,7 @@ el('k-fz').textContent = f0(D.kreis.familienzentren); el('k-ssa').textContent = 
 el('k-pt').textContent = pv(vg((r) => r.arztgruppe.startsWith('Psychotherapeuten')));
 el('k-kjp').textContent = pv(vg((r) => r.arztgruppe === 'Kinder- und Jugendpsychiater'));
 el('k-kjpt').textContent = f0(D.kreis.kjp_pt) + ' Therapeut:innen in ' + f0(D.kreis.kjp_pt_kommunen) + ' Kommunen';
+el('k-pterw').textContent = f0(D.kreis.pt_erw) + ' Therapeut:innen in ' + f0(D.kreis.pt_erw_kommunen) + ' Kommunen';
 el('k-ha1').textContent = pv(vg((r) => r.planungsbereich === 'Mittelbereich Haiger/Dillenburg'));
 el('k-ha2').textContent = pv(vg((r) => r.planungsbereich === 'Mittelbereich Herborn'));
 el('k-ha3').textContent = pv(vg((r) => r.planungsbereich === 'Mittelbereich Wetzlar'));
@@ -596,7 +597,7 @@ function drawAngebote() {
 }
 const tabAngebot = () => sortTable(el('tab-angebot'), [
   { k: 'gemeinde', t: 'Kommune' }, { k: 'bedarfsindex', t: 'Bedarfs­index', f: fs }, { k: 'schulen', t: 'Schulen' }, { k: 'ganztag', t: 'Ganztag/Pakt' },
-  { k: 'kita_u3', t: 'Kita U3 %' }, { k: 'kita_3_5', t: 'Kita 3–5 %' }, { k: 'hausaerzte', t: 'Hausärzt:innen' }, { k: 'hausarzt_vg', t: 'Hausarzt-VG %' }, { k: 'kjp_pt', t: 'Psycho­therapie Kinder/Jugend' }, { k: 'sportvereine_je1000', t: 'Sportvereine je 1.000', f: f1 }, { k: 'sport_quote', t: 'Sport-Mitglieder %' }, { k: 'sport_u18', t: 'Mitglieder unter 18 %' },
+  { k: 'kita_u3', t: 'Kita U3 %' }, { k: 'kita_3_5', t: 'Kita 3–5 %' }, { k: 'hausaerzte', t: 'Hausärzt:innen' }, { k: 'hausarzt_vg', t: 'Hausarzt-VG %' }, { k: 'kjp_pt', t: 'Psycho­therapie Kinder/Jugend' }, { k: 'pt_erw', t: 'Psycho­therapie Erwachsene' }, { k: 'pt_erw_je10k', t: 'Psychotherapie Erw. je 10.000', f: f1 }, { k: 'sportvereine_je1000', t: 'Sportvereine je 1.000', f: f1 }, { k: 'sport_quote', t: 'Sport-Mitglieder %' }, { k: 'sport_u18', t: 'Mitglieder unter 18 %' },
   { k: 'familienzentren', t: 'Familien­zentren' }, { k: 'schulsozialarbeit', t: 'Schulsozial­arbeit' }, { k: 'jugend', t: 'Jugend­pflege' },
   { k: 'vorort_je10k', t: 'Vor Ort je 10.000' }, { k: 'fachdienste', t: 'Fach­dienste' }, { k: 'psychiatrie', t: 'Psychiatrie' }
 ], G, { key: 'bedarfsindex', dir: -1 }, ['bedarfsindex', 'vorort_je10k']);
@@ -666,6 +667,7 @@ drawListe();
     ['schulen_liste.csv', 'Schulstandorte mit Schulform und Ganztag'], ['angebote_liste.csv', 'Anlaufstellen und soziale Angebote'],
     ['kita_mh_kreis.csv', 'Kita-Kinder mit Migrationshintergrund je Kommune (Kita-Datenbank des Kreises, intern)'],
     ['kjp_psychotherapeuten.csv', 'Psychotherapeut:innen für Kinder und Jugendliche je Kommune (Psychotherapeutenkammer Hessen)'],
+    ['pt_erwachsene.csv', 'Psychotherapeut:innen für Erwachsene je Kommune (Psychotherapeutenkammer Hessen) und Erwachsene ab 18 (HSL)'],
     ['sportvereine_2026.csv', 'Sportvereine und Mitglieder je Kommune (Stabsstelle Sport, Kultur und Ehrenamt, Bildungsbericht 5.2)'],
     ['bevoelkerung_4_7_2025.csv', 'Kinder von 4 bis 7 Jahren je Kommune, 31.12.2025 (HSL)'],
     ['hze_kommunen_2025.csv', 'Hilfen zur Erziehung 2025 je Kommune (Kreisjugendamt, intern; Werte unter 5 als „<5“, Gegenwert ambulant/stationär als „verdeckt“)']];
