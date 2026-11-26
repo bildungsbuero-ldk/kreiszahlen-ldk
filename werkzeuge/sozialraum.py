@@ -61,7 +61,8 @@ SCHEMA = {
         ('u6', 'num', True, (0, 20)), ('u6_15', 'num', True, (0, 25)), ('ab65', 'num', True, (5, 50)),
         ('nichtdt', 'num', True, (0, 60)), ('kinder_u15_nichtdt', 'num', True, (0, 60)),
         ('geburten_je1000', 'num', True, (0, 30)), ('wanderungssaldo_je1000', 'num', True, (-60, 60)),
-        ('einkuenfte_je_stpfl', 'num', True, (15000, 150000)), ('whg_klein', 'num', True, (0, 60))]},
+        ('einkuenfte_je_stpfl', 'num', True, (15000, 150000)), ('whg_klein', 'num', True, (0, 60)),
+        ('wohnflaeche_je_ew', 'num', True, (25, 90)), ('wohnflaeche_je_whg', 'num', True, (50, 180))]},
     'wegweiser_kommune_2023.csv': {'zeilen': 'gemeinden+vergleich', 'spalten': [
         ('gemeinde', 'gemeinde', True, None)] + [(c, 'num', False, (0, 100)) for c in
         ['sgb2', 'alg2', 'kinderarmut', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'efh_anteil',
@@ -256,7 +257,7 @@ def berechnen():
         h, w, k = hsl[g], ww.get(g, {}), kita.get(g, {})
         r = {'gemeinde': g, 'einwohner': int(zahl(h['einwohner']))}
         for c in ['nichtdt', 'kinder_u15_nichtdt', 'einkuenfte_je_stpfl', 'ab65', 'u6', 'geburten_je1000',
-                  'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein']:
+                  'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein', 'wohnflaeche_je_ew', 'wohnflaeche_je_whg']:
             r[c] = zahl(h[c])
         for c in ['sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh',
                   'sgb2_ausl', 'efh_anteil']:
@@ -413,7 +414,7 @@ def kennzahlen_csv(d):
     spalten = ['gemeinde', 'einwohner', 'bedarfsindex', 'rang', 'n_ind', 'angebotsindex', 'sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut',
                'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt',
                'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'kinder_4_7', 'nichtdt_4_7', 'kinder_4_7_nichtdt', 'hze25_je1000', 'hze25_hze', 'hze25_ambulant', 'hze25_34', 'hze25_35a', 'efb25', 'efb25_je1000', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
-               'efh_anteil', 'kita_u3', 'kita_3_5', 'schulen', 'grundschulen', 'weiterfuehrend', 'ganztag', 'hausaerzte',
+               'efh_anteil', 'wohnflaeche_je_ew', 'wohnflaeche_je_whg', 'kita_u3', 'kita_3_5', 'schulen', 'grundschulen', 'weiterfuehrend', 'ganztag', 'hausaerzte',
                'kinderaerzte', 'kjp_pt', 'kjp_je10k_u15', 'pt_erw', 'erwachsene', 'pt_erw_je10k', 'sportvereine', 'sportvereine_je1000', 'sport_quote', 'sport_u18', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'quartier', 'fz_je10k', 'ssa_je10k', 'jug_je10k', 'quartier_je10k', 'hausaerzte_je10k', 'kinderaerzte_je10k_u15', 'ganztag_anteil', 'vorort',
                'vorort_je10k', 'hoher_bedarf_wenig_angebot', 'bedarf_ueber_schnitt', 'fachdienste', 'psychiatrie']
     with open(os.path.join(DATA, 'kennzahlen_kommunen.csv'), 'w', encoding='utf-8', newline='') as f:
@@ -603,7 +604,8 @@ def hsl():
 
     b1, b3, b4, b13, b20 = (blatt(n) for n in ('1', '3', '4', '13', '20'))
     kopf = ['ags', 'gemeinde', 'einwohner', 'flaeche', 'dichte', 'veraend_vj', 'u6', 'u6_15', 'ab65', 'nichtdt',
-            'kinder_u15_nichtdt', 'geburten_je1000', 'wanderungssaldo_je1000', 'einkuenfte_je_stpfl', 'whg_klein']
+            'kinder_u15_nichtdt', 'geburten_je1000', 'wanderungssaldo_je1000', 'einkuenfte_je_stpfl', 'whg_klein',
+            'wohnflaeche_je_ew', 'wohnflaeche_je_whg']
     zeilen = []
     for ags, r in b1.items():
         name = 'Hessen' if ags == '000000' else r[1].strip().split(',')[0]
@@ -611,7 +613,8 @@ def hsl():
         ew = r[3]
         zeilen.append([ags, name, ew, r[2], round(r[11]), round(r[9], 2), round(r[13], 1), round(r[15], 1), round(r[19], 1),
                        round(a3[9], 1), round((a3[10] + a3[12]) / (r[12] + r[14]) * 100, 1),
-                       round(a4[2] / ew * 1000, 1), round(a4[15] / ew * 1000, 1), t[4], round((w[3] + w[4]) / w[2] * 100, 1)])
+                       round(a4[2] / ew * 1000, 1), round(a4[15] / ew * 1000, 1), t[4], round((w[3] + w[4]) / w[2] * 100, 1),
+                       round(w[10] * 1000 / ew, 1), round(w[10] * 1000 / w[2], 1)])
     os.makedirs(DATA, exist_ok=True)
     ziel = os.path.join(DATA, 'hsl_gemeindestatistik.csv')
     with open(ziel, 'w', encoding='utf-8', newline='') as f:
