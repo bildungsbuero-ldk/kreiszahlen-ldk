@@ -188,7 +188,7 @@ td.na { color: var(--fg-muted); }
       <h2>Angebote im Kreis</h2>
       <div class="tiles">
         <div class="tile"><p class="lab">Schulstandorte<button class="info" data-k="schulen" aria-label="Erläuterung Schulstandorte">i</button></p><p class="big" id="k-schulen">—</p><p class="sub">mit Ganztag oder Pakt: <span id="k-ganztag">—</span> <button class="info" data-k="ganztag" aria-label="Erläuterung Ganztag">i</button></p></div>
-        <div class="tile"><p class="lab">Familienzentren / Schulsozialarbeit<span><button class="info" data-k="familienzentren" aria-label="Erläuterung Familienzentren">i</button> <button class="info" data-k="schulsozialarbeit" aria-label="Erläuterung Schulsozialarbeit">i</button></span></p><p class="big"><span id="k-fz">—</span> / <span id="k-ssa">—</span></p><p class="sub">Jugendzentren und Jugendpflege: <span id="k-jug">—</span></p></div>
+        <div class="tile"><p class="lab">Familienzentren / Sozialarbeit an Schulen<span><button class="info" data-k="familienzentren" aria-label="Erläuterung Familienzentren">i</button> <button class="info" data-k="schulsozialarbeit" aria-label="Erläuterung Sozialarbeit an Schulen">i</button></span></p><p class="big"><span id="k-fz">—</span> / <span id="k-ssa">—</span></p><p class="sub">Jugendzentren und Jugendpflege: <span id="k-jug">—</span></p></div>
         <div class="tile"><p class="lab">Psychotherapie, Versorgungsgrad Kreis<button class="info" data-k="versorgungsgrad" aria-label="Erläuterung Versorgungsgrad">i</button></p><p class="big" id="k-pt">—</p><p class="sub">Kinder- und Jugendpsychiatrie (Mittelhessen): <span id="k-kjp">—</span></p><p class="sub">Psychotherapie für Kinder und Jugendliche: <span id="k-kjpt">—</span> <button class="info" data-k="kjp_pt" aria-label="Erläuterung Psychotherapie für Kinder und Jugendliche">i</button></p><p class="sub">Psychotherapie für Erwachsene: <span id="k-pterw">—</span> <button class="info" data-k="pt_erw" aria-label="Erläuterung Psychotherapie für Erwachsene">i</button></p></div>
         <div class="tile"><p class="lab">Hausärzte, Versorgungsgrad Haiger/Dillenburg<button class="info" data-k="hausarzt_vg" aria-label="Erläuterung Hausarzt-Versorgungsgrad">i</button></p><p class="big" id="k-ha1">—</p><p class="sub">Herborn: <span id="k-ha2">—</span> · Wetzlar: <span id="k-ha3">—</span></p></div>
       </div>
@@ -274,7 +274,7 @@ td.na { color: var(--fg-muted); }
       <p>Im Reiter <a href="#berechnung">„Berechnung“</a> lassen sich Kennzahlen ein- und ausschalten, weitere Kennzahlen hinzunehmen und Gewichte zwischen 0 und 1 setzen. Der Index ist dann der gewichtete Mittelwert der vorhandenen z-Werte (Summe aus Gewicht × z-Wert, geteilt durch die Summe der Gewichte). Eine Kommune braucht Werte für mindestens 4 der eingeschalteten Kennzahlen (bei weniger eingeschalteten für alle). Die Tabelle oben und die herunterladbaren Dateien zeigen immer den Standard.</p>
 
       <h3 id="m-angebot">Wie Angebote gezählt werden</h3>
-      <p><b>Angebote vor Ort</b> sind Familienzentren, Schulsozialarbeit, Jugendzentren und Jugendpflege sowie Quartiersarbeit. Gemeinsame Zentren mehrerer Kommunen zählen in jeder beteiligten Kommune. <b>Fachdienste</b> (Beratungsstellen, Sozialpsychiatrie, Psychiatrie, Sucht, Gewaltschutz, Selbsthilfe, Frühe Hilfen, Migration, Existenzsicherung) sind an ihrem Sitz eingetragen, arbeiten aber meist für den ganzen Kreis oder eine Region. Sie gehen deshalb nicht in die Angebotsdichte und nicht in den Angebotsindex ein.</p>
+      <p><b>Angebote vor Ort</b> sind Familienzentren, Sozialarbeit an Schulen, Jugendzentren und Jugendpflege sowie Quartiersarbeit. Gemeinsame Zentren mehrerer Kommunen zählen in jeder beteiligten Kommune. <b>Fachdienste</b> (Beratungsstellen, Sozialpsychiatrie, Psychiatrie, Sucht, Gewaltschutz, Selbsthilfe, Frühe Hilfen, Migration, Existenzsicherung) sind an ihrem Sitz eingetragen, arbeiten aber meist für den ganzen Kreis oder eine Region. Sie gehen deshalb nicht in die Angebotsdichte und nicht in den Angebotsindex ein.</p>
       <p>Ob ein Angebot vor Ort zählt, entscheiden Kategorie und Reichweite: Kreisweite Dienste in diesen Kategorien (z. B. die Kreisjugendpflege) zählen als Fachdienst.</p>
       <h3 id="m-angebotsindex">Der Angebotsindex</h3>
       <p>Seit 24.11.2026 werden die Angebote wie die Bedarfe zu einem Index verdichtet. Jedes Angebot wird auf die passende Bevölkerung bezogen (Anlaufstellen je 10.000 Einwohner:innen, Psychotherapie je 10.000 Kinder unter 15 bzw. je 10.000 Erwachsene), daraus wird ein z-Wert gebildet, und der Angebotsindex ist der Mittelwert der z-Werte. Ein positiver Wert heißt: mehr Angebot als im Durchschnitt der Kommunen.</p>
@@ -284,7 +284,7 @@ td.na { color: var(--fg-muted); }
       <h3 id="m-lesen">Beim Lesen beachten</h3>
       <ul>
         <li>Alle Werte gelten für die ganze Kommune. Stadtteile mit hohem Bedarf (z. B. in Wetzlar oder Dillenburg) gehen im Durchschnitt unter.</li>
-        <li>Die Daten haben unterschiedliche Stände (2021 bis 2026; Schulsozialarbeit nach den Förderanträgen für 2027). Die Jahreszahl steht bei jeder Kennzahl.</li>
+        <li>Die Daten haben unterschiedliche Stände (2021 bis 2026). Die Jahreszahl steht bei jeder Kennzahl.</li>
         <li>Kleine Kommunen schwanken stärker; Bischoffen und Siegbach fehlen im Wegweiser Kommune ganz.</li>
         <li>Wetzlar hat ein eigenes Jugendamt; die übrigen 22 Kommunen betreut das Kreisjugendamt.</li>
         <li>Die Liste der Anlaufstellen ist eine Recherche, kein amtliches Verzeichnis.</li>
@@ -610,7 +610,7 @@ function drawAngebote() {
 const tabAngebot = () => sortTable(el('tab-angebot'), [
   { k: 'gemeinde', t: 'Kommune' }, { k: 'bedarfsindex', t: 'Bedarfs­index', f: fs }, { k: 'angebotsindex', t: 'Angebots­index', f: fs }, { k: 'schulen', t: 'Schulen' }, { k: 'ganztag', t: 'Ganztag/Pakt' },
   { k: 'kita_u3', t: 'Kita U3 %' }, { k: 'kita_3_5', t: 'Kita 3–5 %' }, { k: 'hausaerzte', t: 'Hausärzt:innen' }, { k: 'hausarzt_vg', t: 'Hausarzt-VG %' }, { k: 'kjp_pt', t: 'Psycho­therapie Kinder/Jugend' }, { k: 'pt_erw', t: 'Psycho­therapie Erwachsene' }, { k: 'pt_erw_je10k', t: 'Psychotherapie Erw. je 10.000', f: f1 }, { k: 'sportvereine_je1000', t: 'Sportvereine je 1.000', f: f1 }, { k: 'sport_quote', t: 'Sport-Mitglieder %' }, { k: 'sport_u18', t: 'Mitglieder unter 18 %' },
-  { k: 'familienzentren', t: 'Familien­zentren' }, { k: 'schulsozialarbeit', t: 'Schulsozial­arbeit' }, { k: 'jugend', t: 'Jugend­pflege' },
+  { k: 'familienzentren', t: 'Familien­zentren' }, { k: 'schulsozialarbeit', t: 'Sozialarbeit an Schulen' }, { k: 'jugend', t: 'Jugend­pflege' },
   { k: 'vorort_je10k', t: 'Vor Ort je 10.000' }, { k: 'fachdienste', t: 'Fach­dienste' }, { k: 'psychiatrie', t: 'Psychiatrie' }
 ], G, { key: 'bedarfsindex', dir: -1 }, ['bedarfsindex', 'angebotsindex', 'vorort_je10k']);
 

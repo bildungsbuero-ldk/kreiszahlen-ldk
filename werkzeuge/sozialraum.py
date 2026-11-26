@@ -37,10 +37,10 @@ GEMEINDEN = ['Aßlar', 'Bischoffen', 'Braunfels', 'Breitscheid', 'Dietzhölztal'
 VERGLEICH = ['Lahn-Dill-Kreis', 'Hessen']
 KATEGORIEN = ['Psychiatrie (Klinik/Ambulanz)', 'Sozialpsychiatrie', 'Erziehungs-/Familienberatung', 'Suchtberatung',
               'Krisen/Gewaltschutz', 'Selbsthilfe', 'Schulpsychologie', 'Frühe Hilfen', 'Familienzentrum',
-              'Schulsozialarbeit', 'Jugendzentrum/Jugendpflege', 'Quartier/Mehrgenerationen', 'Migration/Integration',
+              'Sozialarbeit an Schulen', 'Jugendzentrum/Jugendpflege', 'Quartier/Mehrgenerationen', 'Migration/Integration',
               'Existenzsicherung (Schuldner, Tafel)', 'Sonstiges']
 SONDERORTE = ['Lahn-Dill-Kreis (kein Ort angegeben)', 'Gießen (außerhalb LDK)', 'Weilburg (außerhalb LDK)']
-VOR_ORT = {'Familienzentrum', 'Schulsozialarbeit', 'Jugendzentrum/Jugendpflege', 'Quartier/Mehrgenerationen'}
+VOR_ORT = {'Familienzentrum', 'Sozialarbeit an Schulen', 'Jugendzentrum/Jugendpflege', 'Quartier/Mehrgenerationen'}
 SCHULARTEN = ['Grundschule', 'Weiterführende Schule', 'Förderschule', 'Berufliche Schule', 'nicht zugeordnet']
 GANZTAG = ['Pakt für den Ganztag', 'Profil 1', 'Profil 2', 'Profil 3', 'Betreuung', 'unbekannt']
 GANZTAG_ZAEHLT = {'Pakt für den Ganztag', 'Profil 1', 'Profil 2', 'Profil 3'}
@@ -328,7 +328,7 @@ def berechnen():
         mb = ha_vg.get(r['mittelbereich'])
         r['hausarzt_vg'] = zahl(mb['versorgungsgrad_prozent']) if mb else None
         r['familienzentren'] = sum(1 for x in mine if x['kategorie'] == 'Familienzentrum' and vor_ort(x))
-        r['schulsozialarbeit'] = sum(1 for x in mine if x['kategorie'] == 'Schulsozialarbeit' and vor_ort(x))
+        r['schulsozialarbeit'] = sum(1 for x in mine if x['kategorie'] == 'Sozialarbeit an Schulen' and vor_ort(x))
         r['jugend'] = sum(1 for x in mine if x['kategorie'] == 'Jugendzentrum/Jugendpflege' and vor_ort(x))
         r['quartier'] = sum(1 for x in mine if x['kategorie'] == 'Quartier/Mehrgenerationen' and vor_ort(x))
         je10k = lambda n: round(n / r['einwohner'] * 10000, 2)
@@ -352,7 +352,7 @@ def berechnen():
     kreis = {
         'schulen': len(schulen), 'ganztag': sum(1 for s in schulen if s['ganztag_kurz'] in GANZTAG_ZAEHLT),
         'familienzentren': sum(1 for a in angebote if a['kategorie'] == 'Familienzentrum' and vor_ort(a)),
-        'schulsozialarbeit': sum(1 for a in angebote if a['kategorie'] == 'Schulsozialarbeit' and vor_ort(a)),
+        'schulsozialarbeit': sum(1 for a in angebote if a['kategorie'] == 'Sozialarbeit an Schulen' and vor_ort(a)),
         'jugend': sum(1 for a in angebote if a['kategorie'] == 'Jugendzentrum/Jugendpflege' and vor_ort(a)),
         'angebote': len(angebote),
         'kjp_pt': sum(kjp.values()),
