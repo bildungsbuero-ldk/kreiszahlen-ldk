@@ -585,7 +585,7 @@ function kopf() {
 document.querySelectorAll('[data-kreis]').forEach((e) => { const k = e.getAttribute('data-kreis'); e.textContent = fmt(k, KREIS[k]); });
 document.querySelectorAll('[data-hessen]').forEach((e) => { const k = e.getAttribute('data-hessen'); e.textContent = fmt(k, HESSEN[k]); });
 
-const EINZEL = ['sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'nichtdt_4_7', 'hze25_je1000', 'efb25_je1000', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein', 'wohnflaeche_je_ew', 'wohnflaeche_je_whg', 'efh_anteil', 'kita_u3', 'kita_3_5'];
+const EINZEL = ['sgb2', 'kinderarmut', 'alleinerz_quote', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'nichtdt_4_7', 'hze25_je1000', 'efb25_je1000', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein', 'wohnflaeche_je_ew', 'wohnflaeche_je_whg', 'efh_anteil', 'kita_u3', 'kita_3_5'];
 const klein = (v) => v == null ? 'k. A.' : (v > 0 && v < 5 ? 'unter 5' : f0(v));
 // ambulant und stationär gemeinsam verdecken, sonst per Differenz zur Summe ablesbar
 const istKlein = (v) => v > 0 && v < 5;
@@ -740,6 +740,7 @@ drawListe();
     ['schulen_liste.csv', 'Schulstandorte mit Schulform und Ganztag'], ['angebote_liste.csv', 'Anlaufstellen und soziale Angebote'],
     ['kita_mh_kreis.csv', 'Kita-Kinder mit Migrationshintergrund je Kommune (Kita-Datenbank des Kreises, intern)'],
     ['kjp_psychotherapeuten.csv', 'Psychotherapeut:innen für Kinder und Jugendliche je Kommune (Psychotherapeutenkammer Hessen)'],
+    ['zensus_alleinerziehende_2022.csv', 'Haushalte nach Typ, Zensus 2022 (Statistische Ämter des Bundes und der Länder, dl-de/by-2-0)'],
     ['efb_2025.csv', 'Erziehungs- und Familienberatung 2025 je Kommune und Beratungsstelle (Geschäftsberichte der Beratungsstellen, intern; Werte unter 5 als „<5“)'],
     ['pt_erwachsene.csv', 'Psychotherapeut:innen für Erwachsene je Kommune (Psychotherapeutenkammer Hessen) und Erwachsene ab 18 (HSL)'],
     ['sportvereine_2026.csv', 'Sportvereine und Mitglieder je Kommune (Stabsstelle Sport, Kultur und Ehrenamt, Bildungsbericht 5.2)'],
@@ -754,7 +755,7 @@ drawListe();
 const RICHTUNG_WEITERE = { wohnflaeche_je_ew: -1 };
 const SETS = {
   b: { def: D.index_def, wort: 'Bedarf', titel: ['Im Standard-Bedarfsindex', 'Weitere Kennzahlen (im Standard nicht enthalten)'],
-    weitere: ['efb25_je1000', 'wohnflaeche_je_ew', 'jugendarmut', 'altersarmut', 'alo_svb_u25', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'anteil_4_7', 'u6'] },
+    weitere: ['efb25_je1000', 'alleinerz_quote', 'wohnflaeche_je_ew', 'jugendarmut', 'altersarmut', 'alo_svb_u25', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'anteil_4_7', 'u6'] },
   a: { def: D.angebot_def, wort: 'Angebot', titel: ['Im Standard-Angebotsindex', 'Weitere Angebote (im Standard nicht enthalten)'],
     weitere: ['kita_u3', 'kita_3_5', 'ganztag_anteil', 'hausaerzte_je10k', 'kinderaerzte_je10k_u15', 'sportvereine_je1000', 'sport_quote', 'sport_u18'] }
 };

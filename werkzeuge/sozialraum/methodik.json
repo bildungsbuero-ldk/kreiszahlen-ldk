@@ -89,6 +89,15 @@
       "datei": "pt_erwachsene.csv (Download unter „Daten und Ergänzungen“)",
       "hinweis": "Suche mit Filter Altersbereich „Erwachsene“, gezählt nach Ort der Praxis. Erwachsene ab 18 Jahren je Kommune aus der Bevölkerung nach Einzelalter am 31.12.2025 (HSL)."
     },
+    "zensus2022_hh": {
+      "titel": "Zensus 2022, Tabelle 5000H-1005 Haushalte: Typ des privaten Haushalts (Gemeinden, Gebietsstand 15.05.2022)",
+      "herausgeber": "Statistische Ämter des Bundes und der Länder",
+      "stand": "15.05.2022, abgerufen 26.11.2026",
+      "url": "https://ergebnisse.zensus2022.de/datenbank/online/statistic/5000H/table/5000H-1005",
+      "lizenz": "Datenlizenz Deutschland – Namensnennung – Version 2.0",
+      "datei": "zensus_alleinerziehende_2022.csv (Download unter „Daten und Ergänzungen“)",
+      "hinweis": "Haushaltstyp nach Familien (Bezugspersonenprinzip). Kreiswert als Summe der 23 Gemeinden."
+    },
     "hsl_bev_2025": {
       "titel": "Bevölkerung in Hessen am 31. Dezember 2025 nach Gemeinden, Alter, Nationalität und Geschlecht",
       "herausgeber": "Hessisches Statistisches Landesamt (Auszählung 4 bis unter 8 Jahre: Bildungsbüro Lahn-Dill-Kreis)",
@@ -149,6 +158,8 @@
     "wanderungssaldo_je1000": {"label": "Wanderungssaldo je 1.000 Einwohner", "einheit": "", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Zuzüge minus Fortzüge über die Gemeindegrenze 2024 je 1.000 Einwohner:innen."},
     "veraend_vj": {"label": "Bevölkerungsveränderung zum Vorjahr", "einheit": "%", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Veränderung der Einwohnerzahl vom 31.12.2023 zum 31.12.2024."},
     "whg_klein": {"label": "Wohnungen mit 1–2 Räumen", "einheit": "%", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Wohnungen mit einem oder zwei Räumen (einschließlich Küche) an allen Wohnungen in Wohn- und Nichtwohngebäuden."},
+    "alleinerz_quote": {"label": "Alleinerziehende an den Haushalten mit Kindern", "einheit": "%", "jahr": "2022", "quelle": ["zensus2022_hh"], "definition": "Haushalte von alleinerziehenden Müttern und Vätern an allen Haushalten mit Kindern (Paare mit Kindern und Alleinerziehende), Zensus 2022.", "hinweis": "Kinder ohne Altersgrenze: Auch Haushalte mit erwachsenen Kindern zählen mit. Werte der Haushaltebefragung sind hochgerechnet, bei kleinen Gemeinden also mit Unsicherheit. Im Reiter „Berechnung“ als Bedarfskennzahl zuschaltbar."},
+    "alleinerz_hh": {"label": "Alleinerziehende an allen Haushalten", "einheit": "%", "jahr": "2022", "quelle": ["zensus2022_hh"], "definition": "Haushalte von Alleinerziehenden an allen privaten Haushalten, Zensus 2022."},
     "wohnflaeche_je_ew": {"label": "Wohnfläche je Einwohner", "einheit": "m²", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Wohnfläche aller Wohnungen in Wohn- und Nichtwohngebäuden am 31.12.2024 (Fortschreibung des Gebäude- und Wohnungsbestands) geteilt durch die Einwohnerzahl.", "hinweis": "Grobes Maß für Wohnenge: Leerstehende Wohnungen zählen mit, und große Einfamilienhäuser älterer Menschen heben den Durchschnitt. Für Familien mit Kindern sagt der Wert daher nur die Richtung. Im Reiter „Berechnung“ als Bedarfskennzahl zuschaltbar (weniger Fläche = mehr Bedarf)."},
     "wohnflaeche_je_whg": {"label": "Wohnfläche je Wohnung", "einheit": "m²", "jahr": "2024", "quelle": ["hsl_gemeinde"], "definition": "Durchschnittliche Wohnfläche je Wohnung in Wohn- und Nichtwohngebäuden am 31.12.2024."},
     "efb25_je1000": {"label": "Erziehungs- und Familienberatung je 1.000 unter 21-Jährige", "einheit": "je 1.000", "jahr": "2025", "quelle": ["efb_2025", "hsl_bev_2025"], "definition": "Bearbeitete Fälle der vier Erziehungs- und Familienberatungsstellen im Jahr 2025 (§§ 16 bis 18 und 28 SGB VIII) nach Wohnort je 1.000 Einwohner:innen unter 21 Jahren am 31.12.2025.", "hinweis": "Eigene Kennzahl neben den Hilfen zur Erziehung, nicht im Standard-Bedarfsindex: Beratung ist niedrigschwellig und wird von Familien selbst aufgesucht. Hohe Werte zeigen deshalb Bedarf, aber auch, dass eine Beratungsstelle nah und bekannt ist; niedrige Werte können auf Wege oder fehlende Bekanntheit hinweisen. Im Reiter „Berechnung“ zuschaltbar. Enthält auch Wetzlar. Einschließlich der aus 2024 übernommenen Fälle. Der Kreiswert bezieht sich auf alle 23 Kommunen und nur auf Fälle mit zugeordnetem Wohnort. Fallzahlen unter 5 werden nicht genannt."},
@@ -186,7 +197,6 @@
     "psychiatrie": {"label": "Psychiatrie und Sozialpsychiatrie", "einheit": "Anzahl", "jahr": "2026", "quelle": ["angebote"], "definition": "Kliniken, Tageskliniken, Institutsambulanzen und sozialpsychiatrische Angebote mit Sitz in der Kommune."}
   },
   "luecken": [
-    ["Alleinerziehende", "Auf Gemeindeebene nur im Zensus 2022 bzw. beim Kommunalen Jobcenter Lahn-Dill."],
     ["Gesundheit von Kindern", "Gesundheitsdaten liegen öffentlich nur auf Kreisebene vor. Für Kommunen eignen sich die Schuleingangsuntersuchungen des Gesundheitsamts (Sprache, Motorik, Übergewicht, Impfstatus)."],
     ["Hilfen zur Erziehung nach Kommune (Lücken)", "Für 2025 liegt eine interne Auswertung des Kreisjugendamts nach Kommune vor (siehe Kennzahl), ohne Vollzeitpflege und ohne Wetzlar. Erziehungsberatung (§ 28) steht seit 24.11.2026 als eigene Kennzahl im Dashboard. Vollzeitpflege (§ 33) lässt sich nach Einzelfallprüfung durch das Jugendamt dem Herkunftsort zuordnen; das ist noch offen. Werte für Wetzlar (eigenes Jugendamt) liegen nicht vor."],
     ["Kita-Plätze", "Die Zahl der Einrichtungen ist nur für 8 Kommunen veröffentlicht; Plätze je Kommune gar nicht."],

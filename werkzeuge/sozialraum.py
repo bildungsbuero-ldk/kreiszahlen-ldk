@@ -72,6 +72,9 @@ SCHEMA = {
     'kita_mh_kreis.csv': {'zeilen': 'gemeinden', 'spalten': [
         ('gemeinde', 'gemeinde', True, None), ('kitas', 'int', False, (1, 60)), ('kinder', 'int', False, (10, 5000)),
         ('migrantenkinder', 'int', False, (0, 5000)), ('kita_mh_kreis', 'num', False, (0, 100))]},
+    'zensus_alleinerziehende_2022.csv': {'zeilen': 'gemeinden+vergleich', 'spalten': [
+        ('gemeinde', 'gemeinde', True, None), ('haushalte', 'int', True, (300, 5000000)),
+        ('paare_mit_kind', 'int', True, (50, 2000000)), ('alleinerziehende', 'int', True, (10, 1000000))]},
     'bevoelkerung_4_7_2025.csv': {'zeilen': 'gemeinden+vergleich', 'spalten': [
         ('gemeinde', 'gemeinde', True, None), ('einwohner_31_12_2025', 'int', True, (1000, 10000000)),
         ('kinder_4_7', 'int', True, (10, 1000000)), ('kinder_4_7_nichtdt', 'int', True, (0, 1000000)),
@@ -241,6 +244,7 @@ def berechnen():
     kita = {z['gemeinde']: z for z in lesen('kita_quoten_2023.csv')}
     kita_db = {z['gemeinde']: z for z in lesen('kita_mh_kreis.csv')}
     bev47 = {z['gemeinde']: z for z in lesen('bevoelkerung_4_7_2025.csv')}
+    zae = {z['gemeinde']: z for z in lesen('zensus_alleinerziehende_2022.csv')}
     hze25 = {z['gemeinde']: z for z in lesen('hze_kommunen_2025.csv')}
     efb = {z['gemeinde']: z for z in lesen('efb_2025.csv')}
     sport = {z['gemeinde']: z for z in lesen('sportvereine_2026.csv')}
@@ -266,6 +270,9 @@ def berechnen():
         r['kita_3_5'] = zahl(k.get('kita_quote_3_5'))
         r['kita_mh_kreis'] = zahl(kita_db.get(g, {}).get('kita_mh_kreis'))
         r['anteil_4_7'] = zahl(bev47.get(g, {}).get('anteil_4_7'))
+        ze = zae.get(g)
+        r['alleinerz_quote'] = round(zahl(ze['alleinerziehende']) / (zahl(ze['paare_mit_kind']) + zahl(ze['alleinerziehende'])) * 100, 1) if ze else None
+        r['alleinerz_hh'] = round(zahl(ze['alleinerziehende']) / zahl(ze['haushalte']) * 100, 1) if ze else None
         r['kinder_4_7'] = int(zahl(bev47[g]['kinder_4_7'])) if g in bev47 else None
         r['kinder_4_7_nichtdt'] = int(zahl(bev47[g]['kinder_4_7_nichtdt'])) if g in bev47 else None
         r['nichtdt_4_7'] = round(r['kinder_4_7_nichtdt'] / r['kinder_4_7'] * 100, 1) if r['kinder_4_7'] else None
@@ -413,7 +420,7 @@ def berechnen():
 def kennzahlen_csv(d):
     spalten = ['gemeinde', 'einwohner', 'bedarfsindex', 'rang', 'n_ind', 'angebotsindex', 'sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut',
                'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt',
-               'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'kinder_4_7', 'nichtdt_4_7', 'kinder_4_7_nichtdt', 'hze25_je1000', 'hze25_hze', 'hze25_ambulant', 'hze25_34', 'hze25_35a', 'efb25', 'efb25_je1000', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
+               'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'alleinerz_quote', 'alleinerz_hh', 'kinder_4_7', 'nichtdt_4_7', 'kinder_4_7_nichtdt', 'hze25_je1000', 'hze25_hze', 'hze25_ambulant', 'hze25_34', 'hze25_35a', 'efb25', 'efb25_je1000', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
                'efh_anteil', 'wohnflaeche_je_ew', 'wohnflaeche_je_whg', 'kita_u3', 'kita_3_5', 'schulen', 'grundschulen', 'weiterfuehrend', 'ganztag', 'hausaerzte',
                'kinderaerzte', 'kjp_pt', 'kjp_je10k_u15', 'pt_erw', 'erwachsene', 'pt_erw_je10k', 'sportvereine', 'sportvereine_je1000', 'sport_quote', 'sport_u18', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'quartier', 'fz_je10k', 'ssa_je10k', 'jug_je10k', 'quartier_je10k', 'hausaerzte_je10k', 'kinderaerzte_je10k_u15', 'ganztag_anteil', 'vorort',
                'vorort_je10k', 'hoher_bedarf_wenig_angebot', 'bedarf_ueber_schnitt', 'fachdienste', 'psychiatrie']
