@@ -396,7 +396,7 @@ const fmt = (k, v) => {
   if (k === 'bedarfsindex') return fs(v);
   if (e === '€') return f0(v) + ' €';
   if (e === 'Anzahl') return f0(v);
-  return f1(v) + (e === '%' ? ' %' : '');
+  return f1(v) + (e === '%' ? ' %' : e === 'm²' ? ' m²' : '');
 };
 const G = D.gemeinden;
 const KREIS = D.vergleich.find((r) => r.gemeinde === 'Lahn-Dill-Kreis');
@@ -585,7 +585,7 @@ function kopf() {
 document.querySelectorAll('[data-kreis]').forEach((e) => { const k = e.getAttribute('data-kreis'); e.textContent = fmt(k, KREIS[k]); });
 document.querySelectorAll('[data-hessen]').forEach((e) => { const k = e.getAttribute('data-hessen'); e.textContent = fmt(k, HESSEN[k]); });
 
-const EINZEL = ['sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'nichtdt_4_7', 'hze25_je1000', 'efb25_je1000', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein', 'efh_anteil', 'kita_u3', 'kita_3_5'];
+const EINZEL = ['sgb2', 'kinderarmut', 'jugendarmut', 'altersarmut', 'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'nichtdt_4_7', 'hze25_je1000', 'efb25_je1000', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein', 'wohnflaeche_je_ew', 'wohnflaeche_je_whg', 'efh_anteil', 'kita_u3', 'kita_3_5'];
 const klein = (v) => v == null ? 'k. A.' : (v > 0 && v < 5 ? 'unter 5' : f0(v));
 // ambulant und stationär gemeinsam verdecken, sonst per Differenz zur Summe ablesbar
 const istKlein = (v) => v > 0 && v < 5;
@@ -750,16 +750,18 @@ drawListe();
 })();
 
 // ---------- Berechnung (eigene Gewichtung) ----------
+// Zusatzkennzahlen, bei denen ein niedriger Wert mehr Bedarf bedeutet
+const RICHTUNG_WEITERE = { wohnflaeche_je_ew: -1 };
 const SETS = {
   b: { def: D.index_def, wort: 'Bedarf', titel: ['Im Standard-Bedarfsindex', 'Weitere Kennzahlen (im Standard nicht enthalten)'],
-    weitere: ['efb25_je1000', 'jugendarmut', 'altersarmut', 'alo_svb_u25', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'anteil_4_7', 'u6'] },
+    weitere: ['efb25_je1000', 'wohnflaeche_je_ew', 'jugendarmut', 'altersarmut', 'alo_svb_u25', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'anteil_4_7', 'u6'] },
   a: { def: D.angebot_def, wort: 'Angebot', titel: ['Im Standard-Angebotsindex', 'Weitere Angebote (im Standard nicht enthalten)'],
     weitere: ['kita_u3', 'kita_3_5', 'ganztag_anteil', 'hausaerzte_je10k', 'kinderaerzte_je10k_u15', 'sportvereine_je1000', 'sport_quote', 'sport_u18'] }
 };
 Object.values(SETS).forEach((S) => {
   const std = S.def.kennzahlen;
   S.kand = std.map((k) => ({ k, s: S.def.richtung[k], std: true }))
-    .concat(S.weitere.filter((k) => !std.includes(k) && M.kennzahlen[k] && G.filter((r) => r[k] != null).length >= 3).map((k) => ({ k, s: 1, std: false })));
+    .concat(S.weitere.filter((k) => !std.includes(k) && M.kennzahlen[k] && G.filter((r) => r[k] != null).length >= 3).map((k) => ({ k, s: RICHTUNG_WEITERE[k] || 1, std: false })));
   S.stat = {};
   S.kand.forEach(({ k }) => { const v = G.map((r) => r[k]).filter((x) => x != null); S.stat[k] = { m: d3.mean(v), sd: d3.deviation(v) }; }); // Stichproben-SD wie im Werkzeug
 });
