@@ -113,6 +113,33 @@ td.na { color: var(--fg-muted); }
 .eigen { margin: 0; background: #fff; color: var(--fg); border-left: 4px solid var(--ldk-orange); padding: 6px 10px; border-radius: 6px; font-size: 14px; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
 .eigen[hidden] { display: none; }
 .eigen .knopf { padding: 3px 10px; font-size: 13px; }
+.vgl-wahl { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: end; }
+.vgl-wahl label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 600; color: var(--fg-muted); text-transform: uppercase; letter-spacing: .05em; }
+.vgl-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: baseline; }
+.vgl-dot.a { background: var(--ldk-blau); } .vgl-dot.b { background: var(--ldk-orange); border-radius: 2px; transform: rotate(45deg) scale(.85); }
+.vgl-kopf { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.vgl-kopf .card h3 { margin-bottom: 6px; }
+.vgl-kopf dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0; font-size: 14px; }
+.vgl-kopf dt { color: var(--fg-muted); } .vgl-kopf dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+.prof { display: grid; grid-template-columns: minmax(8rem, 38%) 1fr; gap: 0 12px; font-size: 13px; }
+.prof .grp { grid-column: 1 / -1; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--fg-muted); margin: 14px 0 2px; display: flex; justify-content: space-between; gap: 8px; }
+.prof .grp span:last-child { text-transform: none; letter-spacing: 0; font-weight: 400; }
+.prof .lbl { padding: 5px 0; border-bottom: 1px solid var(--line); line-height: 1.25; }
+.prof .trk { position: relative; border-bottom: 1px solid var(--line); min-height: 28px; }
+.prof .trk::before { content: ''; position: absolute; left: 50%; top: 4px; bottom: 4px; border-left: 1px dashed var(--ref); }
+.prof .ach { position: relative; height: 18px; font-size: 11px; color: var(--fg-muted); }
+.prof .ach span { position: absolute; transform: translateX(-50%); }
+.prof .pt { position: absolute; top: 38%; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--ldk-blau); border: 2px solid #fff; box-sizing: border-box; }
+.prof .pt.b { top: 62%; background: var(--ldk-orange); border-radius: 2px; transform: rotate(45deg); }
+.prof .ln { position: absolute; top: 50%; height: 2px; margin-top: -1px; background: var(--muted-bar); }
+.vgl-tab td:nth-child(n+2), .vgl-tab th:nth-child(n+2) { text-align: right; font-variant-numeric: tabular-nums; }
+.vgl-tab td:first-child { white-space: normal; min-width: 9rem; }
+.vgl-tab tr.sec td { font-weight: 600; background: var(--bg); color: var(--fg-muted); text-transform: uppercase; font-size: 12px; letter-spacing: .05em; text-align: left; }
+.vgl-tab tr.idx td:first-child { font-weight: 600; }
+.vgl-anl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 14px; }
+.vgl-anl h4 { margin: 10px 0 4px; font-size: 13px; color: var(--fg-muted); }
+.vgl-anl ul { margin: 0; padding-left: 18px; }
+@media (max-width: 560px) { .vgl-kopf, .vgl-anl { grid-template-columns: 1fr; } .prof { grid-template-columns: 1fr; } .prof .lbl { border-bottom: 0; padding-bottom: 0; } }
 @media print { .tabs, .info { display: none; } .page[hidden] { display: flex; } }
 </style>
 </head>
@@ -127,6 +154,7 @@ td.na { color: var(--fg-muted); }
     <nav class="tabs" role="tablist" aria-label="Ansicht">
       <button type="button" role="tab" id="tab-bedarfe" data-tab="bedarfe" aria-controls="bedarfe" aria-selected="true">Bedarfe</button>
       <button type="button" role="tab" id="tab-angebote" data-tab="angebote" aria-controls="angebote" aria-selected="false">Angebote</button>
+      <button type="button" role="tab" id="tab-vgl" data-tab="vergleich" aria-controls="vergleich" aria-selected="false">Vergleich</button>
       <button type="button" role="tab" id="tab-berechnung" data-tab="berechnung" aria-controls="berechnung" aria-selected="false">Berechnung</button>
       <button type="button" role="tab" id="tab-methodik" data-tab="methodik" aria-controls="methodik" aria-selected="false">Methodik und Quellen</button>
       <button type="button" role="tab" id="tab-daten" data-tab="daten" aria-controls="daten" aria-selected="false">Daten und Ergänzungen</button>
@@ -229,6 +257,36 @@ td.na { color: var(--fg-muted); }
       </div>
       <p class="note" id="liste-anzahl">—</p>
       <div class="tablewrap"><table class="list" id="tab-liste"></table></div>
+    </section>
+  </main>
+
+  <!-- ============ VERGLEICH ============ -->
+  <main class="page" id="vergleich" role="tabpanel" aria-labelledby="tab-vgl" hidden>
+    <p class="hint">Zwei Kommunen nebeneinander: Indizes, alle Kennzahlen mit dem Kreiswert und die Anlaufstellen vor Ort. Die Indizes folgen der Einstellung im Reiter „Berechnung“.</p>
+    <div class="card">
+      <div class="vgl-wahl">
+        <label><span><i class="vgl-dot a"></i>Kommune A</span><select id="vgl-a" aria-label="Kommune A"></select></label>
+        <button type="button" class="knopf" id="vgl-tausch" aria-label="Kommunen tauschen" title="Tauschen">⇄</button>
+        <label><span><i class="vgl-dot b"></i>Kommune B</span><select id="vgl-b" aria-label="Kommune B"></select></label>
+      </div>
+    </div>
+    <section class="vgl-kopf" id="vgl-kopf" style="margin-top:12px"></section>
+    <section class="grid" style="margin-top:12px">
+      <div class="card wide">
+        <h3>Profil<button class="info" data-k="bedarfsindex" aria-label="Erläuterung Bedarfsindex">i</button></h3>
+        <p class="note">Jede Zeile ist eine Kennzahl des Bedarfs- bzw. Angebotsindex (wie im Reiter „Berechnung“ eingestellt). Die Mitte ist der Durchschnitt der Kommunen; ein Strich nach außen entspricht einer Standardabweichung. Werte jenseits von ±2,5 stehen am Rand. Für die genauen Werte über einen Punkt fahren oder die Tabelle unten nutzen.</p>
+        <div class="prof" id="vgl-profil"></div>
+      </div>
+      <div class="card wide">
+        <h3>Alle Kennzahlen</h3>
+        <p class="note">Fett: Teil des Index in der aktuellen Einstellung. Der Kreiswert steht nur dort, wo er vorliegt.</p>
+        <div class="tablewrap" style="max-height:none"><table class="vgl-tab" id="vgl-tab"></table></div>
+      </div>
+      <div class="card wide">
+        <h3>Anlaufstellen vor Ort</h3>
+        <p class="note">Familienzentren, Sozialarbeit an Schulen, Jugendzentren/Jugendpflege und Quartiersarbeit mit Standort in der Kommune; dazu die Zahl der Fachdienste mit Sitz dort. Vollständige Liste im Reiter „Angebote“.</p>
+        <div class="vgl-anl" id="vgl-anl"></div>
+      </div>
     </section>
   </main>
 
@@ -828,11 +886,107 @@ el('ber-reset').addEventListener('click', zurueck);
 el('eigen-reset').addEventListener('click', zurueck);
 el('ber-eins').addEventListener('click', () => { Object.keys(SETS).forEach((n) => SETS[n].kand.forEach(({ k }) => { CFG[n][k].w = 1; })); berListe(); anwenden(); });
 
+// ---------- Vergleich ----------
+const vA = el('vgl-a'), vB = el('vgl-b');
+[...G].sort((a, b) => a.gemeinde.localeCompare(b.gemeinde, 'de')).forEach((r) => { vA.append(new Option(r.gemeinde)); vB.append(new Option(r.gemeinde)); });
+(function () { // Vorauswahl: die ersten beiden mit hohem Bedarf und wenig Angebot, sonst die höchsten Bedarfe
+  const hot = G.filter(HOT).sort((a, b) => (b.bedarfsindex ?? 0) - (a.bedarfsindex ?? 0)).map((r) => r.gemeinde);
+  const rest = G.filter((r) => r.rang).sort((a, b) => a.rang - b.rang).map((r) => r.gemeinde).filter((g) => !hot.includes(g));
+  const v = hot.concat(rest);
+  let s = null; try { s = JSON.parse(sessionStorage.getItem('sozialraum-vergleich') || 'null'); } catch (e) { /* kein Speicher */ }
+  vA.value = s && G.some((r) => r.gemeinde === s[0]) ? s[0] : v[0];
+  vB.value = s && G.some((r) => r.gemeinde === s[1]) ? s[1] : v[1];
+})();
+const vglMerken = () => { try { sessionStorage.setItem('sozialraum-vergleich', JSON.stringify([vA.value, vB.value])); } catch (e) { /* kein Speicher */ } };
+vA.addEventListener('change', () => { vglMerken(); drawVergleich(); });
+vB.addEventListener('change', () => { vglMerken(); drawVergleich(); });
+el('vgl-tausch').addEventListener('click', () => { [vA.value, vB.value] = [vB.value, vA.value]; vglMerken(); drawVergleich(); });
+const VGL_BEDARF_INFO = ['efb25_je1000', 'geburten_je1000'];
+const VGL_ANGEBOT = ['schulen', 'ganztag', 'familienzentren', 'schulsozialarbeit', 'jugend', 'quartier', 'kjp_pt', 'pt_erw', 'hausaerzte', 'kinderaerzte', 'fachdienste', 'vorort_je10k'];
+function drawVergleich() {
+  const a = G.find((r) => r.gemeinde === vA.value), b = G.find((r) => r.gemeinde === vB.value);
+  if (!a || !b) return;
+  // Kopf
+  const kopfKarte = (r, cls) => {
+    const d = document.createElement('div'); d.className = 'card';
+    const h = document.createElement('h3'); h.innerHTML = '<i class="vgl-dot ' + cls + '"></i>'; h.append(r.gemeinde);
+    const dl = document.createElement('dl');
+    [['Einwohner:innen', f0(r.einwohner)], ['Bedarfsindex', r.bedarfsindex == null ? 'kein Wert' : fs(r.bedarfsindex) + (r.rang ? ' (Rang ' + r.rang + ' von ' + ranked.length + ')' : '')],
+      ['Angebotsindex', r.angebotsindex == null ? 'kein Wert' : fs(r.angebotsindex) + (D.median_angebot != null ? (r._a < D.median_angebot ? ' (unter dem Median)' : ' (über dem Median)') : '')],
+      ['Einstufung', HOT(r) ? 'hoher Bedarf, wenig Angebot' : r.bedarf_ueber_schnitt ? 'Bedarf über dem Durchschnitt' : r.bedarfsindex == null ? '—' : 'Bedarf unter dem Durchschnitt']
+    ].forEach(([k, v]) => { const dt = document.createElement('dt'); dt.textContent = k; const dd = document.createElement('dd'); dd.textContent = v; if (k === 'Einstufung' && HOT(r)) dd.style.color = '#b4540a'; dl.append(dt, dd); });
+    d.append(h, dl); return d;
+  };
+  el('vgl-kopf').replaceChildren(kopfKarte(a, 'a'), kopfKarte(b, 'b'));
+  // Profil
+  const prof = el('vgl-profil'); prof.replaceChildren();
+  const L = 2.5, pos = (z) => ((Math.max(-L, Math.min(L, z)) + L) / (2 * L)) * 100;
+  const achse = () => { const x = document.createElement('div'); x.className = 'ach'; [-2, -1, 0, 1, 2].forEach((t) => { const s2 = document.createElement('span'); s2.style.left = pos(t) + '%'; s2.textContent = t === 0 ? 'Ø' : (t > 0 ? '+' : '−') + Math.abs(t); x.append(s2); }); return x; };
+  [['b', 'Bedarf', 'rechts = mehr Bedarf'], ['a', 'Angebot', 'rechts = mehr Angebot']].forEach(([n, titel, hinweis]) => {
+    const S = SETS[n];
+    const aktiv = S.kand.filter(({ k }) => CFG[n][k].an && CFG[n][k].w > 0 && S.stat[k].sd > 0);
+    const g = document.createElement('div'); g.className = 'grp'; g.innerHTML = '<span></span><span></span>'; g.firstChild.textContent = titel + (aktiv.length ? '' : ': keine Kennzahl eingeschaltet'); g.lastChild.textContent = hinweis; prof.append(g);
+    if (!aktiv.length) return;
+    prof.append(document.createElement('div'), achse());
+    aktiv.forEach(({ k, s }) => {
+      const lb = document.createElement('div'); lb.className = 'lbl'; lb.textContent = KZ(k).label + (CFG[n][k].w < 1 ? ' (×' + de.format('.2~f')(CFG[n][k].w) + ')' : '');
+      const tr = document.createElement('div'); tr.className = 'trk';
+      const z = (r) => (r[k] == null ? null : s * (r[k] - S.stat[k].m) / S.stat[k].sd);
+      const za = z(a), zb = z(b);
+      if (za != null && zb != null) { const ln = document.createElement('div'); ln.className = 'ln'; ln.style.left = Math.min(pos(za), pos(zb)) + '%'; ln.style.width = Math.abs(pos(za) - pos(zb)) + '%'; tr.append(ln); }
+      [[a, za, 'a'], [b, zb, 'b']].forEach(([r, zv, cls]) => {
+        if (zv == null) return;
+        const pt = document.createElement('div'); pt.className = 'pt ' + cls; pt.style.left = pos(zv) + '%';
+        pt.title = r.gemeinde + ': ' + fmt(k, r[k]) + ' (z ' + fs(zv) + ')'; pt.setAttribute('aria-label', pt.title); pt.setAttribute('role', 'img');
+        tr.append(pt);
+      });
+      if (za == null || zb == null) { const t = document.createElement('span'); t.style.cssText = 'position:absolute;right:0;top:6px;font-size:11px;color:var(--fg-muted)'; t.textContent = 'ohne Wert: ' + [za == null ? a.gemeinde : '', zb == null ? b.gemeinde : ''].filter(Boolean).join(', '); tr.append(t); }
+      prof.append(lb, tr);
+    });
+  });
+  // Tabelle
+  const tbl = el('vgl-tab');
+  const th = document.createElement('thead'); th.innerHTML = '<tr><th><div class="thw">Kennzahl</div></th><th><div class="thw"></div></th><th><div class="thw"></div></th><th><div class="thw">Kreis</div></th></tr>';
+  th.querySelectorAll('.thw')[1].textContent = a.gemeinde; th.querySelectorAll('.thw')[2].textContent = b.gemeinde;
+  const tb = document.createElement('tbody');
+  const sek = (t) => { const r = document.createElement('tr'); r.className = 'sec'; const td = document.createElement('td'); td.colSpan = 4; td.textContent = t; r.append(td); tb.append(r); };
+  const zeile = (k, fett) => {
+    if (a[k] == null && b[k] == null) return;
+    const r = document.createElement('tr'); if (fett) r.className = 'idx';
+    const td0 = document.createElement('td'); td0.append(KZ(k).label + (KZ(k).jahr ? ' (' + KZ(k).jahr + ')' : '') + ' '); td0.append(infoBtn(k)); r.append(td0);
+    [a[k], b[k], KREIS ? KREIS[k] : null].forEach((v) => { const td = document.createElement('td'); td.textContent = fmt(k, v); r.append(td); });
+    tb.append(r);
+  };
+  const istAktiv = (n, k) => CFG[n][k] && CFG[n][k].an && CFG[n][k].w > 0;
+  sek('Bedarf');
+  [...new Set(SETS.b.kand.map((x) => x.k).concat(EINZEL.filter((k) => !VGL_ANGEBOT.includes(k)), VGL_BEDARF_INFO))].filter((k) => !SETS.a.kand.some((x) => x.k === k)).forEach((k) => zeile(k, istAktiv('b', k)));
+  sek('Angebot');
+  [...new Set(SETS.a.kand.map((x) => x.k).concat(VGL_ANGEBOT))].forEach((k) => zeile(k, istAktiv('a', k)));
+  tbl.replaceChildren(th, tb);
+  // Anlaufstellen
+  const vorOrtKat = ['Familienzentrum', 'Sozialarbeit an Schulen', 'Jugendzentrum/Jugendpflege', 'Quartier/Mehrgenerationen'];
+  const anl = el('vgl-anl'); anl.replaceChildren();
+  [[a, 'a'], [b, 'b']].forEach(([r, cls]) => {
+    const box = document.createElement('div');
+    const h = document.createElement('h3'); h.innerHTML = '<i class="vgl-dot ' + cls + '"></i>'; h.append(r.gemeinde + ': ' + f0(r.vorort) + ' vor Ort'); box.append(h);
+    const liste = D.angebote.filter((x) => vorOrtKat.includes(x.kategorie) && x.reichweite === 'vor Ort' && (x.kommune === r.gemeinde || (x.weitere_kommunen || '').split('; ').includes(r.gemeinde)));
+    vorOrtKat.forEach((kat) => {
+      const l = liste.filter((x) => x.kategorie === kat); if (!l.length) return;
+      const h4 = document.createElement('h4'); h4.textContent = kat; const ul = document.createElement('ul');
+      l.sort((x, y) => x.name.localeCompare(y.name, 'de')).forEach((x) => { const li = document.createElement('li'); li.textContent = x.name + (x.kommune !== r.gemeinde ? ' (Sitz ' + x.kommune + ')' : ''); ul.append(li); });
+      box.append(h4, ul);
+    });
+    if (!liste.length) { const p2 = document.createElement('p'); p2.className = 'note'; p2.textContent = 'Keine Anlaufstelle vor Ort erfasst.'; box.append(p2); }
+    const fd = document.createElement('p'); fd.className = 'note'; fd.textContent = 'Fachdienste mit Sitz hier: ' + f0(r.fachdienste) + ' · Psychotherapie Kinder/Jugend: ' + f0(r.kjp_pt) + ' · Erwachsene: ' + f0(r.pt_erw); box.append(fd);
+    anl.append(box);
+  });
+}
+
 // ---------- Reiter ----------
 const drawn = {};
-const draws = { bedarfe: drawBedarfe, angebote: drawAngebote };
+const draws = { bedarfe: drawBedarfe, angebote: drawAngebote, vergleich: drawVergleich };
 function show(tab, anchor) {
-  if (!['bedarfe', 'angebote', 'berechnung', 'methodik', 'daten'].includes(tab)) tab = 'bedarfe';
+  if (!['bedarfe', 'angebote', 'vergleich', 'berechnung', 'methodik', 'daten'].includes(tab)) tab = 'bedarfe';
   document.querySelectorAll('.page').forEach((p) => { p.hidden = p.id !== tab; });
   document.querySelectorAll('.tabs button').forEach((b) => b.setAttribute('aria-selected', b.dataset.tab === tab ? 'true' : 'false'));
   if (draws[tab]) { draws[tab](); drawn[tab] = true; }
