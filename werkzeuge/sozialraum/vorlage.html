@@ -97,6 +97,7 @@ td.na { color: var(--fg-muted); }
 .steps li { margin: 6px 0; }
 .btn { display: inline-block; background: var(--ldk-orange); color: #fff; text-decoration: none; padding: 8px 14px; border-radius: var(--radius); font-weight: 600; }
 .quelle { font-size: 12px; color: var(--fg-muted); margin: 0; padding-top: 10px; border-top: 1px solid var(--line); }
+.ueb { margin: 8px 0; padding: 6px 8px; background: #fff7f0; border-left: 3px solid var(--ldk-orange); border-radius: 4px; font-size: 13px; line-height: 1.4; }
 .ber-grp { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--fg-muted); margin: 12px 0 0; }
 .ber-item { display: grid; grid-template-columns: auto 1fr auto; gap: 2px 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
 .ber-item input[type=checkbox] { width: 18px; height: 18px; margin: 0; accent-color: var(--ldk-blau); }
@@ -403,6 +404,38 @@ const KREIS = D.vergleich.find((r) => r.gemeinde === 'Lahn-Dill-Kreis');
 const HESSEN = D.vergleich.find((r) => r.gemeinde === 'Hessen');
 const HOT = (r) => r.hoher_bedarf_wenig_angebot === true;
 
+// ---------- Überschneidung von Zusatzkennzahlen mit dem Standard ----------
+const korr = (a, b) => {
+  const p = D.gemeinden.filter((r) => r[a] != null && r[b] != null);
+  if (p.length < 5) return null;
+  const ma = d3.mean(p, (r) => r[a]), mb = d3.mean(p, (r) => r[b]);
+  let sab = 0, saa = 0, sbb = 0;
+  p.forEach((r) => { const x = r[a] - ma, y = r[b] - mb; sab += x * y; saa += x * x; sbb += y * y; });
+  return saa && sbb ? sab / Math.sqrt(saa * sbb) : null;
+};
+const staerke = (r) => { const v = Math.abs(r); return v >= 0.9 ? 'fast deckungsgleich' : v >= 0.7 ? 'eng' : v >= 0.4 ? 'mittel' : 'schwach'; };
+const stdListe = (k) => { // Standardkennzahlen des Index, zu dem die Zusatzkennzahl gehört
+  const b = D.index_def.kennzahlen, a = D.angebot_def.kennzahlen;
+  const istA = ['kita_u3', 'kita_3_5', 'ganztag_anteil', 'hausaerzte_je10k', 'kinderaerzte_je10k_u15', 'sportvereine_je1000', 'sport_quote', 'sport_u18'].includes(k);
+  return istA ? a : b;
+};
+function ueberschneidung(k) {
+  const u = KZ(k).ueberschneidung; if (!u) return null;
+  const std = stdListe(k);
+  // Zusammenhang über die Kommunen: genannte Kennzahlen, sonst die drei stärksten des Standards
+  const kand = (u.mit && u.mit.length ? u.mit : std).map((x) => ({ x, r: korr(k, x) })).filter((o) => o.r != null).sort((p, q) => Math.abs(q.r) - Math.abs(p.r));
+  const zeig = (u.mit && u.mit.length ? kand : kand.slice(0, 1)).map((o) => KZ(o.x).label + ' r = ' + de.format('+.2f')(o.r).replace('-', '−') + ' (' + staerke(o.r) + ')');
+  const top = kand[0] && Math.abs(kand[0].r) >= 0.7 && !(u.mit && u.mit.length) ? KZ(kand[0].x).label : null;
+  return { text: u.text, mit: u.mit || [], eng: top, zahl: zeig.length ? 'Zusammenhang über die Kommunen: ' + zeig.join('; ') + '.' : '' };
+}
+const uebBlock = (k, cls) => {
+  const u = ueberschneidung(k); if (!u) return null;
+  const d = document.createElement('div'); d.className = cls || 'ueb';
+  const b = document.createElement('b'); b.textContent = 'Überschneidung mit dem Standard: ';
+  d.append(b, u.text + (u.zahl ? ' ' + u.zahl : ''));
+  return d;
+};
+
 // ---------- Info-Popups ----------
 const pop = el('pop');
 let popBtn = null;
@@ -416,6 +449,7 @@ function popOpen(btn) {
   pop.append(x, h);
   const p = (t, cls) => { if (!t) return; const e = document.createElement('p'); if (cls) e.className = cls; e.textContent = t; pop.append(e); };
   p(z.definition); p(z.hinweis, 'm');
+  const ub = uebBlock(k); if (ub) pop.append(ub);
   (z.quelle || []).forEach((q) => {
     const s = M.quellen[q]; if (!s) return;
     const e = document.createElement('p'); e.className = 'm'; e.append('Quelle: ');
@@ -720,6 +754,7 @@ drawListe();
     const dt = document.createElement('dt'); dt.id = 'm-k-' + k; dt.textContent = z.label + (z.einheit && z.einheit !== 'Anzahl' ? ' (' + z.einheit + ')' : '') + ', ' + z.jahr;
     const dd = document.createElement('dd'); dd.append(z.definition);
     if (z.hinweis) { const s = document.createElement('div'); s.className = 'm'; s.textContent = z.hinweis; dd.append(s); }
+    const ub = uebBlock(k, 'm ueb'); if (ub) dd.append(ub);
     const q = document.createElement('div'); q.className = 'm'; q.textContent = 'Quelle: ' + (z.quelle || []).map((x) => (M.quellen[x] || {}).titel).join('; '); dd.append(q);
     dl.append(dt, dd);
   });
@@ -870,7 +905,9 @@ function berListe() {
         const wv = document.createElement('output'); wv.className = 'w'; wv.htmlFor = 'ber-w-' + id;
         const ri = document.createElement('div'); ri.className = 'ri';
         const fehlt = G.filter((r) => r[k] == null).map((r) => r.gemeinde);
-        ri.textContent = (s > 0 ? 'Höher = mehr ' : 'Niedriger = mehr ') + S.wort + (fehlt.length ? ' · ohne Wert: ' + fehlt.join(', ') : '');
+        const ue = std ? null : ueberschneidung(k);
+        const ueTxt = ue ? (ue.mit.length ? ' · überschneidet sich mit: ' + ue.mit.map((x) => KZ(x).label).join(', ') : ue.eng ? ' · inhaltlich keine Überschneidung, statistisch eng mit ' + ue.eng : ' · keine Überschneidung mit dem Standard') + ' (Details im i)' : '';
+        ri.textContent = (s > 0 ? 'Höher = mehr ' : 'Niedriger = mehr ') + S.wort + ueTxt + (fehlt.length ? ' · ohne Wert: ' + fehlt.join(', ') : '');
         const sl = document.createElement('input'); sl.type = 'range'; sl.id = 'ber-w-' + id; sl.min = 0; sl.max = 1; sl.step = 0.05; sl.value = c.w;
         sl.setAttribute('aria-label', 'Gewicht ' + z.label);
         const zeig = () => { wv.textContent = de.format('.2f')(CFG[n][k].w); sl.disabled = !CFG[n][k].an; it.classList.toggle('aus', !CFG[n][k].an); };
