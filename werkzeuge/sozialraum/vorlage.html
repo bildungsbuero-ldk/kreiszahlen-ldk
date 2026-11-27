@@ -702,7 +702,7 @@ function drawAngebote() {
 }
 const tabAngebot = () => sortTable(el('tab-angebot'), [
   { k: 'gemeinde', t: 'Kommune' }, { k: 'bedarfsindex', t: 'Bedarfs­index', f: fs }, { k: 'angebotsindex', t: 'Angebots­index', f: fs }, { k: 'schulen', t: 'Schulen' }, { k: 'ganztag', t: 'Ganztag/Pakt' },
-  { k: 'kita_u3', t: 'Kita U3 %' }, { k: 'kita_3_5', t: 'Kita 3–5 %' }, { k: 'hausaerzte', t: 'Hausärzt:innen' }, { k: 'hausarzt_vg', t: 'Hausarzt-VG %' }, { k: 'kjp_pt', t: 'Psycho­therapie Kinder/Jugend' }, { k: 'pt_erw', t: 'Psycho­therapie Erwachsene' }, { k: 'pt_erw_je10k', t: 'Psychotherapie Erw. je 10.000', f: f1 }, { k: 'sportvereine_je1000', t: 'Sportvereine je 1.000', f: f1 }, { k: 'sport_quote', t: 'Sport-Mitglieder %' }, { k: 'sport_u18', t: 'Mitglieder unter 18 %' },
+  { k: 'kita_u3', t: 'Kita U3 %' }, { k: 'kita_3_5', t: 'Kita 3–5 %' }, { k: 'hausaerzte', t: 'Hausärzt:innen' }, { k: 'hausarzt_vg', t: 'Hausarzt-VG %' }, { k: 'kjp_pt', t: 'Psycho­therapie Kinder/Jugend' }, { k: 'pt_erw', t: 'Psycho­therapie Erwachsene' }, { k: 'kirche_kj', t: 'Kirchl. Kinder-/Jugend­arbeit (vorläufig)' }, { k: 'pt_erw_je10k', t: 'Psychotherapie Erw. je 10.000', f: f1 }, { k: 'sportvereine_je1000', t: 'Sportvereine je 1.000', f: f1 }, { k: 'sport_quote', t: 'Sport-Mitglieder %' }, { k: 'sport_u18', t: 'Mitglieder unter 18 %' },
   { k: 'familienzentren', t: 'Familien­zentren' }, { k: 'schulsozialarbeit', t: 'Sozialarbeit an Schulen' }, { k: 'jugend', t: 'Jugend­pflege' },
   { k: 'vorort_je10k', t: 'Vor Ort je 10.000' }, { k: 'fachdienste', t: 'Fach­dienste' }, { k: 'psychiatrie', t: 'Psychiatrie' }
 ], G, { key: 'bedarfsindex', dir: -1 }, ['bedarfsindex', 'angebotsindex', 'vorort_je10k']);
