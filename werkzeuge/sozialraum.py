@@ -46,11 +46,11 @@ GANZTAG = ['Pakt für den Ganztag', 'Profil 1', 'Profil 2', 'Profil 3', 'Betreuu
 GANZTAG_ZAEHLT = {'Pakt für den Ganztag', 'Profil 1', 'Profil 2', 'Profil 3'}
 # Bedarfsindex: Kennzahl, Richtung (+1 = höherer Wert bedeutet mehr Bedarf)
 INDEX = [('kinderarmut', 1), ('sgb2', 1), ('alo_svb', 1), ('kita_mh', 1), ('nichtdt_4_7', 1), ('einkuenfte_je_stpfl', -1),
-         ('hze25_je1000', 1)]
+         ('hze25_je1000', 1), ('alleinerz_quote', 1)]
 INDEX_MIN = 4
 # Angebotsindex: Kennzahl, Richtung (+1 = höherer Wert bedeutet mehr Angebot); Dichten auf 2 Stellen gerundet,
 # damit die Seite im Browser mit denselben Werten rechnet
-ANGEBOT = [('fz_je10k', 1), ('ssa_je10k', 1), ('jug_je10k', 1), ('quartier_je10k', 1), ('kjp_je10k_u15', 1), ('pt_erw_je10k', 1)]
+ANGEBOT = [('fz_je10k', 1), ('ssa_je10k', 1), ('jug_je10k', 1), ('quartier_je10k', 1), ('ganztag_anteil', 1)]
 ANGEBOT_MIN = 3
 
 # Erwartete Spalten und Prüfregeln je Datei: (Spalte, Typ, Pflicht, (min, max))
