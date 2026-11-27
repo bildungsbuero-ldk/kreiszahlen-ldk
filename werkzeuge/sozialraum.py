@@ -38,7 +38,7 @@ VERGLEICH = ['Lahn-Dill-Kreis', 'Hessen']
 KATEGORIEN = ['Psychiatrie (Klinik/Ambulanz)', 'Sozialpsychiatrie', 'Erziehungs-/Familienberatung', 'Suchtberatung',
               'Krisen/Gewaltschutz', 'Selbsthilfe', 'Schulpsychologie', 'Frühe Hilfen', 'Familienzentrum',
               'Sozialarbeit an Schulen', 'Jugendzentrum/Jugendpflege', 'Quartier/Mehrgenerationen', 'Migration/Integration',
-              'Existenzsicherung (Schuldner, Tafel)', 'Sonstiges']
+              'Existenzsicherung (Schuldner, Tafel)', 'Kirchliche Kinder- und Jugendarbeit', 'Sonstiges']
 SONDERORTE = ['Lahn-Dill-Kreis (kein Ort angegeben)', 'Gießen (außerhalb LDK)', 'Weilburg (außerhalb LDK)']
 VOR_ORT = {'Familienzentrum', 'Sozialarbeit an Schulen', 'Jugendzentrum/Jugendpflege', 'Quartier/Mehrgenerationen'}
 SCHULARTEN = ['Grundschule', 'Weiterführende Schule', 'Förderschule', 'Berufliche Schule', 'nicht zugeordnet']
@@ -347,7 +347,10 @@ def berechnen():
         r['vorort'] = sum(1 for x in mine if vor_ort(x))
         r['_dichte'] = r['vorort'] / r['einwohner'] * 10000
         r['vorort_je10k'] = round(r['_dichte'], 1)
-        r['fachdienste'] = sum(1 for x in angebote if x['kommune'] == g and not vor_ort(x))
+        r['fachdienste'] = sum(1 for x in angebote if x['kommune'] == g and not vor_ort(x) and x['kategorie'] != 'Kirchliche Kinder- und Jugendarbeit')
+        # vorläufig (Stand der Recherche): kirchliche Kinder- und Jugendarbeit vor Ort, auch über weitere_kommunen
+        r['kirche_kj'] = sum(1 for x in angebote if x['kategorie'] == 'Kirchliche Kinder- und Jugendarbeit' and x['reichweite'] == 'vor Ort'
+                             and (x['kommune'] == g or g in (x['weitere_kommunen'] or '').split('; ')))
         r['psychiatrie'] = sum(1 for x in angebote if x['kommune'] == g and x['kategorie'] in ('Psychiatrie (Klinik/Ambulanz)', 'Sozialpsychiatrie'))
 
     hze_rows = []
@@ -422,7 +425,7 @@ def kennzahlen_csv(d):
                'alo_svb', 'alo_svb_u25', 'kita_mh', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt',
                'einkuenfte_je_stpfl', 'ab65', 'u6', 'anteil_4_7', 'alleinerz_quote', 'alleinerz_hh', 'kinder_4_7', 'nichtdt_4_7', 'kinder_4_7_nichtdt', 'hze25_je1000', 'hze25_hze', 'hze25_ambulant', 'hze25_34', 'hze25_35a', 'efb25', 'efb25_je1000', 'geburten_je1000', 'wanderungssaldo_je1000', 'veraend_vj', 'whg_klein',
                'efh_anteil', 'wohnflaeche_je_ew', 'wohnflaeche_je_whg', 'kita_u3', 'kita_3_5', 'schulen', 'grundschulen', 'weiterfuehrend', 'ganztag', 'hausaerzte',
-               'kinderaerzte', 'kjp_pt', 'kjp_je10k_u15', 'pt_erw', 'erwachsene', 'pt_erw_je10k', 'sportvereine', 'sportvereine_je1000', 'sport_quote', 'sport_u18', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'quartier', 'fz_je10k', 'ssa_je10k', 'jug_je10k', 'quartier_je10k', 'hausaerzte_je10k', 'kinderaerzte_je10k_u15', 'ganztag_anteil', 'vorort',
+               'kinderaerzte', 'kjp_pt', 'kjp_je10k_u15', 'pt_erw', 'erwachsene', 'pt_erw_je10k', 'sportvereine', 'sportvereine_je1000', 'sport_quote', 'sport_u18', 'mittelbereich', 'hausarzt_vg', 'familienzentren', 'schulsozialarbeit', 'jugend', 'quartier', 'kirche_kj', 'fz_je10k', 'ssa_je10k', 'jug_je10k', 'quartier_je10k', 'hausaerzte_je10k', 'kinderaerzte_je10k_u15', 'ganztag_anteil', 'vorort',
                'vorort_je10k', 'hoher_bedarf_wenig_angebot', 'bedarf_ueber_schnitt', 'fachdienste', 'psychiatrie']
     with open(os.path.join(DATA, 'kennzahlen_kommunen.csv'), 'w', encoding='utf-8', newline='') as f:
         w = csv.writer(f)
