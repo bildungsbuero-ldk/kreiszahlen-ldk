@@ -226,7 +226,7 @@ td.na { color: var(--fg-muted); }
     <section class="grid">
       <div class="card" id="karte-matrix">
         <h3>Bedarf und Angebot<button class="info" data-k="angebotsindex" aria-label="Erläuterung Angebotsindex">i</button></h3>
-        <p class="note">Waagerecht der Bedarfsindex, senkrecht der Angebotsindex (Anlaufstellen vor Ort und Psychotherapie je Einwohner:in). Gestrichelt: Durchschnitt des Bedarfs (0) und Median des Angebots. Orange und hinterlegt: überdurchschnittlicher Bedarf bei wenig Angebot.</p>
+        <p class="note">Waagerecht der Bedarfsindex, senkrecht der Angebotsindex (Anlaufstellen vor Ort je Einwohner:in und Schulen mit Ganztag). Gestrichelt: Durchschnitt des Bedarfs (0) und Median des Angebots. Orange und hinterlegt: überdurchschnittlicher Bedarf bei wenig Angebot.</p>
         <div class="chart" id="ch-matrix"></div>
       </div>
       <div class="card" id="karte-kv">
@@ -293,7 +293,7 @@ td.na { color: var(--fg-muted); }
 
   <!-- ============ BERECHNUNG ============ -->
   <main class="page" id="berechnung" role="tabpanel" aria-labelledby="tab-berechnung" hidden>
-    <p class="hint">Hier lässt sich ausprobieren, wie sich Bedarfsindex und Angebotsindex mit anderen Kennzahlen oder Gewichten verändern. Alle Reiter rechnen sofort mit der eigenen Einstellung. Sie gilt nur in diesem Browser und ändert nichts an der Übersicht für andere. Standard: sieben Kennzahlen für den Bedarf und sechs Angebote, alle mit Gewicht 1.</p>
+    <p class="hint">Hier lässt sich ausprobieren, wie sich Bedarfsindex und Angebotsindex mit anderen Kennzahlen oder Gewichten verändern. Alle Reiter rechnen sofort mit der eigenen Einstellung. Sie gilt nur in diesem Browser und ändert nichts an der Übersicht für andere. Standard: acht Kennzahlen für den Bedarf und fünf Angebote, alle mit Gewicht 1.</p>
     <div class="knoepfe" style="margin:0 0 12px">
       <button type="button" class="knopf" id="ber-reset">Standard wiederherstellen</button>
       <button type="button" class="knopf" id="ber-eins">Alle Gewichte auf 1</button>
@@ -326,19 +326,19 @@ td.na { color: var(--fg-muted); }
       <p>Sie hat zwei Teile: <b>Bedarfe</b> (amtliche Sozialdaten je Kommune, verdichtet zu einem Bedarfsindex) und <b>Angebote</b> (Schulen, Kitas, ärztliche Versorgung und soziale Anlaufstellen, mit Schwerpunkt psychische Gesundheit).</p>
 
       <h3 id="m-index">Der Bedarfsindex</h3>
-      <p>Für jede der sieben Kennzahlen wird ein z-Wert gebildet: der Abstand einer Kommune zum Mittelwert der Kommunen, gemessen in Standardabweichungen. So werden Kennzahlen mit unterschiedlichen Einheiten (Prozent, Euro) vergleichbar. Bei den Einkünften dreht sich das Vorzeichen um, weil niedrige Einkünfte auf mehr Bedarf hinweisen.</p>
-      <p class="formel">z = Richtung × (Wert der Kommune − Mittelwert der Kommunen) / Standardabweichung<br>Bedarfsindex = Mittelwert der vorhandenen z-Werte (mindestens 4 von 7)</p>
+      <p>Für jede der acht Kennzahlen wird ein z-Wert gebildet: der Abstand einer Kommune zum Mittelwert der Kommunen, gemessen in Standardabweichungen. So werden Kennzahlen mit unterschiedlichen Einheiten (Prozent, Euro) vergleichbar. Bei den Einkünften dreht sich das Vorzeichen um, weil niedrige Einkünfte auf mehr Bedarf hinweisen.</p>
+      <p class="formel">z = Richtung × (Wert der Kommune − Mittelwert der Kommunen) / Standardabweichung<br>Bedarfsindex = Mittelwert der vorhandenen z-Werte (mindestens 4 von 8)</p>
       <div class="tablewrap" style="max-height:none"><table id="tab-indexdef"></table></div>
-      <p class="note" style="margin-top:8px">Alle sieben Kennzahlen zählen gleich. Seit 13.11.2026 gehören die Hilfen zur Erziehung 2025 dazu; seit 19.11.2026 steht statt der nichtdeutschen Kinder unter 15 Jahren (2024) der Anteil nichtdeutscher Kinder von 4 bis 7 Jahren (2025), also die Zielgruppe der Sozialraumkonferenzen. Die Plätze 1 bis 9 bleiben dabei gleich. Für Wetzlar fehlt dieser Wert (eigenes Jugendamt), der Index von Wetzlar beruht deshalb auf sechs Kennzahlen. Mit den Hilfen zur Erziehung bleiben die fünf höchsten Werte gleich (Wetzlar, Aßlar, Dillenburg, Leun, Ehringshausen); Herborn und Dietzhölztal rücken vor, Sinn und Braunfels zurück. Frühere Probe mit sechs Kennzahlen (06.11.2026): Mit doppelt gewichteter Kinderarmut oder ohne die Einkünfte blieben die fünf höchsten Werte gleich; ohne die beiden Migrationskennzahlen rückte Sinn für Ehringshausen auf Platz 5. Mittelwert und Standardabweichung beziehen sich auf die Kommunen mit Wert, nicht auf Kreis oder Land.</p>
+      <p class="note" style="margin-top:8px">Alle acht Kennzahlen zählen gleich. Entwicklung des Standards: am 13.11.2026 kamen die Hilfen zur Erziehung 2025 hinzu; am 19.11.2026 ersetzte der Anteil nichtdeutscher Kinder von 4 bis 7 Jahren (2025) den der unter 15-Jährigen (2024); am 27.11.2026 kamen die Alleinerziehenden (Zensus 2022) hinzu. Für Wetzlar fehlen die Hilfen zur Erziehung (eigenes Jugendamt), der Index von Wetzlar beruht deshalb auf sieben Kennzahlen. Siegbach und Bischoffen haben keine Daten im Wegweiser Kommune und erreichen mit den Alleinerziehenden erstmals vier Werte; sie haben damit einen Rang, der aber auf nur vier Kennzahlen beruht – Siegbach steht so auf Platz 4. Mittelwert und Standardabweichung beziehen sich auf die Kommunen mit Wert, nicht auf Kreis oder Land.</p>
       <p>Im Reiter <a href="#berechnung">„Berechnung“</a> lassen sich Kennzahlen ein- und ausschalten, weitere Kennzahlen hinzunehmen und Gewichte zwischen 0 und 1 setzen. Der Index ist dann der gewichtete Mittelwert der vorhandenen z-Werte (Summe aus Gewicht × z-Wert, geteilt durch die Summe der Gewichte). Eine Kommune braucht Werte für mindestens 4 der eingeschalteten Kennzahlen (bei weniger eingeschalteten für alle). Die Tabelle oben und die herunterladbaren Dateien zeigen immer den Standard.</p>
 
       <h3 id="m-angebot">Wie Angebote gezählt werden</h3>
       <p><b>Angebote vor Ort</b> sind Familienzentren, Sozialarbeit an Schulen, Jugendzentren und Jugendpflege sowie Quartiersarbeit. Gemeinsame Zentren mehrerer Kommunen zählen in jeder beteiligten Kommune. <b>Fachdienste</b> (Beratungsstellen, Sozialpsychiatrie, Psychiatrie, Sucht, Gewaltschutz, Selbsthilfe, Frühe Hilfen, Migration, Existenzsicherung) sind an ihrem Sitz eingetragen, arbeiten aber meist für den ganzen Kreis oder eine Region. Sie gehen deshalb nicht in die Angebotsdichte und nicht in den Angebotsindex ein.</p>
       <p>Ob ein Angebot vor Ort zählt, entscheiden Kategorie und Reichweite: Kreisweite Dienste in diesen Kategorien (z. B. die Kreisjugendpflege) zählen als Fachdienst.</p>
       <h3 id="m-angebotsindex">Der Angebotsindex</h3>
-      <p>Seit 24.11.2026 werden die Angebote wie die Bedarfe zu einem Index verdichtet. Jedes Angebot wird auf die passende Bevölkerung bezogen (Anlaufstellen je 10.000 Einwohner:innen, Psychotherapie je 10.000 Kinder unter 15 bzw. je 10.000 Erwachsene), daraus wird ein z-Wert gebildet, und der Angebotsindex ist der Mittelwert der z-Werte. Ein positiver Wert heißt: mehr Angebot als im Durchschnitt der Kommunen.</p>
+      <p>Seit 24.11.2026 werden die Angebote wie die Bedarfe zu einem Index verdichtet. Die Anlaufstellen werden je 10.000 Einwohner:innen gerechnet, dazu kommt der Anteil der Schulen mit Ganztag oder Pakt; daraus wird je ein z-Wert gebildet, und der Angebotsindex ist der Mittelwert der z-Werte. Ein positiver Wert heißt: mehr Angebot als im Durchschnitt der Kommunen.</p>
       <div class="tablewrap" style="max-height:none"><table id="tab-angebotdef"></table></div>
-      <p>„Hoher Bedarf, wenig Angebot“ heißt: Bedarfsindex über 0 und Angebotsindex unter dem Median der Kommunen mit Bedarfsindex (<span id="median-text">—</span>). Eingestuft wird mit ungerundeten Werten. Bis 23.11.2026 galt statt des Angebotsindex die Zahl der Angebote vor Ort je 10.000 Einwohner:innen; damals fielen Leun, Sinn, Solms und Dietzhölztal in diese Gruppe. Mit der Psychotherapie im Angebotsindex liegen Sinn und Solms knapp über dem Median (beide haben eine Praxis für Kinder und Jugendliche, Solms auch vier für Erwachsene). Solms ist dabei selbst die mittlere Kommune.</p>
+      <p>„Hoher Bedarf, wenig Angebot“ heißt: Bedarfsindex über 0 und Angebotsindex unter dem Median der Kommunen mit Bedarfsindex (<span id="median-text">—</span>). Eingestuft wird mit ungerundeten Werten. Seit 27.11.2026 (acht Bedarfskennzahlen, fünf Angebote) fallen Leun, Solms, Ehringshausen, Dietzhölztal und Sinn in diese Gruppe. Vom 24. bis 26.11.2026 zählte die Psychotherapie zum Angebot; damals waren es nur Leun und Dietzhölztal, weil Praxen in Solms, Sinn und Ehringshausen den Angebotswert hoben. Bis 23.11.2026 galt statt des Angebotsindex die Zahl der Angebote vor Ort je 10.000 Einwohner:innen (Leun, Sinn, Solms, Dietzhölztal).</p>
 
       <h3 id="m-lesen">Beim Lesen beachten</h3>
       <ul>
@@ -414,9 +414,10 @@ const korr = (a, b) => {
   return saa && sbb ? sab / Math.sqrt(saa * sbb) : null;
 };
 const staerke = (r) => { const v = Math.abs(r); return v >= 0.9 ? 'fast deckungsgleich' : v >= 0.7 ? 'eng' : v >= 0.4 ? 'mittel' : 'schwach'; };
+const ANGEBOT_ZUSATZ = ['kjp_je10k_u15', 'pt_erw_je10k', 'kita_u3', 'kita_3_5', 'hausaerzte_je10k', 'kinderaerzte_je10k_u15', 'sportvereine_je1000', 'sport_quote', 'sport_u18'];
 const stdListe = (k) => { // Standardkennzahlen des Index, zu dem die Zusatzkennzahl gehört
   const b = D.index_def.kennzahlen, a = D.angebot_def.kennzahlen;
-  const istA = ['kita_u3', 'kita_3_5', 'ganztag_anteil', 'hausaerzte_je10k', 'kinderaerzte_je10k_u15', 'sportvereine_je1000', 'sport_quote', 'sport_u18'].includes(k);
+  const istA = ANGEBOT_ZUSATZ.includes(k);
   return istA ? a : b;
 };
 function ueberschneidung(k) {
@@ -792,7 +793,7 @@ const SETS = {
   b: { def: D.index_def, wort: 'Bedarf', titel: ['Im Standard-Bedarfsindex', 'Weitere Kennzahlen (im Standard nicht enthalten)'],
     weitere: ['efb25_je1000', 'alleinerz_quote', 'wohnflaeche_je_ew', 'jugendarmut', 'altersarmut', 'alo_svb_u25', 'kita3_mh', 'kita_mh_kreis', 'sgb2_ausl', 'nichtdt', 'kinder_u15_nichtdt', 'anteil_4_7', 'u6'] },
   a: { def: D.angebot_def, wort: 'Angebot', titel: ['Im Standard-Angebotsindex', 'Weitere Angebote (im Standard nicht enthalten)'],
-    weitere: ['kita_u3', 'kita_3_5', 'ganztag_anteil', 'hausaerzte_je10k', 'kinderaerzte_je10k_u15', 'sportvereine_je1000', 'sport_quote', 'sport_u18'] }
+    weitere: ANGEBOT_ZUSATZ }
 };
 Object.values(SETS).forEach((S) => {
   const std = S.def.kennzahlen;
